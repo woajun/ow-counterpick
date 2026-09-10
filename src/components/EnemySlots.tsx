@@ -55,7 +55,9 @@ export function EnemySlots({
         </button>
       </h2>
 
-      <div className="slots">
+      {/* 칸 수를 격자에 그대로 넘긴다. flex 로 나누면 안쪽 글자 폭 때문에
+          좁은 화면에서 마지막 칸이 밀려 나간다. */}
+      <div className="slots" style={{ '--n': size } as CSSProperties}>
         {slots.map((slot, i) => {
           if (!slot.id) {
             const role = slot.role && ROLES.find((r) => r.k === slot.role);

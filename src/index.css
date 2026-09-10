@@ -167,9 +167,12 @@ h2.head .n.max { color: var(--accent); }
 }
 
 /* ── 적 팀 슬롯 ────────────────────────────────────────── */
-.slots { display: flex; gap: 8px; margin-bottom: 20px; }
+.slots {
+  display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr));
+  gap: 8px; margin-bottom: 20px;
+}
 .slot {
-  flex: 1 1 0; min-width: 0; height: 106px;
+  min-width: 0; height: 106px;
   border-radius: 9px; border: 1px solid var(--line);
   background: var(--panel);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -279,7 +282,10 @@ h2.head .n.max { color: var(--accent); }
   }
 
   .rec {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    /* top 을 끄는 것이 중요하다. 넓은 화면 규칙의 top: 62px 이 남아 있으면
+       fixed 박스가 top 과 bottom 사이를 꽉 채워서, 아래에 붙는 대신 위에
+       붙고 max-height 만큼 늘어난다. */
+    position: fixed; top: auto; left: 0; right: 0; bottom: 0; z-index: 30;
     margin: 0; padding: 0;
     max-height: min(76vh, 560px);
     display: flex; flex-direction: column;
@@ -337,7 +343,15 @@ h2.head .n.max { color: var(--accent); }
   .slot .ko { display: none; }
   .slot .ko.short { display: block; font-size: 14px; }
 
-  .bar { gap: 9px; padding: 9px 14px; }
+  /* 상단 바가 390px 에서 넘쳐 잘렸다. 여백을 늘리는 spacer 를 빼면 항목이
+     왼쪽으로 붙고, 그래도 모자라면 flex-wrap 이 다음 줄로 넘긴다. */
+  .bar { gap: 8px; padding: 9px 12px; }
+  .bar .spacer { display: none; }
+  .brand { gap: 7px; }
+  .brand h1 { font-size: 16px; }
+  .brand .mark { font-size: 11px; padding: 1px 5px 0; }
+  .tabs a { padding: 5px 9px; font-size: 13px; }
+  .seg button { padding: 5px 10px; font-size: 13px; }
   main { padding-left: 14px; padding-right: 14px; }
   footer { padding-left: 14px; padding-right: 14px; }
 }

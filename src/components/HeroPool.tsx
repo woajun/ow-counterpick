@@ -1,0 +1,56 @@
+import type { CSSProperties } from 'react';
+import { HEROES, ROLES, type HeroId } from '../data/heroes';
+
+interface Props {
+  /** 검색으로 걸러진 뒤 남은 영웅. 순서가 곧 Enter 가 집는 순서다. */
+  visible: HeroId[];
+  picked: HeroId[];
+  full: boolean;
+  onToggle: (id: HeroId) => void;
+}
+
+export function HeroPool({ visible, picked, full, onToggle }: Props) {
+  return (
+    <section className="pool">
+      <h2 className="head">적 영웅 고르기</h2>
+
+      <div className="cols">
+        {ROLES.map((role) => {
+          const ids = visible.filter((id) => HEROES[id].r === role.k);
+          return (
+            <div key={role.k}>
+              <div
+                className="role-head"
+                style={{ '--role': `var(--${role.k})` } as CSSProperties}
+              >
+                <span className="dot" />
+                <span>{role.ko}</span>
+              </div>
+
+              <div className="tiles">
+                {ids.map((id) => {
+                  const h = HEROES[id];
+                  const on = picked.includes(id);
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      className="tile"
+                      style={{ '--role': `var(--${role.k})` } as CSSProperties}
+                      aria-pressed={on}
+                      disabled={full && !on}
+                      onClick={() => onToggle(id)}
+                    >
+                      <span className="ko">{h.ko}</span>
+                      <span className="en">{h.en}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}

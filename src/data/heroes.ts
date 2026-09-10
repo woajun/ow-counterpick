@@ -10,7 +10,8 @@ export interface Hero {
 }
 
 /** 초상화는 public/heroes/<id>.webp 에 있다. scripts/sync_heroes.py 가 받아 온다. */
-export const portrait = (id: HeroId) => `/heroes/${id}.webp`;
+export const portrait = (id: HeroId) =>
+  `${import.meta.env.BASE_URL}heroes/${id}.webp`;
 
 /* 이 표는 scripts/sync_heroes.py 가 다시 쓴다. 손으로 고치면 다음 실행에
    날아가니, 이름을 바꾸고 싶으면 그 스크립트의 SHORT / FULL 을 고칠 것. */

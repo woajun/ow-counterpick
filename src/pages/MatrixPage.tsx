@@ -10,6 +10,7 @@ import {
 import { MATRIX, UNFILLED, cellTone, colLine, rowLine, signed } from '../lib/matrix';
 import { TopBar } from '../components/TopBar';
 import { useSlashFocus } from '../lib/useSlashFocus';
+import { SiteLinks } from '../components/SiteLinks';
 
 /** 범례. 나무위키 등급을 그대로 옮긴 여섯 단계다. */
 const LEGEND: [number, string][] = [
@@ -293,6 +294,7 @@ export function MatrixPage() {
       </main>
 
       <footer>
+        <SiteLinks />
         <b>표 보는 법</b> — 가로줄 하나가 내 픽 하나다. 세로줄을 훑으면 그 적이
         나왔을 때 뭐가 좋은지 보인다. 맨 오른쪽 <b>합</b>은 적 {COLS.length}명
         전체를 상대로 한 점수 합이고, 맨 아래 <b>합</b>은 화면에 남은 내 픽만
@@ -302,6 +304,17 @@ export function MatrixPage() {
         있으면 그 짝은 아직 안 적혔거나 중립이라는 뜻이다. 두 문서가 서로
         자기가 유리하다고 적어 놓은 짝은 <code>data/namu/conflicts.md</code> 에
         모아 두었다.
+        <br />
+        <b>출처</b> — <a href="https://namu.wiki/" target="_blank" rel="noreferrer">나무위키</a>
+        영웅 문서의 상성 절(
+        <a
+          href="https://creativecommons.org/licenses/by-nc-sa/2.0/kr/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          CC BY-NC-SA 2.0 KR
+        </a>
+        ). 영웅 초상화는 블리자드의 자산입니다.
       </footer>
     </>
   );

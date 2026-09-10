@@ -4,7 +4,8 @@ import { MatrixPage } from './pages/MatrixPage';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    // 프로젝트 사이트라 주소 앞에 /ow-counterpick 이 붙는다.
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<CounterPage />} />
         <Route path="/table" element={<MatrixPage />} />

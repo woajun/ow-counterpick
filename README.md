@@ -4,11 +4,14 @@
 게임 중에 알트탭으로 넘어와서 몇 초 안에 쓰는 것을 전제로 만들었다 —
 로그인이 없고, 홈 화면에서 바로 고르고 바로 초기화된다.
 
+**https://woajun.github.io/ow-counterpick/**
+
 ```bash
-npm install
-npm run dev      # http://localhost:5173
-npm run build    # dist/
-npm run preview
+corepack enable
+yarn install
+yarn dev         # http://localhost:5173
+yarn build       # dist/
+yarn preview     # http://localhost:4173/ow-counterpick/
 ```
 
 ## 화면
@@ -22,9 +25,19 @@ npm run preview
 적 픽이고 칸 값이 추천 점수에 얹히는 숫자 그대로다. 53 × 53 이라 십자선과
 읽어 주는 줄을 붙였다. 빈 칸은 아직 안 적혔거나 중립이라는 뜻이다.
 
-`BrowserRouter` 라 정적 호스팅에 올릴 때는 `/table` 도 `index.html` 로
-돌려주도록 서버에 rewrite 을 걸어야 한다. `vite dev` 와 `vite preview` 는
-기본으로 해 준다.
+## 배포
+
+`main` 에 밀면 [GitHub Actions](.github/workflows/deploy.yml) 가 빌드해서
+Pages 로 올린다. 리포 Settings → Pages → Source 를 **GitHub Actions** 로
+한 번 바꿔 두면 그다음부터는 자동이다.
+
+프로젝트 사이트라 주소 앞에 리포 이름이 붙는다. `vite.config.ts` 의 `base`,
+`BrowserRouter` 의 `basename`, 초상화 경로가 다 거기에 맞춰져 있으니 리포
+이름을 바꾸면 `base` 한 줄만 고치면 된다.
+
+Pages 에는 서버 rewrite 이 없어서 `/table` 로 바로 들어오면 404 가 난다.
+빌드 끝에 `index.html` 을 `404.html` 로 복사해 둔다 — Pages 가 모르는 경로에
+그걸 내주는데 그게 곧 앱이라 화면이 그대로 뜬다.
 
 ## 상성 데이터 고치는 곳
 
@@ -115,6 +128,7 @@ python3 scripts/scrape_matchups.py --write  # matchups.ts 까지 다시 쓴다
 | `src/lib/score.ts` | 적 조합 → 영웅별 점수와 근거 |
 | `src/lib/matrix.ts` | 상성표를 행렬로 편 것, 줄 합계 |
 | `src/lib/roster.ts` | 역할별 인원 규칙, 슬롯 배치 |
+| `src/lib/site.ts` | 리포 · 후원 · 이슈 링크 |
 | `src/lib/useTeam.ts` | 적 팀 상태, 5v5·6v6, localStorage |
 | `src/lib/useRoleFilter.ts` | 추천에서 볼 역할, localStorage |
 | `src/lib/useSlashFocus.ts` | `/` 로 검색창 잡기 (상성표 화면) |
@@ -122,6 +136,22 @@ python3 scripts/scrape_matchups.py --write  # matchups.ts 까지 다시 쓴다
 | `scripts/sync_heroes.py` | 영웅 명단·초상화 받아 오기 |
 | `scripts/scrape_matchups.py` | 나무위키 상성 절 옮겨 적기 |
 | `src/components/` | 상단 바 · 적 슬롯 · 영웅 목록 · 추천 |
+
+## 라이선스와 수익화
+
+코드는 MIT, **상성 데이터는 CC BY-NC-SA 2.0 KR** 이다. 나무위키에서 옮긴
+것이라 그쪽 라이선스를 그대로 물려받는다. 자세한 건 [LICENSE](LICENSE) 에
+적어 두었다.
+
+`NC` 가 붙어 있어서 **광고는 달 수 없다.** 호스팅을 옮겨도 마찬가지다 —
+데이터가 비영리 조건이라 어디에 올리든 같다. GitHub Pages 약관도 광고는
+허용하지 않고 기부 버튼과 크라우드펀딩 링크까지만 허용한다.
+
+영웅 초상화는 블리자드 자산이다. 이 프로젝트는 팬 제작물이고 블리자드와
+관련이 없다.
+
+후원 링크는 `src/lib/site.ts` 의 `DONATE_URL` 하나다. 비워 두면 화면에
+안 뜬다.
 
 ## 정해 둔 것
 

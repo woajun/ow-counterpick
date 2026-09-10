@@ -1,4 +1,4 @@
-import { useMemo, type CSSProperties } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import { HEROES, ROLES, portrait, type HeroId } from '../data/heroes';
 import { useRoleFilter } from '../lib/useRoleFilter';
 import { scaleFor, scoreAll, topByRole, worst, type Scored } from '../lib/score';
@@ -96,8 +96,45 @@ export function Recommendations({ enemies, onLit }: Props) {
     .map((r) => ({ role: r, list: topByRole(scores, r.k, limit) }))
     .filter((b) => b.list.length > 0);
 
+  // 좁은 화면에서는 아래에 붙는 시트가 된다. 접힌 채로도 1위 몇 개는
+  // 보여야, 영웅을 고른 결과가 화면을 안 움직이고 그 자리에서 바뀐다.
+  const [open, setOpen] = useState(false);
+  // 전체를 볼 때는 역할마다 1위 하나씩 — 점수순으로 자르면 탱커만 셋이
+  // 나오는 판이 생긴다. 한 역할만 볼 때는 그 안에서 셋.
+  const peek = (
+    role ? blocks.flatMap((b) => b.list).slice(0, 3) : blocks.map((b) => b.list[0])
+  ).filter(Boolean);
+
   return (
-    <aside className="rec" aria-live="polite">
+    <aside className={'rec' + (open ? ' open' : '')} aria-live="polite">
+      <button
+        type="button"
+        className="sheet-handle"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="caret" aria-hidden="true">
+          {open ? '▾' : '▴'}
+        </span>
+        <span className="lbl">추천</span>
+        <span className="peek">
+          {peek.length === 0 ? (
+            <i>적을 고르면 여기에 나옵니다</i>
+          ) : (
+            peek.map((it) => (
+              <span key={it.id}>
+                {HEROES[it.id].ko}
+                <b>
+                  {it.value > 0 ? '+' : ''}
+                  {it.value}
+                </b>
+              </span>
+            ))
+          )}
+        </span>
+      </button>
+
+      <div className="rec-body">
       <h2 className="head">
         추천 픽
         <div className="spacer" />
@@ -176,6 +213,7 @@ export function Recommendations({ enemies, onLit }: Props) {
           )}
         </>
       )}
+      </div>
     </aside>
   );
 }

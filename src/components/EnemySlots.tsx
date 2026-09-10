@@ -88,7 +88,10 @@ export function EnemySlots({
                 ✕
               </span>
               <img className="pic" src={portrait(id)} alt="" decoding="async" />
+              {/* 좁은 화면에서는 줄인 이름으로 바꾼다 — 66px 칸에
+                  "위도우메이커"를 넣으면 잘려서 못 읽는다. */}
               <span className="ko">{h.full}</span>
+              <span className="ko short">{h.ko}</span>
               <span className="en">{h.en}</span>
             </button>
           );

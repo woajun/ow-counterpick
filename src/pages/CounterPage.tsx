@@ -60,6 +60,10 @@ export function CounterPage() {
         최대 2명에 나머지는 합이 6이면 됩니다. 자리가 찬 역할은 아래 목록에서
         눌리지 않습니다.
       </footer>
+
+      {/* 좁은 화면에서 추천 시트가 화면 아래에 떠 있어서, 마지막 줄이
+          그 밑에 깔리지 않게 자리를 비워 둔다. */}
+      <div className="sheet-gap" aria-hidden="true" />
     </>
   );
 }

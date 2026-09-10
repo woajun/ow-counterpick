@@ -201,6 +201,7 @@ h2.head .n.max { color: var(--accent); }
   line-height: 1.15; white-space: nowrap;
   max-width: 100%; overflow: hidden; text-overflow: ellipsis;
 }
+.slot .ko.short { display: none; }
 .slot .en {
   font-size: 10px; color: var(--faint); letter-spacing: .04em; white-space: nowrap;
 }
@@ -264,8 +265,81 @@ h2.head .n.max { color: var(--accent); }
   border-radius: 11px; padding: 15px 15px 13px;
   max-height: calc(100vh - 78px); overflow: auto;
 }
+.rec .sheet-handle { display: none; }
+.sheet-gap { display: none; }
+
+/* ── 좁은 화면: 추천을 아래에 붙는 시트로 ──────────────────
+   목록 위에 추천이 있으면, 영웅을 고를 때마다 추천이 커졌다 작아지면서
+   그 아래 목록이 통째로 밀린다. 손가락 밑에서 화면이 움직이고, 결과를
+   보려면 다시 위로 올라가야 한다. 시트로 떼어 내면 고르는 자리는 안
+   움직이고 결과는 그 자리에서 바뀐다. */
 @media (max-width: 1020px) {
-  .rec { position: static; max-height: none; margin-bottom: 20px; }
+  main {
+    grid-template-areas: 'enemy' 'pool';
+  }
+
+  .rec {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    margin: 0; padding: 0;
+    max-height: min(76vh, 560px);
+    display: flex; flex-direction: column;
+    border-radius: 14px 14px 0 0;
+    border: 1px solid var(--line2); border-bottom: 0;
+    background: var(--bg2);
+    box-shadow: 0 -10px 28px rgb(0 0 0 / .5);
+    /* 홈 인디케이터가 있는 기기에서 손잡이가 가리지 않게 */
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .rec .sheet-handle {
+    display: flex; align-items: center; gap: 9px; flex: none;
+    width: 100%; padding: 12px 14px;
+    background: transparent; border: 0; cursor: pointer; text-align: left;
+  }
+  .rec .sheet-handle .caret { color: var(--faint); font-size: 11px; }
+  .rec .sheet-handle .lbl {
+    font-family: var(--display); font-size: 12.5px; font-weight: 600;
+    letter-spacing: .19em; text-transform: uppercase; color: var(--dim);
+    flex: none;
+  }
+  .rec .sheet-handle .peek {
+    display: flex; align-items: baseline; gap: 9px;
+    min-width: 0; overflow: hidden; white-space: nowrap;
+  }
+  .rec .sheet-handle .peek > span {
+    font-family: var(--display); font-size: 15px; color: var(--txt);
+  }
+  .rec .sheet-handle .peek b {
+    margin-left: 3px; font-size: 11px; font-weight: 500;
+    font-variant-numeric: tabular-nums; color: var(--good);
+  }
+  .rec .sheet-handle .peek i {
+    font-style: normal; font-family: var(--body);
+    font-size: 12px; color: var(--faint);
+  }
+
+  .rec .rec-body {
+    display: none; overflow: auto; overscroll-behavior: contain;
+    padding: 0 14px 14px;
+    border-top: 1px solid var(--line);
+    /* flex 세로 배치에서 min-height: 0 이 없으면 칸이 내용만큼 부풀어서
+       max-height 를 넘고, 안에서 스크롤이 안 걸린다. */
+    flex: 1 1 auto; min-height: 0;
+  }
+  .rec.open .rec-body { display: block; }
+  .rec.open .rec-body .head { padding-top: 12px; }
+
+  .sheet-gap { display: block; height: 76px; }
+
+  /* 좁은 칸에 정식 이름은 안 들어간다 */
+  .slot { height: 92px; }
+  .slot .pic { width: 36px; height: 36px; }
+  .slot .ko { display: none; }
+  .slot .ko.short { display: block; font-size: 14px; }
+
+  .bar { gap: 9px; padding: 9px 14px; }
+  main { padding-left: 14px; padding-right: 14px; }
+  footer { padding-left: 14px; padding-right: 14px; }
 }
 
 .rec-empty { color: var(--faint); font-size: 12.5px; padding: 6px 0 4px; }

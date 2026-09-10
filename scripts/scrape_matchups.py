@@ -51,6 +51,8 @@ MATCHUPS_TS = ROOT / "src" / "data" / "matchups.ts"
 CACHE = ROOT / "data" / "namu" / "pages"
 OUT_JSON = ROOT / "data" / "namu" / "matchups.json"
 CLASH_MD = ROOT / "data" / "namu" / "conflicts.md"
+CLASH_TS = ROOT / "src" / "data" / "conflicts.ts"
+NAMU_TS = ROOT / "src" / "data" / "namu.ts"
 
 BASE = "https://namu.wiki/w/"
 DELAY = 1.0  # 초. 남의 서버다.
@@ -168,6 +170,20 @@ def section(doc: str, name: str, nxt: tuple[str, ...]) -> str:
     return re.sub(r"[ \t ]+", " ", txt)
 
 
+def ts_string(s: str) -> str:
+    return "'" + s.replace("\\", "\\\\").replace("'", "\\'") + "'"
+
+
+def doc_title(doc: str) -> str | None:
+    """받아 온 문서에서 실제 제목을 도로 읽는다.
+
+    `파라` 는 동음이의어 문서라 실제로 받은 것은 `파라(오버워치)` 다. 화면에서
+    그 영웅의 상성 절로 링크를 걸려면 어느 제목으로 받았는지 알아야 한다.
+    """
+    m = re.search(r"<title>(.*?) - 나무위키</title>", doc)
+    return html.unescape(m.group(1)) if m else None
+
+
 def parse(doc: str, row_re: re.Pattern, diag_re: re.Pattern) -> tuple[list, set]:
     body = section(doc, "상성", ("궁합", "관련업적및도전과제", "패치노트"))
     rows = [(n.strip(), g) for n, g in row_re.findall(body)]
@@ -255,6 +271,90 @@ def write_ts(table: dict[str, dict[str, int]], heroes: dict[str, dict]) -> None:
     MATCHUPS_TS.write_text("".join(out), "utf-8")
 
 
+CLASH_HEAD = """import type { HeroId } from './heroes';
+
+/**
+ * 두 영웅의 나무위키 문서가 서로 어긋나게 적어 둔 짝.
+ *
+ * 애쉬 문서는 "메이 상대로 불리"라고 적고, 메이 문서도 "애쉬 상대로 불리"라고
+ * 적는다. 둘 다 자기가 진다는 말이라 앞뒤가 안 맞는다. 옮겨 적으면서 생긴
+ * 오류가 아니라 원본이 그렇게 되어 있는 것이라, 한쪽으로 정하려면 사람이
+ * 판단해야 한다.
+ *
+ * 상성표에서 이 짝을 따로 표시해 준다 — 표시가 없으면 도구가 고장 난 것처럼
+ * 보인다.
+ *
+ * scripts/scrape_matchups.py 가 다시 쓴다. 손으로 고치면 다음 실행에 날아간다.
+ */
+export interface Conflict {
+  a: HeroId;
+  b: HeroId;
+  /** 둘 다 유리하다고 적었는지(`up`), 둘 다 불리하다고 적었는지(`down`). */
+  both: 'up' | 'down';
+}
+
+export const CONFLICTS: Conflict[] = [
+"""
+
+CLASH_FOOT = """];
+
+const key = (a: HeroId, b: HeroId) => (a < b ? `${a}|${b}` : `${b}|${a}`);
+
+const INDEX = new Map(CONFLICTS.map((c) => [key(c.a, c.b), c]));
+
+/** 이 짝이 어긋나 있나. 어느 쪽을 먼저 넣든 같다. */
+export const conflictOf = (a: HeroId, b: HeroId) => INDEX.get(key(a, b));
+"""
+
+
+def write_conflicts_ts(pairs, heroes: dict[str, dict]) -> None:
+    out = [CLASH_HEAD]
+    for a, b, both in pairs:
+        out.append(
+            f"  {{ a: '{a}', b: '{b}', both: '{both}' }},"
+            f" // {heroes[a]['full']} ↔ {heroes[b]['full']}\n"
+        )
+    out.append(CLASH_FOOT)
+    CLASH_TS.write_text("".join(out), "utf-8")
+
+
+NAMU_HEAD = """import type { HeroId } from './heroes';
+
+/**
+ * 영웅별 나무위키 문서 제목.
+ *
+ * 이름이 겹치는 영웅은 동음이의어 문서로 밀려서 `(오버워치)` 가 붙는다 —
+ * `파라` 는 아랍어 이름 문서고, 오버워치 파라는 `파라(오버워치)` 다.
+ *
+ * scripts/scrape_matchups.py 가 실제로 받아 온 제목을 그대로 적는다.
+ */
+const DOCS: Record<HeroId, string> = {
+"""
+
+NAMU_FOOT = """};
+
+/**
+ * 그 영웅의 상성 절로 바로 가는 주소.
+ *
+ * 값이 이상하면 여기가 고칠 자리다. 이 도구는 옮겨 적은 사본이라 여기서
+ * 고쳐 봐야 원본은 그대로다.
+ */
+export const namuUrl = (id: HeroId) =>
+  `https://namu.wiki/w/${encodeURIComponent(DOCS[id])}#상성`;
+"""
+
+
+def write_namu_ts(titles: dict[str, str], heroes: dict[str, dict]) -> None:
+    order = sorted(heroes, key=lambda h: ({"tank": 0, "dmg": 1, "sup": 2}[heroes[h]["r"]], h))
+    out = [NAMU_HEAD]
+    for hid in order:
+        t = titles.get(hid)
+        if t:
+            out.append(f"  {hid}: {ts_string(t)},\n")
+    out.append(NAMU_FOOT)
+    NAMU_TS.write_text("".join(out), "utf-8")
+
+
 # ── 본체 ──────────────────────────────────────────────────
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -321,9 +421,13 @@ def main() -> int:
 
     # ── 읽은 것을 정리 ────────────────────────────────────
     raw: dict[str, dict[str, str]] = {}
+    titles: dict[str, str] = {}
     odd_grades: dict[str, set[str]] = {}
     thin = []
     for hid, doc in docs.items():
+        t = doc_title(doc)
+        if t:
+            titles[hid] = t
         rows, odd = parse(doc, row_re, diag_re)
         got = {}
         for name, grade in rows:
@@ -371,12 +475,13 @@ def main() -> int:
                 clash.append((a, b, g, back, "둘 다 유리"))
             elif score[g] < 0 and score[back] < 0:
                 clash.append((a, b, g, back, "둘 다 불리"))
-    seen, lines = set(), []
+    seen, lines, pairs = set(), [], []
     for a, b, g, back, why in clash:
         if (b, a) in seen:
             continue
         seen.add((a, b))
         lines.append(f"| {heroes[a]['full']} | {g} | {heroes[b]['full']} | {back} | {why} |")
+        pairs.append((a, b, "up" if "유리" in why else "down"))
     if lines:
         CLASH_MD.write_text(
             "# 두 문서가 어긋나는 곳\n\n"
@@ -389,6 +494,15 @@ def main() -> int:
             "utf-8",
         )
         print(f"\n두 문서가 어긋나는 짝 {len(lines)}개 → {CLASH_MD.relative_to(ROOT)}")
+
+    write_conflicts_ts(sorted(pairs), heroes)
+    print(f"{CLASH_TS.relative_to(ROOT)} — 어긋난 짝 {len(pairs)}개")
+
+    if len(titles) == len(heroes):
+        write_namu_ts(titles, heroes)
+        print(f"{NAMU_TS.relative_to(ROOT)} — 문서 제목 {len(titles)}개")
+    else:
+        print(f"\n문서 제목을 {len(titles)}/{len(heroes)}개만 읽었다 — namu.ts 는 안 고친다")
 
     # ── 방향을 뒤집어 상성표로 ────────────────────────────
     if not args.write:

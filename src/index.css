@@ -393,10 +393,20 @@ main.wide {
 
 /* 칸이 작아서 숫자만으로는 누가 누군지 놓친다 — 십자선을 글로 읽어 준다. */
 .readout {
-  display: flex; align-items: center; gap: 4px;
-  height: 24px; margin-bottom: 8px;
+  display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
+  min-height: 26px; margin-bottom: 8px;
   font-size: 12.5px; color: var(--dim);
 }
+/* 원본 문서로 가는 링크. 표에서 마우스를 떼도 줄이 남아 있어서 누를 수 있다. */
+.readout .src {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-left: 8px; font-size: 11.5px; color: var(--faint);
+}
+.readout .src a {
+  padding: 1px 7px; border-radius: 20px; text-decoration: none;
+  border: 1px solid var(--line2); background: var(--panel); color: var(--dim);
+}
+.readout .src a:hover { color: var(--txt); border-color: var(--faint); background: var(--panel2); }
 .readout b { color: var(--txt); font-weight: 600; }
 .readout .hint, .readout .zero { color: var(--faint); }
 
@@ -523,7 +533,31 @@ main.wide {
   font-size: 11.5px; color: var(--dim);
 }
 
-/* 십자선 — 44 × 44 라 이게 없으면 줄을 놓친다. */
+/* 두 문서가 서로 어긋나는 짝. 모서리에 빗금을 그어 둔다 — 배경색은 점수를
+   나타내는 데 이미 쓰고 있어서, 덧칠하면 몇 점인지가 안 보인다. */
+.matrix td.clash::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  border: 5px solid transparent;
+  border-top-color: var(--accent); border-right-color: var(--accent);
+  pointer-events: none;
+}
+.legend .clash-key {
+  width: 12px; height: 12px; padding: 0; position: relative;
+  border-radius: 2px; background: var(--panel2);
+}
+.legend .clash-key::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  border: 5px solid transparent;
+  border-top-color: var(--accent); border-right-color: var(--accent);
+}
+.tag.clash { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.readout .clash-note {
+  margin-left: 8px; padding: 1px 8px; border-radius: 20px;
+  font-size: 11.5px; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* 십자선 — 53 × 53 이라 이게 없으면 줄을 놓친다. */
 .matrix td.col::after,
 .matrix tbody tr.on > td::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;

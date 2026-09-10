@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DONATE_URL, REPO, REPO_URL, reportUrl } from '../lib/site';
+import { DONATE_URL, REPO, REPO_URL, feedbackUrl } from '../lib/site';
 
 /**
  * 스타 수를 곁들인 바깥 링크 묶음.
@@ -30,8 +30,8 @@ export function SiteLinks() {
         {stars !== null && <b>{stars}</b>}
       </a>
 
-      <a className="link" href={reportUrl()} target="_blank" rel="noreferrer">
-        <span aria-hidden="true">✎</span> 상성이 틀렸어요
+      <a className="link" href={feedbackUrl()} target="_blank" rel="noreferrer">
+        <span aria-hidden="true">✎</span> 의견 · 버그
       </a>
 
       {DONATE_URL && (

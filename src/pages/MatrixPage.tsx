@@ -8,6 +8,8 @@ import {
   type Role,
 } from '../data/heroes';
 import { MATRIX, UNFILLED, cellTone, colLine, rowLine, signed } from '../lib/matrix';
+import { CONFLICTS, conflictOf } from '../data/conflicts';
+import { namuUrl } from '../data/namu';
 import { TopBar } from '../components/TopBar';
 import { useSlashFocus } from '../lib/useSlashFocus';
 import { SiteLinks } from '../components/SiteLinks';
@@ -40,6 +42,10 @@ export function MatrixPage() {
   const [query, setQuery] = useState('');
   const [roles, setRoles] = useState<Role[]>([]);
   const [cross, setCross] = useState<Cross | null>(null);
+  // 십자선은 표 위에 있을 때만 켜고, 읽어 주는 줄은 떼어도 남긴다 —
+  // 그러지 않으면 줄 안의 링크를 누르러 가는 사이에 줄이 사라진다.
+  const [onTable, setOnTable] = useState(false);
+  const lit = onTable ? cross : null;
   const searchRef = useRef<HTMLInputElement>(null);
   useSlashFocus(searchRef);
 
@@ -124,6 +130,9 @@ export function MatrixPage() {
           {UNFILLED.size > 0 && (
             <span className="tag todo">상성 미기입 {UNFILLED.size}</span>
           )}
+          {CONFLICTS.length > 0 && (
+            <span className="tag clash">어긋난 짝 {CONFLICTS.length}</span>
+          )}
         </h2>
 
         <div className="legend">
@@ -134,6 +143,8 @@ export function MatrixPage() {
           ))}
           <span className="sep" />
           매우 유리 · 유리 · 약간 유리 · 약간 불리 · 불리 · 매우 불리
+          <span className="sep" />
+          <span className="clash-key" /> 두 문서가 서로 어긋나는 짝
           <span className="sep" />
           가로 = 내 픽, 세로 = 적 픽. 칸 값은 추천 점수에 그대로 얹히는 숫자다.
         </div>
@@ -149,6 +160,36 @@ export function MatrixPage() {
                   ? '적어 둔 상성 없음'
                   : signed(MATRIX[cross.mine][cross.enemy])}
               </span>
+              {(() => {
+                const c = conflictOf(cross.mine, cross.enemy);
+                if (!c) return null;
+                const w = c.both === 'up' ? '유리' : '불리';
+                return (
+                  <span className="clash-note">
+                    ⚠ 두 문서가 서로 {w}하다고 적은 짝
+                  </span>
+                );
+              })()}
+
+              {/* 값이 이상하면 여기가 고칠 자리다. 이 도구는 옮겨 적은
+                  사본이라 여기서 고쳐 봐야 원본은 그대로다. */}
+              <span className="src">
+                나무위키
+                <a
+                  href={namuUrl(cross.mine)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {HEROES[cross.mine].ko}
+                </a>
+                <a
+                  href={namuUrl(cross.enemy)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {HEROES[cross.enemy].ko}
+                </a>
+              </span>
             </>
           ) : (
             <span className="hint">칸에 마우스를 올리면 여기에 읽어 줍니다.</span>
@@ -161,7 +202,8 @@ export function MatrixPage() {
           <div className="matrix-scroll">
             <table
               className="matrix"
-              onMouseLeave={() => setCross(null)}
+              onMouseEnter={() => setOnTable(true)}
+              onMouseLeave={() => setOnTable(false)}
             >
               <thead>
                 <tr>
@@ -178,7 +220,7 @@ export function MatrixPage() {
                         className={
                           'ch' +
                           (startsRole(COLS, i) ? ' gap' : '') +
-                          (cross?.enemy === e ? ' on' : '')
+                          (lit?.enemy === e ? ' on' : '')
                         }
                         style={{ '--role': `var(--${h.r})` } as CSSProperties}
                         title={
@@ -216,7 +258,7 @@ export function MatrixPage() {
                       key={mine}
                       className={
                         (startsRole(rows, ri) ? 'gap' : '') +
-                        (cross?.mine === mine ? ' on' : '')
+                        (lit?.mine === mine ? ' on' : '')
                       }
                     >
                       <th
@@ -247,7 +289,8 @@ export function MatrixPage() {
                               tone +
                               (startsRole(COLS, ci) ? ' gap' : '') +
                               (mine === enemy ? ' self' : '') +
-                              (cross?.enemy === enemy ? ' col' : '')
+                              (lit?.enemy === enemy ? ' col' : '') +
+                              (conflictOf(mine, enemy) ? ' clash' : '')
                             }
                             onMouseEnter={() => setCross({ mine, enemy })}
                           >
@@ -277,7 +320,7 @@ export function MatrixPage() {
                         className={
                           'tot' +
                           (startsRole(COLS, i) ? ' gap' : '') +
-                          (cross?.enemy === e ? ' col' : '')
+                          (lit?.enemy === e ? ' col' : '')
                         }
                         title={`${HEROES[e].full} — 유리 ${line.up} · 불리 ${line.down}`}
                       >
@@ -295,15 +338,20 @@ export function MatrixPage() {
 
       <footer>
         <SiteLinks />
-        <b>표 보는 법</b> — 가로줄 하나가 내 픽 하나다. 세로줄을 훑으면 그 적이
-        나왔을 때 뭐가 좋은지 보인다. 맨 오른쪽 <b>합</b>은 적 {COLS.length}명
-        전체를 상대로 한 점수 합이고, 맨 아래 <b>합</b>은 화면에 남은 내 픽만
-        더한 값이다.
+        <b>표 보는 법</b> — 가로줄 하나가 내 픽 하나입니다. 세로줄을 훑으면
+        그 적이 나왔을 때 뭐가 좋은지 보입니다. 맨 오른쪽 <b>합</b>은 적{' '}
+        {COLS.length}명 전체를 상대로 한 점수 합이고, 맨 아래 <b>합</b>은 화면에
+        남은 내 픽만 더한 값입니다.
         <br />
-        <b>고치는 곳</b> — <code>src/data/matchups.ts</code> 하나다. 칸이 비어
-        있으면 그 짝은 아직 안 적혔거나 중립이라는 뜻이다. 두 문서가 서로
-        자기가 유리하다고 적어 놓은 짝은 <code>data/namu/conflicts.md</code> 에
-        모아 두었다.
+        <b>모서리에 빗금이 그어진 칸</b> — 두 영웅의 나무위키 문서가 서로
+        어긋나게 적어 둔 짝입니다. 애쉬 문서는 "메이 상대로 불리", 메이 문서도
+        "애쉬 상대로 불리"라고 적어서 둘 다 자기가 진다는 말이 됩니다. 옮겨
+        적으면서 생긴 오류가 아니라 원본이 그렇게 되어 있는 것이라, 한쪽으로
+        정하려면 사람이 판단해야 합니다. 지금 {CONFLICTS.length}짝입니다.
+        <br />
+        <b>값이 이상하면</b> — 원본인 나무위키 문서를 고쳐 주세요. 이 표는 옮겨
+        적은 사본이라 다음 수집 때 따라옵니다. 칸을 짚으면 그 영웅의 상성 절로
+        가는 링크가 위에 뜹니다. 빈 칸은 아직 안 적혔거나 중립이라는 뜻입니다.
         <br />
         <b>출처</b> — <a href="https://namu.wiki/" target="_blank" rel="noreferrer">나무위키</a>
         영웅 문서의 상성 절(

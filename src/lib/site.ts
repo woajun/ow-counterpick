@@ -10,23 +10,24 @@ export const REPO_URL = `https://github.com/${REPO}`;
  */
 export const DONATE_URL = '';
 
-/** 상성이 틀렸을 때 이슈를 여는 링크. 양식을 미리 채워서 보낸다. */
-export function reportUrl(subject?: string) {
+/**
+ * 도구 자체에 대한 의견을 남기는 링크.
+ *
+ * 상성 값이 틀렸다는 제보는 여기가 아니라 나무위키로 간다 — 이 도구는 옮겨
+ * 적은 사본이라 여기서 고쳐 봐야 원본은 그대로다. 상성표에서 칸을 짚으면
+ * 그 영웅의 원본 문서로 가는 링크가 뜬다.
+ */
+export function feedbackUrl() {
   const body = [
-    '### 어느 짝인가요',
-    subject ?? '적: (영웅) / 내 픽: (영웅)',
+    '### 무엇이',
     '',
-    '### 지금 값과 맞다고 보시는 값',
-    '지금: (예: +2) → 맞다고 보는 값: (예: -1)',
+    '### 어디서',
+    '추천 화면 / 상성표 중 어디인가요',
     '',
-    '### 왜 그렇게 보시나요',
+    '(상성 값이 틀렸다는 제보는 나무위키 원본 문서를 고쳐 주세요.',
+    ' 상성표에서 칸을 짚으면 그 영웅의 문서로 가는 링크가 뜹니다.)',
     '',
   ].join('\n');
 
-  const q = new URLSearchParams({
-    labels: '상성',
-    title: subject ? `상성 수정: ${subject}` : '상성 수정 제안',
-    body,
-  });
-  return `${REPO_URL}/issues/new?${q}`;
+  return `${REPO_URL}/issues/new?${new URLSearchParams({ body })}`;
 }

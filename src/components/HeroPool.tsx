@@ -1,22 +1,21 @@
 import type { CSSProperties } from 'react';
-import { HEROES, ROLES, type HeroId } from '../data/heroes';
+import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 
 interface Props {
-  /** 검색으로 걸러진 뒤 남은 영웅. 순서가 곧 Enter 가 집는 순서다. */
-  visible: HeroId[];
   picked: HeroId[];
-  full: boolean;
+  /** 지금 더 못 넣는 영웅. 팀이 다 찼거나 그 역할 자리가 다 찼을 때. */
+  blocked: (id: HeroId) => boolean;
   onToggle: (id: HeroId) => void;
 }
 
-export function HeroPool({ visible, picked, full, onToggle }: Props) {
+export function HeroPool({ picked, blocked, onToggle }: Props) {
   return (
     <section className="pool">
       <h2 className="head">적 영웅 고르기</h2>
 
       <div className="cols">
         {ROLES.map((role) => {
-          const ids = visible.filter((id) => HEROES[id].r === role.k);
+          const ids = HERO_IDS.filter((id) => HEROES[id].r === role.k);
           return (
             <div key={role.k}>
               <div
@@ -38,9 +37,16 @@ export function HeroPool({ visible, picked, full, onToggle }: Props) {
                       className="tile"
                       style={{ '--role': `var(--${role.k})` } as CSSProperties}
                       aria-pressed={on}
-                      disabled={full && !on}
+                      disabled={!on && blocked(id)}
                       onClick={() => onToggle(id)}
                     >
+                      <img
+                        className="pic"
+                        src={portrait(id)}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                      />
                       <span className="ko">{h.ko}</span>
                       <span className="en">{h.en}</span>
                     </button>

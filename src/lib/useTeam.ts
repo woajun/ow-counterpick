@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { isHeroId, type HeroId } from '../data/heroes';
+import { canAdd, trim, type TeamSize } from './roster';
 
-export type TeamSize = 5 | 6;
+export type { TeamSize };
 
 const KEY = 'ow-counterpick.v1';
 
@@ -23,7 +24,7 @@ function initial(): Team {
       const v = JSON.parse(raw) as Partial<Team>;
       const size: TeamSize = v.size === 6 ? 6 : 5;
       const enemies = Array.isArray(v.enemies)
-        ? v.enemies.filter(isHeroId).slice(0, size)
+        ? trim(v.enemies.filter(isHeroId), size)
         : [];
       return { size, enemies, demo: false };
     }
@@ -61,9 +62,7 @@ export function useTeam() {
     () => ({
       add: (id: HeroId) =>
         edit((p) =>
-          p.enemies.includes(id) || p.enemies.length >= p.size
-            ? p.enemies
-            : [...p.enemies, id],
+          canAdd(p.enemies, p.size, id) ? [...p.enemies, id] : p.enemies,
         ),
 
       remove: (id: HeroId) => edit((p) => p.enemies.filter((x) => x !== id)),
@@ -72,18 +71,19 @@ export function useTeam() {
         edit((p) =>
           p.enemies.includes(id)
             ? p.enemies.filter((x) => x !== id)
-            : p.enemies.length >= p.size
-              ? p.enemies
-              : [...p.enemies, id],
+            : canAdd(p.enemies, p.size, id)
+              ? [...p.enemies, id]
+              : p.enemies,
         ),
 
       removeLast: () => edit((p) => p.enemies.slice(0, -1)),
 
       reset: () => edit(() => []),
 
-      /** 6인에서 5인으로 줄이면 넘치는 자리를 잘라 낸다. */
+      /** 인원을 바꾸면 새 규칙에 안 맞는 자리를 잘라 낸다 — 탱커 둘짜리
+       *  6v6 을 5v5 로 옮기면 탱커 하나가 빠진다. */
       setSize: (size: TeamSize) =>
-        setTeam((p) => ({ ...p, size, enemies: p.enemies.slice(0, size) })),
+        setTeam((p) => ({ ...p, size, enemies: trim(p.enemies, size) })),
     }),
     [edit],
   );

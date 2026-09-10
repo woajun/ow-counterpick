@@ -1,15 +1,14 @@
 import { HEROES, HERO_IDS, type HeroId, type Role } from '../data/heroes';
-import { MATCHUPS } from '../data/matchups';
+import { MATCHUPS, type Level } from '../data/matchups';
 
-export const W_GOOD = 3;
-export const W_OK = 1;
-export const W_BAD = -3;
+/** 한 칸이 얹을 수 있는 가장 센 점수. 막대를 채우는 기준이 된다. */
+export const MAX_LEVEL = 3;
 
 export interface Reason {
   /** 근거가 된 적 영웅. */
   enemy: HeroId;
-  /** 확실한 카운터인지(good), 무난한 편인지(ok). */
-  hard: boolean;
+  /** 그 적 하나가 얹은 점수. +3 매우 유리 … −3 매우 불리. */
+  level: Level;
 }
 
 export interface Scored {
@@ -24,22 +23,29 @@ export interface Scored {
  * 적 하나하나가 독립적으로 점수를 얹는 단순한 합이다. 시너지나 맵은
  * 안 본다 — 게임 중에 몇 초 안에 스왑을 정하는 도구라, 설명할 수 없는
  * 가중치를 넣는 것보다 근거를 그대로 보여주는 쪽이 쓸모 있다.
+ *
+ * 불리한 근거도 같이 담는다. 점수가 왜 깎였는지 안 보이면 "피해야 할 픽"
+ * 줄이 이유 없는 명단이 된다.
  */
 export function scoreAll(enemies: HeroId[]): Record<HeroId, Scored> {
   const out = {} as Record<HeroId, Scored>;
   for (const id of HERO_IDS) out[id] = { id, value: 0, reasons: [] };
 
   for (const enemy of enemies) {
-    const m = MATCHUPS[enemy];
-    for (const id of m.good) {
-      out[id].value += W_GOOD;
-      out[id].reasons.push({ enemy, hard: true });
+    for (const [mine, level] of Object.entries(MATCHUPS[enemy]) as [
+      HeroId,
+      Level,
+    ][]) {
+      out[mine].value += level;
+      out[mine].reasons.push({ enemy, level });
     }
-    for (const id of m.ok) {
-      out[id].value += W_OK;
-      out[id].reasons.push({ enemy, hard: false });
-    }
-    for (const id of m.bad) out[id].value += W_BAD;
+  }
+
+  // 센 근거부터. 칩을 몇 개만 보고 넘어가도 제일 중요한 것이 눈에 들어온다.
+  for (const s of Object.values(out)) {
+    s.reasons.sort(
+      (a, b) => Math.abs(b.level) - Math.abs(a.level) || b.level - a.level,
+    );
   }
   return out;
 }
@@ -61,10 +67,16 @@ export function topByRole(
     .map((id) => scores[id]);
 }
 
-/** 역할 가리지 않고 가장 불리한 픽. */
-export function worst(scores: Record<HeroId, Scored>, limit = 4): Scored[] {
+/** 가장 불리한 픽. 역할을 주면 그 역할 안에서만 고른다. */
+export function worst(
+  scores: Record<HeroId, Scored>,
+  limit = 4,
+  role: Role | null = null,
+): Scored[] {
   return HERO_IDS
-    .filter((id) => scores[id].value < 0)
+    .filter(
+      (id) => scores[id].value < 0 && (role === null || HEROES[id].r === role),
+    )
     .sort((a, b) => scores[a].value - scores[b].value)
     .slice(0, limit)
     .map((id) => scores[id]);
@@ -72,4 +84,4 @@ export function worst(scores: Record<HeroId, Scored>, limit = 4): Scored[] {
 
 /** 막대를 채우는 기준값. 적이 많을수록 점수가 커지므로 같이 늘린다. */
 export const scaleFor = (enemyCount: number) =>
-  Math.max(W_GOOD, enemyCount * W_GOOD);
+  Math.max(MAX_LEVEL, enemyCount * MAX_LEVEL);

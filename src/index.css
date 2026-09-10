@@ -83,6 +83,15 @@ button, input { font: inherit; color: inherit; }
 .seg button[aria-pressed='true'] { background: var(--line2); color: var(--txt); }
 .seg button:hover { color: var(--txt); }
 
+/* 추천 패널 머리줄 안에 들어가는 작은 것. 머리줄의 대문자·자간을 물려받으면
+   한글이 벌어져 보여서 끊는다. */
+.seg.small { border-radius: 6px; }
+.seg.small button {
+  padding: 3px 8px; font-size: 11.5px;
+  letter-spacing: .02em; text-transform: none;
+  font-family: var(--body); font-weight: 500;
+}
+
 .search {
   width: 190px; padding: 7px 11px;
   background: var(--panel); border: 1px solid var(--line2);
@@ -100,6 +109,18 @@ button, input { font: inherit; color: inherit; }
   color: var(--dim);
 }
 .reset:hover { border-color: var(--bad); color: var(--bad); }
+
+/* 구역 머리줄 안에 들어가는 작은 것. 머리줄의 대문자·자간을 물려받으면
+   한글이 벌어져 보여서 끊는다. */
+.reset.small {
+  padding: 2px 9px; border-radius: 6px;
+  font-family: var(--body); font-size: 11.5px; font-weight: 500;
+  letter-spacing: .02em; text-transform: none;
+}
+.reset:disabled {
+  opacity: .35; cursor: not-allowed;
+  border-color: var(--line); color: var(--faint);
+}
 
 /* ── 레이아웃 ──────────────────────────────────────────── */
 main {
@@ -128,7 +149,7 @@ main {
 }
 
 h2.head {
-  display: flex; align-items: center; gap: 9px;
+  display: flex; align-items: center; gap: 9px; min-height: 24px;
   margin: 0 0 9px;
   font-family: var(--display); font-weight: 600; font-size: 12.5px;
   letter-spacing: .19em; text-transform: uppercase; color: var(--dim);
@@ -136,6 +157,7 @@ h2.head {
 h2.head .n {
   color: var(--faint); font-variant-numeric: tabular-nums; letter-spacing: .06em;
 }
+h2.head .n.max { color: var(--accent); }
 .tag {
   font-family: var(--body); font-size: 10.5px; font-weight: 600;
   letter-spacing: .02em; text-transform: none;
@@ -147,16 +169,28 @@ h2.head .n {
 /* ── 적 팀 슬롯 ────────────────────────────────────────── */
 .slots { display: flex; gap: 8px; margin-bottom: 20px; }
 .slot {
-  flex: 1 1 0; min-width: 0; height: 74px;
+  flex: 1 1 0; min-width: 0; height: 106px;
   border-radius: 9px; border: 1px solid var(--line);
   background: var(--panel);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 1px; position: relative; padding: 0 6px;
 }
+.slot .pic {
+  width: 42px; height: 42px; margin-bottom: 4px;
+  border-radius: 50%; object-fit: cover; background: var(--panel2);
+}
 .slot.empty {
   border-style: dashed; border-color: var(--line2); background: transparent;
   color: var(--faint); font-size: 11.5px;
 }
+/* 5v5 는 자리마다 역할이 정해져 있다. 빈 자리에 그 역할을 적어 두면
+   아직 못 본 역할이 무엇인지 바로 보인다. */
+.slot.empty .want {
+  font-family: var(--display); font-size: 13px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--role) 62%, var(--faint));
+}
+.slot.empty:has(.want) { border-color: color-mix(in srgb, var(--role) 30%, var(--line2)); }
 .slot.filled { cursor: pointer; border-color: var(--line2); }
 .slot.filled::before {
   content: ''; position: absolute; inset: -1px -1px auto; height: 3px;
@@ -202,6 +236,10 @@ h2.head .n {
   display: flex; flex-direction: column; gap: 1px;
   transition: border-color .12s, background .12s, transform .12s;
 }
+.tile .pic {
+  display: block; width: 100%; aspect-ratio: 1; margin-bottom: 4px;
+  border-radius: 5px; object-fit: cover; background: var(--panel2);
+}
 .tile .ko { font-family: var(--display); font-size: 15px; font-weight: 500; line-height: 1.1; }
 .tile .en {
   font-size: 8.5px; color: var(--faint); letter-spacing: .05em;
@@ -241,8 +279,8 @@ h2.head .n {
 .block-head .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--role); }
 
 .row {
-  display: grid; grid-template-columns: 26px 1fr auto; align-items: center;
-  gap: 9px; padding: 6px 8px; border-radius: 7px;
+  display: grid; grid-template-columns: 21px 26px 1fr auto; align-items: center;
+  gap: 8px; padding: 6px 8px; border-radius: 7px;
   transition: background .12s;
 }
 .row + .row { margin-top: 2px; }
@@ -252,20 +290,27 @@ h2.head .n {
   text-align: center; font-variant-numeric: tabular-nums;
 }
 .row.top .rank { color: var(--accent); }
+.row .pic {
+  width: 26px; height: 26px;
+  border-radius: 50%; object-fit: cover; background: var(--panel2);
+}
 .row .name { font-family: var(--display); font-size: 16px; font-weight: 500; line-height: 1.2; }
 .row .why { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 3px; }
 .row .why span {
+  display: inline-flex; align-items: baseline; gap: 3px;
   font-size: 9.5px; letter-spacing: .02em; padding: 1px 5px;
   border-radius: 3px; background: var(--panel2); color: var(--dim);
   border: 1px solid var(--line);
 }
-.row .why span.hard {
-  color: var(--good); border-color: color-mix(in srgb, var(--good) 35%, transparent);
+.row .why span b {
+  font-family: var(--display); font-weight: 500; font-size: 9px;
+  font-variant-numeric: tabular-nums; opacity: .85;
 }
 
 .meter { width: 54px; }
 .meter .track { height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; }
 .meter .fill { height: 100%; border-radius: 3px; background: var(--good); }
+.meter .num { white-space: nowrap; }
 .meter .num {
   font-family: var(--display); font-size: 11px; color: var(--dim);
   text-align: right; margin-top: 2px; font-variant-numeric: tabular-nums;
@@ -283,4 +328,189 @@ footer b { color: var(--dim); font-weight: 600; }
 kbd {
   font-family: var(--display); font-size: 11px; padding: 0 5px;
   border: 1px solid var(--line2); border-radius: 4px; color: var(--dim);
+}
+
+/* ── 화면 탭 ───────────────────────────────────────────── */
+.tabs { display: flex; gap: 2px; }
+.tabs a {
+  padding: 6px 11px; border-radius: 7px; text-decoration: none;
+  color: var(--dim);
+  font-family: var(--display); font-size: 14px; letter-spacing: .04em;
+}
+.tabs a:hover { color: var(--txt); background: var(--panel); }
+.tabs a.on {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+/* ── 상성표 ────────────────────────────────────────────── */
+/* 표는 한 덩어리라 추천 화면의 2단 격자를 쓰지 않는다. */
+main.wide {
+  display: block;
+  padding: 16px 18px 28px;
+  max-width: 1480px; margin: 0 auto;
+}
+
+.legend {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 9px;
+  color: var(--faint); font-size: 11.5px;
+}
+.legend > span {
+  font-family: var(--display); font-size: 10.5px;
+  padding: 1px 5px; border-radius: 3px;
+  font-variant-numeric: tabular-nums;
+}
+.legend > span + * { margin-left: -2px; }
+.legend .sep {
+  width: 1px; height: 12px; padding: 0;
+  background: var(--line2); margin: 0 5px;
+}
+
+/* 칸이 작아서 숫자만으로는 누가 누군지 놓친다 — 십자선을 글로 읽어 준다. */
+.readout {
+  display: flex; align-items: center; gap: 4px;
+  height: 24px; margin-bottom: 8px;
+  font-size: 12.5px; color: var(--dim);
+}
+.readout b { color: var(--txt); font-weight: 600; }
+.readout .hint, .readout .zero { color: var(--faint); }
+
+.matrix-scroll {
+  overflow: auto;
+  max-height: calc(100vh - 244px); min-height: 320px;
+  border: 1px solid var(--line); border-radius: 11px;
+  background: var(--bg2);
+  overscroll-behavior: contain;
+}
+
+.matrix {
+  table-layout: fixed; width: max-content;
+  border-collapse: separate; border-spacing: 0;
+}
+.matrix th, .matrix td {
+  margin: 0; padding: 0; font-weight: 400;
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+}
+
+/* 세로 칸 머리 — 44개가 가로로 서야 해서 글자를 세운다. */
+.matrix th.ch {
+  width: 28px; height: 96px; padding: 6px 0 5px;
+  font-size: 11.5px; color: var(--dim); white-space: nowrap;
+  position: sticky; top: 0; z-index: 2;
+  background: var(--bg2);
+  box-shadow: inset 0 -2px 0 -1px var(--role);
+}
+/* th 를 flex 로 바꾸면 표 칸이 아니게 돼서 세로줄이 어긋난다 — 안쪽을 싼다. */
+.matrix th.ch .chi {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 5px; height: 100%;
+}
+.matrix th.ch .pic {
+  width: 20px; height: 20px; flex: none;
+  border-radius: 50%; object-fit: cover; background: var(--panel2);
+}
+.matrix th.ch .v { writing-mode: vertical-rl; text-align: end; flex: 1 1 auto; }
+/* 아직 상성을 한 줄도 안 적은 영웅 — 빈 세로줄이 실수가 아니라는 표시. */
+.matrix th.ch .v.todo { color: color-mix(in srgb, var(--accent) 70%, var(--faint)); }
+.matrix th.ch.on { color: var(--txt); background: var(--panel2); }
+
+.matrix th.corner {
+  width: 122px; padding: 0 9px 7px;
+  position: sticky; top: 0; left: 0; z-index: 3;
+  background: var(--bg2);
+  vertical-align: bottom; text-align: left;
+  font-size: 9.5px; letter-spacing: .12em; color: var(--faint);
+}
+.matrix th.corner .mine { display: block; }
+.matrix th.corner .enemy { display: block; color: var(--dim); }
+
+/* 가로 칸 머리 — 왼쪽에 붙어 따라온다. */
+.matrix th.rh {
+  width: 122px; padding: 0 9px; text-align: left;
+  position: sticky; left: 0; z-index: 1;
+  background: var(--bg2);
+  font-family: var(--display); font-size: 13px; font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  box-shadow: inset 3px 0 0 -1px var(--role, transparent),
+              1px 0 0 var(--line);
+}
+.matrix th.rh .rhi { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.matrix th.rh .rhi > span { overflow: hidden; text-overflow: ellipsis; }
+.matrix th.rh .pic {
+  width: 19px; height: 19px; flex: none;
+  border-radius: 50%; object-fit: cover; background: var(--panel2);
+}
+.matrix tbody tr.on > th.rh { color: var(--txt); background: var(--panel2); }
+
+.matrix td {
+  width: 28px; height: 25px; text-align: center; position: relative;
+  font-family: var(--display); font-size: 10.5px;
+  font-variant-numeric: tabular-nums; color: var(--faint);
+}
+
+/* 여섯 단계 — 초록이 유리, 빨강이 불리, 진할수록 세다.
+   표 칸 · 추천 칩 · 범례가 같은 색을 쓴다. 한 곳에서 익히면 어디서든 읽힌다. */
+.p3, .p2, .p1, .n1, .n2, .n3 { --on: var(--good); }
+.n1, .n2, .n3 { --on: var(--bad); }
+.p3, .n3 { --tint: 24%; --ink: 100%; }
+.p2, .n2 { --tint: 13%; --ink:  78%; }
+.p1, .n1 { --tint:  6%; --ink:  56%; }
+
+.matrix td.p3, .matrix td.p2, .matrix td.p1,
+.matrix td.n1, .matrix td.n2, .matrix td.n3,
+.legend > span.p3, .legend > span.p2, .legend > span.p1,
+.legend > span.n1, .legend > span.n2, .legend > span.n3,
+.row .why span.p3, .row .why span.p2, .row .why span.p1,
+.row .why span.n1, .row .why span.n2, .row .why span.n3 {
+  background: color-mix(in srgb, var(--on) var(--tint), transparent);
+  color: color-mix(in srgb, var(--on) var(--ink), var(--dim));
+}
+.row .why span.p3, .row .why span.p2, .row .why span.p1,
+.row .why span.n1, .row .why span.n2, .row .why span.n3 {
+  border-color: color-mix(in srgb, var(--on) 30%, transparent);
+}
+.readout .p3, .readout .p2, .readout .p1,
+.readout .n1, .readout .n2, .readout .n3 {
+  color: color-mix(in srgb, var(--on) var(--ink), var(--dim));
+}
+/* 자기 자신 칸. 늘 비어 있으니 배경만 살짝 눌러 대각선이 보이게 한다. */
+.matrix td.self { background: var(--panel); }
+
+/* 역할이 바뀌는 자리 */
+.matrix th.gap, .matrix td.gap { border-left: 1px solid var(--line2); }
+.matrix tr.gap > th, .matrix tr.gap > td { border-top: 1px solid var(--line2); }
+
+/* 합계 */
+.matrix .th-tot { width: 46px; color: var(--dim); }
+.matrix td.tot {
+  width: 46px; color: var(--dim); font-size: 11.5px;
+  background: color-mix(in srgb, var(--panel) 60%, transparent);
+}
+.matrix tfoot td.tot {
+  position: sticky; bottom: 0; z-index: 1;
+  background: var(--panel2);
+  border-top: 1px solid var(--line2);
+}
+.matrix tfoot th.rh {
+  position: sticky; bottom: 0; left: 0; z-index: 2;
+  background: var(--panel2);
+  border-top: 1px solid var(--line2);
+  font-size: 11.5px; color: var(--dim);
+}
+
+/* 십자선 — 44 × 44 라 이게 없으면 줄을 놓친다. */
+.matrix td.col::after,
+.matrix tbody tr.on > td::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: color-mix(in srgb, var(--txt) 7%, transparent);
+}
+.matrix tbody tr.on > td.col { box-shadow: inset 0 0 0 1px var(--accent); }
+
+.tag.todo { color: var(--dim); border-color: var(--line2); }
+
+footer code {
+  font-size: 11px; color: var(--dim);
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 4px; padding: 0 4px;
 }

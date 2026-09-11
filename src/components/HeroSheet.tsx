@@ -1,5 +1,5 @@
 import { useEffect, useRef, type CSSProperties } from 'react';
-import { HEROES, HERO_IDS, portrait, type HeroId } from '../data/heroes';
+import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 import { conflictOf } from '../data/conflicts';
 import { namuUrl } from '../data/namu';
 import { MATRIX, cellTone, signed } from '../lib/matrix';
@@ -51,10 +51,18 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
 
   const me = HEROES[id];
   const row = MATRIX[id];
-  const groups = LEVELS.map((lv) => ({
-    ...lv,
-    ids: HERO_IDS.filter((e) => row[e] === lv.v),
-  })).filter((g) => g.ids.length > 0);
+  // 한 묶음에 열일곱 명까지 들어간다. 역할로 한 번 더 갈라야 눈에 들어온다.
+  const groups = LEVELS.map((lv) => {
+    const ids = HERO_IDS.filter((e) => row[e] === lv.v);
+    return {
+      ...lv,
+      ids,
+      byRole: ROLES.map((r) => ({
+        role: r,
+        ids: ids.filter((e) => HEROES[e].r === r.k),
+      })).filter((x) => x.ids.length > 0),
+    };
+  }).filter((g) => g.ids.length > 0);
 
   const written = groups.reduce((n, g) => n + g.ids.length, 0);
 
@@ -94,35 +102,47 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
                 <span className="hs-count">{g.ids.length}</span>
               </div>
 
-              <div className="hs-list">
-                {g.ids.map((e) => {
-                  const h = HEROES[e];
-                  const picked = enemies.includes(e);
-                  const clash = conflictOf(id, e);
-                  return (
-                    <span
-                      key={e}
-                      className={'hs-item' + (picked ? ' picked' : '')}
-                      title={
-                        h.full +
-                        (picked ? ' · 지금 적 팀에 있음' : '') +
-                        (clash ? ' · 두 문서가 서로 어긋난 짝' : '')
-                      }
-                      style={{ '--role': `var(--${h.r})` } as CSSProperties}
-                    >
-                      <img
-                        className="pic"
-                        src={portrait(e)}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <span className="nm">{h.ko}</span>
-                      {clash ? <i className="hs-clash" aria-hidden="true" /> : null}
-                    </span>
-                  );
-                })}
-              </div>
+              {g.byRole.map(({ role, ids }) => (
+                <div className="hs-role" key={role.k}>
+                  <div
+                    className="hs-role-tag"
+                    style={{ '--role': `var(--${role.k})` } as CSSProperties}
+                  >
+                    <span className="dot" />
+                    {role.ko}
+                  </div>
+
+                  <div className="hs-list">
+                    {ids.map((e) => {
+                      const h = HEROES[e];
+                      const picked = enemies.includes(e);
+                      const clash = conflictOf(id, e);
+                      return (
+                        <span
+                          key={e}
+                          className={'hs-item' + (picked ? ' picked' : '')}
+                          title={
+                            h.full +
+                            (picked ? ' · 지금 적 팀에 있음' : '') +
+                            (clash ? ' · 두 문서가 서로 어긋난 짝' : '')
+                          }
+                          style={{ '--role': `var(--${h.r})` } as CSSProperties}
+                        >
+                          <img
+                            className="pic"
+                            src={portrait(e)}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <span className="nm">{h.ko}</span>
+                          {clash ? <i className="hs-clash" aria-hidden="true" /> : null}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
           ))}
 

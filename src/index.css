@@ -237,6 +237,20 @@ h2.head .n.max { color: var(--accent); }
 
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 5px; }
 
+/* 타일은 고르는 버튼이라, 상성만 보고 싶을 때 누를 자리를 따로 낸다.
+   버튼 안에 버튼을 넣을 수 없어서 타일을 한 겹 감쌌다. */
+.tile-wrap { position: relative; display: flex; }
+.tile-wrap .tile { flex: 1; }
+.tile-info {
+  position: absolute; top: 3px; right: 3px; z-index: 2;
+  width: 18px; height: 18px; padding: 0; cursor: pointer;
+  border: 1px solid var(--line2); border-radius: 50%;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  color: var(--faint);
+  font-family: var(--display); font-size: 11px; line-height: 1;
+}
+.tile-info:hover { border-color: var(--accent); color: var(--accent); }
+
 .tile {
   border: 1px solid var(--line); border-radius: 7px;
   background: var(--panel); color: var(--txt);
@@ -765,6 +779,14 @@ footer code {
   margin-left: auto; font-size: 11px; color: var(--faint);
   font-variant-numeric: tabular-nums;
 }
+
+.hs-role + .hs-role { margin-top: 9px; }
+.hs-role-tag {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 5px;
+  font-family: var(--display); font-size: 10.5px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--role);
+}
+.hs-role-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--role); }
 
 .hs-list { display: flex; flex-wrap: wrap; gap: 6px; }
 .hs-item {

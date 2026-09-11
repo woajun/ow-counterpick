@@ -24,7 +24,6 @@ export function CounterPage() {
         <EnemySlots
           enemies={team.enemies}
           size={team.size}
-          demo={team.demo}
           lit={lit}
           onRemove={team.remove}
           onReset={team.reset}

@@ -5,7 +5,6 @@ import { LIMITS, arrange, countRole, type TeamSize } from '../lib/roster';
 interface Props {
   enemies: HeroId[];
   size: TeamSize;
-  demo: boolean;
   /** 추천 줄에 마우스를 올렸을 때 근거가 된 적만 테두리를 켠다. */
   lit: HeroId[];
   onRemove: (id: HeroId) => void;
@@ -15,7 +14,6 @@ interface Props {
 export function EnemySlots({
   enemies,
   size,
-  demo,
   lit,
   onRemove,
   onReset,
@@ -39,7 +37,6 @@ export function EnemySlots({
             탱커 {countRole(enemies, 'tank')} / {LIMITS[6].tank}
           </span>
         )}
-        {demo && <span className="tag">예시</span>}
 
         <div className="spacer" />
 

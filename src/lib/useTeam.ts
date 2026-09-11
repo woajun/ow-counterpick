@@ -6,15 +6,9 @@ export type { TeamSize };
 
 const KEY = 'ow-counterpick.v1';
 
-/** 처음 열었을 때 깔아 두는 예시 조합.
- *  빈 껍데기 대신 무엇을 하는 도구인지 한 번에 보이게 한다. */
-const SEED: HeroId[] = ['pharah', 'widowmaker', 'reinhardt'];
-
 interface Team {
   size: TeamSize;
   enemies: HeroId[];
-  /** 아직 예시를 보고 있는 중. 손대는 순간 내려간다. */
-  demo: boolean;
 }
 
 function initial(): Team {
@@ -26,21 +20,19 @@ function initial(): Team {
       const enemies = Array.isArray(v.enemies)
         ? trim(v.enemies.filter(isHeroId), size)
         : [];
-      return { size, enemies, demo: false };
+      return { size, enemies };
     }
   } catch {
     // 시크릿 창이나 저장이 막힌 브라우저. 기억은 못 해도 도구는 돌아간다.
   }
-  return { size: 5, enemies: SEED, demo: true };
+  // 빈 채로 시작한다. 예시를 깔아 두면 지우는 것이 첫 일이 된다.
+  return { size: 5, enemies: [] };
 }
 
 export function useTeam() {
   const [team, setTeam] = useState<Team>(initial);
 
   useEffect(() => {
-    // 예시는 저장하지 않는다 — 손댄 적 없는 조합이 다음에 열었을 때
-    // 사용자가 고른 것처럼 되살아나면 안 된다.
-    if (team.demo) return;
     try {
       localStorage.setItem(
         KEY,
@@ -51,10 +43,10 @@ export function useTeam() {
     }
   }, [team]);
 
-  /** 적 목록을 바꾸는 모든 길은 여기를 지난다 — 예시 표시도 같이 내린다. */
+  /** 적 목록을 바꾸는 모든 길은 여기를 지난다. */
   const edit = useCallback(
     (fn: (prev: Team) => HeroId[]) =>
-      setTeam((prev) => ({ ...prev, demo: false, enemies: fn(prev) })),
+      setTeam((prev) => ({ ...prev, enemies: fn(prev) })),
     [],
   );
 

@@ -762,6 +762,16 @@ footer code {
 .hs-icon:hover { border-color: var(--accent); color: var(--accent); }
 .hs-close:hover { border-color: var(--bad); color: var(--bad); }
 
+/* 나무위키 로고는 그 자체가 동그란 마크라 테두리를 덧그릴 필요가 없다.
+   자체 색을 가진 그림이라 글자색으로도 못 물들여서, 평소엔 조금 죽여 두고
+   올렸을 때 제 색을 낸다. */
+.hs-wiki { border: 0; padding: 0; }
+.hs-wiki img {
+  width: 100%; height: 100%; display: block;
+  border-radius: 50%; opacity: .82;
+}
+.hs-wiki:hover img { opacity: 1; }
+
 .hs-body {
   overflow: auto; overscroll-behavior: contain;
   flex: 1 1 auto; min-height: 0;
@@ -809,8 +819,6 @@ footer code {
   padding: 3px 6px 3px 3px; border-radius: 20px;
   background: var(--panel); border: 1px solid var(--line);
 }
-/* 지금 적 팀에 있는 영웅. 이 줄이 왜 이 점수인지 바로 잇는다. */
-.hs-item.picked { border-color: var(--accent); background: var(--panel2); }
 .hs-item .pic {
   width: 22px; height: 22px; flex: none;
   border-radius: 50%; object-fit: cover; background: var(--panel2);

@@ -46,11 +46,7 @@ export function CounterPage() {
         />
       </main>
 
-      <HeroSheet
-        id={info}
-        enemies={team.enemies}
-        onClose={() => setInfo(null)}
-      />
+      <HeroSheet id={info} onClose={() => setInfo(null)} />
 
       {/* 좁은 화면에서 추천 시트가 화면 아래에 떠 있어서, 마지막 줄이
           그 밑에 깔리지 않게 자리를 비워 둔다. */}

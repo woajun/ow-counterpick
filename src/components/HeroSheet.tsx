@@ -2,12 +2,11 @@ import { useEffect, useRef, type CSSProperties } from 'react';
 import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 import { namuUrl } from '../data/namu';
 import { MATRIX, cellTone, signed } from '../lib/matrix';
+import wikiIcon from '../assets/wiki.svg';
 
 interface Props {
   /** 펼쳐 볼 내 픽. null 이면 안 뜬다. */
   id: HeroId | null;
-  /** 지금 적 팀. 이 안에 있는 영웅은 따로 표시한다. */
-  enemies: HeroId[];
   onClose: () => void;
 }
 
@@ -33,7 +32,7 @@ const LEVELS: { v: number; label: string }[] = [
  * 추천 줄은 "지금 고른 적 조합"에 대한 점수만 보여 준다. 그 영웅을 실제로
  * 꺼낼지 정하려면 아직 안 나온 적한테도 통하는지가 궁금해진다.
  */
-export function HeroSheet({ id, enemies, onClose }: Props) {
+export function HeroSheet({ id, onClose }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -87,14 +86,14 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
           </div>
           {/* 값이 이상하면 여기가 고칠 자리다. 이 도구는 옮겨 적은 사본이다. */}
           <a
-            className="hs-icon"
+            className="hs-icon hs-wiki"
             href={namuUrl(id)}
             target="_blank"
             rel="noreferrer"
             aria-label={`나무위키 ${me.full} 상성 절 열기`}
             title="나무위키 상성 절 열기"
           >
-            ↗
+            <img src={wikiIcon} alt="" />
           </a>
           <button
             ref={closeRef}
@@ -143,12 +142,11 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
                     ) : (
                       ids.map((e) => {
                         const h = HEROES[e];
-                        const picked = enemies.includes(e);
                         return (
                           <span
                             key={e}
-                            className={'hs-item' + (picked ? ' picked' : '')}
-                            title={h.full + (picked ? ' · 지금 적 팀에 있음' : '')}
+                            className="hs-item"
+                            title={h.full}
                           >
                             <img
                               className="pic"

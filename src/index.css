@@ -612,7 +612,9 @@ main.wide {
 .legend > span.p3, .legend > span.p2, .legend > span.p1,
 .legend > span.n1, .legend > span.n2, .legend > span.n3,
 .row .why span.p3, .row .why span.p2, .row .why span.p1,
-.row .why span.n1, .row .why span.n2, .row .why span.n3 {
+.row .why span.n1, .row .why span.n2, .row .why span.n3,
+.hs-badge.p3, .hs-badge.p2, .hs-badge.p1,
+.hs-badge.n1, .hs-badge.n2, .hs-badge.n3 {
   background: color-mix(in srgb, var(--on) var(--tint), transparent);
   color: color-mix(in srgb, var(--on) var(--ink), var(--dim));
 }
@@ -688,3 +690,111 @@ footer code {
   background: var(--panel); border: 1px solid var(--line);
   border-radius: 4px; padding: 0 4px;
 }
+
+/* ── 영웅 상성 펼쳐 보기 ───────────────────────────────────
+   추천 줄은 "지금 고른 적 조합"에 대한 점수만 보여 준다. 그 픽을 실제로
+   꺼낼지 정하려면 아직 안 나온 적한테도 통하는지가 궁금해진다. */
+.sheet-back {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  background: rgb(0 0 0 / .66);
+}
+@media (max-width: 1020px) {
+  /* 좁은 화면에서는 위쪽을 조금 비우고 아래로 꽉 채운다 */
+  .sheet-back { padding: 0; align-items: flex-end; }
+}
+
+.hero-sheet {
+  display: flex; flex-direction: column;
+  width: min(560px, 100%); max-height: min(84vh, 720px);
+  background: var(--bg2);
+  border: 1px solid var(--line2); border-radius: 14px;
+  box-shadow: 0 24px 60px rgb(0 0 0 / .6);
+  overflow: hidden;
+}
+@media (max-width: 1020px) {
+  .hero-sheet {
+    border-radius: 16px 16px 0 0; border-bottom: 0;
+    max-height: 88vh;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}
+
+.hs-head {
+  display: flex; align-items: center; gap: 12px; flex: none;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  box-shadow: inset 0 3px 0 0 var(--role);
+}
+.hs-head .pic {
+  width: 46px; height: 46px; flex: none;
+  border-radius: 50%; object-fit: cover; background: var(--panel2);
+  box-shadow: 0 0 0 2px var(--role);
+}
+.hs-name { flex: 1; min-width: 0; }
+.hs-name b {
+  display: block; font-family: var(--display);
+  font-size: 20px; font-weight: 600; color: var(--txt);
+}
+.hs-name span { font-size: 11.5px; color: var(--faint); }
+.hs-close {
+  flex: none; width: 34px; height: 34px; cursor: pointer;
+  border: 1px solid var(--line2); border-radius: 50%;
+  background: transparent; color: var(--dim); font-size: 14px;
+}
+.hs-close:hover { border-color: var(--bad); color: var(--bad); }
+
+.hs-body {
+  overflow: auto; overscroll-behavior: contain;
+  flex: 1 1 auto; min-height: 0;
+  padding: 14px 16px 18px;
+}
+
+.hs-group + .hs-group { margin-top: 16px; }
+.hs-group-head {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.hs-badge {
+  font-family: var(--display); font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  padding: 2px 8px; border-radius: 20px;
+}
+.hs-label { font-size: 12.5px; color: var(--dim); }
+.hs-count {
+  margin-left: auto; font-size: 11px; color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.hs-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.hs-item {
+  display: inline-flex; align-items: center; gap: 6px; position: relative;
+  padding: 3px 9px 3px 3px; border-radius: 20px;
+  background: var(--panel); border: 1px solid var(--line);
+}
+/* 지금 적 팀에 있는 영웅. 이 줄이 왜 이 점수인지 바로 잇는다. */
+.hs-item.picked { border-color: var(--accent); background: var(--panel2); }
+.hs-item .pic {
+  width: 24px; height: 24px; flex: none;
+  border-radius: 50%; object-fit: cover; background: var(--panel2);
+  box-shadow: 0 0 0 1.5px var(--role);
+}
+.hs-item .nm { font-family: var(--display); font-size: 13px; color: var(--txt); }
+/* 두 문서가 서로 어긋난 짝 — 상성표의 빗금과 같은 뜻이다. */
+.hs-clash {
+  position: absolute; top: -1px; right: -1px;
+  border: 5px solid transparent;
+  border-top-color: var(--accent); border-right-color: var(--accent);
+  border-radius: 0 20px 0 0;
+}
+
+.hs-foot {
+  margin: 18px 0 0; padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 11.5px; line-height: 1.7; color: var(--faint);
+}
+.hs-foot a { color: var(--dim); text-decoration: underline dotted; text-underline-offset: 2px; }
+.hs-foot a:hover { color: var(--txt); }
+
+/* 추천 줄이 눌리는 것이라는 표시 */
+.row { cursor: pointer; }

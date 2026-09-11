@@ -1,6 +1,7 @@
 import { useMemo, useState, type CSSProperties } from 'react';
 import { HEROES, ROLES, portrait, type HeroId } from '../data/heroes';
 import { useRoleFilter } from '../lib/useRoleFilter';
+import { HeroSheet } from './HeroSheet';
 import { scaleFor, scoreAll, topByRole, worst, type Scored } from '../lib/score';
 import { cellTone } from '../lib/matrix';
 
@@ -14,11 +15,13 @@ function Row({
   rank,
   scale,
   onLit,
+  onOpen,
 }: {
   item: Scored;
   rank: number;
   scale: number;
   onLit: (ids: HeroId[]) => void;
+  onOpen: (id: HeroId) => void;
 }) {
   const h = HEROES[item.id];
   const negative = item.value < 0;
@@ -31,8 +34,18 @@ function Row({
       className={
         'row' + (negative ? ' neg' : '') + (rank === 1 && !negative ? ' top' : '')
       }
+      role="button"
+      tabIndex={0}
+      aria-label={`${h.full} 상성 펼치기`}
       onMouseEnter={() => onLit(chips.map((c) => c.enemy))}
       onMouseLeave={() => onLit([])}
+      onClick={() => onOpen(item.id)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onOpen(item.id);
+        }
+      }}
     >
       <div className="rank">{rank}</div>
 
@@ -99,6 +112,8 @@ export function Recommendations({ enemies, onLit }: Props) {
   // 좁은 화면에서는 아래에 붙는 시트가 된다. 접힌 채로도 1위 몇 개는
   // 보여야, 영웅을 고른 결과가 화면을 안 움직이고 그 자리에서 바뀐다.
   const [open, setOpen] = useState(false);
+  /** 상성을 펼쳐 볼 영웅. 추천 줄을 누르면 열린다. */
+  const [sheetId, setSheetId] = useState<HeroId | null>(null);
   // 전체를 볼 때는 역할마다 1위 하나씩 — 점수순으로 자르면 탱커만 셋이
   // 나오는 판이 생긴다. 한 역할만 볼 때는 그 안에서 셋.
   const peek = (
@@ -199,6 +214,7 @@ export function Recommendations({ enemies, onLit }: Props) {
                   rank={i + 1}
                   scale={scale}
                   onLit={onLit}
+                  onOpen={setSheetId}
                 />
               ))}
             </div>
@@ -220,6 +236,7 @@ export function Recommendations({ enemies, onLit }: Props) {
                   rank={i + 1}
                   scale={scale}
                   onLit={onLit}
+                  onOpen={setSheetId}
                 />
               ))}
             </div>
@@ -227,6 +244,12 @@ export function Recommendations({ enemies, onLit }: Props) {
         </>
       )}
       </div>
+
+      <HeroSheet
+        id={sheetId}
+        enemies={enemies}
+        onClose={() => setSheetId(null)}
+      />
     </aside>
   );
 }

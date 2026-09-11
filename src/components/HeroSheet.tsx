@@ -1,6 +1,5 @@
 import { useEffect, useRef, type CSSProperties } from 'react';
 import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
-import { conflictOf } from '../data/conflicts';
 import { namuUrl } from '../data/namu';
 import { MATRIX, cellTone, signed } from '../lib/matrix';
 
@@ -12,11 +11,17 @@ interface Props {
   onClose: () => void;
 }
 
-/** 위에서부터 센 순서. 0(중립)은 안 적힌 것과 같아서 빼고 맨 뒤에 따로 센다. */
+/**
+ * 유리한 쪽부터 불리한 쪽으로. 0 은 눈금 그대로 가운데에 둔다.
+ *
+ * 상성표에 0 을 따로 적지 않기 때문에 "중립이라 적어 둔 것"과 "아직 안 적은
+ * 것"이 여기서 섞인다 — 이름을 그렇게 달아 둔다.
+ */
 const LEVELS: { v: number; label: string }[] = [
   { v: 3, label: '매우 유리' },
   { v: 2, label: '유리' },
   { v: 1, label: '약간 유리' },
+  { v: 0, label: '중립 · 안 적힘' },
   { v: -1, label: '약간 불리' },
   { v: -2, label: '불리' },
   { v: -3, label: '매우 불리' },
@@ -53,18 +58,21 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
   const row = MATRIX[id];
   // 한 묶음에 열일곱 명까지 들어간다. 역할로 한 번 더 갈라야 눈에 들어온다.
   const groups = LEVELS.map((lv) => {
-    const ids = HERO_IDS.filter((e) => row[e] === lv.v);
+    // 자기 자신은 뺀다. 0 묶음에 제가 끼어 있으면 이상하다.
+    const ids = HERO_IDS.filter((e) => e !== id && row[e] === lv.v);
     return {
       ...lv,
       ids,
+      // 빈 역할도 칸을 남긴다. 줄이 어긋나면 3열로 나눈 뜻이 없다.
       byRole: ROLES.map((r) => ({
         role: r,
         ids: ids.filter((e) => HEROES[e].r === r.k),
-      })).filter((x) => x.ids.length > 0),
+      })),
     };
   }).filter((g) => g.ids.length > 0);
 
-  const written = groups.reduce((n, g) => n + g.ids.length, 0);
+  // 머리에 적는 숫자는 실제로 적혀 있는 것만 센다. 0 은 안 적힌 것이 섞여 있다.
+  const written = groups.reduce((n, g) => (g.v === 0 ? n : n + g.ids.length), 0);
 
   return (
     <div
@@ -97,59 +105,57 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
           {groups.map((g) => (
             <div className="hs-group" key={g.v}>
               <div className="hs-group-head">
-                <span className={'hs-badge ' + cellTone(g.v)}>{signed(g.v)}</span>
+                <span className={'hs-badge ' + (cellTone(g.v) || 'zero')}>
+                  {signed(g.v)}
+                </span>
                 <span className="hs-label">{g.label}</span>
                 <span className="hs-count">{g.ids.length}</span>
               </div>
 
-              {g.byRole.map(({ role, ids }) => (
-                <div className="hs-role" key={role.k}>
+              <div className="hs-cols">
+                {g.byRole.map(({ role, ids }) => (
                   <div
-                    className="hs-role-tag"
+                    className="hs-col"
+                    key={role.k}
                     style={{ '--role': `var(--${role.k})` } as CSSProperties}
                   >
-                    <span className="dot" />
-                    {role.ko}
-                  </div>
+                    <div className="hs-col-head">
+                      <span className="dot" />
+                      {role.ko}
+                      <span className="n">{ids.length || ''}</span>
+                    </div>
 
-                  <div className="hs-list">
-                    {ids.map((e) => {
-                      const h = HEROES[e];
-                      const picked = enemies.includes(e);
-                      const clash = conflictOf(id, e);
-                      return (
-                        <span
-                          key={e}
-                          className={'hs-item' + (picked ? ' picked' : '')}
-                          title={
-                            h.full +
-                            (picked ? ' · 지금 적 팀에 있음' : '') +
-                            (clash ? ' · 두 문서가 서로 어긋난 짝' : '')
-                          }
-                          style={{ '--role': `var(--${h.r})` } as CSSProperties}
-                        >
-                          <img
-                            className="pic"
-                            src={portrait(e)}
-                            alt=""
-                            loading="lazy"
-                            decoding="async"
-                          />
-                          <span className="nm">{h.ko}</span>
-                          {clash ? <i className="hs-clash" aria-hidden="true" /> : null}
-                        </span>
-                      );
-                    })}
+                    {ids.length === 0 ? (
+                      <span className="hs-none">-</span>
+                    ) : (
+                      ids.map((e) => {
+                        const h = HEROES[e];
+                        const picked = enemies.includes(e);
+                        return (
+                          <span
+                            key={e}
+                            className={'hs-item' + (picked ? ' picked' : '')}
+                            title={h.full + (picked ? ' · 지금 적 팀에 있음' : '')}
+                          >
+                            <img
+                              className="pic"
+                              src={portrait(e)}
+                              alt=""
+                              loading="lazy"
+                              decoding="async"
+                            />
+                            <span className="nm">{h.ko}</span>
+                          </span>
+                        );
+                      })
+                    )}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           ))}
 
           <p className="hs-foot">
-            적 팀에 있는 영웅은 테두리로 표시했습니다. 모서리에 주황 표시가 있는
-            짝은 두 문서가 서로 어긋나게 적어 둔 것입니다.
-            <br />
             <a href={namuUrl(id)} target="_blank" rel="noreferrer">
               나무위키 {me.ko} 상성 절 열기
             </a>

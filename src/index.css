@@ -774,42 +774,51 @@ footer code {
   font-variant-numeric: tabular-nums;
   padding: 2px 8px; border-radius: 20px;
 }
+.hs-badge.zero {
+  background: var(--panel2); color: var(--faint);
+  border: 1px solid var(--line);
+}
 .hs-label { font-size: 12.5px; color: var(--dim); }
 .hs-count {
   margin-left: auto; font-size: 11px; color: var(--faint);
   font-variant-numeric: tabular-nums;
 }
 
-.hs-role + .hs-role { margin-top: 9px; }
-.hs-role-tag {
-  display: flex; align-items: center; gap: 6px; margin-bottom: 5px;
-  font-family: var(--display); font-size: 10.5px; font-weight: 600;
-  letter-spacing: .16em; text-transform: uppercase; color: var(--role);
+/* 역할을 세로 3열로 세운다. 한 묶음에 열일곱 명까지 들어가는데 가로로
+   늘어놓으면 어느 역할인지 되짚어야 한다. 빈 역할도 칸을 남겨서 줄을 맞춘다. */
+.hs-cols {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
+  align-items: start;
 }
-.hs-role-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--role); }
+.hs-col { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.hs-col-head {
+  display: flex; align-items: center; gap: 5px; margin-bottom: 2px;
+  padding-bottom: 4px; border-bottom: 1px solid var(--line);
+  font-family: var(--display); font-size: 10.5px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--role);
+}
+.hs-col-head .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--role); flex: none; }
+.hs-col-head .n {
+  margin-left: auto; color: var(--faint); letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+.hs-none { color: var(--faint); font-size: 12px; padding: 2px 4px; }
 
-.hs-list { display: flex; flex-wrap: wrap; gap: 6px; }
 .hs-item {
-  display: inline-flex; align-items: center; gap: 6px; position: relative;
-  padding: 3px 9px 3px 3px; border-radius: 20px;
+  display: flex; align-items: center; gap: 5px; position: relative; min-width: 0;
+  padding: 3px 6px 3px 3px; border-radius: 20px;
   background: var(--panel); border: 1px solid var(--line);
 }
 /* 지금 적 팀에 있는 영웅. 이 줄이 왜 이 점수인지 바로 잇는다. */
 .hs-item.picked { border-color: var(--accent); background: var(--panel2); }
 .hs-item .pic {
-  width: 24px; height: 24px; flex: none;
+  width: 22px; height: 22px; flex: none;
   border-radius: 50%; object-fit: cover; background: var(--panel2);
-  box-shadow: 0 0 0 1.5px var(--role);
 }
-.hs-item .nm { font-family: var(--display); font-size: 13px; color: var(--txt); }
-/* 두 문서가 서로 어긋난 짝 — 상성표의 빗금과 같은 뜻이다. */
-.hs-clash {
-  position: absolute; top: -1px; right: -1px;
-  border: 5px solid transparent;
-  border-top-color: var(--accent); border-right-color: var(--accent);
-  border-radius: 0 20px 0 0;
+.hs-item .nm {
+  font-family: var(--display); font-size: 12.5px; color: var(--txt);
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-
 .hs-foot {
   margin: 18px 0 0; padding-top: 14px;
   border-top: 1px solid var(--line);

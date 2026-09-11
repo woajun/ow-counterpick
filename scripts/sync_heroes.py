@@ -69,7 +69,11 @@ SHORT = {
 }
 
 # API 가 한국어 이름을 영문으로 주는 몇 명. 한국 커뮤니티에서 부르는 대로 쓴다.
-FULL = {"dva": "디바"}
+#
+# 이름을 한글로 맞추는 것이 보기에도 중요하다. 표시용 글꼴 Oswald 에는 한글이
+# 없어서 한글 이름은 IBM Plex 로 떨어지는데, 라틴 문자만 Oswald 로 그려져서
+# 그 영웅만 굵고 좁아 보인다.
+FULL = {"dva": "디바", "dmon": "디몬"}
 
 
 def fetch(locale: str) -> dict[str, dict]:

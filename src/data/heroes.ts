@@ -17,7 +17,7 @@ export const portrait = (id: HeroId) =>
    날아가니, 이름을 바꾸고 싶으면 그 스크립트의 SHORT / FULL 을 고칠 것. */
 export const HEROES = {
   // ── 탱커 ──────────────────────────────
-  dmon: { ko: 'D.Mon', full: 'D.Mon', en: 'D.Mon', r: 'tank' },
+  dmon: { ko: '디몬', full: '디몬', en: 'D.Mon', r: 'tank' },
   domina: { ko: '도미나', full: '도미나', en: 'Domina', r: 'tank' },
   doomfist: { ko: '둠피', full: '둠피스트', en: 'Doomfist', r: 'tank' },
   dva: { ko: '디바', full: '디바', en: 'D.Va', r: 'tank' },

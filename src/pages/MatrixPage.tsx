@@ -12,7 +12,6 @@ import { CONFLICTS, conflictOf } from '../data/conflicts';
 import { namuUrl } from '../data/namu';
 import { TopBar } from '../components/TopBar';
 import { useSlashFocus } from '../lib/useSlashFocus';
-import { SiteLinks } from '../components/SiteLinks';
 
 /** 범례. 나무위키 등급을 그대로 옮긴 여섯 단계다. */
 const LEGEND: [number, string][] = [
@@ -337,7 +336,6 @@ export function MatrixPage() {
       </main>
 
       <footer>
-        <SiteLinks />
         <b>표 보는 법</b> — 가로줄 하나가 내 픽 하나입니다. 세로줄을 훑으면
         그 적이 나왔을 때 뭐가 좋은지 보입니다. 맨 오른쪽 <b>합</b>은 적{' '}
         {COLS.length}명 전체를 상대로 한 점수 합이고, 맨 아래 <b>합</b>은 화면에

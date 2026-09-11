@@ -122,8 +122,21 @@ export function Recommendations({ enemies, onLit }: Props) {
             <i>적을 고르면 여기에 나옵니다</i>
           ) : (
             peek.map((it) => (
-              <span key={it.id}>
-                {HEROES[it.id].ko}
+              <span
+                key={it.id}
+                className="pk"
+                style={
+                  { '--role': `var(--${HEROES[it.id].r})` } as CSSProperties
+                }
+              >
+                <img
+                  className="pic"
+                  src={portrait(it.id)}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="nm">{HEROES[it.id].ko}</span>
                 <b>
                   {it.value > 0 ? '+' : ''}
                   {it.value}

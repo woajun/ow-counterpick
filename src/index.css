@@ -752,11 +752,14 @@ footer code {
   font-size: 20px; font-weight: 600; color: var(--txt);
 }
 .hs-name span { font-size: 11.5px; color: var(--faint); }
-.hs-close {
+.hs-icon {
   flex: none; width: 34px; height: 34px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
   border: 1px solid var(--line2); border-radius: 50%;
-  background: transparent; color: var(--dim); font-size: 14px;
+  background: transparent; color: var(--dim);
+  font-size: 14px; text-decoration: none;
 }
+.hs-icon:hover { border-color: var(--accent); color: var(--accent); }
 .hs-close:hover { border-color: var(--bad); color: var(--bad); }
 
 .hs-body {
@@ -779,10 +782,6 @@ footer code {
   border: 1px solid var(--line);
 }
 .hs-label { font-size: 12.5px; color: var(--dim); }
-.hs-count {
-  margin-left: auto; font-size: 11px; color: var(--faint);
-  font-variant-numeric: tabular-nums;
-}
 
 /* 역할을 세로 3열로 세운다. 한 묶음에 열일곱 명까지 들어가는데 가로로
    늘어놓으면 어느 역할인지 되짚어야 한다. 빈 역할도 칸을 남겨서 줄을 맞춘다. */
@@ -791,17 +790,18 @@ footer code {
   align-items: start;
 }
 .hs-col { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.hs-col-head {
-  display: flex; align-items: center; gap: 5px; margin-bottom: 2px;
-  padding-bottom: 4px; border-bottom: 1px solid var(--line);
-  font-family: var(--display); font-size: 10.5px; font-weight: 600;
-  letter-spacing: .1em; text-transform: uppercase; color: var(--role);
+/* 역할 머리는 본문 맨 위에 한 번만. 스크롤해도 붙어 있는다. */
+.hs-colhead {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
+  margin: 0 0 10px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
 }
-.hs-col-head .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--role); flex: none; }
-.hs-col-head .n {
-  margin-left: auto; color: var(--faint); letter-spacing: 0;
-  font-variant-numeric: tabular-nums;
+.hs-colhead > div {
+  display: flex; align-items: center; gap: 5px; min-width: 0;
+  font-family: var(--display); font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--role);
 }
+.hs-colhead .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--role); flex: none; }
 .hs-none { color: var(--faint); font-size: 12px; padding: 2px 4px; }
 
 .hs-item {
@@ -819,13 +819,6 @@ footer code {
   font-family: var(--display); font-size: 12.5px; color: var(--txt);
   min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.hs-foot {
-  margin: 18px 0 0; padding-top: 14px;
-  border-top: 1px solid var(--line);
-  font-size: 11.5px; line-height: 1.7; color: var(--faint);
-}
-.hs-foot a { color: var(--dim); text-decoration: underline dotted; text-underline-offset: 2px; }
-.hs-foot a:hover { color: var(--txt); }
 
 /* 추천 줄이 눌리는 것이라는 표시 */
 .row { cursor: pointer; }

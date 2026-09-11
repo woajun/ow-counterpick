@@ -71,9 +71,6 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
     };
   }).filter((g) => g.ids.length > 0);
 
-  // 머리에 적는 숫자는 실제로 적혀 있는 것만 센다. 0 은 안 적힌 것이 섞여 있다.
-  const written = groups.reduce((n, g) => (g.v === 0 ? n : n + g.ids.length), 0);
-
   return (
     <div
       className="sheet-back"
@@ -86,14 +83,23 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
           <img className="pic" src={portrait(id)} alt="" decoding="async" />
           <div className="hs-name">
             <b>{me.full}</b>
-            <span>
-              {me.en} · 적 {written}명에 대해 적혀 있음
-            </span>
+            <span>{me.en}</span>
           </div>
+          {/* 값이 이상하면 여기가 고칠 자리다. 이 도구는 옮겨 적은 사본이다. */}
+          <a
+            className="hs-icon"
+            href={namuUrl(id)}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`나무위키 ${me.full} 상성 절 열기`}
+            title="나무위키 상성 절 열기"
+          >
+            ↗
+          </a>
           <button
             ref={closeRef}
             type="button"
-            className="hs-close"
+            className="hs-icon hs-close"
             aria-label="닫기"
             onClick={onClose}
           >
@@ -102,6 +108,20 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
         </div>
 
         <div className="hs-body">
+          {/* 역할 머리는 여기 한 번만. 등급 묶음마다 달면 일곱 번 반복된다.
+              스크롤해도 붙어 있어서 아래로 내려가도 어느 칸인지 안 잃는다. */}
+          <div className="hs-colhead">
+            {ROLES.map((r) => (
+              <div
+                key={r.k}
+                style={{ '--role': `var(--${r.k})` } as CSSProperties}
+              >
+                <span className="dot" />
+                {r.ko}
+              </div>
+            ))}
+          </div>
+
           {groups.map((g) => (
             <div className="hs-group" key={g.v}>
               <div className="hs-group-head">
@@ -109,7 +129,6 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
                   {signed(g.v)}
                 </span>
                 <span className="hs-label">{g.label}</span>
-                <span className="hs-count">{g.ids.length}</span>
               </div>
 
               <div className="hs-cols">
@@ -119,12 +138,6 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
                     key={role.k}
                     style={{ '--role': `var(--${role.k})` } as CSSProperties}
                   >
-                    <div className="hs-col-head">
-                      <span className="dot" />
-                      {role.ko}
-                      <span className="n">{ids.length || ''}</span>
-                    </div>
-
                     {ids.length === 0 ? (
                       <span className="hs-none">-</span>
                     ) : (
@@ -155,11 +168,6 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
             </div>
           ))}
 
-          <p className="hs-foot">
-            <a href={namuUrl(id)} target="_blank" rel="noreferrer">
-              나무위키 {me.ko} 상성 절 열기
-            </a>
-          </p>
         </div>
       </div>
     </div>

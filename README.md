@@ -137,7 +137,7 @@ python3 scripts/scrape_matchups.py --write  # matchups.ts 까지 다시 쓴다
 
 | 파일 | 하는 일 |
 | --- | --- |
-| `src/data/heroes.ts` | 영웅 명단과 역할 |
+| `src/data/heroes.ts` | 영웅 명단과 역할. 차례는 게임 영웅 선택 화면과 같다 |
 | `src/data/matchups.ts` | 상성표 |
 | `src/data/conflicts.ts` | 두 문서가 어긋나는 짝 |
 | `src/data/namu.ts` | 영웅별 나무위키 문서 제목 |
@@ -235,5 +235,6 @@ python3 scripts/scrape_matchups.py --write  # matchups.ts 까지 다시 쓴다
 둔다 — 거기는 53줄을 좁혀야 하는 화면이라 필요하다. <kbd>/</kbd> 로 바로
 들어간다.
 
-**초기화는 적 팀 머리줄에 있다.** 비우는 대상 바로 위다. 상단 바에 있으면
-무엇을 되돌리는 버튼인지 안 보이고, 적 팀이 비어 있으면 눌리지 않는다.
+**초기화는 적 슬롯 줄 맨 앞에 있다.** 슬롯과 같은 높이로 서 있어서 무엇을
+비우는 버튼인지 바로 보인다. 머리줄에 작게 달려 있을 때는 있는 줄도 몰랐다.
+적 팀이 비어 있으면 눌리지 않는다.

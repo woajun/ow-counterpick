@@ -37,24 +37,25 @@ export function EnemySlots({
             탱커 {countRole(enemies, 'tank')} / {LIMITS[6].tank}
           </span>
         )}
-
-        <div className="spacer" />
-
-        {/* 비우는 대상 바로 위에 둔다. 상단 바에 있으면 무엇을 되돌리는
-            버튼인지 안 보인다. */}
-        <button
-          type="button"
-          className="reset small"
-          disabled={enemies.length === 0}
-          onClick={onReset}
-        >
-          초기화
-        </button>
       </h2>
 
       {/* 칸 수를 격자에 그대로 넘긴다. flex 로 나누면 안쪽 글자 폭 때문에
           좁은 화면에서 마지막 칸이 밀려 나간다. */}
       <div className="slots" style={{ '--n': size } as CSSProperties}>
+        {/* 비우는 대상과 같은 높이로, 맨 앞에. 머리줄에 작게 달려 있을 때는
+            있는 줄도 몰랐다. */}
+        <button
+          type="button"
+          className="wipe"
+          disabled={enemies.length === 0}
+          onClick={onReset}
+        >
+          <span className="x" aria-hidden="true">
+            ✕
+          </span>
+          <span className="lbl">초기화</span>
+        </button>
+
         {slots.map((slot, i) => {
           if (!slot.id) {
             const role = slot.role && ROLES.find((r) => r.k === slot.role);

@@ -115,7 +115,11 @@ export const portrait = (id: HeroId) =>
   `${import.meta.env.BASE_URL}heroes/${id}.webp`;
 
 /* 이 표는 scripts/sync_heroes.py 가 다시 쓴다. 손으로 고치면 다음 실행에
-   날아가니, 이름을 바꾸고 싶으면 그 스크립트의 SHORT / FULL 을 고칠 것. */
+   날아가니, 이름을 바꾸고 싶으면 그 스크립트의 SHORT / FULL 을 고칠 것.
+
+   차례는 게임 영웅 선택 화면과 같다 — 역할별로 묶고 그 안에서는 게임이
+   보여 주는 한국어 이름 순이다. HERO_IDS 를 그대로 쓰는 화면들이 이 차례를
+   따라간다. */
 export const HEROES = {
 """
 
@@ -153,9 +157,17 @@ def main() -> int:
                 "en": en[key]["name"],
                 "r": ROLE_MAP[h["role"]],
                 "portrait": h["portrait"],
+                # 게임이 쓰는 이름. 화면에는 안 쓰고 순서를 세우는 데만 쓴다.
+                "sort": h["name"],
             }
         )
-    heroes.sort(key=lambda h: (ROLE_ORDER[h["r"]], h["id"]))
+    # 게임 영웅 선택 화면과 같은 순서로 세운다. 역할별로 묶고, 그 안에서는
+    # 게임이 보여 주는 한국어 이름 순이다. 유니코드 차례가 곧 가나다순이고
+    # 라틴 문자가 한글보다 앞이라, D.Mon · D.Va 가 먼저 오는 것까지 맞는다.
+    #
+    # 정렬에는 API 가 준 이름을 쓴다. 화면에 쓰는 이름은 우리가 바꾼 것이
+    # 있어서(D.Va → 디바) 그걸로 세우면 게임과 어긋난다.
+    heroes.sort(key=lambda h: (ROLE_ORDER[h["r"]], h["sort"]))
 
     before = set(re.findall(r"^  ([a-z0-9]+): \{", HEROES_TS.read_text("utf-8"), re.M))
     added = [h for h in heroes if h["id"] not in before]

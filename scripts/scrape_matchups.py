@@ -53,6 +53,7 @@ OUT_JSON = ROOT / "data" / "namu" / "matchups.json"
 CLASH_MD = ROOT / "data" / "namu" / "conflicts.md"
 CLASH_TS = ROOT / "src" / "data" / "conflicts.ts"
 NAMU_TS = ROOT / "src" / "data" / "namu.ts"
+NEUTRAL_TS = ROOT / "src" / "data" / "neutral.ts"
 
 BASE = "https://namu.wiki/w/"
 DELAY = 1.0  # 초. 남의 서버다.
@@ -318,6 +319,56 @@ def write_conflicts_ts(pairs, heroes: dict[str, dict]) -> None:
     CLASH_TS.write_text("".join(out), "utf-8")
 
 
+NEUTRAL_HEAD = """import type { HeroId } from './heroes';
+
+/**
+ * 중립이라고 **적혀 있는** 짝.
+ *
+ * 아예 안 적힌 것과 다르다. 나무위키가 "중립" 또는 "유동적"이라고 판단해
+ * 둔 것이라, 점수가 0이라는 사실 자체가 정보다. 상성표에는 0을 적지 않기
+ * 때문에 그 구별이 사라지는데, 그걸 여기에 남긴다.
+ *
+ * 방향이 있다. `NEUTRAL[a]` 에 b 가 있다는 것은 **a 의 문서가** b 를 중립으로
+ * 봤다는 뜻이고, b 의 문서가 a 를 어떻게 봤는지는 별개다.
+ *
+ * scripts/scrape_matchups.py 가 다시 쓴다. 손으로 고치면 다음 실행에 날아간다.
+ */
+const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
+"""
+
+NEUTRAL_FOOT = """};
+
+const INDEX = new Map(
+  Object.entries(NEUTRAL).map(([a, bs]) => [a, new Set(bs)]),
+);
+
+/** `mine` 의 문서가 `enemy` 를 중립으로 적어 두었나. */
+export const isNeutral = (mine: HeroId, enemy: HeroId) =>
+  INDEX.get(mine)?.has(enemy) ?? false;
+"""
+
+
+def write_neutral_ts(raw: dict, heroes: dict, score: dict) -> None:
+    order = sorted(heroes, key=lambda h: ({"tank": 0, "dmg": 1, "sup": 2}[heroes[h]["r"]], h))
+    out, n = [NEUTRAL_HEAD], 0
+    for hid in order:
+        ids = sorted(e for e, g in raw.get(hid, {}).items() if score[g] == 0)
+        if not ids:
+            continue
+        n += len(ids)
+        items = ", ".join(f"'{e}'" for e in ids)
+        line = f"  {hid}: [{items}],"
+        if len(line) <= WIDTH:
+            out.append(line + "\n")
+        else:
+            out.append(f"  {hid}: [\n")
+            out.extend(l + "\n" for l in wrap([f"'{e}'" for e in ids], "    "))
+            out.append("  ],\n")
+    out.append(NEUTRAL_FOOT)
+    NEUTRAL_TS.write_text("".join(out), "utf-8")
+    return n
+
+
 NAMU_HEAD = """import type { HeroId } from './heroes';
 
 /**
@@ -494,6 +545,9 @@ def main() -> int:
             "utf-8",
         )
         print(f"\n두 문서가 어긋나는 짝 {len(lines)}개 → {CLASH_MD.relative_to(ROOT)}")
+
+    n_neutral = write_neutral_ts(raw, heroes, score)
+    print(f"{NEUTRAL_TS.relative_to(ROOT)} — 중립이라 적힌 짝 {n_neutral}개")
 
     write_conflicts_ts(sorted(pairs), heroes)
     print(f"{CLASH_TS.relative_to(ROOT)} — 어긋난 짝 {len(pairs)}개")

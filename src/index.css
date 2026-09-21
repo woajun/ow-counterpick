@@ -820,6 +820,11 @@ footer code {
   background: var(--panel2); color: var(--faint);
   border: 1px solid var(--line);
 }
+/* 등급이 아니라 자료가 없다는 뜻이라 더 죽여 둔다. */
+.hs-badge.blank {
+  background: transparent; color: var(--faint);
+  border: 1px dashed var(--line2);
+}
 .hs-label { font-size: 12.5px; color: var(--dim); }
 
 /* 역할을 세로 3열로 세운다. 한 묶음에 열일곱 명까지 들어가는데 가로로

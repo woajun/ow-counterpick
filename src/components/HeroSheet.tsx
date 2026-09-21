@@ -2,6 +2,7 @@ import { useEffect, useRef, type CSSProperties } from 'react';
 import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 import { namuUrl } from '../data/namu';
 import { MATRIX, cellTone, signed } from '../lib/matrix';
+import { isNeutral } from '../data/neutral';
 import wikiIcon from '../assets/wiki.svg';
 
 interface Props {
@@ -11,19 +12,23 @@ interface Props {
 }
 
 /**
- * 유리한 쪽부터 불리한 쪽으로. 0 은 눈금 그대로 가운데에 둔다.
+ * 유리한 쪽부터 불리한 쪽으로.
  *
- * 상성표에 0 을 따로 적지 않기 때문에 "중립이라 적어 둔 것"과 "아직 안 적은
- * 것"이 여기서 섞인다 — 이름을 그렇게 달아 둔다.
+ * 0 은 둘로 갈린다. "중립이라 적어 둔 것"은 판단이 있는 것이라 눈금 그대로
+ * 가운데에 두고, "아예 안 적힌 것"은 등급이 아니라 자료가 없는 것이라 맨
+ * 뒤로 뺀다. 둘을 한 묶음에 넣으면 571개와 106개가 섞여 버린다.
  */
-const LEVELS: { v: number; label: string }[] = [
-  { v: 3, label: '매우 유리' },
-  { v: 2, label: '유리' },
-  { v: 1, label: '약간 유리' },
-  { v: 0, label: '중립 · 안 적힘' },
-  { v: -1, label: '약간 불리' },
-  { v: -2, label: '불리' },
-  { v: -3, label: '매우 불리' },
+type Kind = 'scored' | 'neutral' | 'blank';
+
+const LEVELS: { v: number; label: string; kind: Kind }[] = [
+  { v: 3, label: '매우 유리', kind: 'scored' },
+  { v: 2, label: '유리', kind: 'scored' },
+  { v: 1, label: '약간 유리', kind: 'scored' },
+  { v: 0, label: '중립', kind: 'neutral' },
+  { v: -1, label: '약간 불리', kind: 'scored' },
+  { v: -2, label: '불리', kind: 'scored' },
+  { v: -3, label: '매우 불리', kind: 'scored' },
+  { v: 0, label: '적힌 것 없음', kind: 'blank' },
 ];
 
 /**
@@ -58,7 +63,12 @@ export function HeroSheet({ id, onClose }: Props) {
   // 한 묶음에 열일곱 명까지 들어간다. 역할로 한 번 더 갈라야 눈에 들어온다.
   const groups = LEVELS.map((lv) => {
     // 자기 자신은 뺀다. 0 묶음에 제가 끼어 있으면 이상하다.
-    const ids = HERO_IDS.filter((e) => e !== id && row[e] === lv.v);
+    const ids = HERO_IDS.filter((e) => {
+      if (e === id || row[e] !== lv.v) return false;
+      if (lv.kind === 'neutral') return isNeutral(id, e);
+      if (lv.kind === 'blank') return !isNeutral(id, e);
+      return true;
+    });
     return {
       ...lv,
       ids,
@@ -122,10 +132,15 @@ export function HeroSheet({ id, onClose }: Props) {
           </div>
 
           {groups.map((g) => (
-            <div className="hs-group" key={g.v}>
+            <div className="hs-group" key={g.label}>
               <div className="hs-group-head">
-                <span className={'hs-badge ' + (cellTone(g.v) || 'zero')}>
-                  {signed(g.v)}
+                <span
+                  className={
+                    'hs-badge ' +
+                    (cellTone(g.v) || (g.kind === 'blank' ? 'blank' : 'zero'))
+                  }
+                >
+                  {g.kind === 'blank' ? '—' : signed(g.v)}
                 </span>
                 <span className="hs-label">{g.label}</span>
               </div>

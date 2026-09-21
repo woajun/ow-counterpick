@@ -21,34 +21,34 @@ export interface Conflict {
 }
 
 export const CONFLICTS: Conflict[] = [
-  { a: 'ana', b: 'moira', both: 'up' }, // 아나 ↔ 모이라
   { a: 'anran', b: 'baptiste', both: 'down' }, // 안란 ↔ 바티스트
-  { a: 'anran', b: 'bastion', both: 'up' }, // 안란 ↔ 바스티온
   { a: 'anran', b: 'echo', both: 'down' }, // 안란 ↔ 에코
   { a: 'anran', b: 'juno', both: 'up' }, // 안란 ↔ 주노
   { a: 'anran', b: 'mercy', both: 'up' }, // 안란 ↔ 메르시
-  { a: 'ashe', b: 'mei', both: 'down' }, // 애쉬 ↔ 메이
   { a: 'ashe', b: 'tracer', both: 'up' }, // 애쉬 ↔ 트레이서
-  { a: 'dmon', b: 'orisa', both: 'up' }, // D.Mon ↔ 오리사
+  { a: 'bastion', b: 'anran', both: 'up' }, // 바스티온 ↔ 안란
+  { a: 'dmon', b: 'orisa', both: 'up' }, // 디몬 ↔ 오리사
   { a: 'domina', b: 'zarya', both: 'up' }, // 도미나 ↔ 자리야
   { a: 'doomfist', b: 'bastion', both: 'up' }, // 둠피스트 ↔ 바스티온
   { a: 'doomfist', b: 'emre', both: 'up' }, // 둠피스트 ↔ 엠레
   { a: 'echo', b: 'illari', both: 'down' }, // 에코 ↔ 일리아리
   { a: 'echo', b: 'jetpackcat', both: 'down' }, // 에코 ↔ 제트팩 캣
   { a: 'freja', b: 'juno', both: 'up' }, // 프레야 ↔ 주노
-  { a: 'freja', b: 'sojourn', both: 'up' }, // 프레야 ↔ 소전
   { a: 'junkerqueen', b: 'anran', both: 'up' }, // 정커퀸 ↔ 안란
   { a: 'junkerqueen', b: 'illari', both: 'up' }, // 정커퀸 ↔ 일리아리
   { a: 'junkerqueen', b: 'mizuki', both: 'up' }, // 정커퀸 ↔ 미즈키
   { a: 'junkerqueen', b: 'tracer', both: 'up' }, // 정커퀸 ↔ 트레이서
   { a: 'mauga', b: 'wuyang', both: 'up' }, // 마우가 ↔ 우양
-  { a: 'pharah', b: 'sombra', both: 'up' }, // 파라 ↔ 솜브라
+  { a: 'mei', b: 'ashe', both: 'down' }, // 메이 ↔ 애쉬
+  { a: 'moira', b: 'ana', both: 'up' }, // 모이라 ↔ 아나
   { a: 'ramattra', b: 'ana', both: 'down' }, // 라마트라 ↔ 아나
   { a: 'reinhardt', b: 'genji', both: 'up' }, // 라인하르트 ↔ 겐지
   { a: 'reinhardt', b: 'soldier76', both: 'up' }, // 라인하르트 ↔ 솔저: 76
   { a: 'roadhog', b: 'mei', both: 'up' }, // 로드호그 ↔ 메이
   { a: 'shion', b: 'brigitte', both: 'up' }, // 시온 ↔ 브리기테
+  { a: 'sojourn', b: 'freja', both: 'up' }, // 소전 ↔ 프레야
   { a: 'soldier76', b: 'ana', both: 'up' }, // 솔저: 76 ↔ 아나
+  { a: 'sombra', b: 'pharah', both: 'up' }, // 솜브라 ↔ 파라
   { a: 'sombra', b: 'tracer', both: 'up' }, // 솜브라 ↔ 트레이서
   { a: 'symmetra', b: 'tracer', both: 'down' }, // 시메트라 ↔ 트레이서
   { a: 'tracer', b: 'illari', both: 'down' }, // 트레이서 ↔ 일리아리

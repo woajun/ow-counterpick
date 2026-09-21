@@ -853,6 +853,9 @@ footer code {
   padding: 3px 6px 3px 3px; border-radius: 20px;
   background: var(--panel); border: 1px solid var(--line);
 }
+/* 반대쪽 문서를 뒤집어 매긴 값. 근거가 한쪽뿐이라 테두리로만 조용히 구별한다. */
+.hs-item.guessed { border-style: dashed; border-color: var(--line2); }
+
 .hs-item .pic {
   width: 22px; height: 22px; flex: none;
   border-radius: 50%; object-fit: cover; background: var(--panel2);

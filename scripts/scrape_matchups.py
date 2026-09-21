@@ -54,6 +54,7 @@ CLASH_MD = ROOT / "data" / "namu" / "conflicts.md"
 CLASH_TS = ROOT / "src" / "data" / "conflicts.ts"
 NAMU_TS = ROOT / "src" / "data" / "namu.ts"
 NEUTRAL_TS = ROOT / "src" / "data" / "neutral.ts"
+INFERRED_TS = ROOT / "src" / "data" / "inferred.ts"
 
 BASE = "https://namu.wiki/w/"
 DELAY = 1.0  # 초. 남의 서버다.
@@ -348,6 +349,83 @@ export const isNeutral = (mine: HeroId, enemy: HeroId) =>
 """
 
 
+def effective(raw: dict, heroes: dict, score: dict):
+    """실제로 쓸 상성. 적힌 것을 먼저 두고, 빈 자리는 반대쪽을 뒤집어 메운다.
+
+    `raw[a][b]` 는 "a 의 문서가 b 를 상대로 어떤가"다. a 쪽이 비어 있어도
+    b 의 문서가 a 를 적어 뒀다면 그게 같은 짝에 대한 진술이다 — b 가 a 에게
+    유리하다면 a 는 b 에게 그만큼 불리하다. 부호만 뒤집으면 된다.
+
+    다만 뒤집어 온 값은 따로 표시해 둔다. 나중에 원본이 채워지면 덮어써야
+    하고, 한쪽만 적힌 짝이라 근거의 무게도 다르다.
+
+    돌려주는 것: {나: {적: (점수, 뒤집어왔나)}}
+    """
+    eff: dict[str, dict[str, tuple[int, bool]]] = {m: {} for m in heroes}
+    for mine in heroes:
+        for enemy in heroes:
+            if mine == enemy:
+                continue
+            g = raw.get(mine, {}).get(enemy)
+            if g is not None:
+                eff[mine][enemy] = (score[g], False)
+                continue
+            back = raw.get(enemy, {}).get(mine)
+            if back is not None:
+                eff[mine][enemy] = (-score[back], True)
+    return eff
+
+
+INFERRED_HEAD = """import type { HeroId } from './heroes';
+
+/**
+ * 반대쪽 문서를 뒤집어 메운 짝.
+ *
+ * 나무위키는 두 영웅 중 한쪽 문서에만 적어 두는 일이 잦다. 빈 쪽은 반대쪽을
+ * 뒤집어 채웠다 — b 가 a 에게 유리하면 a 는 b 에게 그만큼 불리하다.
+ *
+ * 적혀 있는 값과 구별해 두는 이유: 나중에 원본이 채워지면 덮어써야 하고,
+ * 한쪽 문서만 근거라서 무게가 다르다.
+ *
+ * scripts/scrape_matchups.py 가 다시 쓴다. 손으로 고치면 다음 실행에 날아간다.
+ */
+const INFERRED: Partial<Record<HeroId, HeroId[]>> = {
+"""
+
+INFERRED_FOOT = """};
+
+const INDEX = new Map(
+  Object.entries(INFERRED).map(([a, bs]) => [a, new Set(bs)]),
+);
+
+/** `mine` 의 `enemy` 상성이 반대쪽에서 뒤집어 온 값인가. */
+export const isInferred = (mine: HeroId, enemy: HeroId) =>
+  INDEX.get(mine)?.has(enemy) ?? false;
+"""
+
+
+def write_pairs_ts(path, head, foot, by_hero, heroes) -> int:
+    """{영웅: [상대…]} 를 파일로. neutral.ts 와 inferred.ts 가 같은 꼴이다."""
+    order = sorted(heroes, key=lambda h: ({"tank": 0, "dmg": 1, "sup": 2}[heroes[h]["r"]], h))
+    out, n = [head], 0
+    for hid in order:
+        ids = sorted(by_hero.get(hid, []))
+        if not ids:
+            continue
+        n += len(ids)
+        items = ", ".join(f"'{e}'" for e in ids)
+        line = f"  {hid}: [{items}],"
+        if len(line) <= WIDTH:
+            out.append(line + "\n")
+        else:
+            out.append(f"  {hid}: [\n")
+            out.extend(l + "\n" for l in wrap([f"'{e}'" for e in ids], "    "))
+            out.append("  ],\n")
+    out.append(foot)
+    path.write_text("".join(out), "utf-8")
+    return n
+
+
 def write_neutral_ts(raw: dict, heroes: dict, score: dict) -> None:
     order = sorted(heroes, key=lambda h: ({"tank": 0, "dmg": 1, "sup": 2}[heroes[h]["r"]], h))
     out, n = [NEUTRAL_HEAD], 0
@@ -546,8 +624,16 @@ def main() -> int:
         )
         print(f"\n두 문서가 어긋나는 짝 {len(lines)}개 → {CLASH_MD.relative_to(ROOT)}")
 
-    n_neutral = write_neutral_ts(raw, heroes, score)
-    print(f"{NEUTRAL_TS.relative_to(ROOT)} — 중립이라 적힌 짝 {n_neutral}개")
+    eff = effective(raw, heroes, score)
+
+    neutral_by = {m: [e for e, (v, _) in r.items() if v == 0] for m, r in eff.items()}
+    n_neutral = write_pairs_ts(NEUTRAL_TS, NEUTRAL_HEAD, NEUTRAL_FOOT, neutral_by, heroes)
+    print(f"{NEUTRAL_TS.relative_to(ROOT)} — 중립 {n_neutral}개")
+
+    inferred_by = {m: [e for e, (_, inf) in r.items() if inf] for m, r in eff.items()}
+    n_inf = write_pairs_ts(INFERRED_TS, INFERRED_HEAD, INFERRED_FOOT, inferred_by, heroes)
+    blank = sum(1 for m in heroes for e in heroes if m != e and e not in eff[m])
+    print(f"{INFERRED_TS.relative_to(ROOT)} — 뒤집어 메운 짝 {n_inf}개 (끝까지 빈 짝 {blank}개)")
 
     write_conflicts_ts(sorted(pairs), heroes)
     print(f"{CLASH_TS.relative_to(ROOT)} — 어긋난 짝 {len(pairs)}개")
@@ -570,10 +656,9 @@ def main() -> int:
         )
 
     table: dict[str, dict[str, int]] = {hid: {} for hid in heroes}
-    for mine, row in raw.items():
-        for enemy, grade in row.items():
-            v = score[grade]
-            if v:  # 0(중립·유동적)은 안 적힌 것과 뜻이 같다
+    for mine, row in eff.items():
+        for enemy, (v, _) in row.items():
+            if v:  # 0(중립)은 neutral.ts 가 따로 들고 있다
                 table[enemy][mine] = v
 
     write_ts(table, heroes)

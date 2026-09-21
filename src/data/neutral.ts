@@ -39,8 +39,8 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
     'roadhog', 'sigma', 'torbjorn', 'vendetta',
   ],
   mauga: [
-    'echo', 'lifeweaver', 'mei', 'moira', 'orisa', 'reaper', 'roadhog',
-    'sombra', 'torbjorn', 'tracer', 'wreckingball',
+    'echo', 'lifeweaver', 'mei', 'mizuki', 'moira', 'orisa', 'reaper',
+    'roadhog', 'sombra', 'torbjorn', 'tracer', 'wreckingball',
   ],
   orisa: [
     'anran', 'ashe', 'baptiste', 'freja', 'genji', 'illari', 'mauga',
@@ -52,8 +52,8 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
     'pharah', 'shion', 'vendetta', 'widowmaker', 'winston',
   ],
   reinhardt: [
-    'ana', 'anran', 'baptiste', 'illari', 'juno', 'kiriko', 'mercy', 'moira',
-    'roadhog', 'torbjorn',
+    'ana', 'anran', 'baptiste', 'dmon', 'illari', 'juno', 'kiriko', 'mercy',
+    'moira', 'roadhog', 'torbjorn',
   ],
   roadhog: [
     'ashe', 'bastion', 'dva', 'hanzo', 'illari', 'junkerqueen', 'lifeweaver',
@@ -68,8 +68,8 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
     'venture', 'wreckingball',
   ],
   wreckingball: [
-    'ana', 'anran', 'dva', 'emre', 'hazard', 'junkerqueen', 'lifeweaver',
-    'lucio', 'mauga', 'venture', 'zenyatta',
+    'ana', 'anran', 'dmon', 'dva', 'emre', 'hazard', 'junkerqueen',
+    'lifeweaver', 'lucio', 'mauga', 'venture', 'zenyatta',
   ],
   zarya: [
     'doomfist', 'juno', 'mauga', 'moira', 'reaper', 'roadhog', 'sierra',
@@ -77,8 +77,8 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
   ],
   anran: ['domina', 'orisa', 'reinhardt', 'wreckingball', 'wuyang'],
   ashe: [
-    'bastion', 'hanzo', 'moira', 'roadhog', 'soldier76', 'sombra',
-    'symmetra', 'vendetta', 'venture',
+    'bastion', 'domina', 'emre', 'hanzo', 'moira', 'roadhog', 'soldier76',
+    'sombra', 'symmetra', 'vendetta', 'venture',
   ],
   bastion: [
     'ashe', 'baptiste', 'dva', 'emre', 'illari', 'junkerqueen', 'lucio',
@@ -88,11 +88,12 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
   cassidy: ['genji', 'junkerqueen', 'junkrat', 'soldier76'],
   echo: ['ana', 'lucio', 'mauga', 'mercy', 'moira', 'sojourn'],
   emre: [
-    'ana', 'ashe', 'domina', 'mizuki', 'reaper', 'sojourn', 'venture',
-    'winston', 'wuyang',
+    'ana', 'ashe', 'domina', 'mizuki', 'reaper', 'shion', 'sojourn',
+    'venture', 'winston', 'wuyang',
   ],
   freja: [
-    'ana', 'baptiste', 'dmon', 'jetpackcat', 'mizuki', 'reaper', 'winston',
+    'ana', 'baptiste', 'dmon', 'jetpackcat', 'mizuki', 'reaper', 'shion',
+    'winston',
   ],
   genji: [
     'ana', 'baptiste', 'cassidy', 'hazard', 'illari', 'junkerqueen',
@@ -104,14 +105,14 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
     'sojourn', 'soldier76', 'symmetra', 'tracer', 'widowmaker',
   ],
   junkrat: [
-    'cassidy', 'dva', 'genji', 'illari', 'mizuki', 'moira', 'torbjorn',
-    'zenyatta',
+    'cassidy', 'dva', 'genji', 'illari', 'mizuki', 'moira', 'shion',
+    'torbjorn', 'zenyatta',
   ],
   mei: [
     'brigitte', 'juno', 'moira', 'torbjorn', 'vendetta', 'venture',
     'wreckingball',
   ],
-  pharah: ['sigma'],
+  pharah: ['shion', 'sierra', 'sigma'],
   reaper: [
     'ana', 'dva', 'echo', 'emre', 'freja', 'genji', 'juno', 'mizuki',
     'orisa', 'roadhog', 'sierra', 'sigma', 'soldier76',
@@ -129,24 +130,24 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
     'orisa', 'shion', 'wuyang',
   ],
   soldier76: [
-    'baptiste', 'cassidy', 'dva', 'illari', 'mizuki', 'moira', 'orisa',
-    'shion', 'sierra', 'symmetra', 'zenyatta',
+    'baptiste', 'cassidy', 'dmon', 'dva', 'illari', 'mizuki', 'moira',
+    'orisa', 'shion', 'sierra', 'symmetra', 'zenyatta',
   ],
   sombra: [
     'ana', 'ashe', 'baptiste', 'dmon', 'jetpackcat', 'mauga', 'orisa',
-    'ramattra', 'symmetra',
+    'ramattra', 'sierra', 'symmetra',
   ],
   symmetra: [
     'ana', 'ashe', 'illari', 'juno', 'lifeweaver', 'mei', 'orisa',
     'ramattra', 'soldier76', 'sombra', 'venture', 'widowmaker', 'zenyatta',
   ],
   torbjorn: [
-    'ana', 'domina', 'illari', 'lucio', 'mauga', 'mei', 'orisa', 'reinhardt',
-    'sombra',
+    'ana', 'dmon', 'domina', 'illari', 'lucio', 'mauga', 'mei', 'orisa',
+    'reinhardt', 'shion', 'sombra',
   ],
   tracer: [
     'doomfist', 'genji', 'hazard', 'lifeweaver', 'lucio', 'mauga', 'mizuki',
-    'moira', 'vendetta', 'wreckingball', 'wuyang',
+    'moira', 'sierra', 'vendetta', 'wreckingball', 'wuyang',
   ],
   vendetta: [
     'ashe', 'baptiste', 'doomfist', 'junkerqueen', 'kiriko', 'lucio', 'mei',
@@ -161,8 +162,9 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
     'tracer', 'wuyang', 'zenyatta',
   ],
   ana: [
-    'baptiste', 'echo', 'freja', 'genji', 'hazard', 'junkrat', 'reaper',
-    'reinhardt', 'torbjorn', 'tracer', 'venture', 'wuyang', 'zenyatta',
+    'baptiste', 'echo', 'emre', 'freja', 'genji', 'hazard', 'junkrat',
+    'mizuki', 'reaper', 'reinhardt', 'sierra', 'torbjorn', 'tracer',
+    'venture', 'wuyang', 'zenyatta',
   ],
   baptiste: [
     'ana', 'bastion', 'domina', 'doomfist', 'genji', 'mizuki', 'moira',
@@ -171,8 +173,9 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
   ],
   brigitte: ['domina', 'juno', 'mei'],
   illari: [
-    'ashe', 'baptiste', 'bastion', 'genji', 'kiriko', 'lifeweaver', 'moira',
-    'orisa', 'pharah', 'reinhardt', 'sojourn', 'soldier76', 'symmetra',
+    'ashe', 'baptiste', 'bastion', 'dmon', 'genji', 'kiriko', 'lifeweaver',
+    'moira', 'orisa', 'pharah', 'reinhardt', 'sojourn', 'soldier76',
+    'symmetra',
   ],
   jetpackcat: [
     'doomfist', 'freja', 'lucio', 'mercy', 'ramattra', 'sigma', 'sombra',
@@ -192,8 +195,9 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
     'symmetra', 'wreckingball',
   ],
   lucio: [
-    'bastion', 'dva', 'echo', 'genji', 'juno', 'kiriko', 'mercy', 'moira',
-    'torbjorn', 'tracer', 'vendetta', 'wreckingball', 'zenyatta',
+    'bastion', 'dmon', 'dva', 'echo', 'genji', 'jetpackcat', 'juno',
+    'kiriko', 'mercy', 'moira', 'torbjorn', 'tracer', 'vendetta',
+    'wreckingball', 'zenyatta',
   ],
   mercy: [
     'echo', 'hanzo', 'hazard', 'jetpackcat', 'kiriko', 'lifeweaver', 'lucio',
@@ -206,9 +210,9 @@ const NEUTRAL: Partial<Record<HeroId, HeroId[]>> = {
     'soldier76', 'wuyang',
   ],
   moira: [
-    'baptiste', 'brigitte', 'doomfist', 'echo', 'illari', 'junkerqueen',
-    'junkrat', 'lifeweaver', 'lucio', 'mauga', 'mei', 'winston',
-    'wreckingball', 'zarya', 'zenyatta',
+    'baptiste', 'brigitte', 'dmon', 'doomfist', 'echo', 'illari',
+    'junkerqueen', 'junkrat', 'lifeweaver', 'lucio', 'mauga', 'mei', 'shion',
+    'winston', 'wreckingball', 'zarya', 'zenyatta',
   ],
   wuyang: [
     'ana', 'bastion', 'emre', 'mizuki', 'ramattra', 'sigma', 'sojourn',

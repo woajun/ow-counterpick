@@ -3,6 +3,7 @@ import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 import { namuUrl } from '../data/namu';
 import { MATRIX, cellTone, signed } from '../lib/matrix';
 import { isNeutral } from '../data/neutral';
+import { isInferred } from '../data/inferred';
 import wikiIcon from '../assets/wiki.svg';
 
 interface Props {
@@ -160,8 +161,15 @@ export function HeroSheet({ id, onClose }: Props) {
                         return (
                           <span
                             key={e}
-                            className="hs-item"
-                            title={h.full}
+                            className={
+                              'hs-item' + (isInferred(id, e) ? ' guessed' : '')
+                            }
+                            title={
+                              h.full +
+                              (isInferred(id, e)
+                                ? ` · ${h.full} 문서 쪽 기록을 뒤집어 매긴 값`
+                                : '')
+                            }
                           >
                             <img
                               className="pic"

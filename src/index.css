@@ -807,6 +807,25 @@ footer code {
   padding: 14px 16px 18px;
 }
 
+/* 지금 고른 적 팀 상대 — 시트 맨 위. 합 · 한마디 · 적 하나하나. */
+.hs-now {
+  margin-bottom: 16px; padding: 12px; border-radius: 10px;
+  background: var(--panel2); border: 1px solid var(--line);
+}
+.hs-now-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.hs-now-title { font-size: 12.5px; color: var(--dim); }
+.hs-now-total { font-size: 15px; padding: 2px 10px; }
+.hs-now-verdict { font-family: var(--display); font-size: 15px; font-weight: 600; color: var(--txt); }
+.hs-now-count { margin-left: auto; font-size: 11.5px; color: var(--faint); }
+.hs-now-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
+.hs-now-item {
+  display: flex; align-items: center; gap: 8px; min-width: 0;
+  padding: 4px 8px 4px 4px; border-radius: 999px; background: var(--bg2);
+}
+.hs-now-item .pic { width: 26px; height: 26px; flex: none; border-radius: 50%; object-fit: cover; }
+.hs-now-item .nm { flex: 1; min-width: 0; font-size: 12.5px; color: var(--txt); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hs-now-item.guessed .nm { font-style: italic; }
+
 .hs-group + .hs-group { margin-top: 16px; }
 .hs-group-head {
   display: flex; align-items: center; gap: 8px; margin-bottom: 8px;

@@ -9,6 +9,8 @@ import wikiIcon from '../assets/wiki.svg';
 interface Props {
   /** 펼쳐 볼 내 픽. null 이면 안 뜬다. */
   id: HeroId | null;
+  /** 지금 고른 적 팀. 있으면 맨 위에 "이 조합 상대로 어떤지" 를 먼저 보여 준다. */
+  enemies: HeroId[];
   onClose: () => void;
 }
 
@@ -38,7 +40,7 @@ const LEVELS: { v: number; label: string; kind: Kind }[] = [
  * 추천 줄은 "지금 고른 적 조합"에 대한 점수만 보여 준다. 그 영웅을 실제로
  * 꺼낼지 정하려면 아직 안 나온 적한테도 통하는지가 궁금해진다.
  */
-export function HeroSheet({ id, onClose }: Props) {
+export function HeroSheet({ id, enemies, onClose }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -118,6 +120,8 @@ export function HeroSheet({ id, onClose }: Props) {
         </div>
 
         <div className="hs-body">
+          {enemies.length > 0 && <VersusNow id={id} enemies={enemies} />}
+
           {/* 역할 머리는 여기 한 번만. 등급 묶음마다 달면 일곱 번 반복된다.
               스크롤해도 붙어 있어서 아래로 내려가도 어느 칸인지 안 잃는다. */}
           <div className="hs-colhead">
@@ -192,5 +196,57 @@ export function HeroSheet({ id, onClose }: Props) {
         </div>
       </div>
     </div>
+  );
+}
+
+/** 평균 한 칸 점수로 붙이는 한마디. 합만 보면 적이 많을수록 커져서 감이 안 온다. */
+const verdict = (avg: number) =>
+  avg >= 1.5 ? '유리' : avg >= 0.5 ? '약간 유리' : avg > -0.5 ? '비슷' : avg > -1.5 ? '약간 불리' : '불리';
+
+/**
+ * 지금 고른 적 팀 상대로 — 시트 맨 위.
+ *
+ * 시트 아래쪽은 "아직 안 나온 적까지 포함한 전체 상성" 이다. 그런데 i 를 누르는 순간의
+ * 질문은 대개 "지금 이 조합 상대로 내 영웅이 어떤가" 라서, 그 답을 먼저 둔다.
+ * 합은 추천 줄의 점수(scoreAll)와 같은 값이다 — 둘이 다르면 어느 쪽을 믿을지 모른다.
+ */
+function VersusNow({ id, enemies }: { id: HeroId; enemies: HeroId[] }) {
+  const row = MATRIX[id];
+  const total = enemies.reduce((a, e) => a + row[e], 0);
+  const avg = total / enemies.length;
+  const tone = cellTone(Math.max(-3, Math.min(3, Math.round(avg))));
+  const up = enemies.filter((e) => row[e] > 0).length;
+  const down = enemies.filter((e) => row[e] < 0).length;
+  const blank = enemies.filter((e) => row[e] === 0 && !isNeutral(id, e)).length;
+
+  return (
+    <section className="hs-now" aria-label="지금 적 팀 상대 상성">
+      <div className="hs-now-head">
+        <span className="hs-now-title">지금 적 팀 상대</span>
+        <span className={'hs-badge hs-now-total ' + (tone || 'zero')}>{signed(total)}</span>
+        <span className="hs-now-verdict">{verdict(avg)}</span>
+        <span className="hs-now-count">
+          유리 {up} · 불리 {down}
+          {blank > 0 && ` · 기록 없음 ${blank}`}
+        </span>
+      </div>
+      <div className="hs-now-list">
+        {enemies.map((e) => {
+          const v = row[e];
+          const none = v === 0 && !isNeutral(id, e);
+          return (
+            <span
+              key={e}
+              className={'hs-now-item' + (isInferred(id, e) ? ' guessed' : '')}
+              title={HEROES[e].full + (isInferred(id, e) ? ` · ${HEROES[e].full} 문서 쪽 기록을 뒤집어 매긴 값` : '')}
+            >
+              <img className="pic" src={portrait(e)} alt="" decoding="async" />
+              <span className="nm">{HEROES[e].ko}</span>
+              <span className={'hs-badge ' + (none ? 'blank' : cellTone(v) || 'zero')}>{none ? '—' : signed(v)}</span>
+            </span>
+          );
+        })}
+      </div>
+    </section>
   );
 }

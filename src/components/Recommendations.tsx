@@ -5,6 +5,7 @@ import { scaleFor, scoreAll, scoreCombo, topByRole, worst, type Scored } from '.
 import { COMBO_ENABLED, type Mode } from '../lib/useMode';
 import type { TeamSize } from '../lib/roster';
 import { cellTone } from '../lib/matrix';
+import { useMySheet } from '../lib/mySheet';
 
 interface Props {
   /** 카운터 — 적 조합에 유리한 픽. 조합 — 우리 팀에 어울리는 픽. */
@@ -103,10 +104,11 @@ function Row({
 export function Recommendations({ mode, onMode, team, size, onLit, onInfo }: Props) {
   const [role, setRole] = useRoleFilter();
   const combo = mode === 'combo';
+  const { viewMatrix: matrix } = useMySheet();
   /* 조합은 자리가 남은 역할만 매긴다 — 5v5 에서 탱커가 차 있으면 탱커는 안 나온다. */
   const scores = useMemo(
-    () => (combo ? scoreCombo(team, size) : scoreAll(team)),
-    [combo, team, size],
+    () => (combo ? scoreCombo(team, size) : scoreAll(team, matrix)),
+    [combo, team, size, matrix],
   );
   // 조합 한 칸은 최대 2점이라 막대 기준도 그만큼.
   const scale = combo ? Math.max(2, team.length * 2) : scaleFor(team.length);

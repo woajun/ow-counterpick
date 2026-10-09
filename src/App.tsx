@@ -1,6 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { CounterPage } from './pages/CounterPage';
 import { MatrixPage } from './pages/MatrixPage';
+import { EditPage } from './pages/EditPage';
+import { BrowsePage } from './pages/BrowsePage';
 
 export default function App() {
   return (
@@ -9,6 +11,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<CounterPage />} />
         <Route path="/table" element={<MatrixPage />} />
+        <Route path="/browse" element={<BrowsePage />} />
+        <Route path="/edit" element={<EditPage />} />
+        <Route path="/edit/:hero" element={<EditPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

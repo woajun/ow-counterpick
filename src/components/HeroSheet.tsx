@@ -1,8 +1,9 @@
 import { useEffect, useRef, type CSSProperties } from 'react';
 import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 import { namuUrl } from '../data/namu';
-import { MATRIX, cellTone, signed } from '../lib/matrix';
-import { isNeutral } from '../data/neutral';
+import { Link } from 'react-router';
+import { cellTone, signed } from '../lib/matrix';
+import { useMySheet } from '../lib/mySheet';
 import { isInferred } from '../data/inferred';
 import wikiIcon from '../assets/wiki.svg';
 
@@ -42,6 +43,12 @@ const LEVELS: { v: number; label: string; kind: Kind }[] = [
  */
 export function HeroSheet({ id, enemies, onClose }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  // 내가 고친 상성이 있으면 그 위에서 편다. 추천 점수와 같은 행렬이어야 한다.
+  const { viewMatrix: matrix, differs, viewBlank: blank, peek } = useMySheet();
+  // 둘러보는 중에는 내가 고친 표시를 하지 않는다 — 보고 있는 표가 내 것이 아니다.
+  const isEdited = (a: HeroId, b: HeroId) => !peek && differs(a, b);
+  /** 판단이 있는 칸 — 0 이어도 중립이라 정한 것이다. */
+  const judged = (e: HeroId) => (id ? !blank(id, e) : false);
 
   useEffect(() => {
     if (!id) return;
@@ -62,14 +69,14 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
   if (!id) return null;
 
   const me = HEROES[id];
-  const row = MATRIX[id];
+  const row = matrix[id];
   // 한 묶음에 열일곱 명까지 들어간다. 역할로 한 번 더 갈라야 눈에 들어온다.
   const groups = LEVELS.map((lv) => {
     // 자기 자신은 뺀다. 0 묶음에 제가 끼어 있으면 이상하다.
     const ids = HERO_IDS.filter((e) => {
       if (e === id || row[e] !== lv.v) return false;
-      if (lv.kind === 'neutral') return isNeutral(id, e);
-      if (lv.kind === 'blank') return !isNeutral(id, e);
+      if (lv.kind === 'neutral') return judged(e);
+      if (lv.kind === 'blank') return !judged(e);
       return true;
     });
     return {
@@ -108,6 +115,15 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
           >
             <img src={wikiIcon} alt="" />
           </a>
+          {/* 이 영웅 줄을 고치러 간다. 고친 것은 나무위키 위에 덧씌워진다. */}
+          <Link
+            className="hs-icon hs-edit"
+            to={`/edit/${id}`}
+            aria-label={`${me.full} 상성 수정`}
+            title="상성 수정"
+          >
+            ✎
+          </Link>
           <button
             ref={closeRef}
             type="button"
@@ -120,7 +136,9 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
         </div>
 
         <div className="hs-body">
-          {enemies.length > 0 && <VersusNow id={id} enemies={enemies} />}
+          {enemies.length > 0 && (
+            <VersusNow id={id} enemies={enemies} row={row} judged={judged} />
+          )}
 
           {/* 역할 머리는 여기 한 번만. 등급 묶음마다 달면 일곱 번 반복된다.
               스크롤해도 붙어 있어서 아래로 내려가도 어느 칸인지 안 잃는다. */}
@@ -166,13 +184,20 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
                           <span
                             key={e}
                             className={
-                              'hs-item' + (isInferred(id, e) ? ' guessed' : '')
+                              'hs-item' +
+                              (isEdited(id, e)
+                                ? ' mine'
+                                : isInferred(id, e)
+                                  ? ' guessed'
+                                  : '')
                             }
                             title={
                               h.full +
-                              (isInferred(id, e)
-                                ? ` · ${h.full} 문서 쪽 기록을 뒤집어 매긴 값`
-                                : '')
+                              (isEdited(id, e)
+                                ? ' · 내가 고친 값'
+                                : isInferred(id, e)
+                                  ? ` · ${h.full} 문서 쪽 기록을 뒤집어 매긴 값`
+                                  : '')
                             }
                           >
                             <img
@@ -210,14 +235,23 @@ const verdict = (avg: number) =>
  * 질문은 대개 "지금 이 조합 상대로 내 영웅이 어떤가" 라서, 그 답을 먼저 둔다.
  * 합은 추천 줄의 점수(scoreAll)와 같은 값이다 — 둘이 다르면 어느 쪽을 믿을지 모른다.
  */
-function VersusNow({ id, enemies }: { id: HeroId; enemies: HeroId[] }) {
-  const row = MATRIX[id];
+function VersusNow({
+  id,
+  enemies,
+  row,
+  judged,
+}: {
+  id: HeroId;
+  enemies: HeroId[];
+  row: Record<HeroId, number>;
+  judged: (e: HeroId) => boolean;
+}) {
   const total = enemies.reduce((a, e) => a + row[e], 0);
   const avg = total / enemies.length;
   const tone = cellTone(Math.max(-3, Math.min(3, Math.round(avg))));
   const up = enemies.filter((e) => row[e] > 0).length;
   const down = enemies.filter((e) => row[e] < 0).length;
-  const blank = enemies.filter((e) => row[e] === 0 && !isNeutral(id, e)).length;
+  const blank = enemies.filter((e) => row[e] === 0 && !judged(e)).length;
 
   return (
     <section className="hs-now" aria-label="지금 적 팀 상대 상성">
@@ -233,7 +267,7 @@ function VersusNow({ id, enemies }: { id: HeroId; enemies: HeroId[] }) {
       <div className="hs-now-list">
         {enemies.map((e) => {
           const v = row[e];
-          const none = v === 0 && !isNeutral(id, e);
+          const none = v === 0 && !judged(e);
           return (
             <span
               key={e}

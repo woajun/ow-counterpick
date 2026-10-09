@@ -1,5 +1,6 @@
 import { HEROES, HERO_IDS, type HeroId, type Role } from '../data/heroes';
-import { MATCHUPS, type Level } from '../data/matchups';
+import type { Level } from '../data/matchups';
+import { MATRIX, type Matrix } from './matrix';
 import { SYNERGY } from '../data/synergy';
 import { canAdd, type TeamSize } from './roster';
 
@@ -29,15 +30,15 @@ export interface Scored {
  * 불리한 근거도 같이 담는다. 점수가 왜 깎였는지 안 보이면 "피해야 할 픽"
  * 줄이 이유 없는 명단이 된다.
  */
-export function scoreAll(enemies: HeroId[]): Record<HeroId, Scored> {
+export function scoreAll(enemies: HeroId[], matrix: Matrix = MATRIX): Record<HeroId, Scored> {
   const out = {} as Record<HeroId, Scored>;
   for (const id of HERO_IDS) out[id] = { id, value: 0, reasons: [] };
 
+  // 칸은 행렬에서 읽는다 — 내가 고친 상성(mySheet)이 얹힌 행렬이 들어올 수 있다.
   for (const enemy of enemies) {
-    for (const [mine, level] of Object.entries(MATCHUPS[enemy]) as [
-      HeroId,
-      Level,
-    ][]) {
+    for (const mine of HERO_IDS) {
+      const level = matrix[mine][enemy] as Level | 0;
+      if (level === 0 || mine === enemy) continue;
       out[mine].value += level;
       out[mine].reasons.push({ enemy, level });
     }

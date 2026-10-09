@@ -46,7 +46,6 @@ export const HEROES = {
   venture: { ko: '벤처', full: '벤처', en: 'Venture', r: 'dmg' },
   sojourn: { ko: '소전', full: '소전', en: 'Sojourn', r: 'dmg' },
   soldier76: { ko: '솔저', full: '솔저: 76', en: 'Soldier: 76', r: 'dmg' },
-  sombra: { ko: '솜브라', full: '솜브라', en: 'Sombra', r: 'dmg' },
   symmetra: { ko: '시메트라', full: '시메트라', en: 'Symmetra', r: 'dmg' },
   sierra: { ko: '시에라', full: '시에라', en: 'Sierra', r: 'dmg' },
   shion: { ko: '시온', full: '시온', en: 'Shion', r: 'dmg' },
@@ -64,6 +63,7 @@ export const HEROES = {
   hanzo: { ko: '한조', full: '한조', en: 'Hanzo', r: 'dmg' },
 
   // ── 지원 ──────────────────────────────
+  doctrine: { ko: '독트린', full: '독트린', en: 'Doctrine', r: 'sup' },
   lifeweaver: { ko: '라위', full: '라이프위버', en: 'Lifeweaver', r: 'sup' },
   lucio: { ko: '루시우', full: '루시우', en: 'Lúcio', r: 'sup' },
   mercy: { ko: '메르시', full: '메르시', en: 'Mercy', r: 'sup' },
@@ -71,6 +71,7 @@ export const HEROES = {
   mizuki: { ko: '미즈키', full: '미즈키', en: 'Mizuki', r: 'sup' },
   baptiste: { ko: '바티스트', full: '바티스트', en: 'Baptiste', r: 'sup' },
   brigitte: { ko: '브리기테', full: '브리기테', en: 'Brigitte', r: 'sup' },
+  sombra: { ko: '솜브라', full: '솜브라', en: 'Sombra', r: 'sup' },
   ana: { ko: '아나', full: '아나', en: 'Ana', r: 'sup' },
   wuyang: { ko: '우양', full: '우양', en: 'Wuyang', r: 'sup' },
   illari: { ko: '일리아리', full: '일리아리', en: 'Illari', r: 'sup' },

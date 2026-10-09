@@ -481,6 +481,11 @@ def write_namu_ts(titles: dict[str, str], heroes: dict[str, dict]) -> None:
         if t:
             out.append(f"  {hid}: {ts_string(t)},\n")
     out.append(NAMU_FOOT)
+    # 언제 받은 상성인지 — 둘러보기의 "나무위키(10/9 기준)" 가 이걸 쓴다.
+    out.append(
+        "\n/** 나무위키 상성을 마지막으로 받은 날. */\n"
+        f"export const NAMU_FETCHED = '{time.strftime('%Y-%m-%d')}';\n"
+    )
     NAMU_TS.write_text("".join(out), "utf-8")
 
 

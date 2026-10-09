@@ -41,7 +41,6 @@ const DOCS: Record<HeroId, string> = {
   sierra: '시에라(오버워치)',
   sojourn: '소전(오버워치)',
   soldier76: '솔저: 76',
-  sombra: '솜브라',
   symmetra: '시메트라',
   torbjorn: '토르비욘',
   tracer: '트레이서(오버워치)',
@@ -51,6 +50,7 @@ const DOCS: Record<HeroId, string> = {
   ana: '아나(오버워치)',
   baptiste: '바티스트(오버워치)',
   brigitte: '브리기테',
+  doctrine: '독트린(오버워치)',
   illari: '일리아리',
   jetpackcat: '제트팩 캣',
   juno: '주노(오버워치)',
@@ -60,6 +60,7 @@ const DOCS: Record<HeroId, string> = {
   mercy: '메르시',
   mizuki: '미즈키(오버워치)',
   moira: '모이라(오버워치)',
+  sombra: '솜브라',
   wuyang: '우양',
   zenyatta: '젠야타',
 };
@@ -72,3 +73,6 @@ const DOCS: Record<HeroId, string> = {
  */
 export const namuUrl = (id: HeroId) =>
   `https://namu.wiki/w/${encodeURIComponent(DOCS[id])}#상성`;
+
+/** 나무위키 상성을 마지막으로 받은 날. */
+export const NAMU_FETCHED = '2026-10-09';

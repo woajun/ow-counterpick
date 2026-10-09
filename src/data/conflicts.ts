@@ -27,12 +27,12 @@ export const CONFLICTS: Conflict[] = [
   { a: 'anran', b: 'mercy', both: 'up' }, // 안란 ↔ 메르시
   { a: 'ashe', b: 'tracer', both: 'up' }, // 애쉬 ↔ 트레이서
   { a: 'bastion', b: 'anran', both: 'up' }, // 바스티온 ↔ 안란
+  { a: 'bastion', b: 'moira', both: 'up' }, // 바스티온 ↔ 모이라
   { a: 'dmon', b: 'orisa', both: 'up' }, // 디몬 ↔ 오리사
   { a: 'domina', b: 'zarya', both: 'up' }, // 도미나 ↔ 자리야
   { a: 'doomfist', b: 'bastion', both: 'up' }, // 둠피스트 ↔ 바스티온
   { a: 'doomfist', b: 'emre', both: 'up' }, // 둠피스트 ↔ 엠레
   { a: 'echo', b: 'illari', both: 'down' }, // 에코 ↔ 일리아리
-  { a: 'echo', b: 'jetpackcat', both: 'down' }, // 에코 ↔ 제트팩 캣
   { a: 'freja', b: 'juno', both: 'up' }, // 프레야 ↔ 주노
   { a: 'junkerqueen', b: 'anran', both: 'up' }, // 정커퀸 ↔ 안란
   { a: 'junkerqueen', b: 'illari', both: 'up' }, // 정커퀸 ↔ 일리아리
@@ -42,20 +42,22 @@ export const CONFLICTS: Conflict[] = [
   { a: 'mei', b: 'ashe', both: 'down' }, // 메이 ↔ 애쉬
   { a: 'moira', b: 'ana', both: 'up' }, // 모이라 ↔ 아나
   { a: 'ramattra', b: 'ana', both: 'down' }, // 라마트라 ↔ 아나
+  { a: 'ramattra', b: 'ashe', both: 'down' }, // 라마트라 ↔ 애쉬
+  { a: 'ramattra', b: 'hanzo', both: 'down' }, // 라마트라 ↔ 한조
+  { a: 'ramattra', b: 'sojourn', both: 'down' }, // 라마트라 ↔ 소전
+  { a: 'ramattra', b: 'tracer', both: 'up' }, // 라마트라 ↔ 트레이서
+  { a: 'reaper', b: 'moira', both: 'up' }, // 리퍼 ↔ 모이라
   { a: 'reinhardt', b: 'genji', both: 'up' }, // 라인하르트 ↔ 겐지
   { a: 'reinhardt', b: 'soldier76', both: 'up' }, // 라인하르트 ↔ 솔저: 76
   { a: 'roadhog', b: 'mei', both: 'up' }, // 로드호그 ↔ 메이
   { a: 'shion', b: 'brigitte', both: 'up' }, // 시온 ↔ 브리기테
   { a: 'sojourn', b: 'freja', both: 'up' }, // 소전 ↔ 프레야
   { a: 'soldier76', b: 'ana', both: 'up' }, // 솔저: 76 ↔ 아나
-  { a: 'sombra', b: 'pharah', both: 'up' }, // 솜브라 ↔ 파라
-  { a: 'sombra', b: 'tracer', both: 'up' }, // 솜브라 ↔ 트레이서
   { a: 'symmetra', b: 'tracer', both: 'down' }, // 시메트라 ↔ 트레이서
   { a: 'tracer', b: 'illari', both: 'down' }, // 트레이서 ↔ 일리아리
+  { a: 'vendetta', b: 'moira', both: 'up' }, // 벤데타 ↔ 모이라
   { a: 'venture', b: 'illari', both: 'up' }, // 벤처 ↔ 일리아리
   { a: 'wreckingball', b: 'freja', both: 'up' }, // 레킹볼 ↔ 프레야
-  { a: 'zarya', b: 'freja', both: 'down' }, // 자리야 ↔ 프레야
-  { a: 'zarya', b: 'mei', both: 'down' }, // 자리야 ↔ 메이
   { a: 'zarya', b: 'sojourn', both: 'down' }, // 자리야 ↔ 소전
   { a: 'zarya', b: 'symmetra', both: 'down' }, // 자리야 ↔ 시메트라
 ];

@@ -11,20 +11,18 @@ import { useMySheet } from '../lib/mySheet';
  */
 const TABS = [
   { to: '/', label: '추천' },
-  // 해설자 · 스트리머가 건 상성을 골라 따라가는 곳.
+  // 해설자 · 스트리머가 건 카운터픽을 골라 여는 곳.
   { to: '/browse', label: '둘러보기' },
 ];
 
 /** 화면마다 다른 조작(인원·검색·초기화)은 children 으로 받는다. */
 export function TopBar({ children }: { children?: ReactNode }) {
-  const { user, link, source, peek } = useMySheet();
-  // 제목은 지금 추천 기준이 누구의 상성인지 — 따라가는 사람, 나무위키, 아니면 나.
+  const { user, source, peek } = useMySheet();
+  // 제목은 지금 보는 상성이 누구의 것인지 — 주소로 연 사람, 나무위키, 아니면 나.
   // 배틀태그는 # 앞만, 이메일은 @ 앞만 — 제목이 길어지지 않게.
   const short = (name: string) => name.split(/[#@]/)[0];
   const who = peek
     ? short(peek.owner)
-    : link
-    ? short(link.owner)
     : source.kind === 'namu'
       ? '나무위키'
       : user

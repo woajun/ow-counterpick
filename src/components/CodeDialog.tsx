@@ -1,24 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import {
-  CODE_LEN,
-  findCode,
-  followCode,
-  normalizeCode,
-  diffCount,
-  publishCode,
-  useMySheet,
-} from '../lib/mySheet';
+import { useNavigate } from 'react-router';
+import { CODE_LEN, findCode, normalizeCode, publishCode, useMySheet } from '../lib/mySheet';
 import { LoginDialog } from './Account';
 
 /**
- * 상성 코드 창 — 내 코드 보기(share) · 남의 코드 넣기(enter).
+ * 상성 코드 창 — 내 코드 · 주소 보기(share) · 남의 코드로 열기(enter).
  *
  * 로그인 창과 같은 껍데기를 쓴다.
  */
 export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose: () => void }) {
-  const { user, source, diff, code: myCode } = useMySheet();
-  const [code, setCode] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
+  const { user, diff, code: myCode } = useMySheet();
+  const navigate = useNavigate();
+  const [copied, setCopied] = useState<'code' | 'link' | null>(null);
   const [input, setInput] = useState('');
   const [error, setError] = useState('');
   const [login, setLogin] = useState(false);
@@ -26,7 +19,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
 
   // 열 때마다 지금 상성을 내 코드에 싣는다. 로그인 전이면 코드가 없다.
   useEffect(() => {
-    if (mode === 'share' && user) setCode(publishCode());
+    if (mode === 'share' && user) publishCode();
   }, [mode, user]);
 
   useEffect(() => {
@@ -38,18 +31,24 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose, login]);
 
-  const copy = async () => {
+  // 내 코드는 저장소에서 읽는다 — 처음 열면 publishCode() 가 받아 둔다.
+  const code = myCode ?? null;
+
+  /** 내 카운터픽 주소 — 누구나 로그인 없이 바로 연다. */
+  const link = code ? `${location.origin}${import.meta.env.BASE_URL}?code=${code}` : '';
+
+  const copy = async (what: 'code' | 'link') => {
     if (!code) return;
     try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
+      await navigator.clipboard.writeText(what === 'code' ? code : link);
+      setCopied(what);
     } catch {
       field.current?.select();
     }
   };
 
-  const use = () => {
-    const hit = findCode(input);
+  const use = async () => {
+    const hit = await findCode(input);
     if (!hit) {
       setError('없는 코드예요. 글자를 다시 확인해 주세요.');
       return;
@@ -58,13 +57,8 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
       setError('내 코드예요. 친구 코드를 넣어 주세요.');
       return;
     }
-    const n = diffCount(hit.sheet);
-    if (
-      source.kind === 'mine' &&
-      !confirm(`지금 내 상성을 지우고 ${hit.owner}의 상성(나무위키와 다른 짝 ${n})을 따라갈까요?`)
-    )
-      return;
-    followCode(input);
+    // 그 사람 카운터픽 주소로 연다 — 내 상성은 그대로다.
+    navigate(`/?code=${hit.code}`);
     onClose();
   };
 
@@ -90,8 +84,8 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
               <>
                 <h3>내 상성 코드</h3>
                 <p>
-                  친구가 [코드 입력]에 넣으면 내 상성(나무위키와 다른 짝 <b>{diff}</b>)을 따라와요. 내가 더 고치면
-                  친구 쪽도 자동으로 바뀌어요.
+                  주소를 열면 누구나 로그인 없이 내 상성(나무위키와 다른 짝 <b>{diff}</b>)으로 추천을
+                  받아요. 내가 더 고치면 다음에 열 때 바로 반영돼요.
                 </p>
                 <input
                   ref={field}
@@ -101,8 +95,12 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
                   aria-label="내 상성 코드"
                   onFocus={(e) => e.currentTarget.select()}
                 />
-                <button type="button" className="login-btn bnet" onClick={copy} disabled={!code}>
-                  {copied ? '복사했어요' : '코드 복사'}
+                <button type="button" className="login-btn bnet" onClick={() => void copy('link')} disabled={!code}>
+                  {copied === 'link' ? '복사했어요' : '내 카운터픽 주소 복사'}
+                  <span>{link || '코드를 받는 중…'}</span>
+                </button>
+                <button type="button" className="login-btn" onClick={() => void copy('code')} disabled={!code}>
+                  {copied === 'code' ? '복사했어요' : '코드만 복사'}
                 </button>
               </>
             )
@@ -110,8 +108,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
             <>
               <h3>상성 코드 입력</h3>
               <p>
-                친구 코드를 넣으면 그 사람의 상성을 따라가요. 그 사람이 고치면 나도 자동으로 바뀌고,
-                내가 한 칸이라도 고치면 연결이 끊겨요.
+                친구 코드를 넣으면 그 사람 카운터픽을 열어요. 내 상성은 그대로예요.
               </p>
               <input
                 ref={field}
@@ -127,7 +124,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
                   setError('');
                 }}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' && input.length === CODE_LEN) use();
+                  if (e.key === 'Enter' && input.length === CODE_LEN) void use();
                 }}
               />
               {error && <p className="code-error">{error}</p>}
@@ -135,9 +132,9 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
                 type="button"
                 className="login-btn bnet"
                 disabled={input.length !== CODE_LEN}
-                onClick={use}
+                onClick={() => void use()}
               >
-                이 상성 따라가기
+                이 카운터픽 열기
               </button>
             </>
           )}

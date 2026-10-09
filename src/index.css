@@ -1129,7 +1129,7 @@ button.link {
   background: var(--panel); border: 1px solid var(--line); border-radius: 9px; font-size: 13px;
 }
 .bw-row .dim { color: var(--faint); font-size: 12px; }
-.bw-row .bw-btns, .bw-row .bw-following { margin-left: auto; }
+.bw-row .reset.small { margin-left: auto; }
 .bw-avatar.wiki { padding: 0; object-fit: cover; background: none; }
 .bw-count b { color: var(--txt); font-variant-numeric: tabular-nums; }
 .bw-btns { display: flex; align-items: center; gap: 6px; }
@@ -1144,3 +1144,17 @@ button.link {
 .peek-bar b { color: var(--txt); }
 .peek-bar > span { flex: 1; min-width: 200px; }
 .peek-bar .bw-follow { padding: 5px 14px; font-size: 12.5px; }
+.email-field {
+  width: 100%; padding: 11px 12px;
+  background: var(--panel); border: 1px solid var(--line2); border-radius: 8px;
+  color: var(--txt); font-size: 14px;
+}
+.email-field:focus { outline: none; border-color: color-mix(in srgb, var(--accent) 55%, var(--line2)); }
+.like-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 5px 12px; cursor: pointer; border-radius: 20px;
+  background: transparent; border: 1px solid var(--line2);
+  color: var(--dim); font-size: 13px; font-variant-numeric: tabular-nums;
+}
+.like-btn:hover { border-color: #ff5a7a; color: #ff5a7a; }
+.like-btn.on { border-color: #ff5a7a; color: #ff5a7a; background: color-mix(in srgb, #ff5a7a 12%, transparent); cursor: default; }

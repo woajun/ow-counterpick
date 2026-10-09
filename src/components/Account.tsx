@@ -1,18 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
-import { login, logout, useMySheet } from '../lib/mySheet';
+import { logout, sendLoginLink, useMySheet } from '../lib/mySheet';
 
 /**
- * 로그인 창 — 목업. 단추를 누르면 바로 로그인된 것으로 친다.
+ * 로그인 창 — 이메일로 로그인 링크를 받는다(비밀번호 없음).
  *
- * Battle.net 으로 들어오면 배틀태그가 확인된 사용자라 나중에 공유할 때 더 믿을 만하게
- * 보인다. 이메일은 그냥 계정이다.
+ * Battle.net 은 블리자드 개발자 앱을 등록한 다음에 붙인다. 배틀태그가 확인된
+ * 사용자라 공유할 때 더 믿을 만하게 보일 것이다.
  */
 export function LoginDialog({ onClose }: { onClose: () => void }) {
-  const first = useRef<HTMLButtonElement>(null);
+  const field = useRef<HTMLInputElement>(null);
   const { source } = useMySheet();
+  const [email, setEmail] = useState('');
+  const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    first.current?.focus();
+    field.current?.focus();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
@@ -20,10 +24,16 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose]);
 
-  const go = (via: 'battlenet' | 'email') => {
-    login(via);
-    onClose();
+  const send = async () => {
+    setBusy(true);
+    setError('');
+    const err = await sendLoginLink(email.trim());
+    setBusy(false);
+    if (err) setError(err);
+    else setSent(true);
   };
+
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
   return (
     <div
@@ -35,28 +45,51 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
       <div className="hero-sheet login" role="dialog" aria-modal="true" aria-label="로그인">
         <div className="login-body">
           <h3>내 상성 저장하기</h3>
-          <p>
-            {source.kind !== 'namu' ? (
-              <>
-                지금 <b>내 상성</b>은 이 창에만 있어요. 로그인하면 계정에 남아서
-                다음에도 그대로 쓸 수 있어요.
-              </>
-            ) : (
-              <>로그인하면 고친 상성이 계정에 남아서 다음에도 그대로 쓸 수 있어요.</>
-            )}
-          </p>
-
-          <button ref={first} type="button" className="login-btn bnet" onClick={() => go('battlenet')}>
-            Battle.net으로 로그인
-            <span>배틀태그 인증 배지가 붙어요</span>
-          </button>
-          <button type="button" className="login-btn" onClick={() => go('email')}>
-            이메일로 가입 · 로그인
-          </button>
-
-          <p className="mock-note">목업이에요 — 실제로 로그인하지 않고 이 브라우저에만 저장해요.</p>
+          {sent ? (
+            <p>
+              <b>{email.trim()}</b>로 로그인 링크를 보냈어요. 메일의 링크를 누르면 이 사이트로
+              돌아와 로그인돼요. 이 창에서 고친 것도 같이 계정으로 옮겨져요.
+            </p>
+          ) : (
+            <>
+              <p>
+                {source.kind !== 'namu'
+                  ? '지금 고친 상성은 이 창에만 있어요. 로그인하면 계정에 남고, 코드로 친구에게 건넬 수 있어요.'
+                  : '로그인하면 고친 상성이 계정에 남고, 코드로 친구에게 건넬 수 있어요.'}
+              </p>
+              <input
+                ref={field}
+                className="email-field"
+                type="email"
+                value={email}
+                placeholder="이메일"
+                autoComplete="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError('');
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && valid && !busy) void send();
+                }}
+              />
+              {error && <p className="code-error">{error}</p>}
+              <button
+                type="button"
+                className="login-btn bnet"
+                disabled={!valid || busy}
+                onClick={() => void send()}
+              >
+                {busy ? '보내는 중…' : '로그인 링크 받기'}
+                <span>비밀번호 없이 메일의 링크로 들어와요</span>
+              </button>
+              <button type="button" className="login-btn" disabled>
+                Battle.net으로 로그인
+                <span>준비 중이에요</span>
+              </button>
+            </>
+          )}
           <button type="button" className="reset small" onClick={onClose}>
-            나중에
+            {sent ? '닫기' : '나중에'}
           </button>
         </div>
       </div>
@@ -98,7 +131,7 @@ export function AccountChip() {
             type="button"
             role="menuitem"
             onClick={() => {
-              logout();
+              void logout();
               setMenu(false);
             }}
           >

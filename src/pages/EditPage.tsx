@@ -3,12 +3,10 @@ import { Link, Navigate, useParams } from 'react-router';
 import { HEROES, HERO_IDS, ROLES, isHeroId, portrait, type HeroId } from '../data/heroes';
 import { cellTone, signed } from '../lib/matrix';
 import {
-  followCode,
   resetAll,
   resetHero,
   setPair,
   sourceNow,
-  unlink,
   useMySheet,
   type Source,
 } from '../lib/mySheet';
@@ -48,7 +46,7 @@ export function EditPage() {
     return () => clearTimeout(t);
   }, [left]);
 
-  /** 칸을 고친다. 나무위키나 코드를 따라가다가 내 상성으로 넘어가는 순간이면 알린다. */
+  /** 칸을 고친다. 나무위키를 따라가다가 내 상성으로 넘어가는 순간이면 알린다. */
   const edit = (fn: () => void) => {
     const before = sourceNow();
     fn();
@@ -56,8 +54,7 @@ export function EditPage() {
   };
 
   const undo = () => {
-    if (left?.kind === 'code') followCode(left.link.code);
-    else resetAll();
+    resetAll();
     setLeft(null);
   };
   if (hero && !isHeroId(hero)) return <Navigate to="/edit" replace />;
@@ -85,14 +82,9 @@ export function EditPage() {
 
       <main className="edit">
         {/* 저장 상태. 로그인 전에는 창을 닫으면 사라진다는 것을 먼저 알린다. */}
-        <div className={'save-note' + (src === 'code' ? ' linked' : src === 'mine' ? ' saved' : '')}>
+        <div className={'save-note' + (src === 'mine' ? ' saved' : '')}>
           <span>
-            {sheet.link ? (
-              <>
-                <b>{sheet.link.owner}</b>의 상성(<b className="mono">{sheet.link.code}</b>)을 따라가는
-                중 · 그 사람이 고치면 자동으로 바뀌어요. 내가 한 칸이라도 고치면 연결이 끊겨요.
-              </>
-            ) : src === 'namu' ? (
+            {src === 'namu' ? (
               <>
                 <b>나무위키</b>를 따라가는 중 · 나무위키가 바뀌면 같이 바뀌어요. 한 칸이라도 고치면
                 연결이 끊기고 내 상성이 돼요.
@@ -112,21 +104,13 @@ export function EditPage() {
             )}
           </span>
           <span className="note-actions">
-            {/* 따라가는 중에는 끊는 것 하나만. 나머지는 끊고 나서 할 일이다. */}
-            {src === 'code' ? (
-              <button type="button" className="reset small" onClick={unlink}>
-                연결 끊기
-              </button>
-            ) : (
+            {src === 'mine' && (
               <>
                 {src === 'mine' && (
                   <button type="button" className="reset small" onClick={() => setCodeMode('share')}>
                     내 코드
                   </button>
                 )}
-                <button type="button" className="reset small" onClick={() => setCodeMode('enter')}>
-                  코드 입력
-                </button>
                 {src === 'mine' && (
                   <button
                     type="button"
@@ -215,7 +199,7 @@ export function EditPage() {
                   {list.map((e) => {
                     const blank = sheet.blank(id, e);
                     const v = sheet.matrix[id][e];
-                    // 나무위키와 다른 칸. 따라가는 중에는 그 사람이 나무위키와 다르게 둔 칸이다.
+                    // 나무위키와 다른 칸.
                     const edited = sheet.differs(id, e);
                     return (
                       <div
@@ -275,21 +259,11 @@ export function EditPage() {
       {login && <LoginDialog onClose={() => setLogin(false)} />}
       {codeMode && <CodeDialog mode={codeMode} onClose={() => setCodeMode(null)} />}
 
-      {/* 따라가던 것에서 떨어져 나온 순간 — 무슨 일이 일어났는지와 되돌리는 길. */}
+      {/* 나무위키에서 떨어져 나온 순간 — 무슨 일이 일어났는지와 되돌리는 길. */}
       {left && (
         <div className="toast" role="status">
           <span>
-            {left.kind === 'code' ? (
-              <>
-                <b>{left.link.owner}</b>({left.link.code}) 연결이 끊기고 내 상성이 됐어요. 이제 그
-                사람이 고쳐도 안 바뀌어요.
-              </>
-            ) : (
-              <>
-                <b>나무위키</b> 연결이 끊기고 내 상성이 됐어요. 이제 나무위키가 바뀌어도 안
-                바뀌어요.
-              </>
-            )}
+            <b>나무위키</b> 연결이 끊기고 내 상성이 됐어요. 이제 나무위키가 바뀌어도 안 바뀌어요.
           </span>
           <button type="button" className="link" onClick={undo}>
             되돌리기

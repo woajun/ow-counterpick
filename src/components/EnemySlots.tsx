@@ -9,6 +9,8 @@ interface Props {
   lit: HeroId[];
   onRemove: (id: HeroId) => void;
   onReset: () => void;
+  /** 머리 글자. 조합 모드에서는 '우리 팀'. */
+  title?: string;
 }
 
 export function EnemySlots({
@@ -17,13 +19,14 @@ export function EnemySlots({
   lit,
   onRemove,
   onReset,
+  title = '적 팀',
 }: Props) {
   const slots = arrange(enemies, size);
 
   return (
     <section className="enemy">
       <h2 className="head">
-        적 팀
+        {title}
         <span className="n">
           {enemies.length} / {size}
         </span>

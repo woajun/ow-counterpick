@@ -8,12 +8,14 @@ interface Props {
   onToggle: (id: HeroId) => void;
   /** 그 영웅의 상성 전체를 펼친다. */
   onInfo: (id: HeroId) => void;
+  /** 머리 글자. 조합 모드에서는 '우리 팀 영웅 고르기'. */
+  title?: string;
 }
 
-export function HeroPool({ picked, blocked, onToggle, onInfo }: Props) {
+export function HeroPool({ picked, blocked, onToggle, onInfo, title = '적 영웅 고르기' }: Props) {
   return (
     <section className="pool">
-      <h2 className="head">적 영웅 고르기</h2>
+      <h2 className="head">{title}</h2>
 
       <div className="cols">
         {ROLES.map((role) => {

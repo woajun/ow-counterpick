@@ -1,0 +1,11612 @@
+[
+ {
+  "me": "ana",
+  "mate": "anran",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "ashe",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "ana",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "bastion",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "brigitte",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "ana",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "dmon",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "domina",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "편차 극심"
+ },
+ {
+  "me": "ana",
+  "mate": "dva",
+  "level": 1,
+  "why": "나노 효율 좋음"
+ },
+ {
+  "me": "ana",
+  "mate": "echo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "emre",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "freja",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "hazard",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "illari",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "jetpackcat",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "조건부 효율"
+ },
+ {
+  "me": "ana",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "juno",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "ana",
+  "mate": "kiriko",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "ana",
+  "mate": "lifeweaver",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "ana",
+  "mate": "lucio",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "ana",
+  "mate": "mauga",
+  "level": 2,
+  "why": "나노 시너지 최고"
+ },
+ {
+  "me": "ana",
+  "mate": "mei",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "mercy",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "ana",
+  "mate": "mizuki",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "ana",
+  "mate": "moira",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "orisa",
+  "level": 1,
+  "why": "나노 효율 좋음"
+ },
+ {
+  "me": "ana",
+  "mate": "pharah",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "ramattra",
+  "level": 2,
+  "why": "나노 효율 높음"
+ },
+ {
+  "me": "ana",
+  "mate": "reaper",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "ana",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "나노 메인급"
+ },
+ {
+  "me": "ana",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "조건부 좋음"
+ },
+ {
+  "me": "ana",
+  "mate": "shion",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "ana",
+  "mate": "sierra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "sigma",
+  "level": -1,
+  "why": "나노 효율 최저"
+ },
+ {
+  "me": "ana",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "sombra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "ana",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "tracer",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "vendetta",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "ana",
+  "mate": "venture",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "ana",
+  "mate": "winston",
+  "level": 2,
+  "why": "나노 효율 높음"
+ },
+ {
+  "me": "ana",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "나노 효율 나쁨"
+ },
+ {
+  "me": "ana",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "ana",
+  "mate": "zarya",
+  "level": 1,
+  "why": "화력 증폭"
+ },
+ {
+  "me": "ana",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "anran",
+  "mate": "ashe",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "anran",
+  "mate": "dva",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "anran",
+  "mate": "illari",
+  "level": -1,
+  "why": "안 맞는다"
+ },
+ {
+  "me": "anran",
+  "mate": "mauga",
+  "level": 2,
+  "why": "천생연분"
+ },
+ {
+  "me": "anran",
+  "mate": "wuyang",
+  "level": 2,
+  "why": "설계상 시너지 극대"
+ },
+ {
+  "me": "anran",
+  "mate": "zarya",
+  "level": 2,
+  "why": "영혼의 조합"
+ },
+ {
+  "me": "ashe",
+  "mate": "ana",
+  "level": 1,
+  "why": "어느 정도 좋음"
+ },
+ {
+  "me": "ashe",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "시너지 좋음"
+ },
+ {
+  "me": "ashe",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "상호보완"
+ },
+ {
+  "me": "ashe",
+  "mate": "cassidy",
+  "level": 0,
+  "why": "단순 설명"
+ },
+ {
+  "me": "ashe",
+  "mate": "dva",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "ashe",
+  "mate": "genji",
+  "level": 1,
+  "why": "쓸만한 궁합"
+ },
+ {
+  "me": "ashe",
+  "mate": "jetpackcat",
+  "level": 1,
+  "why": "밥과 사기적 시너지"
+ },
+ {
+  "me": "ashe",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "ashe",
+  "mate": "lifeweaver",
+  "level": 0,
+  "why": "이렇다 할 시너지 없음"
+ },
+ {
+  "me": "ashe",
+  "mate": "lucio",
+  "level": 0,
+  "why": "그럭저럭 무난"
+ },
+ {
+  "me": "ashe",
+  "mate": "mauga",
+  "level": 1,
+  "why": "포킹 조합 좋음"
+ },
+ {
+  "me": "ashe",
+  "mate": "mercy",
+  "level": 1,
+  "why": "좋은 궁합"
+ },
+ {
+  "me": "ashe",
+  "mate": "mizuki",
+  "level": 0,
+  "why": "시너지 거의 없음"
+ },
+ {
+  "me": "ashe",
+  "mate": "moira",
+  "level": 1,
+  "why": "괜찮은 편"
+ },
+ {
+  "me": "ashe",
+  "mate": "reaper",
+  "level": 1,
+  "why": "프리딜 가능"
+ },
+ {
+  "me": "ashe",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "ashe",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "서로 도움"
+ },
+ {
+  "me": "ashe",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "ashe",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "실력 따라 좋음"
+ },
+ {
+  "me": "ashe",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "시너지 좋음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "ana",
+  "level": 0,
+  "why": "숙련도 필요"
+ },
+ {
+  "me": "baptiste",
+  "mate": "anran",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "baptiste",
+  "mate": "ashe",
+  "level": 1,
+  "why": "화력 증폭"
+ },
+ {
+  "me": "baptiste",
+  "mate": "bastion",
+  "level": 2,
+  "why": "케어 최적"
+ },
+ {
+  "me": "baptiste",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "생존 도움"
+ },
+ {
+  "me": "baptiste",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "궁합 상당히 좋음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "domina",
+  "level": 0,
+  "why": "효율 애매"
+ },
+ {
+  "me": "baptiste",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "도움 안 됨"
+ },
+ {
+  "me": "baptiste",
+  "mate": "dva",
+  "level": 0,
+  "why": "약간 좋음, 한계"
+ },
+ {
+  "me": "baptiste",
+  "mate": "echo",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "baptiste",
+  "mate": "freja",
+  "level": -1,
+  "why": "힐 효율 나쁨"
+ },
+ {
+  "me": "baptiste",
+  "mate": "genji",
+  "level": -1,
+  "why": "궁합 좋지 않음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "호흡 상당히 좋음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "hazard",
+  "level": -1,
+  "why": "운용 안 맞음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "illari",
+  "level": 2,
+  "why": "앵커 조합 매우 좋음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "jetpackcat",
+  "level": -1,
+  "why": "최악의 파트너"
+ },
+ {
+  "me": "baptiste",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "무난"
+ },
+ {
+  "me": "baptiste",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "baptiste",
+  "mate": "juno",
+  "level": -1,
+  "why": "힐 까다로움"
+ },
+ {
+  "me": "baptiste",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "증폭 활용 가능"
+ },
+ {
+  "me": "baptiste",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "단점 상호 보완"
+ },
+ {
+  "me": "baptiste",
+  "mate": "lucio",
+  "level": 1,
+  "why": "러쉬 조합"
+ },
+ {
+  "me": "baptiste",
+  "mate": "mauga",
+  "level": 1,
+  "why": "효율 높음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "mei",
+  "level": 1,
+  "why": "효율 나쁘지 않음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "mercy",
+  "level": 1,
+  "why": "알박기서 주목"
+ },
+ {
+  "me": "baptiste",
+  "mate": "moira",
+  "level": -1,
+  "why": "궁합 그리 안 좋음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "orisa",
+  "level": 1,
+  "why": "조합 좋아짐"
+ },
+ {
+  "me": "baptiste",
+  "mate": "pharah",
+  "level": -1,
+  "why": "보호 어려움"
+ },
+ {
+  "me": "baptiste",
+  "mate": "ramattra",
+  "level": 2,
+  "why": "효율 최고"
+ },
+ {
+  "me": "baptiste",
+  "mate": "reaper",
+  "level": 0,
+  "why": "수비만 호흡"
+ },
+ {
+  "me": "baptiste",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "궁합 상당히 좋음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "roadhog",
+  "level": 2,
+  "why": "보디가드 시너지"
+ },
+ {
+  "me": "baptiste",
+  "mate": "sierra",
+  "level": 1,
+  "why": "궁합 괜찮음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "sigma",
+  "level": 2,
+  "why": "정석 포킹 조합"
+ },
+ {
+  "me": "baptiste",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "증폭 위협적"
+ },
+ {
+  "me": "baptiste",
+  "mate": "soldier76",
+  "level": 2,
+  "why": "호흡 끝장"
+ },
+ {
+  "me": "baptiste",
+  "mate": "sombra",
+  "level": 0,
+  "why": "힐 불필요"
+ },
+ {
+  "me": "baptiste",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "효율 낮음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "tracer",
+  "level": -1,
+  "why": "맞지 않음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "vendetta",
+  "level": -1,
+  "why": "최악의 조합"
+ },
+ {
+  "me": "baptiste",
+  "mate": "venture",
+  "level": 0,
+  "why": "힐 부담 적음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "widowmaker",
+  "level": 1,
+  "why": "증폭 위력"
+ },
+ {
+  "me": "baptiste",
+  "mate": "winston",
+  "level": -1,
+  "why": "플레이 안 맞음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "시너지 최악"
+ },
+ {
+  "me": "baptiste",
+  "mate": "wuyang",
+  "level": 0,
+  "why": "호흡 안 맞는 편"
+ },
+ {
+  "me": "baptiste",
+  "mate": "zarya",
+  "level": 0,
+  "why": "특출한 시너지 없음"
+ },
+ {
+  "me": "baptiste",
+  "mate": "zenyatta",
+  "level": 2,
+  "why": "딜찍누 조합"
+ },
+ {
+  "me": "bastion",
+  "mate": "ana",
+  "level": 1,
+  "why": "케어 쉽고 나노 위력"
+ },
+ {
+  "me": "bastion",
+  "mate": "ashe",
+  "level": 1,
+  "why": "일단 먹고 들어감"
+ },
+ {
+  "me": "bastion",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "바티 센스에 달림"
+ },
+ {
+  "me": "bastion",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "집결 켜면 괜찮"
+ },
+ {
+  "me": "bastion",
+  "mate": "cassidy",
+  "level": 0,
+  "why": "괜찮으나 카운터 공유"
+ },
+ {
+  "me": "bastion",
+  "mate": "domina",
+  "level": 1,
+  "why": "꽤 좋은 조합"
+ },
+ {
+  "me": "bastion",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "썩 좋지 않음"
+ },
+ {
+  "me": "bastion",
+  "mate": "dva",
+  "level": 0,
+  "why": "케어 되나 한계 뚜렷"
+ },
+ {
+  "me": "bastion",
+  "mate": "echo",
+  "level": 0,
+  "why": "그런대로 쓸 만"
+ },
+ {
+  "me": "bastion",
+  "mate": "freja",
+  "level": 0,
+  "why": "좋다 보기 어려우나 활용"
+ },
+ {
+  "me": "bastion",
+  "mate": "genji",
+  "level": 1,
+  "why": "겐지 견제 괜찮"
+ },
+ {
+  "me": "bastion",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "원거리 견제 대처 좋음"
+ },
+ {
+  "me": "bastion",
+  "mate": "hazard",
+  "level": -1,
+  "why": "맞추기 어려움 궁만 좋음"
+ },
+ {
+  "me": "bastion",
+  "mate": "illari",
+  "level": 1,
+  "why": "힐 견제 도움"
+ },
+ {
+  "me": "bastion",
+  "mate": "jetpackcat",
+  "level": 2,
+  "why": "냥바스 부족한 것 제공"
+ },
+ {
+  "me": "bastion",
+  "mate": "junkerqueen",
+  "level": -1,
+  "why": "케어 못해 나음 정도"
+ },
+ {
+  "me": "bastion",
+  "mate": "junkrat",
+  "level": -1,
+  "why": "포지션 겹침 유효타 어려움"
+ },
+ {
+  "me": "bastion",
+  "mate": "juno",
+  "level": 1,
+  "why": "이속 케어 도움"
+ },
+ {
+  "me": "bastion",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "여우길 최고 시너지"
+ },
+ {
+  "me": "bastion",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "이동 케어 도움"
+ },
+ {
+  "me": "bastion",
+  "mate": "lucio",
+  "level": 1,
+  "why": "이속 상당한 시너지"
+ },
+ {
+  "me": "bastion",
+  "mate": "mauga",
+  "level": 0,
+  "why": "화력 좋으나 컨셉 겹침"
+ },
+ {
+  "me": "bastion",
+  "mate": "mei",
+  "level": 1,
+  "why": "빙벽 전술 유효"
+ },
+ {
+  "me": "bastion",
+  "mate": "mercy",
+  "level": 1,
+  "why": "무난하게 좋음"
+ },
+ {
+  "me": "bastion",
+  "mate": "mizuki",
+  "level": 0,
+  "why": "장단점 극명"
+ },
+ {
+  "me": "bastion",
+  "mate": "moira",
+  "level": -1,
+  "why": "케어 어려움"
+ },
+ {
+  "me": "bastion",
+  "mate": "orisa",
+  "level": -1,
+  "why": "리메이크 후 궁합 하락"
+ },
+ {
+  "me": "bastion",
+  "mate": "pharah",
+  "level": -1,
+  "why": "별로임"
+ },
+ {
+  "me": "bastion",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "방벽 케어 시너지"
+ },
+ {
+  "me": "bastion",
+  "mate": "reaper",
+  "level": -1,
+  "why": "카운터 많아 단점 투성이"
+ },
+ {
+  "me": "bastion",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "러쉬 조합에서 좋음"
+ },
+ {
+  "me": "bastion",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "가능하나 보호 못함"
+ },
+ {
+  "me": "bastion",
+  "mate": "sigma",
+  "level": 1,
+  "why": "방벽 케어 궁연계"
+ },
+ {
+  "me": "bastion",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "포지셔닝 킬캐치 보완"
+ },
+ {
+  "me": "bastion",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "포지션 겹쳐 애매"
+ },
+ {
+  "me": "bastion",
+  "mate": "sombra",
+  "level": 1,
+  "why": "앞뒤 교란 좋음"
+ },
+ {
+  "me": "bastion",
+  "mate": "symmetra",
+  "level": 2,
+  "why": "스킬 모두 유용"
+ },
+ {
+  "me": "bastion",
+  "mate": "torbjorn",
+  "level": -1,
+  "why": "조합 잘 안 됨"
+ },
+ {
+  "me": "bastion",
+  "mate": "tracer",
+  "level": 1,
+  "why": "킬캐치 시너지 좋음"
+ },
+ {
+  "me": "bastion",
+  "mate": "vendetta",
+  "level": 0,
+  "why": "마냥 나쁘진 않음"
+ },
+ {
+  "me": "bastion",
+  "mate": "venture",
+  "level": 1,
+  "why": "딜각 만들어줌 훌륭"
+ },
+ {
+  "me": "bastion",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "위도우 천적 맞저격 불리"
+ },
+ {
+  "me": "bastion",
+  "mate": "winston",
+  "level": -1,
+  "why": "상성 안 맞음"
+ },
+ {
+  "me": "bastion",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "호응 떨어짐 시너지 전무"
+ },
+ {
+  "me": "bastion",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "딜 조합으로 아주 좋음"
+ },
+ {
+  "me": "bastion",
+  "mate": "zarya",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "bastion",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "부조화 포커싱 좋음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "ana",
+  "level": 2,
+  "why": "정석 듀오 능가"
+ },
+ {
+  "me": "brigitte",
+  "mate": "ashe",
+  "level": 1,
+  "why": "상호보완"
+ },
+ {
+  "me": "brigitte",
+  "mate": "baptiste",
+  "level": 2,
+  "why": "받아치기 뛰어남"
+ },
+ {
+  "me": "brigitte",
+  "mate": "bastion",
+  "level": 1,
+  "why": "지원 가능"
+ },
+ {
+  "me": "brigitte",
+  "mate": "cassidy",
+  "level": 2,
+  "why": "거의 완벽 일치"
+ },
+ {
+  "me": "brigitte",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "좋은 궁합"
+ },
+ {
+  "me": "brigitte",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋은 궁합"
+ },
+ {
+  "me": "brigitte",
+  "mate": "echo",
+  "level": 1,
+  "why": "지원 도움"
+ },
+ {
+  "me": "brigitte",
+  "mate": "freja",
+  "level": 1,
+  "why": "치유 수월"
+ },
+ {
+  "me": "brigitte",
+  "mate": "genji",
+  "level": 2,
+  "why": "겐브리 조합"
+ },
+ {
+  "me": "brigitte",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "서로 도움"
+ },
+ {
+  "me": "brigitte",
+  "mate": "illari",
+  "level": 0,
+  "why": "같이 쓰기 애매"
+ },
+ {
+  "me": "brigitte",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "잘 맞는 편"
+ },
+ {
+  "me": "brigitte",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "지원 다양"
+ },
+ {
+  "me": "brigitte",
+  "mate": "juno",
+  "level": 2,
+  "why": "전폭 지원 파트너"
+ },
+ {
+  "me": "brigitte",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "시너지 매우 좋음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "lifeweaver",
+  "level": 0,
+  "why": "썩 나쁘진 않음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "lucio",
+  "level": -1,
+  "why": "굳이 쓸 필요 없음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "mauga",
+  "level": 1,
+  "why": "보조 좋음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "mei",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "mercy",
+  "level": 0,
+  "why": "변수 부족"
+ },
+ {
+  "me": "brigitte",
+  "mate": "mizuki",
+  "level": -1,
+  "why": "힐 공백 잦음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "moira",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "brigitte",
+  "mate": "orisa",
+  "level": 0,
+  "why": "공통 약점"
+ },
+ {
+  "me": "brigitte",
+  "mate": "pharah",
+  "level": 1,
+  "why": "의외로 괜찮음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "평소 궁합 없음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "reaper",
+  "level": 1,
+  "why": "약간 좋음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "최적화 조건부"
+ },
+ {
+  "me": "brigitte",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "별다른 궁합 없음"
+ },
+ {
+  "me": "brigitte",
+  "mate": "sigma",
+  "level": 1,
+  "why": "꽤 좋은 궁합"
+ },
+ {
+  "me": "brigitte",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "무난"
+ },
+ {
+  "me": "brigitte",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "괜찮은 편"
+ },
+ {
+  "me": "brigitte",
+  "mate": "sombra",
+  "level": 1,
+  "why": "포커싱 조합"
+ },
+ {
+  "me": "brigitte",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "서로 편함"
+ },
+ {
+  "me": "brigitte",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "상대 조합 의존"
+ },
+ {
+  "me": "brigitte",
+  "mate": "tracer",
+  "level": 2,
+  "why": "풀피 유지 시너지"
+ },
+ {
+  "me": "brigitte",
+  "mate": "venture",
+  "level": 0,
+  "why": "그저 그런 조합"
+ },
+ {
+  "me": "brigitte",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "brigitte",
+  "mate": "winston",
+  "level": 2,
+  "why": "궁합 뛰어남"
+ },
+ {
+  "me": "brigitte",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "치유 쉬움"
+ },
+ {
+  "me": "brigitte",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "좋은 궁합"
+ },
+ {
+  "me": "brigitte",
+  "mate": "zarya",
+  "level": 0,
+  "why": "오리사와 비슷"
+ },
+ {
+  "me": "brigitte",
+  "mate": "zenyatta",
+  "level": -1,
+  "why": "유지력 취약"
+ },
+ {
+  "me": "cassidy",
+  "mate": "ana",
+  "level": 1,
+  "why": "상호 지원 빠름"
+ },
+ {
+  "me": "cassidy",
+  "mate": "ashe",
+  "level": 0,
+  "why": "명암 극심"
+ },
+ {
+  "me": "cassidy",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "궁합 상당히 좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "bastion",
+  "level": 0,
+  "why": "한계 있음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "domina",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "cassidy",
+  "mate": "dva",
+  "level": 1,
+  "why": "약간 좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "echo",
+  "level": 1,
+  "why": "서로 마무리"
+ },
+ {
+  "me": "cassidy",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "무난"
+ },
+ {
+  "me": "cassidy",
+  "mate": "hazard",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "cassidy",
+  "mate": "jetpackcat",
+  "level": 2,
+  "why": "공중석양 콤보"
+ },
+ {
+  "me": "cassidy",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "cassidy",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "준수한 시너지"
+ },
+ {
+  "me": "cassidy",
+  "mate": "juno",
+  "level": 1,
+  "why": "좋은 궁합"
+ },
+ {
+  "me": "cassidy",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "포지션 보완"
+ },
+ {
+  "me": "cassidy",
+  "mate": "lucio",
+  "level": 1,
+  "why": "기동성 보완"
+ },
+ {
+  "me": "cassidy",
+  "mate": "mauga",
+  "level": -1,
+  "why": "좋지 않음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "mei",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "cassidy",
+  "mate": "mercy",
+  "level": 0,
+  "why": "필수는 아님"
+ },
+ {
+  "me": "cassidy",
+  "mate": "moira",
+  "level": 1,
+  "why": "어울리는 편"
+ },
+ {
+  "me": "cassidy",
+  "mate": "orisa",
+  "level": 1,
+  "why": "약간 좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "pharah",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "cassidy",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "reaper",
+  "level": 0,
+  "why": "나쁘지 않음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "reinhardt",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "연계 훌륭"
+ },
+ {
+  "me": "cassidy",
+  "mate": "sigma",
+  "level": 2,
+  "why": "궁 조합 최고"
+ },
+ {
+  "me": "cassidy",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "특별할 것 없음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "특정 용도"
+ },
+ {
+  "me": "cassidy",
+  "mate": "sombra",
+  "level": 2,
+  "why": "이상적 조합"
+ },
+ {
+  "me": "cassidy",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "합 맞으면 좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "장점 있으나 드뭄"
+ },
+ {
+  "me": "cassidy",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "도움되나 부담"
+ },
+ {
+  "me": "cassidy",
+  "mate": "winston",
+  "level": 1,
+  "why": "지원 훌륭"
+ },
+ {
+  "me": "cassidy",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "cassidy",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "cassidy",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "궁합 잘 맞음"
+ },
+ {
+  "me": "dmon",
+  "mate": "ana",
+  "level": 1,
+  "why": "디몬에게 최고 지원가"
+ },
+ {
+  "me": "dmon",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "수직 보완, 좋은 편"
+ },
+ {
+  "me": "dmon",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "보통, 대다이브 한정"
+ },
+ {
+  "me": "dmon",
+  "mate": "dva",
+  "level": 2,
+  "why": "MEKA 부대 조합"
+ },
+ {
+  "me": "dmon",
+  "mate": "illari",
+  "level": 0,
+  "why": "보통, 포킹 위주"
+ },
+ {
+  "me": "dmon",
+  "mate": "jetpackcat",
+  "level": 2,
+  "why": "매우 좋음, Z축 보완"
+ },
+ {
+  "me": "dmon",
+  "mate": "juno",
+  "level": 1,
+  "why": "이속, 힐량 좋음"
+ },
+ {
+  "me": "dmon",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "매우 좋음, 아나 이상"
+ },
+ {
+  "me": "dmon",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "수직이동 도움, 힐 부족"
+ },
+ {
+  "me": "dmon",
+  "mate": "lucio",
+  "level": 1,
+  "why": "이속 도움, 힐 부족"
+ },
+ {
+  "me": "dmon",
+  "mate": "mauga",
+  "level": 2,
+  "why": "근접탱 최고 시너지"
+ },
+ {
+  "me": "dmon",
+  "mate": "mercy",
+  "level": -1,
+  "why": "힐량 부족, 부활 비효율"
+ },
+ {
+  "me": "dmon",
+  "mate": "mizuki",
+  "level": -1,
+  "why": "궁합 좋지 않음"
+ },
+ {
+  "me": "dmon",
+  "mate": "moira",
+  "level": 1,
+  "why": "힐량 든든"
+ },
+ {
+  "me": "dmon",
+  "mate": "orisa",
+  "level": 1,
+  "why": "전선 굳히기 좋음"
+ },
+ {
+  "me": "dmon",
+  "mate": "reinhardt",
+  "level": 2,
+  "why": "근접전 최강 조합"
+ },
+ {
+  "me": "dmon",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "호그가 약점 보완"
+ },
+ {
+  "me": "dmon",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "딜각 방해, 합 안 맞음"
+ },
+ {
+  "me": "dmon",
+  "mate": "wuyang",
+  "level": 0,
+  "why": "유동적, 상황 따라"
+ },
+ {
+  "me": "dmon",
+  "mate": "zarya",
+  "level": 2,
+  "why": "매우 좋음, 체급 상승"
+ },
+ {
+  "me": "dmon",
+  "mate": "zenyatta",
+  "level": -1,
+  "why": "궁합 별로"
+ },
+ {
+  "me": "domina",
+  "mate": "ana",
+  "level": 1,
+  "why": "방벽 뒤 포킹 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "ashe",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "baptiste",
+  "level": 2,
+  "why": "매우 좋음, 불사 장치"
+ },
+ {
+  "me": "domina",
+  "mate": "bastion",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "상대 조합 따라"
+ },
+ {
+  "me": "domina",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "근접 대응 보완"
+ },
+ {
+  "me": "domina",
+  "mate": "dmon",
+  "level": 1,
+  "why": "역할 분담 깔끔"
+ },
+ {
+  "me": "domina",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "시너지 없음"
+ },
+ {
+  "me": "domina",
+  "mate": "dva",
+  "level": 1,
+  "why": "상성 보완 우수"
+ },
+ {
+  "me": "domina",
+  "mate": "echo",
+  "level": 0,
+  "why": "보통, 영역 보완"
+ },
+ {
+  "me": "domina",
+  "mate": "emre",
+  "level": 1,
+  "why": "거리 비슷해 합 쉬움"
+ },
+ {
+  "me": "domina",
+  "mate": "freja",
+  "level": 1,
+  "why": "약간 좋음, 역할 보완"
+ },
+ {
+  "me": "domina",
+  "mate": "genji",
+  "level": 0,
+  "why": "시너지 적고 궁은 최상"
+ },
+ {
+  "me": "domina",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "이동 제한해 맞히기 쉬움"
+ },
+ {
+  "me": "domina",
+  "mate": "hazard",
+  "level": 1,
+  "why": "앞뒤로 뒤흔들기"
+ },
+ {
+  "me": "domina",
+  "mate": "illari",
+  "level": 1,
+  "why": "폭힐로 유지력"
+ },
+ {
+  "me": "domina",
+  "mate": "jetpackcat",
+  "level": 1,
+  "why": "기동성 보완"
+ },
+ {
+  "me": "domina",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "지휘의 외침 도움"
+ },
+ {
+  "me": "domina",
+  "mate": "juno",
+  "level": 0,
+  "why": "보완하나 애매"
+ },
+ {
+  "me": "domina",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "약점 직접 보완"
+ },
+ {
+  "me": "domina",
+  "mate": "lucio",
+  "level": -1,
+  "why": "속도 증폭 활용 못함"
+ },
+ {
+  "me": "domina",
+  "mate": "mauga",
+  "level": 1,
+  "why": "궁합 아주 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "mei",
+  "level": 1,
+  "why": "약간 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "mercy",
+  "level": 1,
+  "why": "공버프 시너지"
+ },
+ {
+  "me": "domina",
+  "mate": "moira",
+  "level": 0,
+  "why": "특별 연계 없음"
+ },
+ {
+  "me": "domina",
+  "mate": "orisa",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "pharah",
+  "level": 0,
+  "why": "큰 시너지 없음"
+ },
+ {
+  "me": "domina",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "나름 괜찮음"
+ },
+ {
+  "me": "domina",
+  "mate": "reaper",
+  "level": 1,
+  "why": "근접전 전담"
+ },
+ {
+  "me": "domina",
+  "mate": "reinhardt",
+  "level": 2,
+  "why": "공방일체, 매우 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "호그와 좋은 조합"
+ },
+ {
+  "me": "domina",
+  "mate": "sigma",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "sojourn",
+  "level": 2,
+  "why": "궁합 상당히 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "안정적 상호 보완"
+ },
+ {
+  "me": "domina",
+  "mate": "sombra",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "domina",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "순간이동, 수비 유리"
+ },
+ {
+  "me": "domina",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "수비에서 특히 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "vendetta",
+  "level": 0,
+  "why": "반대 거리, 템포 따라"
+ },
+ {
+  "me": "domina",
+  "mate": "venture",
+  "level": -1,
+  "why": "직접 시너지 적음"
+ },
+ {
+  "me": "domina",
+  "mate": "winston",
+  "level": -1,
+  "why": "포지션 달라 나쁨"
+ },
+ {
+  "me": "domina",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "domina",
+  "mate": "wuyang",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "domina",
+  "mate": "zarya",
+  "level": -1,
+  "why": "운영 어긋남"
+ },
+ {
+  "me": "domina",
+  "mate": "zenyatta",
+  "level": -1,
+  "why": "크게 무너지기 쉬움"
+ },
+ {
+  "me": "doomfist",
+  "mate": "ana",
+  "level": 2,
+  "why": "최고의 힐러"
+ },
+ {
+  "me": "doomfist",
+  "mate": "anran",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "ashe",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "지원 까다로움"
+ },
+ {
+  "me": "doomfist",
+  "mate": "bastion",
+  "level": -1,
+  "why": "서로 발목, 좋지 않음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "상황 따라"
+ },
+ {
+  "me": "doomfist",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "약점 상쇄, 좋음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "domina",
+  "level": -1,
+  "why": "난전끼리 서로 방해"
+ },
+ {
+  "me": "doomfist",
+  "mate": "dva",
+  "level": 1,
+  "why": "킬 결정력 증가"
+ },
+ {
+  "me": "doomfist",
+  "mate": "echo",
+  "level": 1,
+  "why": "기동성 보조"
+ },
+ {
+  "me": "doomfist",
+  "mate": "emre",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "freja",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "genji",
+  "level": 1,
+  "why": "킬결정력 보완"
+ },
+ {
+  "me": "doomfist",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "hazard",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "illari",
+  "level": -1,
+  "why": "따로 놀게 됨"
+ },
+ {
+  "me": "doomfist",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "장단 혼재"
+ },
+ {
+  "me": "doomfist",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "juno",
+  "level": -1,
+  "why": "힐로스, 궁 안 맞음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "다이브에서 좋음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "lifeweaver",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "lucio",
+  "level": -1,
+  "why": "힐 기대 못함"
+ },
+ {
+  "me": "doomfist",
+  "mate": "mauga",
+  "level": -1,
+  "why": "서로 방해, 좋지 않음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "mei",
+  "level": 0,
+  "why": "장단 혼재"
+ },
+ {
+  "me": "doomfist",
+  "mate": "mercy",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "doomfist",
+  "mate": "moira",
+  "level": -1,
+  "why": "따라가지 못함"
+ },
+ {
+  "me": "doomfist",
+  "mate": "orisa",
+  "level": 1,
+  "why": "공격적 조합, 보호 부족"
+ },
+ {
+  "me": "doomfist",
+  "mate": "pharah",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "ramattra",
+  "level": -1,
+  "why": "교전 달라 시너지 약함"
+ },
+ {
+  "me": "doomfist",
+  "mate": "reaper",
+  "level": 0,
+  "why": "기동성 아쉬움"
+ },
+ {
+  "me": "doomfist",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "나쁘지 않으나 이론상"
+ },
+ {
+  "me": "doomfist",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "약간 나쁨, 일부 연계"
+ },
+ {
+  "me": "doomfist",
+  "mate": "shion",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "sierra",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "sigma",
+  "level": 0,
+  "why": "시너지 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "나쁘지 않은 조합"
+ },
+ {
+  "me": "doomfist",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "큰 장점 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "sombra",
+  "level": 2,
+  "why": "해킹+포커싱 매우 좋음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "tracer",
+  "level": 2,
+  "why": "고기동 매우 좋음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "vendetta",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "venture",
+  "level": 2,
+  "why": "최고의 궁합"
+ },
+ {
+  "me": "doomfist",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "궁합 없음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "winston",
+  "level": 0,
+  "why": "흔들기, 결정력 낮음"
+ },
+ {
+  "me": "doomfist",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "방해 가능, 합 맞으면 괜찮"
+ },
+ {
+  "me": "doomfist",
+  "mate": "zarya",
+  "level": 1,
+  "why": "궁 조합 훌륭"
+ },
+ {
+  "me": "doomfist",
+  "mate": "zenyatta",
+  "level": 2,
+  "why": "젠둠, 매우 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "ana",
+  "level": 1,
+  "why": "아나 구세주, 궁 주의"
+ },
+ {
+  "me": "dva",
+  "mate": "anran",
+  "level": 1,
+  "why": "좋음(라벨)"
+ },
+ {
+  "me": "dva",
+  "mate": "ashe",
+  "level": 0,
+  "why": "보통, 일방적 도움"
+ },
+ {
+  "me": "dva",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "설명 위주, 긍정 일부"
+ },
+ {
+  "me": "dva",
+  "mate": "bastion",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "dva",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "지속 힐 반가움"
+ },
+ {
+  "me": "dva",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "섭탱으로 보조"
+ },
+ {
+  "me": "dva",
+  "mate": "domina",
+  "level": 0,
+  "why": "보통, 장단 혼재"
+ },
+ {
+  "me": "dva",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "dva",
+  "mate": "echo",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "dva",
+  "mate": "emre",
+  "level": 1,
+  "why": "좋음(라벨)"
+ },
+ {
+  "me": "dva",
+  "mate": "freja",
+  "level": 1,
+  "why": "좋은 단짝"
+ },
+ {
+  "me": "dva",
+  "mate": "genji",
+  "level": 1,
+  "why": "돌진 포커싱 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "상호 지원, 궁 겹침"
+ },
+ {
+  "me": "dva",
+  "mate": "hazard",
+  "level": 1,
+  "why": "다이브 합 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "illari",
+  "level": 0,
+  "why": "약간 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "jetpackcat",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "보통, 장단 혼재"
+ },
+ {
+  "me": "dva",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "상호 보완 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "juno",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "lifeweaver",
+  "level": 0,
+  "why": "약간 좋음, 제한적"
+ },
+ {
+  "me": "dva",
+  "mate": "lucio",
+  "level": 0,
+  "why": "큰 도움 아님"
+ },
+ {
+  "me": "dva",
+  "mate": "mauga",
+  "level": 1,
+  "why": "매트릭스 보조, 궁 연계"
+ },
+ {
+  "me": "dva",
+  "mate": "mei",
+  "level": 1,
+  "why": "궁 연계 최고, 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "mercy",
+  "level": 1,
+  "why": "시너지 좋은 편"
+ },
+ {
+  "me": "dva",
+  "mate": "mizuki",
+  "level": 1,
+  "why": "거리감 닮아 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "moira",
+  "level": 1,
+  "why": "서로 지키기 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "orisa",
+  "level": 1,
+  "why": "상호 보완 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "pharah",
+  "level": 2,
+  "why": "매우 좋음, 파르시"
+ },
+ {
+  "me": "dva",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "궁 연계 이점"
+ },
+ {
+  "me": "dva",
+  "mate": "reaper",
+  "level": 1,
+  "why": "서로 좋은 조합"
+ },
+ {
+  "me": "dva",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "무난히 좋은 조합"
+ },
+ {
+  "me": "dva",
+  "mate": "roadhog",
+  "level": -1,
+  "why": "호그 이동기 없어 별로"
+ },
+ {
+  "me": "dva",
+  "mate": "shion",
+  "level": 1,
+  "why": "좋음(라벨)"
+ },
+ {
+  "me": "dva",
+  "mate": "sierra",
+  "level": -1,
+  "why": "상호작용 없음, 좋지 않음"
+ },
+ {
+  "me": "dva",
+  "mate": "sigma",
+  "level": -1,
+  "why": "좋지 않음, 스킬 겹침"
+ },
+ {
+  "me": "dva",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "이동기 맞춰 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "괜찮은 조합"
+ },
+ {
+  "me": "dva",
+  "mate": "sombra",
+  "level": 1,
+  "why": "매트릭스, EMP 연계"
+ },
+ {
+  "me": "dva",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "편차 심함, 재미 적음"
+ },
+ {
+  "me": "dva",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "수비전에서 빛남"
+ },
+ {
+  "me": "dva",
+  "mate": "tracer",
+  "level": 1,
+  "why": "포커싱 효율 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "vendetta",
+  "level": 1,
+  "why": "좋음(라벨)"
+ },
+ {
+  "me": "dva",
+  "mate": "venture",
+  "level": 1,
+  "why": "돌진 합 좋음"
+ },
+ {
+  "me": "dva",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "조건부, 보통"
+ },
+ {
+  "me": "dva",
+  "mate": "winston",
+  "level": 2,
+  "why": "매우 좋음, 윈디"
+ },
+ {
+  "me": "dva",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "dva",
+  "mate": "wuyang",
+  "level": -1,
+  "why": "힐 부족, 좋지 않음"
+ },
+ {
+  "me": "dva",
+  "mate": "zarya",
+  "level": 1,
+  "why": "나쁘지 않고 좋은 편"
+ },
+ {
+  "me": "dva",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "echo",
+  "mate": "ana",
+  "level": 1,
+  "why": "궁합 괜찮음"
+ },
+ {
+  "me": "echo",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "도움 못 됨"
+ },
+ {
+  "me": "echo",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "한계 있음"
+ },
+ {
+  "me": "echo",
+  "mate": "dva",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "echo",
+  "mate": "genji",
+  "level": 1,
+  "why": "시너지 훌륭"
+ },
+ {
+  "me": "echo",
+  "mate": "illari",
+  "level": -1,
+  "why": "완전 상극"
+ },
+ {
+  "me": "echo",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "반가운 조합"
+ },
+ {
+  "me": "echo",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "덫 연계 좋음"
+ },
+ {
+  "me": "echo",
+  "mate": "juno",
+  "level": 1,
+  "why": "고점 만들어줌"
+ },
+ {
+  "me": "echo",
+  "mate": "kiriko",
+  "level": 0,
+  "why": "무난 단점 있음"
+ },
+ {
+  "me": "echo",
+  "mate": "lifeweaver",
+  "level": -1,
+  "why": "이득 거의 없음"
+ },
+ {
+  "me": "echo",
+  "mate": "lucio",
+  "level": -1,
+  "why": "궁합 좋지 않음"
+ },
+ {
+  "me": "echo",
+  "mate": "mei",
+  "level": 0,
+  "why": "탱커 상대로만 유용"
+ },
+ {
+  "me": "echo",
+  "mate": "mercy",
+  "level": 1,
+  "why": "비행 조합 좋음"
+ },
+ {
+  "me": "echo",
+  "mate": "moira",
+  "level": -1,
+  "why": "호흡 안 맞음"
+ },
+ {
+  "me": "echo",
+  "mate": "orisa",
+  "level": 0,
+  "why": "업혀가는 형태"
+ },
+ {
+  "me": "echo",
+  "mate": "pharah",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "echo",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "심리전 우위"
+ },
+ {
+  "me": "echo",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "윈윈"
+ },
+ {
+  "me": "echo",
+  "mate": "sigma",
+  "level": 2,
+  "why": "궁 호흡 좋음"
+ },
+ {
+  "me": "echo",
+  "mate": "sombra",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "echo",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "이동기 제공 시너지"
+ },
+ {
+  "me": "echo",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "서로 잘 조력"
+ },
+ {
+  "me": "echo",
+  "mate": "tracer",
+  "level": 0,
+  "why": "킬력 좋으나 생존 취약"
+ },
+ {
+  "me": "echo",
+  "mate": "winston",
+  "level": 1,
+  "why": "화력 보강"
+ },
+ {
+  "me": "echo",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "서로 영향 없음"
+ },
+ {
+  "me": "echo",
+  "mate": "zarya",
+  "level": 1,
+  "why": "도움됨"
+ },
+ {
+  "me": "echo",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "서로 유용"
+ },
+ {
+  "me": "emre",
+  "mate": "ana",
+  "level": 2,
+  "why": "완벽한 궁합"
+ },
+ {
+  "me": "emre",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "약간 좋음 궁연계 어긋남"
+ },
+ {
+  "me": "emre",
+  "mate": "brigitte",
+  "level": -1,
+  "why": "시너지 없음"
+ },
+ {
+  "me": "emre",
+  "mate": "domina",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "emre",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "emre",
+  "mate": "genji",
+  "level": 1,
+  "why": "상호보완 완벽"
+ },
+ {
+  "me": "emre",
+  "mate": "hazard",
+  "level": 0,
+  "why": "평소 시너지 적음"
+ },
+ {
+  "me": "emre",
+  "mate": "mauga",
+  "level": 1,
+  "why": "궁연계 막강"
+ },
+ {
+  "me": "emre",
+  "mate": "mei",
+  "level": 1,
+  "why": "궁연계 가능"
+ },
+ {
+  "me": "emre",
+  "mate": "mercy",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "emre",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "궁연계 흉악"
+ },
+ {
+  "me": "emre",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "서로 도움"
+ },
+ {
+  "me": "emre",
+  "mate": "zarya",
+  "level": 2,
+  "why": "궁극기 최강 조합"
+ },
+ {
+  "me": "freja",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "freja",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "매우 나쁨"
+ },
+ {
+  "me": "freja",
+  "mate": "dva",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "hazard",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "juno",
+  "level": -1,
+  "why": "좋지 않음"
+ },
+ {
+  "me": "freja",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "lucio",
+  "level": -1,
+  "why": "좋지 않음"
+ },
+ {
+  "me": "freja",
+  "mate": "mauga",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "freja",
+  "mate": "mercy",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "moira",
+  "level": -1,
+  "why": "좋지 않음"
+ },
+ {
+  "me": "freja",
+  "mate": "orisa",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "freja",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "freja",
+  "mate": "sigma",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "sombra",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "tracer",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "venture",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "winston",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "freja",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "freja",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "genji",
+  "mate": "ana",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "genji",
+  "mate": "ashe",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "genji",
+  "mate": "bastion",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "brigitte",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "genji",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "domina",
+  "level": 0,
+  "why": "보통, 궁 조합 최상"
+ },
+ {
+  "me": "genji",
+  "mate": "doomfist",
+  "level": 2,
+  "why": "고기동 콤비, 매우 좋음"
+ },
+ {
+  "me": "genji",
+  "mate": "dva",
+  "level": 1,
+  "why": "돌진 멤버, 좋음"
+ },
+ {
+  "me": "genji",
+  "mate": "echo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "emre",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "freja",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "hazard",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "genji",
+  "mate": "illari",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "genji",
+  "mate": "jetpackcat",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "genji",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "외침·살육 연계, 좋음"
+ },
+ {
+  "me": "genji",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "juno",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "lucio",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "mauga",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "genji",
+  "mate": "mei",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "mercy",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "genji",
+  "mate": "moira",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "genji",
+  "mate": "orisa",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "genji",
+  "mate": "pharah",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "보통, 방벽·소용돌이 유용"
+ },
+ {
+  "me": "genji",
+  "mate": "reaper",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "reinhardt",
+  "level": -1,
+  "why": "약간 좋지 않음"
+ },
+ {
+  "me": "genji",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "경호원, 좋음"
+ },
+ {
+  "me": "genji",
+  "mate": "sigma",
+  "level": -1,
+  "why": "진입 안 해줘 안 좋음"
+ },
+ {
+  "me": "genji",
+  "mate": "sojourn",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "genji",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "sombra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "genji",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "genji",
+  "mate": "tracer",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "genji",
+  "mate": "vendetta",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "venture",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "genji",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "genji",
+  "mate": "winston",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "genji",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "genji",
+  "mate": "wuyang",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "genji",
+  "mate": "zarya",
+  "level": 2,
+  "why": "최고 경호원, 매우 좋음"
+ },
+ {
+  "me": "genji",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hanzo",
+  "mate": "ana",
+  "level": 1,
+  "why": "합 맞추기 좋음"
+ },
+ {
+  "me": "hanzo",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "포킹 시너지"
+ },
+ {
+  "me": "hanzo",
+  "mate": "bastion",
+  "level": 1,
+  "why": "대응 까다로운 조합"
+ },
+ {
+  "me": "hanzo",
+  "mate": "brigitte",
+  "level": 2,
+  "why": "든든한 상호보완"
+ },
+ {
+  "me": "hanzo",
+  "mate": "dva",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "hanzo",
+  "mate": "genji",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "hanzo",
+  "mate": "illari",
+  "level": 1,
+  "why": "합 무난하고 좋음"
+ },
+ {
+  "me": "hanzo",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "보조 가능"
+ },
+ {
+  "me": "hanzo",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "궁합 괜찮음"
+ },
+ {
+  "me": "hanzo",
+  "mate": "juno",
+  "level": 0,
+  "why": "직접 영향 적음"
+ },
+ {
+  "me": "hanzo",
+  "mate": "kiriko",
+  "level": 0,
+  "why": "영역 겹침, 지원 아쉬움"
+ },
+ {
+  "me": "hanzo",
+  "mate": "lifeweaver",
+  "level": -1,
+  "why": "반갑지 못함"
+ },
+ {
+  "me": "hanzo",
+  "mate": "lucio",
+  "level": 1,
+  "why": "훌륭한 지원가"
+ },
+ {
+  "me": "hanzo",
+  "mate": "mei",
+  "level": 1,
+  "why": "서로 엄호"
+ },
+ {
+  "me": "hanzo",
+  "mate": "mercy",
+  "level": 1,
+  "why": "화력 지원"
+ },
+ {
+  "me": "hanzo",
+  "mate": "moira",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "hanzo",
+  "mate": "orisa",
+  "level": 0,
+  "why": "지원 어려움"
+ },
+ {
+  "me": "hanzo",
+  "mate": "pharah",
+  "level": 0,
+  "why": "적중 의존"
+ },
+ {
+  "me": "hanzo",
+  "mate": "reaper",
+  "level": 1,
+  "why": "서로 엄호"
+ },
+ {
+  "me": "hanzo",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "방벽 궁합 좋음"
+ },
+ {
+  "me": "hanzo",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "hanzo",
+  "mate": "sigma",
+  "level": 1,
+  "why": "지원 좋음"
+ },
+ {
+  "me": "hanzo",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "유용함"
+ },
+ {
+  "me": "hanzo",
+  "mate": "sombra",
+  "level": 1,
+  "why": "잘 맞음"
+ },
+ {
+  "me": "hanzo",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "큰 도움"
+ },
+ {
+  "me": "hanzo",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "서로 도움"
+ },
+ {
+  "me": "hanzo",
+  "mate": "widowmaker",
+  "level": 1,
+  "why": "궁합 괜찮은 편"
+ },
+ {
+  "me": "hanzo",
+  "mate": "winston",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "hanzo",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "딜각 보완"
+ },
+ {
+  "me": "hanzo",
+  "mate": "zarya",
+  "level": 2,
+  "why": "궁연계 최고"
+ },
+ {
+  "me": "hanzo",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "처치 수월"
+ },
+ {
+  "me": "hazard",
+  "mate": "ana",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "ashe",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "cassidy",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "domina",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "echo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "freja",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "illari",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "hazard",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "juno",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "hazard",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "hazard",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "lucio",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "hazard",
+  "mate": "mauga",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "mei",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "mercy",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "hazard",
+  "mate": "orisa",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "reaper",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "sigma",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "sombra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "symmetra",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "hazard",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "tracer",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "hazard",
+  "mate": "venture",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "winston",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "hazard",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "hazard",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "ana",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "ashe",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "baptiste",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "illari",
+  "mate": "bastion",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "치유 사거리 이탈"
+ },
+ {
+  "me": "illari",
+  "mate": "dva",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "echo",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "illari",
+  "mate": "freja",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "genji",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "hazard",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "illari",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "juno",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "illari",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "lucio",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "illari",
+  "mate": "mauga",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "mei",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "mercy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "moira",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "orisa",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "illari",
+  "mate": "pharah",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "illari",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "reaper",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "sigma",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "sombra",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "illari",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "tracer",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "illari",
+  "mate": "venture",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "illari",
+  "mate": "widowmaker",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "illari",
+  "mate": "winston",
+  "level": -1,
+  "why": "치유 사거리 이탈"
+ },
+ {
+  "me": "illari",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "치유 사거리 이탈"
+ },
+ {
+  "me": "illari",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "illari",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "ana",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "anran",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "ashe",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "bastion",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "brigitte",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "dmon",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "domina",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "dva",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "echo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "emre",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "freja",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "genji",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "hanzo",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "hazard",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "illari",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "junkrat",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "juno",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "lifeweaver",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "lucio",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "mauga",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "mei",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "mercy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "mizuki",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "moira",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "orisa",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "pharah",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "reaper",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "reinhardt",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "sierra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "sigma",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "sojourn",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "sombra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "symmetra",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "tracer",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "vendetta",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "venture",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "winston",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "wuyang",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "jetpackcat",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "ana",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "ashe",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "bastion",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "echo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "illari",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "jetpackcat",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "juno",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "lucio",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "mauga",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "mei",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "mercy",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "mizuki",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "moira",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "orisa",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "pharah",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "reaper",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "sigma",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "sombra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "tracer",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "venture",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "winston",
+  "level": 0,
+  "why": "기동성 차이로 따로 놈"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "zarya",
+  "level": 2,
+  "why": "궁 조합 환상, 매우 좋음"
+ },
+ {
+  "me": "junkerqueen",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "junkrat",
+  "mate": "ana",
+  "level": -1,
+  "why": "합이 안 좋음"
+ },
+ {
+  "me": "junkrat",
+  "mate": "ashe",
+  "level": 0,
+  "why": "그럭저럭 무난"
+ },
+ {
+  "me": "junkrat",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "화력 증가"
+ },
+ {
+  "me": "junkrat",
+  "mate": "bastion",
+  "level": 1,
+  "why": "서로 도움"
+ },
+ {
+  "me": "junkrat",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "나쁘지 않음"
+ },
+ {
+  "me": "junkrat",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "준수한 시너지"
+ },
+ {
+  "me": "junkrat",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "한방 콤보 강력"
+ },
+ {
+  "me": "junkrat",
+  "mate": "dva",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "junkrat",
+  "mate": "echo",
+  "level": 1,
+  "why": "약점 보완"
+ },
+ {
+  "me": "junkrat",
+  "mate": "genji",
+  "level": 1,
+  "why": "단점 상쇄"
+ },
+ {
+  "me": "junkrat",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "몹시 좋은 친구"
+ },
+ {
+  "me": "junkrat",
+  "mate": "lucio",
+  "level": 1,
+  "why": "반가운 아군"
+ },
+ {
+  "me": "junkrat",
+  "mate": "mauga",
+  "level": 1,
+  "why": "결정력 보완"
+ },
+ {
+  "me": "junkrat",
+  "mate": "mei",
+  "level": 1,
+  "why": "궁연계 훌륭"
+ },
+ {
+  "me": "junkrat",
+  "mate": "mercy",
+  "level": 2,
+  "why": "잠재력 가장 높음"
+ },
+ {
+  "me": "junkrat",
+  "mate": "moira",
+  "level": -1,
+  "why": "지원하기 무리"
+ },
+ {
+  "me": "junkrat",
+  "mate": "orisa",
+  "level": 1,
+  "why": "합이 잘 맞음"
+ },
+ {
+  "me": "junkrat",
+  "mate": "pharah",
+  "level": -1,
+  "why": "비추천"
+ },
+ {
+  "me": "junkrat",
+  "mate": "reaper",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "junkrat",
+  "mate": "reinhardt",
+  "level": 2,
+  "why": "완벽하게 보완"
+ },
+ {
+  "me": "junkrat",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "호흡 맞음"
+ },
+ {
+  "me": "junkrat",
+  "mate": "sigma",
+  "level": 1,
+  "why": "궁연계 좋음"
+ },
+ {
+  "me": "junkrat",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "따로 놀지만 도움"
+ },
+ {
+  "me": "junkrat",
+  "mate": "sombra",
+  "level": 2,
+  "why": "시너지 최상급"
+ },
+ {
+  "me": "junkrat",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "적당함"
+ },
+ {
+  "me": "junkrat",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "나쁘지 않음"
+ },
+ {
+  "me": "junkrat",
+  "mate": "tracer",
+  "level": -1,
+  "why": "비추천"
+ },
+ {
+  "me": "junkrat",
+  "mate": "widowmaker",
+  "level": 2,
+  "why": "강력한 콤비"
+ },
+ {
+  "me": "junkrat",
+  "mate": "winston",
+  "level": 1,
+  "why": "상성 보완"
+ },
+ {
+  "me": "junkrat",
+  "mate": "zarya",
+  "level": 2,
+  "why": "최고의 궁합"
+ },
+ {
+  "me": "junkrat",
+  "mate": "zenyatta",
+  "level": 2,
+  "why": "영혼의 콤비"
+ },
+ {
+  "me": "juno",
+  "mate": "ana",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "ashe",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "bastion",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "brigitte",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "juno",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "echo",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "hanzo",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "hazard",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "juno",
+  "mate": "illari",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "jetpackcat",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "junkerqueen",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "juno",
+  "mate": "junkrat",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "lifeweaver",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "juno",
+  "mate": "lucio",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "mauga",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "mei",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "juno",
+  "mate": "mercy",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "juno",
+  "mate": "mizuki",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "juno",
+  "mate": "moira",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "juno",
+  "mate": "orisa",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "pharah",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "ramattra",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "juno",
+  "mate": "reaper",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "juno",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "juno",
+  "mate": "sigma",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "juno",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "juno",
+  "mate": "sombra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "juno",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "tracer",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "venture",
+  "level": 1,
+  "why": "기동성 강화, 좋음"
+ },
+ {
+  "me": "juno",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "winston",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "juno",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "juno",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "ana",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "kiriko",
+  "mate": "ashe",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "bastion",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "brigitte",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "kiriko",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "doomfist",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "kiriko",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "echo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "freja",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "kiriko",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "hazard",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "illari",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "kiriko",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "juno",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "lucio",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "kiriko",
+  "mate": "mauga",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "kiriko",
+  "mate": "mei",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "mercy",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "moira",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "orisa",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "pharah",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "ramattra",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "kiriko",
+  "mate": "reaper",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "roadhog",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "kiriko",
+  "mate": "sigma",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "sombra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "tracer",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "venture",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "kiriko",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "winston",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "kiriko",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "wuyang",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "kiriko",
+  "mate": "zarya",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "kiriko",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "ana",
+  "level": 1,
+  "why": "상호 보완"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "ashe",
+  "level": 2,
+  "why": "개발자 공인 조합"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "궁합 상당히 좋음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "bastion",
+  "level": 2,
+  "why": "바스티온 케어 최고"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "나쁘지 않음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "지원 확실"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "domina",
+  "level": 1,
+  "why": "기동성 보완"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "doomfist",
+  "level": 2,
+  "why": "힐·구원 모두 유용"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "dva",
+  "level": 1,
+  "why": "약간 좋음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "echo",
+  "level": 1,
+  "why": "힐 도움"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "freja",
+  "level": 1,
+  "why": "장점 공유"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "genji",
+  "level": 0,
+  "why": "필요성 낮음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "이득 기대 어려움"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "hazard",
+  "level": 1,
+  "why": "난전 지원"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "illari",
+  "level": 1,
+  "why": "앵커 시너지"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "jetpackcat",
+  "level": -1,
+  "why": "서로 도움 안 됨"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "구원 필요"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "죽이 잘 맞음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "juno",
+  "level": 0,
+  "why": "난이도 높음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "번갈아 케어"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "lucio",
+  "level": -1,
+  "why": "플레이 안 맞음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "mauga",
+  "level": 1,
+  "why": "CC 취약 보완"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "mei",
+  "level": 1,
+  "why": "나쁘지 않음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "mercy",
+  "level": -1,
+  "why": "최악의 궁합"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "mizuki",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "moira",
+  "level": 0,
+  "why": "합 맞춰야 함"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "orisa",
+  "level": 1,
+  "why": "구출 가능"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "pharah",
+  "level": 2,
+  "why": "공중 조합 가능성"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "기동성 보완"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "reaper",
+  "level": 1,
+  "why": "연계 유용"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "상황 따라 신중히"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "roadhog",
+  "level": 2,
+  "why": "기동성 보완 매우 좋음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "sigma",
+  "level": 1,
+  "why": "기동성 보완"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "간섭 여지 적음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "도움 쏠쏠"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "sombra",
+  "level": -1,
+  "why": "서로 영향력 없음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "symmetra",
+  "level": -1,
+  "why": "시너지 부족"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "지원 가능"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "tracer",
+  "level": 1,
+  "why": "힐 용이"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "vendetta",
+  "level": 1,
+  "why": "단점 보완"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "venture",
+  "level": 1,
+  "why": "킬각·구출"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "닿기 어려움"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "winston",
+  "level": 0,
+  "why": "신중히 써야 함"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "약간 좋음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "나쁘지 않음"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "zarya",
+  "level": 2,
+  "why": "방벽·생존기 중첩"
+ },
+ {
+  "me": "lifeweaver",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "운용 시너지 보통"
+ },
+ {
+  "me": "lucio",
+  "mate": "ana",
+  "level": 2,
+  "why": "정석 힐러 조합"
+ },
+ {
+  "me": "lucio",
+  "mate": "ashe",
+  "level": 1,
+  "why": "활동 유연"
+ },
+ {
+  "me": "lucio",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "러쉬서 강력"
+ },
+ {
+  "me": "lucio",
+  "mate": "bastion",
+  "level": -1,
+  "why": "알박기엔 비추"
+ },
+ {
+  "me": "lucio",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "난전 시너지"
+ },
+ {
+  "me": "lucio",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "이속 유용"
+ },
+ {
+  "me": "lucio",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "큰 도움"
+ },
+ {
+  "me": "lucio",
+  "mate": "dva",
+  "level": 1,
+  "why": "진입 속도 유용"
+ },
+ {
+  "me": "lucio",
+  "mate": "echo",
+  "level": 1,
+  "why": "시너지 있음"
+ },
+ {
+  "me": "lucio",
+  "mate": "genji",
+  "level": 0,
+  "why": "필수는 아님"
+ },
+ {
+  "me": "lucio",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "무난"
+ },
+ {
+  "me": "lucio",
+  "mate": "hazard",
+  "level": 1,
+  "why": "시너지 기대"
+ },
+ {
+  "me": "lucio",
+  "mate": "illari",
+  "level": -1,
+  "why": "완전 상극"
+ },
+ {
+  "me": "lucio",
+  "mate": "jetpackcat",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "lucio",
+  "mate": "junkerqueen",
+  "level": 2,
+  "why": "퀸러쉬 호궁합"
+ },
+ {
+  "me": "lucio",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "상황 따라"
+ },
+ {
+  "me": "lucio",
+  "mate": "juno",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "lucio",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "프로 국룰 조합"
+ },
+ {
+  "me": "lucio",
+  "mate": "lifeweaver",
+  "level": -1,
+  "why": "플레이 안 맞음"
+ },
+ {
+  "me": "lucio",
+  "mate": "mauga",
+  "level": 1,
+  "why": "좋은 조합"
+ },
+ {
+  "me": "lucio",
+  "mate": "mei",
+  "level": 1,
+  "why": "좋기는 함"
+ },
+ {
+  "me": "lucio",
+  "mate": "mercy",
+  "level": -1,
+  "why": "팀적으로 별로"
+ },
+ {
+  "me": "lucio",
+  "mate": "mizuki",
+  "level": -1,
+  "why": "투 장판 비선호"
+ },
+ {
+  "me": "lucio",
+  "mate": "moira",
+  "level": 2,
+  "why": "루모 조합"
+ },
+ {
+  "me": "lucio",
+  "mate": "orisa",
+  "level": 0,
+  "why": "쟁탈전만 좋음"
+ },
+ {
+  "me": "lucio",
+  "mate": "pharah",
+  "level": -1,
+  "why": "지원 거의 못 받음"
+ },
+ {
+  "me": "lucio",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "좋은 궁합"
+ },
+ {
+  "me": "lucio",
+  "mate": "reaper",
+  "level": 1,
+  "why": "이속 유용"
+ },
+ {
+  "me": "lucio",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "공생 관계"
+ },
+ {
+  "me": "lucio",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "이속 도움 큼"
+ },
+ {
+  "me": "lucio",
+  "mate": "sigma",
+  "level": 1,
+  "why": "이속 유용"
+ },
+ {
+  "me": "lucio",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "무난"
+ },
+ {
+  "me": "lucio",
+  "mate": "sombra",
+  "level": 0,
+  "why": "무난"
+ },
+ {
+  "me": "lucio",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "이속 좋음"
+ },
+ {
+  "me": "lucio",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "알박기엔 비추"
+ },
+ {
+  "me": "lucio",
+  "mate": "tracer",
+  "level": 0,
+  "why": "필요성 낮음"
+ },
+ {
+  "me": "lucio",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "지원받기 어려움"
+ },
+ {
+  "me": "lucio",
+  "mate": "winston",
+  "level": 0,
+  "why": "팀 차원 필요"
+ },
+ {
+  "me": "lucio",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "상황 따라"
+ },
+ {
+  "me": "lucio",
+  "mate": "zarya",
+  "level": 1,
+  "why": "이속 유용"
+ },
+ {
+  "me": "lucio",
+  "mate": "zenyatta",
+  "level": -1,
+  "why": "장기전 별로"
+ },
+ {
+  "me": "mauga",
+  "mate": "ana",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "anran",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "mauga",
+  "mate": "ashe",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "bastion",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "cassidy",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "mauga",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "mauga",
+  "mate": "dva",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "mauga",
+  "mate": "echo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "emre",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "freja",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "genji",
+  "level": 0,
+  "why": "난전만 좋고 보통"
+ },
+ {
+  "me": "mauga",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "mauga",
+  "mate": "illari",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "mauga",
+  "mate": "jetpackcat",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "mauga",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "juno",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "mauga",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "mauga",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "lucio",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "mauga",
+  "mate": "mei",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "mauga",
+  "mate": "mercy",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "mauga",
+  "mate": "mizuki",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "mauga",
+  "mate": "moira",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "mauga",
+  "mate": "orisa",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "mauga",
+  "mate": "pharah",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "reaper",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "mauga",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "mauga",
+  "mate": "sierra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "sigma",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "mauga",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "sombra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "tracer",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "vendetta",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "mauga",
+  "mate": "venture",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "mauga",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "mauga",
+  "mate": "winston",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "mauga",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "mei",
+  "mate": "ana",
+  "level": 0,
+  "why": "평소 약하나 나노 괜찮"
+ },
+ {
+  "me": "mei",
+  "mate": "ashe",
+  "level": 1,
+  "why": "서로 약점 보완"
+ },
+ {
+  "me": "mei",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "수비전에서 빛남"
+ },
+ {
+  "me": "mei",
+  "mate": "bastion",
+  "level": 1,
+  "why": "빙벽 고지대 이점"
+ },
+ {
+  "me": "mei",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "시너지 크지 않음"
+ },
+ {
+  "me": "mei",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "mei",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "동선 방해 합 어려움"
+ },
+ {
+  "me": "mei",
+  "mate": "dva",
+  "level": 2,
+  "why": "서로 좋음 궁연계 최고"
+ },
+ {
+  "me": "mei",
+  "mate": "emre",
+  "level": 1,
+  "why": "흉악한 궁연계"
+ },
+ {
+  "me": "mei",
+  "mate": "genji",
+  "level": 1,
+  "why": "의외로 괜찮고 궁연계 좋음"
+ },
+ {
+  "me": "mei",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "평소 별로 궁연계 위력적"
+ },
+ {
+  "me": "mei",
+  "mate": "illari",
+  "level": 1,
+  "why": "농성에 어울림"
+ },
+ {
+  "me": "mei",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "아주 잘 어울림"
+ },
+ {
+  "me": "mei",
+  "mate": "junkrat",
+  "level": -1,
+  "why": "단점 많고 대체 많음"
+ },
+ {
+  "me": "mei",
+  "mate": "juno",
+  "level": 2,
+  "why": "궁합 나쁠 수 없음 훌륭"
+ },
+ {
+  "me": "mei",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "반가운 아군 좋은 합"
+ },
+ {
+  "me": "mei",
+  "mate": "lifeweaver",
+  "level": -1,
+  "why": "가장 합 안 맞는 딜러"
+ },
+ {
+  "me": "mei",
+  "mate": "lucio",
+  "level": 1,
+  "why": "속도 힐 큰 도움"
+ },
+ {
+  "me": "mei",
+  "mate": "mercy",
+  "level": -1,
+  "why": "시너지 별로 없음"
+ },
+ {
+  "me": "mei",
+  "mate": "moira",
+  "level": 1,
+  "why": "괜찮은 조합"
+ },
+ {
+  "me": "mei",
+  "mate": "orisa",
+  "level": 1,
+  "why": "믿음직한 동행 콤보"
+ },
+ {
+  "me": "mei",
+  "mate": "pharah",
+  "level": -1,
+  "why": "거점수비에 잘 안 맞음"
+ },
+ {
+  "me": "mei",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "상호보완 시너지 제법"
+ },
+ {
+  "me": "mei",
+  "mate": "reaper",
+  "level": 1,
+  "why": "메이얼림 리퍼처리"
+ },
+ {
+  "me": "mei",
+  "mate": "reinhardt",
+  "level": 2,
+  "why": "궁연계 무시무시"
+ },
+ {
+  "me": "mei",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "안티탱커 조합 상당"
+ },
+ {
+  "me": "mei",
+  "mate": "sigma",
+  "level": 0,
+  "why": "보완되나 궁 낭비"
+ },
+ {
+  "me": "mei",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "같이다니기 힘드나 궁 좋음"
+ },
+ {
+  "me": "mei",
+  "mate": "sombra",
+  "level": 1,
+  "why": "CC 메즈 조합 화력약함"
+ },
+ {
+  "me": "mei",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "뒷골목 점령 조합"
+ },
+ {
+  "me": "mei",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "궁합은 별로 궁은 괜찮"
+ },
+ {
+  "me": "mei",
+  "mate": "tracer",
+  "level": 0,
+  "why": "기동차 어려우나 이점도"
+ },
+ {
+  "me": "mei",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "같이 붙을 일 없음"
+ },
+ {
+  "me": "mei",
+  "mate": "winston",
+  "level": 0,
+  "why": "좋지도 나쁘지도 않음"
+ },
+ {
+  "me": "mei",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "상황 많이 탐"
+ },
+ {
+  "me": "mei",
+  "mate": "zarya",
+  "level": 0,
+  "why": "생존 보완 학살은 어려움"
+ },
+ {
+  "me": "mei",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "생존력 강해짐"
+ },
+ {
+  "me": "mercy",
+  "mate": "ana",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "mercy",
+  "mate": "anran",
+  "level": 1,
+  "why": "효율 좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "ashe",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "mercy",
+  "mate": "bastion",
+  "level": 2,
+  "why": "바르시 탁월"
+ },
+ {
+  "me": "mercy",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "변수 부족"
+ },
+ {
+  "me": "mercy",
+  "mate": "cassidy",
+  "level": 2,
+  "why": "구세주 같은 존재"
+ },
+ {
+  "me": "mercy",
+  "mate": "domina",
+  "level": 1,
+  "why": "공버프 좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "효율 낮음"
+ },
+ {
+  "me": "mercy",
+  "mate": "dva",
+  "level": 1,
+  "why": "도움 큼"
+ },
+ {
+  "me": "mercy",
+  "mate": "echo",
+  "level": 2,
+  "why": "새 비행 조합"
+ },
+ {
+  "me": "mercy",
+  "mate": "emre",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "freja",
+  "level": 2,
+  "why": "최적화된 구조"
+ },
+ {
+  "me": "mercy",
+  "mate": "genji",
+  "level": -1,
+  "why": "비효율적"
+ },
+ {
+  "me": "mercy",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "증폭 효율 좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "hazard",
+  "level": 0,
+  "why": "다소 애매"
+ },
+ {
+  "me": "mercy",
+  "mate": "illari",
+  "level": 0,
+  "why": "안정성 부족"
+ },
+ {
+  "me": "mercy",
+  "mate": "jetpackcat",
+  "level": 2,
+  "why": "서로 극대화"
+ },
+ {
+  "me": "mercy",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "체감 어려움"
+ },
+ {
+  "me": "mercy",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "정르시 가치"
+ },
+ {
+  "me": "mercy",
+  "mate": "juno",
+  "level": -1,
+  "why": "약점 많은 조합"
+ },
+ {
+  "me": "mercy",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "단점 상쇄"
+ },
+ {
+  "me": "mercy",
+  "mate": "lifeweaver",
+  "level": -1,
+  "why": "최악의 궁합"
+ },
+ {
+  "me": "mercy",
+  "mate": "lucio",
+  "level": -1,
+  "why": "팀적으로 별로"
+ },
+ {
+  "me": "mercy",
+  "mate": "mauga",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "mercy",
+  "mate": "mei",
+  "level": 0,
+  "why": "지원할 일 적음"
+ },
+ {
+  "me": "mercy",
+  "mate": "mizuki",
+  "level": 0,
+  "why": "상황 따라"
+ },
+ {
+  "me": "mercy",
+  "mate": "moira",
+  "level": -1,
+  "why": "서로 못 도움"
+ },
+ {
+  "me": "mercy",
+  "mate": "orisa",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "mercy",
+  "mate": "pharah",
+  "level": 2,
+  "why": "탁월한 궁합"
+ },
+ {
+  "me": "mercy",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "답답하지만 효율"
+ },
+ {
+  "me": "mercy",
+  "mate": "reaper",
+  "level": 0,
+  "why": "눈치껏 지원"
+ },
+ {
+  "me": "mercy",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "힐량 부족 혼재"
+ },
+ {
+  "me": "mercy",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "서로 좋은 관계"
+ },
+ {
+  "me": "mercy",
+  "mate": "shion",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "mercy",
+  "mate": "sierra",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "sigma",
+  "level": 1,
+  "why": "대체로 호궁합"
+ },
+ {
+  "me": "mercy",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "소르시 효율 좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "서로 큰 도움"
+ },
+ {
+  "me": "mercy",
+  "mate": "sombra",
+  "level": 1,
+  "why": "약간 좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "symmetra",
+  "level": -1,
+  "why": "우선순위 낮음"
+ },
+ {
+  "me": "mercy",
+  "mate": "torbjorn",
+  "level": -1,
+  "why": "지원 우선순위 낮음"
+ },
+ {
+  "me": "mercy",
+  "mate": "tracer",
+  "level": -1,
+  "why": "지원할 일 적음"
+ },
+ {
+  "me": "mercy",
+  "mate": "vendetta",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "venture",
+  "level": 0,
+  "why": "걸림돌 존재"
+ },
+ {
+  "me": "mercy",
+  "mate": "widowmaker",
+  "level": 1,
+  "why": "위르시 화력"
+ },
+ {
+  "me": "mercy",
+  "mate": "winston",
+  "level": 1,
+  "why": "시너지 좋음"
+ },
+ {
+  "me": "mercy",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "편차 심함, 비효율"
+ },
+ {
+  "me": "mercy",
+  "mate": "wuyang",
+  "level": 2,
+  "why": "단점 상쇄"
+ },
+ {
+  "me": "mercy",
+  "mate": "zarya",
+  "level": 1,
+  "why": "방벽 도움 큼"
+ },
+ {
+  "me": "mercy",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "오랜 호조합"
+ },
+ {
+  "me": "mizuki",
+  "mate": "ana",
+  "level": 1,
+  "why": "궁합 상당히 좋음"
+ },
+ {
+  "me": "mizuki",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "생존 보장"
+ },
+ {
+  "me": "mizuki",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "조합 의존"
+ },
+ {
+  "me": "mizuki",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "다이브 킬 조합"
+ },
+ {
+  "me": "mizuki",
+  "mate": "dva",
+  "level": 1,
+  "why": "일맥상통"
+ },
+ {
+  "me": "mizuki",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋음"
+ },
+ {
+  "me": "mizuki",
+  "mate": "illari",
+  "level": -1,
+  "why": "템포 안 맞음"
+ },
+ {
+  "me": "mizuki",
+  "mate": "jetpackcat",
+  "level": 0,
+  "why": "운용 따라"
+ },
+ {
+  "me": "mizuki",
+  "mate": "juno",
+  "level": 1,
+  "why": "단점 보완"
+ },
+ {
+  "me": "mizuki",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "카네자카 듀오"
+ },
+ {
+  "me": "mizuki",
+  "mate": "lifeweaver",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "mizuki",
+  "mate": "lucio",
+  "level": 1,
+  "why": "러쉬 고려 가능"
+ },
+ {
+  "me": "mizuki",
+  "mate": "mauga",
+  "level": -1,
+  "why": "콘셉트 상충"
+ },
+ {
+  "me": "mizuki",
+  "mate": "mercy",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "mizuki",
+  "mate": "moira",
+  "level": 0,
+  "why": "조합 따라 다름"
+ },
+ {
+  "me": "mizuki",
+  "mate": "roadhog",
+  "level": 2,
+  "why": "궁 연계 절륜"
+ },
+ {
+  "me": "mizuki",
+  "mate": "tracer",
+  "level": 1,
+  "why": "후방 침투 좋음"
+ },
+ {
+  "me": "mizuki",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "시너지 없음"
+ },
+ {
+  "me": "mizuki",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "지원 어려움"
+ },
+ {
+  "me": "mizuki",
+  "mate": "wuyang",
+  "level": 0,
+  "why": "탱커 따라"
+ },
+ {
+  "me": "mizuki",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "암살 대응 vs 힐량"
+ },
+ {
+  "me": "moira",
+  "mate": "ana",
+  "level": -1,
+  "why": "불안정 힐러 조합"
+ },
+ {
+  "me": "moira",
+  "mate": "ashe",
+  "level": 0,
+  "why": "힐 주기 애매"
+ },
+ {
+  "me": "moira",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "맵 따라 다름"
+ },
+ {
+  "me": "moira",
+  "mate": "bastion",
+  "level": 1,
+  "why": "힐 편함"
+ },
+ {
+  "me": "moira",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "암살자 내성"
+ },
+ {
+  "me": "moira",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "포지션 유사"
+ },
+ {
+  "me": "moira",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "돌진 궁합"
+ },
+ {
+  "me": "moira",
+  "mate": "dva",
+  "level": 0,
+  "why": "상황 따라"
+ },
+ {
+  "me": "moira",
+  "mate": "echo",
+  "level": -1,
+  "why": "힐·시너지 어려움"
+ },
+ {
+  "me": "moira",
+  "mate": "freja",
+  "level": 0,
+  "why": "특별할 것 없음"
+ },
+ {
+  "me": "moira",
+  "mate": "genji",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "moira",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "합 잘 맞음"
+ },
+ {
+  "me": "moira",
+  "mate": "hazard",
+  "level": 0,
+  "why": "진입 의존"
+ },
+ {
+  "me": "moira",
+  "mate": "illari",
+  "level": 0,
+  "why": "편차 큼"
+ },
+ {
+  "me": "moira",
+  "mate": "jetpackcat",
+  "level": -1,
+  "why": "사거리 벗어나 따로 놂"
+ },
+ {
+  "me": "moira",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "moira",
+  "mate": "junkrat",
+  "level": -1,
+  "why": "따로 놂"
+ },
+ {
+  "me": "moira",
+  "mate": "juno",
+  "level": 0,
+  "why": "편차 큼"
+ },
+ {
+  "me": "moira",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "잘 어울림"
+ },
+ {
+  "me": "moira",
+  "mate": "lifeweaver",
+  "level": 0,
+  "why": "합 맞춰야 함"
+ },
+ {
+  "me": "moira",
+  "mate": "lucio",
+  "level": 2,
+  "why": "가장 좋은 조합"
+ },
+ {
+  "me": "moira",
+  "mate": "mauga",
+  "level": 1,
+  "why": "시너지 최고"
+ },
+ {
+  "me": "moira",
+  "mate": "mei",
+  "level": 1,
+  "why": "폭힐 도움"
+ },
+ {
+  "me": "moira",
+  "mate": "mercy",
+  "level": -1,
+  "why": "변수 부족 단점"
+ },
+ {
+  "me": "moira",
+  "mate": "mizuki",
+  "level": 1,
+  "why": "궁합 좋은 편"
+ },
+ {
+  "me": "moira",
+  "mate": "orisa",
+  "level": 1,
+  "why": "호궁합"
+ },
+ {
+  "me": "moira",
+  "mate": "pharah",
+  "level": -1,
+  "why": "활동영역 달라 안 맞음"
+ },
+ {
+  "me": "moira",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "최적 위치"
+ },
+ {
+  "me": "moira",
+  "mate": "reaper",
+  "level": 1,
+  "why": "힐 쉬움"
+ },
+ {
+  "me": "moira",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "숙련도 필요"
+ },
+ {
+  "me": "moira",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "힐 환영"
+ },
+ {
+  "me": "moira",
+  "mate": "sigma",
+  "level": -1,
+  "why": "잘 맞지 않음"
+ },
+ {
+  "me": "moira",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "무난"
+ },
+ {
+  "me": "moira",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "시너지 있음"
+ },
+ {
+  "me": "moira",
+  "mate": "sombra",
+  "level": 0,
+  "why": "보조 어려움"
+ },
+ {
+  "me": "moira",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "폭힐 반김"
+ },
+ {
+  "me": "moira",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "수비전 유용"
+ },
+ {
+  "me": "moira",
+  "mate": "tracer",
+  "level": 0,
+  "why": "힐 넣기 어려움"
+ },
+ {
+  "me": "moira",
+  "mate": "venture",
+  "level": 0,
+  "why": "따라다닐 일 없음"
+ },
+ {
+  "me": "moira",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "힐 주기 까다로움"
+ },
+ {
+  "me": "moira",
+  "mate": "winston",
+  "level": 0,
+  "why": "공수 차이"
+ },
+ {
+  "me": "moira",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "상황 따라"
+ },
+ {
+  "me": "moira",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "상당히 좋은 시너지"
+ },
+ {
+  "me": "moira",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋은 궁합"
+ },
+ {
+  "me": "moira",
+  "mate": "zenyatta",
+  "level": -1,
+  "why": "마이너스 시너지"
+ },
+ {
+  "me": "orisa",
+  "mate": "ana",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "orisa",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "orisa",
+  "mate": "bastion",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "orisa",
+  "mate": "domina",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "orisa",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "orisa",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "orisa",
+  "mate": "genji",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "orisa",
+  "mate": "illari",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "orisa",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "orisa",
+  "mate": "kiriko",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "lifeweaver",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "lucio",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "mauga",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "orisa",
+  "mate": "mei",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "mercy",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "moira",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "orisa",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "orisa",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "sigma",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "orisa",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "orisa",
+  "mate": "tracer",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "orisa",
+  "mate": "winston",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "orisa",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "orisa",
+  "mate": "zarya",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "orisa",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "pharah",
+  "mate": "ana",
+  "level": 1,
+  "why": "생존률 크게 상승"
+ },
+ {
+  "me": "pharah",
+  "mate": "ashe",
+  "level": 0,
+  "why": "별다른 시너지 없음"
+ },
+ {
+  "me": "pharah",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "궁합 좋지 못함"
+ },
+ {
+  "me": "pharah",
+  "mate": "bastion",
+  "level": 1,
+  "why": "수비 효과 큼"
+ },
+ {
+  "me": "pharah",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "간접 시너지"
+ },
+ {
+  "me": "pharah",
+  "mate": "cassidy",
+  "level": 0,
+  "why": "수비에서만 괜찮음"
+ },
+ {
+  "me": "pharah",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "지원가 궁합 별로"
+ },
+ {
+  "me": "pharah",
+  "mate": "dva",
+  "level": 2,
+  "why": "최상의 시너지"
+ },
+ {
+  "me": "pharah",
+  "mate": "echo",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "pharah",
+  "mate": "genji",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "pharah",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "직접 시너지 없음"
+ },
+ {
+  "me": "pharah",
+  "mate": "illari",
+  "level": 1,
+  "why": "태양석 궁합 괜찮음"
+ },
+ {
+  "me": "pharah",
+  "mate": "junkrat",
+  "level": -1,
+  "why": "비추천"
+ },
+ {
+  "me": "pharah",
+  "mate": "juno",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "pharah",
+  "mate": "kiriko",
+  "level": -1,
+  "why": "궁합 썩 좋지 않음"
+ },
+ {
+  "me": "pharah",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "케어와 단상 도움"
+ },
+ {
+  "me": "pharah",
+  "mate": "lucio",
+  "level": -1,
+  "why": "지원 못 받음"
+ },
+ {
+  "me": "pharah",
+  "mate": "mei",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "pharah",
+  "mate": "mercy",
+  "level": 1,
+  "why": "파르시, 기본 궁합 좋음"
+ },
+ {
+  "me": "pharah",
+  "mate": "moira",
+  "level": -1,
+  "why": "궁합 좋지 않음"
+ },
+ {
+  "me": "pharah",
+  "mate": "orisa",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "pharah",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "서로 신경 안씀"
+ },
+ {
+  "me": "pharah",
+  "mate": "reaper",
+  "level": 1,
+  "why": "나쁘지 않음"
+ },
+ {
+  "me": "pharah",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "어그로 분산 정도"
+ },
+ {
+  "me": "pharah",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "조합 괜찮음"
+ },
+ {
+  "me": "pharah",
+  "mate": "sigma",
+  "level": 0,
+  "why": "시너지 거의 없음"
+ },
+ {
+  "me": "pharah",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "서로 보완"
+ },
+ {
+  "me": "pharah",
+  "mate": "sombra",
+  "level": 1,
+  "why": "사냥감 제공"
+ },
+ {
+  "me": "pharah",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "엄호 안정감"
+ },
+ {
+  "me": "pharah",
+  "mate": "tracer",
+  "level": 1,
+  "why": "궁합 좋은 편"
+ },
+ {
+  "me": "pharah",
+  "mate": "widowmaker",
+  "level": 1,
+  "why": "위협 제거 지원"
+ },
+ {
+  "me": "pharah",
+  "mate": "winston",
+  "level": 0,
+  "why": "한계 있으나 이득"
+ },
+ {
+  "me": "pharah",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "어그로 분산"
+ },
+ {
+  "me": "pharah",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "상성 나쁘지 않음"
+ },
+ {
+  "me": "pharah",
+  "mate": "zarya",
+  "level": 2,
+  "why": "궁극기 최강 조합"
+ },
+ {
+  "me": "pharah",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "힐과 화력 도움"
+ },
+ {
+  "me": "ramattra",
+  "mate": "ana",
+  "level": 1,
+  "why": "굉장히 궁합 좋음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "ashe",
+  "level": 0,
+  "why": "있으면 좋고 없으면 말고"
+ },
+ {
+  "me": "ramattra",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "증폭 막강"
+ },
+ {
+  "me": "ramattra",
+  "mate": "bastion",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "brigitte",
+  "level": 2,
+  "why": "난전 최고 합"
+ },
+ {
+  "me": "ramattra",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "나쁘지 않은 조합"
+ },
+ {
+  "me": "ramattra",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "궁 연계 좋으나 상극"
+ },
+ {
+  "me": "ramattra",
+  "mate": "dva",
+  "level": 1,
+  "why": "궁 연계 이점"
+ },
+ {
+  "me": "ramattra",
+  "mate": "echo",
+  "level": 1,
+  "why": "나쁠 리 없음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "genji",
+  "level": 0,
+  "why": "옴닉 약함, 네메시스 좋음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "hanzo",
+  "level": -1,
+  "why": "역효과, 안 하는 편이 좋음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "hazard",
+  "level": 2,
+  "why": "상부상조, 궁 압권"
+ },
+ {
+  "me": "ramattra",
+  "mate": "illari",
+  "level": 0,
+  "why": "특별한 시너지 없음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "나쁘지 않으나 이득 적음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "이론상, 고민 필요"
+ },
+ {
+  "me": "ramattra",
+  "mate": "juno",
+  "level": 2,
+  "why": "최고의 힐러, 러쉬 메타"
+ },
+ {
+  "me": "ramattra",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "속도 지원, 정화 좋음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "의식하면 굉장히 좋음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "lucio",
+  "level": 2,
+  "why": "최적의 궁합"
+ },
+ {
+  "me": "ramattra",
+  "mate": "mauga",
+  "level": 2,
+  "why": "강철덩이 시너지"
+ },
+ {
+  "me": "ramattra",
+  "mate": "mei",
+  "level": 1,
+  "why": "슬로우, 빙벽 반가움"
+ },
+ {
+  "me": "ramattra",
+  "mate": "mercy",
+  "level": 0,
+  "why": "보완하나 시너지 없음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "moira",
+  "level": 0,
+  "why": "절멸 때만 좋음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "orisa",
+  "level": 2,
+  "why": "최상의 연계"
+ },
+ {
+  "me": "ramattra",
+  "mate": "pharah",
+  "level": -1,
+  "why": "해줄 게 없음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "reaper",
+  "level": 1,
+  "why": "서로 약점 보완"
+ },
+ {
+  "me": "ramattra",
+  "mate": "reinhardt",
+  "level": 2,
+  "why": "합 좋고 궁 절륜"
+ },
+ {
+  "me": "ramattra",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "무난, 궁은 최악"
+ },
+ {
+  "me": "ramattra",
+  "mate": "sigma",
+  "level": 1,
+  "why": "방벽 번갈아 보조"
+ },
+ {
+  "me": "ramattra",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "든든, 호응 가능"
+ },
+ {
+  "me": "ramattra",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "장단 혼재"
+ },
+ {
+  "me": "ramattra",
+  "mate": "sombra",
+  "level": 1,
+  "why": "해킹 지원 포상"
+ },
+ {
+  "me": "ramattra",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "이동기만 유용"
+ },
+ {
+  "me": "ramattra",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "tracer",
+  "level": 1,
+  "why": "반가운 존재"
+ },
+ {
+  "me": "ramattra",
+  "mate": "venture",
+  "level": 0,
+  "why": "별로이나 상황 따라 좋음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "딱히 좋지 않음"
+ },
+ {
+  "me": "ramattra",
+  "mate": "winston",
+  "level": 0,
+  "why": "기동성 차이로 약함"
+ },
+ {
+  "me": "ramattra",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "기동성 차이로 깎임"
+ },
+ {
+  "me": "ramattra",
+  "mate": "zarya",
+  "level": 1,
+  "why": "입자방벽, 궁 연계"
+ },
+ {
+  "me": "ramattra",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "유지력, 화력 증가"
+ },
+ {
+  "me": "reaper",
+  "mate": "ana",
+  "level": 1,
+  "why": "큰 도움 궁연계는 약화"
+ },
+ {
+  "me": "reaper",
+  "mate": "ashe",
+  "level": 1,
+  "why": "딜 시너지 큼 합 필요"
+ },
+ {
+  "me": "reaper",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "좋은 편 아님 궁 없음"
+ },
+ {
+  "me": "reaper",
+  "mate": "bastion",
+  "level": -1,
+  "why": "역할 겹침 거점수비만"
+ },
+ {
+  "me": "reaper",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "수리팩 상당히 괜찮"
+ },
+ {
+  "me": "reaper",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "솔맥 상성 좋음 궁은 별로"
+ },
+ {
+  "me": "reaper",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "reaper",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "reaper",
+  "mate": "genji",
+  "level": 1,
+  "why": "후방교란 콤비 위력적"
+ },
+ {
+  "me": "reaper",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "음파화살 지원 합 좋음"
+ },
+ {
+  "me": "reaper",
+  "mate": "illari",
+  "level": -1,
+  "why": "최악의 힐러 시너지 없음"
+ },
+ {
+  "me": "reaper",
+  "mate": "jetpackcat",
+  "level": 0,
+  "why": "침투 쉬우나 힐 없음"
+ },
+ {
+  "me": "reaper",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "reaper",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "폭딜 탱커 처리 좋음"
+ },
+ {
+  "me": "reaper",
+  "mate": "juno",
+  "level": 0,
+  "why": "이속은 좋으나 너프"
+ },
+ {
+  "me": "reaper",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "최상의 궁합"
+ },
+ {
+  "me": "reaper",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "원거리 힐 상성 좋음"
+ },
+ {
+  "me": "reaper",
+  "mate": "lucio",
+  "level": 2,
+  "why": "이속버프 최고의 지원"
+ },
+ {
+  "me": "reaper",
+  "mate": "mauga",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "reaper",
+  "mate": "mei",
+  "level": 1,
+  "why": "메이 얼리고 리퍼 처리"
+ },
+ {
+  "me": "reaper",
+  "mate": "mercy",
+  "level": -1,
+  "why": "전선 힐 어려워 비효율"
+ },
+ {
+  "me": "reaper",
+  "mate": "moira",
+  "level": 1,
+  "why": "광역힐 융화 좋음"
+ },
+ {
+  "me": "reaper",
+  "mate": "orisa",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "reaper",
+  "mate": "pharah",
+  "level": 0,
+  "why": "실력 따라 극과 극"
+ },
+ {
+  "me": "reaper",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "reaper",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "reaper",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "reaper",
+  "mate": "sigma",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "reaper",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "상성 좋음"
+ },
+ {
+  "me": "reaper",
+  "mate": "sombra",
+  "level": 0,
+  "why": "근접끼리 장단점 혼재"
+ },
+ {
+  "me": "reaper",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "순간이동으로 난전 유도"
+ },
+ {
+  "me": "reaper",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "의외로 서로 보완"
+ },
+ {
+  "me": "reaper",
+  "mate": "tracer",
+  "level": 0,
+  "why": "난전 강하나 단점 큼"
+ },
+ {
+  "me": "reaper",
+  "mate": "widowmaker",
+  "level": 2,
+  "why": "탈론 콤비 무서운 시너지"
+ },
+ {
+  "me": "reaper",
+  "mate": "winston",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "reaper",
+  "mate": "wreckingball",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "reaper",
+  "mate": "wuyang",
+  "level": 0,
+  "why": "힐 기대 낮고 궁은 좋음"
+ },
+ {
+  "me": "reaper",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "reaper",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "시너지 우수 초월 궁합"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "ana",
+  "level": 1,
+  "why": "유지력, 수면 연계"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "ashe",
+  "level": 0,
+  "why": "약간 좋음, 자주 안 쓰임"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "baptiste",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "bastion",
+  "level": 0,
+  "why": "보통, 단점 많음"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "직접 시너지 적음"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "고마운 합류"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "좋지 않다 하나 의외 시너지"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "dva",
+  "level": 1,
+  "why": "무난히 좋은 조합"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "echo",
+  "level": 0,
+  "why": "따로 국밥"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "emre",
+  "level": 1,
+  "why": "궁 연계 흉악"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "freja",
+  "level": 0,
+  "why": "보통(설명 없음)"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "genji",
+  "level": -1,
+  "why": "활동 반경 달라 곤란"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "위협적인 조합"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "illari",
+  "level": 0,
+  "why": "보통, 반가운 힐러 아님"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "jetpackcat",
+  "level": 2,
+  "why": "진정한 단짝, 매우 좋음"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "나쁘지 않음, 관리 필수"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "유용, 궁 연계 좋음"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "juno",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "든든한 힐러"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "슈퍼세이브 가능"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "lucio",
+  "level": 2,
+  "why": "사실상 필수, 환상 시너지"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "mauga",
+  "level": 1,
+  "why": "상호보완 제대로"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "mei",
+  "level": 1,
+  "why": "빙벽 시너지, 궁 연계"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "mercy",
+  "level": 1,
+  "why": "체력 부담 덜음"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "moira",
+  "level": 0,
+  "why": "약간 좋음, 불안정"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "orisa",
+  "level": 1,
+  "why": "괜찮음, 궁 동시 사용"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "pharah",
+  "level": 0,
+  "why": "약간 좋음, 조건부"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "ramattra",
+  "level": 2,
+  "why": "전면전 강하고 궁 절륜"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "reaper",
+  "level": 2,
+  "why": "난전에선 최강"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "유저 따라 갈림"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "sigma",
+  "level": 1,
+  "why": "방벽 합 맞추면 수월"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "화력 극대화, 안성맞춤"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "약간 좋음, 궁은 별로"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "sombra",
+  "level": 0,
+  "why": "정석엔 안 맞고 힘싸움만"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "보충해 주는 장점 많음"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "tracer",
+  "level": -1,
+  "why": "시너지 내기 어려움"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "venture",
+  "level": 1,
+  "why": "난전 시너지, 리스크"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "winston",
+  "level": -1,
+  "why": "최악의 돌격군 조합"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "패배의 지름길"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "zarya",
+  "level": 2,
+  "why": "탱커 정석 조합"
+ },
+ {
+  "me": "reinhardt",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "장단 혼재, 보통"
+ },
+ {
+  "me": "roadhog",
+  "mate": "ana",
+  "level": 1,
+  "why": "나노 강화 효과 큼"
+ },
+ {
+  "me": "roadhog",
+  "mate": "ashe",
+  "level": 1,
+  "why": "꽤 괜찮은 조합"
+ },
+ {
+  "me": "roadhog",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "불사 장치, 증폭 도움"
+ },
+ {
+  "me": "roadhog",
+  "mate": "bastion",
+  "level": 1,
+  "why": "딜량 어마무시"
+ },
+ {
+  "me": "roadhog",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "근접전 궁합 좋음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "괜찮은 조합"
+ },
+ {
+  "me": "roadhog",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "이동기 없어 좋지 않음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "dva",
+  "level": -1,
+  "why": "이동기 없어 좋지 않음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "echo",
+  "level": 1,
+  "why": "서로 윈윈"
+ },
+ {
+  "me": "roadhog",
+  "mate": "freja",
+  "level": 1,
+  "why": "아군으로도 좋음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "genji",
+  "level": 1,
+  "why": "겐지 호위 도움"
+ },
+ {
+  "me": "roadhog",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "시야 지원, 궁 분배"
+ },
+ {
+  "me": "roadhog",
+  "mate": "hazard",
+  "level": 0,
+  "why": "보통, 나쁘지 않음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "illari",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "roadhog",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "DPS 무자비"
+ },
+ {
+  "me": "roadhog",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "보통, 궁 별로"
+ },
+ {
+  "me": "roadhog",
+  "mate": "juno",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "roadhog",
+  "mate": "lifeweaver",
+  "level": 2,
+  "why": "매우 좋음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "lucio",
+  "level": 1,
+  "why": "이속 도움"
+ },
+ {
+  "me": "roadhog",
+  "mate": "mauga",
+  "level": 0,
+  "why": "장단점 확실"
+ },
+ {
+  "me": "roadhog",
+  "mate": "mei",
+  "level": 2,
+  "why": "궁 연계 무시무시"
+ },
+ {
+  "me": "roadhog",
+  "mate": "mercy",
+  "level": 1,
+  "why": "패치 후 든든"
+ },
+ {
+  "me": "roadhog",
+  "mate": "moira",
+  "level": 0,
+  "why": "별다른 시너지 없음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "orisa",
+  "level": 1,
+  "why": "강력한 DPS, 소통 필요"
+ },
+ {
+  "me": "roadhog",
+  "mate": "pharah",
+  "level": 1,
+  "why": "전반적으로 괜찮음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "적당히 좋은 조합"
+ },
+ {
+  "me": "roadhog",
+  "mate": "reaper",
+  "level": 1,
+  "why": "개시자 죽이기"
+ },
+ {
+  "me": "roadhog",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "든든한 존재"
+ },
+ {
+  "me": "roadhog",
+  "mate": "sigma",
+  "level": 1,
+  "why": "효율 좋음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "보통, 궁 연계 난잡"
+ },
+ {
+  "me": "roadhog",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "괜찮은 조합"
+ },
+ {
+  "me": "roadhog",
+  "mate": "sombra",
+  "level": 1,
+  "why": "서로 좋은 조합"
+ },
+ {
+  "me": "roadhog",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "안정성 상승"
+ },
+ {
+  "me": "roadhog",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "근접 폭딜 연계"
+ },
+ {
+  "me": "roadhog",
+  "mate": "tracer",
+  "level": 1,
+  "why": "나쁘지 않음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "vendetta",
+  "level": 0,
+  "why": "직접 시너지 적음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "venture",
+  "level": 0,
+  "why": "보통, 압박 정도"
+ },
+ {
+  "me": "roadhog",
+  "mate": "widowmaker",
+  "level": 1,
+  "why": "낚시 최적 환경"
+ },
+ {
+  "me": "roadhog",
+  "mate": "winston",
+  "level": -1,
+  "why": "이동기 없어 궁합 나쁨"
+ },
+ {
+  "me": "roadhog",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "이동기 없어 좋지 않음"
+ },
+ {
+  "me": "roadhog",
+  "mate": "wuyang",
+  "level": 0,
+  "why": "보통, 궁 시너지 별로"
+ },
+ {
+  "me": "roadhog",
+  "mate": "zarya",
+  "level": 1,
+  "why": "공격력 높인 조합"
+ },
+ {
+  "me": "roadhog",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "호흡 좋음, 경호"
+ },
+ {
+  "me": "shion",
+  "mate": "ana",
+  "level": 2,
+  "why": "궁합 미쳤다"
+ },
+ {
+  "me": "shion",
+  "mate": "jetpackcat",
+  "level": 0,
+  "why": "시너지 없음"
+ },
+ {
+  "me": "shion",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "궁조합 훌륭"
+ },
+ {
+  "me": "shion",
+  "mate": "mercy",
+  "level": -1,
+  "why": "궁합 좋지 못함"
+ },
+ {
+  "me": "shion",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "시너지 뛰어남"
+ },
+ {
+  "me": "shion",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "안정성 상승"
+ },
+ {
+  "me": "shion",
+  "mate": "zarya",
+  "level": 2,
+  "why": "최강의 궁합"
+ },
+ {
+  "me": "shion",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "유지력 상승"
+ },
+ {
+  "me": "sierra",
+  "mate": "jetpackcat",
+  "level": 1,
+  "why": "생명줄 조준 연계"
+ },
+ {
+  "me": "sierra",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "궁합 훌륭"
+ },
+ {
+  "me": "sierra",
+  "mate": "mercy",
+  "level": 1,
+  "why": "공버프로 탱커 압박"
+ },
+ {
+  "me": "sierra",
+  "mate": "zarya",
+  "level": 2,
+  "why": "궁연계 최고"
+ },
+ {
+  "me": "sigma",
+  "mate": "ana",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "ashe",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "bastion",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "sigma",
+  "mate": "brigitte",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "sigma",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "domina",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "sigma",
+  "mate": "dva",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "echo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "hazard",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "illari",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "jetpackcat",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "sigma",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "juno",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "sigma",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "lucio",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "mauga",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "sigma",
+  "mate": "mei",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "sigma",
+  "mate": "mercy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "moira",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "orisa",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "sigma",
+  "mate": "pharah",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "reaper",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "sombra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "torbjorn",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "tracer",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "sigma",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "sigma",
+  "mate": "winston",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "sigma",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sigma",
+  "mate": "zarya",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "sigma",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "sojourn",
+  "mate": "ana",
+  "level": 0,
+  "why": "시너지 나쁘지 않음"
+ },
+ {
+  "me": "sojourn",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "딜량 크게 상승"
+ },
+ {
+  "me": "sojourn",
+  "mate": "cassidy",
+  "level": 0,
+  "why": "투메인딜 중 괜찮은 편"
+ },
+ {
+  "me": "sojourn",
+  "mate": "genji",
+  "level": 2,
+  "why": "가장 모범적 딜러조합"
+ },
+ {
+  "me": "sojourn",
+  "mate": "mercy",
+  "level": 1,
+  "why": "공버프 궁합 발군"
+ },
+ {
+  "me": "sojourn",
+  "mate": "reaper",
+  "level": 1,
+  "why": "딜링 채워줌"
+ },
+ {
+  "me": "sojourn",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "사거리 보완"
+ },
+ {
+  "me": "sojourn",
+  "mate": "widowmaker",
+  "level": 1,
+  "why": "저격 압박 조합"
+ },
+ {
+  "me": "sojourn",
+  "mate": "zarya",
+  "level": 1,
+  "why": "연계 훌륭"
+ },
+ {
+  "me": "soldier76",
+  "mate": "ana",
+  "level": 2,
+  "why": "궁 조합 진공청소기"
+ },
+ {
+  "me": "soldier76",
+  "mate": "ashe",
+  "level": -1,
+  "why": "투메인딜 좋지 않음"
+ },
+ {
+  "me": "soldier76",
+  "mate": "baptiste",
+  "level": 2,
+  "why": "딜힐 엄청난 시너지"
+ },
+ {
+  "me": "soldier76",
+  "mate": "bastion",
+  "level": 1,
+  "why": "사각 보완"
+ },
+ {
+  "me": "soldier76",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "포지션 지원 흉악"
+ },
+ {
+  "me": "soldier76",
+  "mate": "cassidy",
+  "level": -1,
+  "why": "투메인딜 부하 큼"
+ },
+ {
+  "me": "soldier76",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "돌진 조합 합 가능"
+ },
+ {
+  "me": "soldier76",
+  "mate": "dva",
+  "level": 1,
+  "why": "훌륭한 지원 무난"
+ },
+ {
+  "me": "soldier76",
+  "mate": "echo",
+  "level": 1,
+  "why": "킬캐치 지원"
+ },
+ {
+  "me": "soldier76",
+  "mate": "freja",
+  "level": 1,
+  "why": "킬결정력 상승"
+ },
+ {
+  "me": "soldier76",
+  "mate": "genji",
+  "level": 1,
+  "why": "서로 엄호 시너지"
+ },
+ {
+  "me": "soldier76",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "서로 커버 호흡 기대"
+ },
+ {
+  "me": "soldier76",
+  "mate": "hazard",
+  "level": -1,
+  "why": "합 좋은 편 아님"
+ },
+ {
+  "me": "soldier76",
+  "mate": "illari",
+  "level": 1,
+  "why": "수비전 시너지"
+ },
+ {
+  "me": "soldier76",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "공격 조합 합 괜찮"
+ },
+ {
+  "me": "soldier76",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "따로 놀며 도움"
+ },
+ {
+  "me": "soldier76",
+  "mate": "juno",
+  "level": 1,
+  "why": "이속 힐 궁 궁합"
+ },
+ {
+  "me": "soldier76",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "궁 궁합 최고 수준"
+ },
+ {
+  "me": "soldier76",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "스킬 합 잘 맞음"
+ },
+ {
+  "me": "soldier76",
+  "mate": "lucio",
+  "level": 1,
+  "why": "무난 훌륭한 조합"
+ },
+ {
+  "me": "soldier76",
+  "mate": "mauga",
+  "level": 1,
+  "why": "합이 잘 맞음"
+ },
+ {
+  "me": "soldier76",
+  "mate": "mei",
+  "level": 0,
+  "why": "같이 힘드나 궁 좋음"
+ },
+ {
+  "me": "soldier76",
+  "mate": "mercy",
+  "level": 2,
+  "why": "고전 조합 상당히 좋음"
+ },
+ {
+  "me": "soldier76",
+  "mate": "moira",
+  "level": 2,
+  "why": "딜힐 엄청난 시너지"
+ },
+ {
+  "me": "soldier76",
+  "mate": "orisa",
+  "level": 1,
+  "why": "좋다 공방 보완"
+ },
+ {
+  "me": "soldier76",
+  "mate": "pharah",
+  "level": 1,
+  "why": "지상 공중 지원"
+ },
+ {
+  "me": "soldier76",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "방벽 궁 시너지"
+ },
+ {
+  "me": "soldier76",
+  "mate": "reaper",
+  "level": 1,
+  "why": "그럭저럭 꽤 좋음"
+ },
+ {
+  "me": "soldier76",
+  "mate": "reinhardt",
+  "level": 2,
+  "why": "가장 안정적 궁합"
+ },
+ {
+  "me": "soldier76",
+  "mate": "roadhog",
+  "level": 2,
+  "why": "훌륭한 경호원"
+ },
+ {
+  "me": "soldier76",
+  "mate": "sigma",
+  "level": 2,
+  "why": "방어 궁조합 절륜"
+ },
+ {
+  "me": "soldier76",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "꽤 괜찮은 조합"
+ },
+ {
+  "me": "soldier76",
+  "mate": "sombra",
+  "level": 1,
+  "why": "나쁘지 않은 궁합"
+ },
+ {
+  "me": "soldier76",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "사각 기동 보완"
+ },
+ {
+  "me": "soldier76",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "포탑 지원 도움"
+ },
+ {
+  "me": "soldier76",
+  "mate": "tracer",
+  "level": 1,
+  "why": "이상적인 딜러 궁합"
+ },
+ {
+  "me": "soldier76",
+  "mate": "venture",
+  "level": 0,
+  "why": "합 어려우나 이득"
+ },
+ {
+  "me": "soldier76",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "서로 도움 안 됨"
+ },
+ {
+  "me": "soldier76",
+  "mate": "winston",
+  "level": 1,
+  "why": "겐지와 유사 방벽 좋음"
+ },
+ {
+  "me": "soldier76",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "헤집기 각 만들기"
+ },
+ {
+  "me": "soldier76",
+  "mate": "wuyang",
+  "level": -1,
+  "why": "시너지 별로"
+ },
+ {
+  "me": "soldier76",
+  "mate": "zarya",
+  "level": 1,
+  "why": "훌륭한 지원군"
+ },
+ {
+  "me": "soldier76",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "단점 서로 보완"
+ },
+ {
+  "me": "sombra",
+  "mate": "ana",
+  "level": 1,
+  "why": "안티탱킹 콤보 무시무시"
+ },
+ {
+  "me": "sombra",
+  "mate": "ashe",
+  "level": 0,
+  "why": "중간 표준"
+ },
+ {
+  "me": "sombra",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "상황 타는 궁합"
+ },
+ {
+  "me": "sombra",
+  "mate": "bastion",
+  "level": -1,
+  "why": "끼어서 좋을 일 없음"
+ },
+ {
+  "me": "sombra",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "약간 좋음 혼재"
+ },
+ {
+  "me": "sombra",
+  "mate": "cassidy",
+  "level": 2,
+  "why": "이상적 상부상조"
+ },
+ {
+  "me": "sombra",
+  "mate": "domina",
+  "level": 2,
+  "why": "매우 좋음 표기"
+ },
+ {
+  "me": "sombra",
+  "mate": "doomfist",
+  "level": 0,
+  "why": "그럭저럭 나쁘지 않음"
+ },
+ {
+  "me": "sombra",
+  "mate": "dva",
+  "level": 2,
+  "why": "매우 좋음 궁 연계 환상"
+ },
+ {
+  "me": "sombra",
+  "mate": "echo",
+  "level": 0,
+  "why": "약간 좋음 애매"
+ },
+ {
+  "me": "sombra",
+  "mate": "freja",
+  "level": -1,
+  "why": "좋지 않음"
+ },
+ {
+  "me": "sombra",
+  "mate": "genji",
+  "level": 1,
+  "why": "궁연계 효과적"
+ },
+ {
+  "me": "sombra",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "매우 좋음 잘 맞음"
+ },
+ {
+  "me": "sombra",
+  "mate": "hazard",
+  "level": 2,
+  "why": "매우 좋음 궁연계 환상"
+ },
+ {
+  "me": "sombra",
+  "mate": "illari",
+  "level": -1,
+  "why": "별 의미 없음"
+ },
+ {
+  "me": "sombra",
+  "mate": "jetpackcat",
+  "level": 0,
+  "why": "편차 심함 표기"
+ },
+ {
+  "me": "sombra",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "좋은 합"
+ },
+ {
+  "me": "sombra",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "편차 궁은 핵급"
+ },
+ {
+  "me": "sombra",
+  "mate": "juno",
+  "level": 2,
+  "why": "아주 적합한 조합"
+ },
+ {
+  "me": "sombra",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "고마운 존재 매우 좋음"
+ },
+ {
+  "me": "sombra",
+  "mate": "lifeweaver",
+  "level": -1,
+  "why": "최선 아님"
+ },
+ {
+  "me": "sombra",
+  "mate": "lucio",
+  "level": 0,
+  "why": "편차 조건부 도움"
+ },
+ {
+  "me": "sombra",
+  "mate": "mauga",
+  "level": -1,
+  "why": "계륵 궁합"
+ },
+ {
+  "me": "sombra",
+  "mate": "mei",
+  "level": -1,
+  "why": "서브딜 겹침 좋지않음"
+ },
+ {
+  "me": "sombra",
+  "mate": "mercy",
+  "level": 1,
+  "why": "약간 좋음"
+ },
+ {
+  "me": "sombra",
+  "mate": "mizuki",
+  "level": 1,
+  "why": "약간 좋음 표기"
+ },
+ {
+  "me": "sombra",
+  "mate": "moira",
+  "level": 0,
+  "why": "크게 안 맞음 쏠쏠한 면"
+ },
+ {
+  "me": "sombra",
+  "mate": "orisa",
+  "level": -1,
+  "why": "좋지 않음"
+ },
+ {
+  "me": "sombra",
+  "mate": "pharah",
+  "level": 0,
+  "why": "편차 특정 상황"
+ },
+ {
+  "me": "sombra",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "매우 좋음 단 카운터 겹침"
+ },
+ {
+  "me": "sombra",
+  "mate": "reaper",
+  "level": 1,
+  "why": "EMP 죽음의꽃 조합"
+ },
+ {
+  "me": "sombra",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "편차 큼 궁연계는 좋음"
+ },
+ {
+  "me": "sombra",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "나쁘지 않은 궁합"
+ },
+ {
+  "me": "sombra",
+  "mate": "sigma",
+  "level": 0,
+  "why": "평소 약하고 궁 강력"
+ },
+ {
+  "me": "sombra",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "소전 보완 매우 좋음"
+ },
+ {
+  "me": "sombra",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "해킹이 단점 보완"
+ },
+ {
+  "me": "sombra",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "sombra",
+  "mate": "torbjorn",
+  "level": -1,
+  "why": "서로 맞지 않음"
+ },
+ {
+  "me": "sombra",
+  "mate": "tracer",
+  "level": 0,
+  "why": "포커싱 때만 좋음"
+ },
+ {
+  "me": "sombra",
+  "mate": "vendetta",
+  "level": 0,
+  "why": "편차 심함 표기"
+ },
+ {
+  "me": "sombra",
+  "mate": "venture",
+  "level": -1,
+  "why": "나쁨"
+ },
+ {
+  "me": "sombra",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "최악의 궁합"
+ },
+ {
+  "me": "sombra",
+  "mate": "winston",
+  "level": 2,
+  "why": "최강 영혼의 단짝"
+ },
+ {
+  "me": "sombra",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "균열 듀오 좋음"
+ },
+ {
+  "me": "sombra",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "좋음 표기"
+ },
+ {
+  "me": "sombra",
+  "mate": "zarya",
+  "level": 0,
+  "why": "궁만 좋고 편차"
+ },
+ {
+  "me": "sombra",
+  "mate": "zenyatta",
+  "level": 2,
+  "why": "가장 이상적인 힐러"
+ },
+ {
+  "me": "symmetra",
+  "mate": "ana",
+  "level": 0,
+  "why": "나노 가능 에임 의존"
+ },
+ {
+  "me": "symmetra",
+  "mate": "ashe",
+  "level": 0,
+  "why": "순간이동만 좋음"
+ },
+ {
+  "me": "symmetra",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "증폭 일부만 보완"
+ },
+ {
+  "me": "symmetra",
+  "mate": "bastion",
+  "level": 1,
+  "why": "상호 보완 관계"
+ },
+ {
+  "me": "symmetra",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "큰 도움 호흡 필요"
+ },
+ {
+  "me": "symmetra",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "나쁘지 않음, 이동 지원"
+ },
+ {
+  "me": "symmetra",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "서로 큰 도움 안 됨"
+ },
+ {
+  "me": "symmetra",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋은 조합"
+ },
+ {
+  "me": "symmetra",
+  "mate": "echo",
+  "level": 0,
+  "why": "별 도움 못 줌"
+ },
+ {
+  "me": "symmetra",
+  "mate": "genji",
+  "level": 0,
+  "why": "소소한 도움"
+ },
+ {
+  "me": "symmetra",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "나쁘지 않고 쏠쏠"
+ },
+ {
+  "me": "symmetra",
+  "mate": "hazard",
+  "level": -1,
+  "why": "이득 될 건 거의 없음"
+ },
+ {
+  "me": "symmetra",
+  "mate": "illari",
+  "level": 0,
+  "why": "사거리 제약 이상적 그림"
+ },
+ {
+  "me": "symmetra",
+  "mate": "junkerqueen",
+  "level": 0,
+  "why": "유용하나 널뛰기"
+ },
+ {
+  "me": "symmetra",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "수비 한정 효과 큼"
+ },
+ {
+  "me": "symmetra",
+  "mate": "juno",
+  "level": -1,
+  "why": "활용도 겹침 손해"
+ },
+ {
+  "me": "symmetra",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "순간이동 시너지 훌륭"
+ },
+ {
+  "me": "symmetra",
+  "mate": "lifeweaver",
+  "level": 0,
+  "why": "소소 팀 이득 없음"
+ },
+ {
+  "me": "symmetra",
+  "mate": "lucio",
+  "level": 1,
+  "why": "이속 실용성"
+ },
+ {
+  "me": "symmetra",
+  "mate": "mauga",
+  "level": 1,
+  "why": "훌륭한 시너지"
+ },
+ {
+  "me": "symmetra",
+  "mate": "mei",
+  "level": 1,
+  "why": "거점 탈환 강력"
+ },
+ {
+  "me": "symmetra",
+  "mate": "mercy",
+  "level": -1,
+  "why": "큰 도움 안 됨"
+ },
+ {
+  "me": "symmetra",
+  "mate": "moira",
+  "level": 1,
+  "why": "지원 받기 간편"
+ },
+ {
+  "me": "symmetra",
+  "mate": "orisa",
+  "level": 1,
+  "why": "가장 잘 소화"
+ },
+ {
+  "me": "symmetra",
+  "mate": "pharah",
+  "level": -1,
+  "why": "별 도움 못 줌"
+ },
+ {
+  "me": "symmetra",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "제법 좋다"
+ },
+ {
+  "me": "symmetra",
+  "mate": "reaper",
+  "level": 1,
+  "why": "낙궁각 근접 유도"
+ },
+ {
+  "me": "symmetra",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "궁연계 기여 의존도"
+ },
+ {
+  "me": "symmetra",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "흉악한 전법"
+ },
+ {
+  "me": "symmetra",
+  "mate": "sigma",
+  "level": 0,
+  "why": "고점 있으나 많이 가림"
+ },
+ {
+  "me": "symmetra",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "할 수 있는 게 적음"
+ },
+ {
+  "me": "symmetra",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "할 수 있는 게 적음"
+ },
+ {
+  "me": "symmetra",
+  "mate": "sombra",
+  "level": -1,
+  "why": "할 수 있는 게 없음"
+ },
+ {
+  "me": "symmetra",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "의외 재발굴 시너지"
+ },
+ {
+  "me": "symmetra",
+  "mate": "tracer",
+  "level": -1,
+  "why": "틈이 없음 소소한 도움"
+ },
+ {
+  "me": "symmetra",
+  "mate": "vendetta",
+  "level": 1,
+  "why": "킬각 루트 확보"
+ },
+ {
+  "me": "symmetra",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "순간이동만 좋음"
+ },
+ {
+  "me": "symmetra",
+  "mate": "winston",
+  "level": -1,
+  "why": "지원 필요 없음 흠"
+ },
+ {
+  "me": "symmetra",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "거들 부분 없음"
+ },
+ {
+  "me": "symmetra",
+  "mate": "zarya",
+  "level": -1,
+  "why": "별 도움 안 되는 조합"
+ },
+ {
+  "me": "symmetra",
+  "mate": "zenyatta",
+  "level": 2,
+  "why": "상호보완 위력적"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "ashe",
+  "level": 1,
+  "why": "안성맞춤"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "bastion",
+  "level": 1,
+  "why": "훌륭한 콤비"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "cassidy",
+  "level": 0,
+  "why": "모드 한정 조합"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "dva",
+  "level": 1,
+  "why": "매트릭스 보호"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "genji",
+  "level": 0,
+  "why": "한계 있음"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "hanzo",
+  "level": 2,
+  "why": "사기적인 조합"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "mei",
+  "level": 1,
+  "why": "궁합 좋음"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "orisa",
+  "level": 2,
+  "why": "환상의 시너지"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "reaper",
+  "level": 0,
+  "why": "맞춰야 함"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "방벽 보호"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "훌륭함"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "포탑 시너지"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "vendetta",
+  "level": 0,
+  "why": "따라가기 어려움"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "widowmaker",
+  "level": 2,
+  "why": "사기적인 조합"
+ },
+ {
+  "me": "torbjorn",
+  "mate": "winston",
+  "level": 0,
+  "why": "운영 따라 갈림"
+ },
+ {
+  "me": "tracer",
+  "mate": "ana",
+  "level": 1,
+  "why": "엄호 제공"
+ },
+ {
+  "me": "tracer",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "시너지 좋지 않음"
+ },
+ {
+  "me": "tracer",
+  "mate": "bastion",
+  "level": 1,
+  "why": "서로 안팎 공략"
+ },
+ {
+  "me": "tracer",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "든든한 보루"
+ },
+ {
+  "me": "tracer",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "훌륭한 조합"
+ },
+ {
+  "me": "tracer",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "유서 깊은 조합"
+ },
+ {
+  "me": "tracer",
+  "mate": "dva",
+  "level": 1,
+  "why": "후방 교란 좋음"
+ },
+ {
+  "me": "tracer",
+  "mate": "genji",
+  "level": 0,
+  "why": "포지션 겹침"
+ },
+ {
+  "me": "tracer",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "이상적 조합"
+ },
+ {
+  "me": "tracer",
+  "mate": "illari",
+  "level": -1,
+  "why": "합 안 맞음"
+ },
+ {
+  "me": "tracer",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "좋은 시너지"
+ },
+ {
+  "me": "tracer",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "화력 지원"
+ },
+ {
+  "me": "tracer",
+  "mate": "juno",
+  "level": -1,
+  "why": "효과 어려움"
+ },
+ {
+  "me": "tracer",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "강력한 시너지"
+ },
+ {
+  "me": "tracer",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "케어 용이"
+ },
+ {
+  "me": "tracer",
+  "mate": "lucio",
+  "level": 1,
+  "why": "회복 속도 도움"
+ },
+ {
+  "me": "tracer",
+  "mate": "mei",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "tracer",
+  "mate": "mercy",
+  "level": -1,
+  "why": "좋은 시너지 어려움"
+ },
+ {
+  "me": "tracer",
+  "mate": "moira",
+  "level": -1,
+  "why": "케어 부적합"
+ },
+ {
+  "me": "tracer",
+  "mate": "pharah",
+  "level": 1,
+  "why": "궁합 좋은 편"
+ },
+ {
+  "me": "tracer",
+  "mate": "reaper",
+  "level": 1,
+  "why": "화력 좋은 조합"
+ },
+ {
+  "me": "tracer",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "썩 나쁘지 않음"
+ },
+ {
+  "me": "tracer",
+  "mate": "sigma",
+  "level": -1,
+  "why": "같이 운용 어려움"
+ },
+ {
+  "me": "tracer",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "무난"
+ },
+ {
+  "me": "tracer",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "준수한 궁합"
+ },
+ {
+  "me": "tracer",
+  "mate": "sombra",
+  "level": 1,
+  "why": "서로 도움"
+ },
+ {
+  "me": "tracer",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "포킹 지원"
+ },
+ {
+  "me": "tracer",
+  "mate": "venture",
+  "level": 1,
+  "why": "손꼽히는 콤비"
+ },
+ {
+  "me": "tracer",
+  "mate": "winston",
+  "level": 1,
+  "why": "후방 교란 시너지"
+ },
+ {
+  "me": "tracer",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "후방 교란 좋음"
+ },
+ {
+  "me": "tracer",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "투섭딜 메타 가능"
+ },
+ {
+  "me": "tracer",
+  "mate": "zarya",
+  "level": 1,
+  "why": "궁연계 좋음"
+ },
+ {
+  "me": "tracer",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "생존력 증가"
+ },
+ {
+  "me": "vendetta",
+  "mate": "ana",
+  "level": 2,
+  "why": "매우 좋음 나노 시너지"
+ },
+ {
+  "me": "vendetta",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "득보는 게 없음"
+ },
+ {
+  "me": "vendetta",
+  "mate": "bastion",
+  "level": 2,
+  "why": "상성 서로 카운터 보완"
+ },
+ {
+  "me": "vendetta",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "어울리나 한계"
+ },
+ {
+  "me": "vendetta",
+  "mate": "doomfist",
+  "level": 2,
+  "why": "매우 좋음 분탕 듀오"
+ },
+ {
+  "me": "vendetta",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋음 매트릭스 보호"
+ },
+ {
+  "me": "vendetta",
+  "mate": "genji",
+  "level": 1,
+  "why": "궁합 좋으나 자원 소모"
+ },
+ {
+  "me": "vendetta",
+  "mate": "hazard",
+  "level": 0,
+  "why": "나쁘지 않으나 낮은 포텐"
+ },
+ {
+  "me": "vendetta",
+  "mate": "illari",
+  "level": -1,
+  "why": "궁합 부족"
+ },
+ {
+  "me": "vendetta",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "인파이터 듀오 좋음"
+ },
+ {
+  "me": "vendetta",
+  "mate": "juno",
+  "level": 1,
+  "why": "가속 도움 훌륭"
+ },
+ {
+  "me": "vendetta",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "정화 여우길 압도적"
+ },
+ {
+  "me": "vendetta",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "생존 늘려주는 힐러"
+ },
+ {
+  "me": "vendetta",
+  "mate": "lucio",
+  "level": 1,
+  "why": "이속 지원 좋음"
+ },
+ {
+  "me": "vendetta",
+  "mate": "mauga",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "vendetta",
+  "mate": "mercy",
+  "level": 1,
+  "why": "궁합 아주 뛰어남"
+ },
+ {
+  "me": "vendetta",
+  "mate": "moira",
+  "level": -1,
+  "why": "지원 능력 부족"
+ },
+ {
+  "me": "vendetta",
+  "mate": "orisa",
+  "level": 0,
+  "why": "보완되나 어시스트 약함"
+ },
+ {
+  "me": "vendetta",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "보완되나 의존도 높음"
+ },
+ {
+  "me": "vendetta",
+  "mate": "reaper",
+  "level": 1,
+  "why": "폭딜 좋으나 원거리 약함"
+ },
+ {
+  "me": "vendetta",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "근거리 화력 상호보완"
+ },
+ {
+  "me": "vendetta",
+  "mate": "roadhog",
+  "level": 0,
+  "why": "직접 시너지 거의 없음"
+ },
+ {
+  "me": "vendetta",
+  "mate": "sigma",
+  "level": 1,
+  "why": "은근 조합 성능 좋음"
+ },
+ {
+  "me": "vendetta",
+  "mate": "venture",
+  "level": 2,
+  "why": "벤발롬 분탕 듀오"
+ },
+ {
+  "me": "vendetta",
+  "mate": "winston",
+  "level": 1,
+  "why": "다이브 궁합 좋음"
+ },
+ {
+  "me": "vendetta",
+  "mate": "wreckingball",
+  "level": 2,
+  "why": "분탕 궁합 좋음"
+ },
+ {
+  "me": "vendetta",
+  "mate": "wuyang",
+  "level": 1,
+  "why": "생존 궁합 최상급"
+ },
+ {
+  "me": "vendetta",
+  "mate": "zarya",
+  "level": 2,
+  "why": "최고의 단짝 주방벤데타"
+ },
+ {
+  "me": "vendetta",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "지원 강력 힐량 한계"
+ },
+ {
+  "me": "venture",
+  "mate": "ana",
+  "level": 1,
+  "why": "힐 도움 확실"
+ },
+ {
+  "me": "venture",
+  "mate": "ashe",
+  "level": 1,
+  "why": "딜각 만들어 반가움"
+ },
+ {
+  "me": "venture",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "안 좋음"
+ },
+ {
+  "me": "venture",
+  "mate": "bastion",
+  "level": -1,
+  "why": "조합 기대 어려움"
+ },
+ {
+  "me": "venture",
+  "mate": "brigitte",
+  "level": -1,
+  "why": "시너지 별 볼일 없음"
+ },
+ {
+  "me": "venture",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "든든한 파트너"
+ },
+ {
+  "me": "venture",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "훌륭한 시너지"
+ },
+ {
+  "me": "venture",
+  "mate": "dva",
+  "level": 1,
+  "why": "매트릭스 엄호 합 좋음"
+ },
+ {
+  "me": "venture",
+  "mate": "genji",
+  "level": 2,
+  "why": "합이 기가 막힘"
+ },
+ {
+  "me": "venture",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "애매 방해 요소"
+ },
+ {
+  "me": "venture",
+  "mate": "illari",
+  "level": -1,
+  "why": "유의미한 시너지 없음"
+ },
+ {
+  "me": "venture",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "궁연계 훌륭"
+ },
+ {
+  "me": "venture",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "무난히 좋음 궁 강력"
+ },
+ {
+  "me": "venture",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "서로 도움"
+ },
+ {
+  "me": "venture",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "치유 세이브 쏠쏠"
+ },
+ {
+  "me": "venture",
+  "mate": "lucio",
+  "level": 0,
+  "why": "맞추기 난감"
+ },
+ {
+  "me": "venture",
+  "mate": "mauga",
+  "level": 0,
+  "why": "케어 필요 장단 혼재"
+ },
+ {
+  "me": "venture",
+  "mate": "mei",
+  "level": 1,
+  "why": "둔화 사냥 수월"
+ },
+ {
+  "me": "venture",
+  "mate": "mercy",
+  "level": -1,
+  "why": "지원 받기 어려움"
+ },
+ {
+  "me": "venture",
+  "mate": "moira",
+  "level": 0,
+  "why": "나름 도움 제약"
+ },
+ {
+  "me": "venture",
+  "mate": "orisa",
+  "level": -1,
+  "why": "합 잘 맞지 않음"
+ },
+ {
+  "me": "venture",
+  "mate": "ramattra",
+  "level": 1,
+  "why": "지원 업고 헤집기"
+ },
+ {
+  "me": "venture",
+  "mate": "reaper",
+  "level": 1,
+  "why": "난전 합 좋음"
+ },
+ {
+  "me": "venture",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "방벽 못받고 궁만 강함"
+ },
+ {
+  "me": "venture",
+  "mate": "roadhog",
+  "level": -1,
+  "why": "합 맞추기 쉽지 않음"
+ },
+ {
+  "me": "venture",
+  "mate": "sigma",
+  "level": 1,
+  "why": "보완과 누킹 시너지"
+ },
+ {
+  "me": "venture",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "견제와 파고들기 좋음"
+ },
+ {
+  "me": "venture",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "이동기 지원 위력"
+ },
+ {
+  "me": "venture",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "용광로 부담 덜어줌"
+ },
+ {
+  "me": "venture",
+  "mate": "tracer",
+  "level": 1,
+  "why": "시너지 우수"
+ },
+ {
+  "me": "venture",
+  "mate": "winston",
+  "level": 1,
+  "why": "기동 둘이 휘저음"
+ },
+ {
+  "me": "venture",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "어그로 핑퐁 극대화"
+ },
+ {
+  "me": "venture",
+  "mate": "zarya",
+  "level": 1,
+  "why": "방벽 케어 궁연계 강함"
+ },
+ {
+  "me": "venture",
+  "mate": "zenyatta",
+  "level": 2,
+  "why": "탁월한 지원"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "ana",
+  "level": -1,
+  "why": "약간 나쁨"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "ashe",
+  "level": 1,
+  "why": "광역딜 연계 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "궁 궁합 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "bastion",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "카운터 제거, 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "cassidy",
+  "level": 0,
+  "why": "단순 설명"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "doomfist",
+  "level": -1,
+  "why": "현재 좋지 않음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "dva",
+  "level": 0,
+  "why": "맞지 않으나 궁 연계"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "emre",
+  "level": -1,
+  "why": "조합 자체는 별로"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "genji",
+  "level": 1,
+  "why": "서로 좋은 파트너"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "hanzo",
+  "level": -1,
+  "why": "대부분 선호 안됨"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "illari",
+  "level": 2,
+  "why": "궁 궁합까지 매우 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "jetpackcat",
+  "level": -1,
+  "why": "기동 지원 불필요"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "junkrat",
+  "level": 2,
+  "why": "최강 수비 조합"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "juno",
+  "level": -1,
+  "why": "매우 나쁨"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "힐 용이, 약간 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "회복 궁합 약간 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "lucio",
+  "level": -1,
+  "why": "매우 나쁨"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "mei",
+  "level": 0,
+  "why": "장단점 혼재"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "mercy",
+  "level": 1,
+  "why": "위르시, 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "moira",
+  "level": -1,
+  "why": "힐 주기 어려움"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "pharah",
+  "level": 1,
+  "why": "서로 지원"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "reaper",
+  "level": 1,
+  "why": "시너지 큼"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "제한적 도움"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "투시+갈고리 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "sigma",
+  "level": 0,
+  "why": "제한적 도움"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "무난하고 상당히 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "sombra",
+  "level": 1,
+  "why": "일반스킬 시너지 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "winston",
+  "level": 1,
+  "why": "상호 보완"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "궁합 상당히 좋음"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "wuyang",
+  "level": -1,
+  "why": "매우 나쁨"
+ },
+ {
+  "me": "widowmaker",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "부조화 도움, 약간 좋음"
+ },
+ {
+  "me": "winston",
+  "mate": "ana",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "winston",
+  "mate": "ashe",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "winston",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "스타일 안 맞음"
+ },
+ {
+  "me": "winston",
+  "mate": "bastion",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "winston",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "winston",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "지원사격, 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "domina",
+  "level": -1,
+  "why": "따로 노는 조합, 부적합"
+ },
+ {
+  "me": "winston",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "극단적 다이브, 약간 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "dva",
+  "level": 1,
+  "why": "윈디, 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "freja",
+  "level": 1,
+  "why": "어그로 덕에 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "hanzo",
+  "level": -1,
+  "why": "따로 노는 조합"
+ },
+ {
+  "me": "winston",
+  "mate": "hazard",
+  "level": 1,
+  "why": "약간 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "illari",
+  "level": -1,
+  "why": "후방 vs 최전방"
+ },
+ {
+  "me": "winston",
+  "mate": "junkerqueen",
+  "level": -1,
+  "why": "따로 노는 조합, 부적합"
+ },
+ {
+  "me": "winston",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "winston",
+  "mate": "juno",
+  "level": 1,
+  "why": "이속 지원, 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "정화·여우길, 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "케어 가능, 약간 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "lucio",
+  "level": 1,
+  "why": "속도 버프, 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "mauga",
+  "level": 0,
+  "why": "맵 따라 갈림"
+ },
+ {
+  "me": "winston",
+  "mate": "mei",
+  "level": 0,
+  "why": "약간 부적합, 러쉬 시 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "mercy",
+  "level": 1,
+  "why": "증폭 상성, 약간 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "moira",
+  "level": 1,
+  "why": "풀다이브 가능"
+ },
+ {
+  "me": "winston",
+  "mate": "orisa",
+  "level": -1,
+  "why": "따로 노는 조합, 부적합"
+ },
+ {
+  "me": "winston",
+  "mate": "pharah",
+  "level": -1,
+  "why": "따로 노는 조합"
+ },
+ {
+  "me": "winston",
+  "mate": "ramattra",
+  "level": -1,
+  "why": "따로 노는 조합, 부적합"
+ },
+ {
+  "me": "winston",
+  "mate": "reaper",
+  "level": 2,
+  "why": "최강 효율 매우 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "reinhardt",
+  "level": -1,
+  "why": "따로 노는 조합, 부적합"
+ },
+ {
+  "me": "winston",
+  "mate": "roadhog",
+  "level": -1,
+  "why": "따로 노는 조합, 부적합"
+ },
+ {
+  "me": "winston",
+  "mate": "sigma",
+  "level": -1,
+  "why": "따로 노는 조합, 부적합"
+ },
+ {
+  "me": "winston",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "진입 호응, 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "winston",
+  "mate": "sombra",
+  "level": 2,
+  "why": "잠재력 폭발, 매우 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "symmetra",
+  "level": -1,
+  "why": "러쉬 아니면 따로 놈"
+ },
+ {
+  "me": "winston",
+  "mate": "torbjorn",
+  "level": -1,
+  "why": "시너지 찾기 어려움"
+ },
+ {
+  "me": "winston",
+  "mate": "tracer",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "winston",
+  "mate": "venture",
+  "level": 1,
+  "why": "약간 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "지원 좋으나 궁 불일치"
+ },
+ {
+  "me": "winston",
+  "mate": "wreckingball",
+  "level": 1,
+  "why": "약간 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "zarya",
+  "level": 1,
+  "why": "방벽 보조, 적합"
+ },
+ {
+  "me": "winston",
+  "mate": "zenyatta",
+  "level": 1,
+  "why": "부조화 보조, 적합"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "ana",
+  "level": 0,
+  "why": "시너지 좋으나 피곤"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "ashe",
+  "level": 1,
+  "why": "딜각 만들어줌"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "baptiste",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "bastion",
+  "level": -1,
+  "why": "궁합 거의 안 맞음"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "편차 심함, 일반적 별로"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "딜각 만들어줌"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "둠피스트와 합 좋음"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "dva",
+  "level": 1,
+  "why": "돌진 조합, 디바 보호 불가"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "echo",
+  "level": 1,
+  "why": "차이가 크게 남"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "freja",
+  "level": 1,
+  "why": "실력 따르면 제법 좋음"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "genji",
+  "level": 2,
+  "why": "돌진 조합, 볼트"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "딜각 만들어 줌"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "illari",
+  "level": -1,
+  "why": "궁합 좋지 않음"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "jetpackcat",
+  "level": 0,
+  "why": "편차 심함, 고위험"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "junkerqueen",
+  "level": -1,
+  "why": "시너지 기대 어려움"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "시너지 어려움"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "juno",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "kiriko",
+  "level": 1,
+  "why": "무난히 좋음, 정화"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "lifeweaver",
+  "level": 0,
+  "why": "약간 좋음, 소소함"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "lucio",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "mei",
+  "level": -1,
+  "why": "특정 상황 외 따로 놈"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "mercy",
+  "level": -1,
+  "why": "좋지 않음"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "mizuki",
+  "level": 0,
+  "why": "보통"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "moira",
+  "level": 0,
+  "why": "편차 심함"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "orisa",
+  "level": -1,
+  "why": "성격이 따로 놀음"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "pharah",
+  "level": 1,
+  "why": "어그로 서로 분산"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "나쁘지 않음"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "reaper",
+  "level": 1,
+  "why": "공생 관계"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "reinhardt",
+  "level": -1,
+  "why": "조합이 별로"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "혼자 놀 때 합 맞음"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "sigma",
+  "level": -1,
+  "why": "좋은 조합 아님"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "sojourn",
+  "level": 1,
+  "why": "딜각 만들어줌"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "soldier76",
+  "level": 1,
+  "why": "딜각 만들어줌"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "sombra",
+  "level": 1,
+  "why": "강력한 지원군"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "symmetra",
+  "level": -1,
+  "why": "그다지 좋지 못함"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "torbjorn",
+  "level": -1,
+  "why": "따로 노는 조합"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "tracer",
+  "level": 1,
+  "why": "고기동 돌진 조합"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "vendetta",
+  "level": 0,
+  "why": "진영 와해 필요, 설명"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "widowmaker",
+  "level": 1,
+  "why": "딜각 만들어줌"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "winston",
+  "level": 1,
+  "why": "시너지 강하나 불안정"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "wuyang",
+  "level": -1,
+  "why": "궁합 좋지 않음"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "zarya",
+  "level": 1,
+  "why": "공생 관계"
+ },
+ {
+  "me": "wreckingball",
+  "mate": "zenyatta",
+  "level": 2,
+  "why": "가장 시너지 좋은 힐러"
+ },
+ {
+  "me": "wuyang",
+  "mate": "ana",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "anran",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "ashe",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "wuyang",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "bastion",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "cassidy",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "wuyang",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "dva",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "wuyang",
+  "mate": "echo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "freja",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "hazard",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "wuyang",
+  "mate": "illari",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "jetpackcat",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "wuyang",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "junkrat",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "wuyang",
+  "mate": "juno",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "wuyang",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "lucio",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "mauga",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "mei",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "mercy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "mizuki",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "moira",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "orisa",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "wuyang",
+  "mate": "pharah",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "ramattra",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "wuyang",
+  "mate": "reaper",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "reinhardt",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "roadhog",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "wuyang",
+  "mate": "sigma",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "sombra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "tracer",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "wuyang",
+  "mate": "vendetta",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "venture",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "wuyang",
+  "mate": "winston",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "wuyang",
+  "mate": "wreckingball",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "wuyang",
+  "mate": "zarya",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "wuyang",
+  "mate": "zenyatta",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "zarya",
+  "mate": "ana",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "anran",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zarya",
+  "mate": "ashe",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "baptiste",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "bastion",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "brigitte",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "cassidy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "doomfist",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "dva",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "echo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "emre",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zarya",
+  "mate": "freja",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "genji",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "hanzo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "hazard",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "illari",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "junkerqueen",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "junkrat",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "juno",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "kiriko",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "lucio",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "mauga",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "mei",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "mercy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "moira",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "orisa",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zarya",
+  "mate": "pharah",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "reaper",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zarya",
+  "mate": "reinhardt",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zarya",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "sigma",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "zarya",
+  "mate": "sojourn",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "soldier76",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "sombra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "symmetra",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "tracer",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "vendetta",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zarya",
+  "mate": "venture",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "widowmaker",
+  "level": -1,
+  "why": "궁합 안 좋음"
+ },
+ {
+  "me": "zarya",
+  "mate": "winston",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zarya",
+  "mate": "wuyang",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zarya",
+  "mate": "zenyatta",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "ana",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "ashe",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "baptiste",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "bastion",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "brigitte",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "cassidy",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "domina",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "doomfist",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "dva",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "echo",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "freja",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "genji",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "hanzo",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "hazard",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "illari",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "junkerqueen",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "junkrat",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "juno",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "kiriko",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "lifeweaver",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "lucio",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "mauga",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "mei",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "mercy",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "moira",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "orisa",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "pharah",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "ramattra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "reaper",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "reinhardt",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "roadhog",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "sigma",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "sojourn",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "soldier76",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "sombra",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "symmetra",
+  "level": 0,
+  "why": "무난/상황따라"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "torbjorn",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "tracer",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "vendetta",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "venture",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "widowmaker",
+  "level": 0,
+  "why": "보통, 난이도 높음"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "winston",
+  "level": 1,
+  "why": "좋은 편"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "wreckingball",
+  "level": 2,
+  "why": "핵심 조합"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "wuyang",
+  "level": -1,
+  "why": "궁합 나쁨"
+ },
+ {
+  "me": "zenyatta",
+  "mate": "zarya",
+  "level": 1,
+  "why": "좋은 편"
+ }
+]

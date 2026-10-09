@@ -4,16 +4,16 @@ import { canAdd, trim, type TeamSize } from './roster';
 
 export type { TeamSize };
 
-const KEY = 'ow-counterpick.v1';
+export const KEY = 'ow-counterpick.v1';
 
 interface Team {
   size: TeamSize;
   enemies: HeroId[];
 }
 
-function initial(): Team {
+function initial(key: string): Team {
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(key);
     if (raw) {
       const v = JSON.parse(raw) as Partial<Team>;
       const size: TeamSize = v.size === 6 ? 6 : 5;
@@ -29,19 +29,19 @@ function initial(): Team {
   return { size: 5, enemies: [] };
 }
 
-export function useTeam() {
-  const [team, setTeam] = useState<Team>(initial);
+export function useTeam(key: string = KEY) {
+  const [team, setTeam] = useState<Team>(() => initial(key));
 
   useEffect(() => {
     try {
       localStorage.setItem(
-        KEY,
+        key,
         JSON.stringify({ size: team.size, enemies: team.enemies }),
       );
     } catch {
       /* 저장이 막혀 있어도 그냥 넘어간다 */
     }
-  }, [team]);
+  }, [team, key]);
 
   /** 적 목록을 바꾸는 모든 길은 여기를 지난다. */
   const edit = useCallback(

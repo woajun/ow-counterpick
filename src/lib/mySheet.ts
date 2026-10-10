@@ -309,6 +309,21 @@ export async function logout() {
   await supabase?.auth.signOut();
 }
 
+/**
+ * 회원 탈퇴 — 계정과 내 상성표(코드 · 받은 좋아요 포함)를 지운다. 되돌릴 수 없다.
+ * DB 의 delete_my_account() 가 "지금 로그인한 사람"만 지운다. 실패하면 이유.
+ */
+export async function deleteAccount() {
+  if (!supabase || !state.user) return '로그인한 사람만 탈퇴할 수 있어요.';
+  clearTimeout(saveTimer); // 지우는 사이에 저장이 다시 줄을 만들지 않게
+  const { error } = await supabase.rpc('delete_my_account');
+  if (error) return error.message;
+  // 계정이 없어져서 서버 로그아웃은 실패한다 — 이 브라우저의 로그인만 지운다.
+  await supabase.auth.signOut({ scope: 'local' });
+  signedOut();
+  return null;
+}
+
 /** 로그인되면 제 줄을 불러온다. 로그인 전에 이 창에서 한 것이 있으면 그쪽이 이긴다. */
 async function signedIn(id: string, fallbackName: string) {
   if (!supabase) return;

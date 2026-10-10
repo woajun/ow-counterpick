@@ -3,6 +3,7 @@ import type { HeroId } from '../data/heroes';
 import { useTeam } from '../lib/useTeam';
 import { useMode } from '../lib/useMode';
 import { canAdd } from '../lib/roster';
+import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
 import { SizeToggle } from '../components/SizeToggle';
 import { EnemySlots } from '../components/EnemySlots';
@@ -112,10 +113,16 @@ export function CounterPage() {
             type="button"
             className="reset small"
             title="이 표를 복사해 내 상성으로 시작해요. 그 뒤로는 이 사람이 고쳐도 안 바뀌어요."
-            onClick={() => {
+            onClick={async () => {
+              const owner = sheet.peek!.owner;
               if (
                 sheet.source.kind === 'mine' &&
-                !confirm(`지금 내 상성을 지우고 ${sheet.peek!.owner}의 표로 다시 시작할까요?`)
+                !(await confirmDialog({
+                  title: `${owner}의 표로 다시 시작할까요?`,
+                  message: '지금 내 상성은 지워져요. 지운 상성은 되돌릴 수 없어요.',
+                  ok: '다시 시작',
+                  danger: true,
+                }))
               )
                 return;
               copyPeek();

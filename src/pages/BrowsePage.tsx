@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import { fetchBrowse, resetAll, useMySheet, type BrowseItem } from '../lib/mySheet';
 import { NAMU_FETCHED } from '../data/namu';
 import wikiIcon from '../assets/wiki.svg';
+import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
 import { AccountChip } from '../components/Account';
 
@@ -67,8 +68,14 @@ export function BrowsePage() {
                 <button
                   type="button"
                   className="reset small"
-                  onClick={() => {
-                    if (confirm('내 상성을 지우고 나무위키로 돌아갈까요?')) resetAll();
+                  onClick={async () => {
+                    const ok = await confirmDialog({
+                      title: '나무위키로 돌아갈까요?',
+                      message: '내 상성을 지우고 나무위키를 따라가요. 지운 상성은 되돌릴 수 없어요.',
+                      ok: '돌아가기',
+                      danger: true,
+                    });
+                    if (ok) resetAll();
                   }}
                 >
                   나무위키로 돌아가기

@@ -11,6 +11,7 @@ import {
   type Source,
 } from '../lib/mySheet';
 import { CodeDialog } from '../components/CodeDialog';
+import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
 import { AccountChip, LoginDialog } from '../components/Account';
 
@@ -115,8 +116,14 @@ export function EditPage() {
                   <button
                     type="button"
                     className="reset small"
-                    onClick={() => {
-                      if (confirm('내 상성을 지우고 나무위키를 따라갈까요?')) resetAll();
+                    onClick={async () => {
+                      const ok = await confirmDialog({
+                        title: '초기화할까요?',
+                        message: '내 상성을 지우고 나무위키를 따라가요. 지운 상성은 되돌릴 수 없어요.',
+                        ok: '초기화',
+                        danger: true,
+                      });
+                      if (ok) resetAll();
                     }}
                   >
                     초기화

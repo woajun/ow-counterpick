@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { usePageView } from './lib/analytics';
+import { DialogHost } from './components/Dialog';
 import { CounterPage } from './pages/CounterPage';
 import { MatrixPage } from './pages/MatrixPage';
 import { EditPage } from './pages/EditPage';
@@ -18,6 +19,8 @@ export default function App() {
         <Route path="/edit/:hero" element={<EditPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      {/* 알림 · 확인 · 입력 창 — 어느 화면에서 불러도 여기 하나에 뜬다. */}
+      <DialogHost />
     </BrowserRouter>
   );
 }

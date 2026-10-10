@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { loginWithKakao, logout, sendLoginLink, setName, useMySheet, verifyLoginCode } from '../lib/mySheet';
+import { alertDialog, confirmDialog, promptDialog } from '../lib/dialog';
+import { deleteAccount, loginWithKakao, logout, sendLoginLink, setName, useMySheet, verifyLoginCode } from '../lib/mySheet';
 
 /**
- * 로그인 창 — 카카오, 또는 이메일 링크. 비밀번호는 없다.
+ * 로그인 창 — 카카오. 비밀번호는 없다.
  *
- * 이메일은 링크를 누르면 새 탭이 열리지만 이 창도 같이 로그인된다. 숫자 코드로 이 창에서
- * 바로 들어오게 하는 길도 만들어 두었는데, 메일에 코드를 넣으려면 SMTP 를 붙여야 해서
- * 아직 끈다(OTP_IN_MAIL).
+ * 이메일 로그인(링크 · 숫자 코드)도 만들어 두었지만 끈다(EMAIL_LOGIN). 수파베이스 기본
+ * 메일 서버는 시간당 몇 통밖에 못 보내서 사람이 몰리면 메일이 안 간다. 도메인과 메일
+ * 서비스(SMTP)를 붙이면 켠다 — 숫자 코드는 메일에 코드를 넣어야 해서 따로 켠다(OTP_IN_MAIL).
  */
+const EMAIL_LOGIN = false;
 const OTP_IN_MAIL = false;
 
 export function LoginDialog({ onClose }: { onClose: () => void }) {
@@ -123,6 +125,8 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
               >
                 카카오로 로그인
               </button>
+              {EMAIL_LOGIN && (
+              <>
               <div className="login-or">또는 이메일로</div>
               <input
                 ref={field}
@@ -149,6 +153,9 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
                 {busy ? '보내는 중…' : '로그인 메일 받기'}
                 <span>비밀번호 없이 메일의 링크로 들어와요</span>
               </button>
+              </>
+              )}
+              {!EMAIL_LOGIN && error && <p className="code-error">{error}</p>}
             </>
           )}
           <button type="button" className="reset small" onClick={onClose}>
@@ -192,10 +199,16 @@ export function AccountChip() {
           <button
             type="button"
             role="menuitem"
-            onClick={() => {
+            onClick={async () => {
               setMenu(false);
-              const next = prompt('"○○의 카운터픽"에 들어갈 이름 (20자까지)', user.name);
-              if (next !== null) setName(next);
+              const next = await promptDialog({
+                title: '이름 바꾸기',
+                message: '"○○의 카운터픽"에 들어갈 이름이에요. 20자까지 쓸 수 있어요.',
+                value: user.name,
+                maxLength: 20,
+                ok: '바꾸기',
+              });
+              if (next) setName(next);
             }}
           >
             이름 바꾸기
@@ -209,6 +222,31 @@ export function AccountChip() {
             }}
           >
             로그아웃
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            className="danger"
+            onClick={async () => {
+              setMenu(false);
+              const ok = await confirmDialog({
+                title: '회원 탈퇴할까요?',
+                message: (
+                  <>
+                    계정과 내 상성표가 지워지고 <b>되돌릴 수 없어요.</b> 내 코드로 공유한 주소도 더
+                    이상 열리지 않아요.
+                  </>
+                ),
+                ok: '탈퇴하기',
+                danger: true,
+              });
+              if (!ok) return;
+              const err = await deleteAccount();
+              if (err) await alertDialog({ title: '탈퇴하지 못했어요', message: err });
+              else await alertDialog({ title: '탈퇴했어요', message: '그동안 고마웠어요. 언제든 다시 와 주세요.' });
+            }}
+          >
+            회원 탈퇴
           </button>
         </div>
       )}

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { useMySheet } from '../lib/mySheet';
 
 /**
@@ -30,10 +30,11 @@ export function TopBar({ children }: { children?: ReactNode }) {
         : '나';
   return (
     <header className="bar">
-      <div className="brand">
+      {/* 로고와 제목을 누르면 추천(첫 화면)으로 — 남의 코드를 보던 중이면 내 추천으로 돌아온다. */}
+      <Link className="brand" to="/" aria-label="추천으로">
         <span className="mark">OW</span>
         <h1>{who}의 카운터픽</h1>
-      </div>
+      </Link>
 
       {/* 탭이 하나뿐이면 고를 것이 없다. 자리만 차지하니 안 그린다. */}
       {TABS.length > 1 && (

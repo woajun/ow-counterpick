@@ -1153,3 +1153,11 @@ button.link {
 }
 .like-btn:hover { border-color: #ff5a7a; color: #ff5a7a; }
 .like-btn.on { border-color: #ff5a7a; color: #ff5a7a; background: color-mix(in srgb, #ff5a7a 12%, transparent); cursor: default; }
+/* 카카오 로그인 — 카카오 디자인 가이드의 노란 바탕 · 검은 글자 */
+.login-btn.kakao { background: #fee500; border-color: #fee500; color: rgb(0 0 0 / .85); }
+.login-btn.kakao:hover { background: #f5dc00; }
+.login-or {
+  display: flex; align-items: center; gap: 10px; margin: 6px 0 2px;
+  font-size: 11.5px; color: var(--faint);
+}
+.login-or::before, .login-or::after { content: ''; flex: 1; height: 1px; background: var(--line2); }

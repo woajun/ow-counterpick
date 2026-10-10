@@ -1,9 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { logout, sendLoginLink, useMySheet } from '../lib/mySheet';
+import { loginWithKakao, logout, sendLoginLink, setName, useMySheet, verifyLoginCode } from '../lib/mySheet';
 
 /**
- * 로그인 창 — 이메일로 로그인 링크를 받는다(비밀번호 없음).
+ * 로그인 창 — 카카오, 또는 이메일 링크. 비밀번호는 없다.
+ *
+ * 이메일은 링크를 누르면 새 탭이 열리지만 이 창도 같이 로그인된다. 숫자 코드로 이 창에서
+ * 바로 들어오게 하는 길도 만들어 두었는데, 메일에 코드를 넣으려면 SMTP 를 붙여야 해서
+ * 아직 끈다(OTP_IN_MAIL).
  */
+const OTP_IN_MAIL = false;
+
 export function LoginDialog({ onClose }: { onClose: () => void }) {
   const field = useRef<HTMLInputElement>(null);
   const { source } = useMySheet();
@@ -11,6 +17,7 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     field.current?.focus();
@@ -30,7 +37,18 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
     else setSent(true);
   };
 
+  const verify = async () => {
+    setBusy(true);
+    setError('');
+    const err = await verifyLoginCode(email.trim(), token);
+    setBusy(false);
+    if (err) setError(err);
+    else onClose();
+  };
+
   const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  // 수파베이스 기본은 6자리, 설정에 따라 8자리까지.
+  const tokenOk = /^\d{6,8}$/.test(token);
 
   return (
     <div
@@ -42,11 +60,45 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
       <div className="hero-sheet login" role="dialog" aria-modal="true" aria-label="로그인">
         <div className="login-body">
           <h3>내 상성 저장하기</h3>
-          {sent ? (
+          {sent && !OTP_IN_MAIL ? (
             <p>
-              <b>{email.trim()}</b>로 로그인 링크를 보냈어요. 메일의 링크를 누르면 이 사이트로
-              돌아와 로그인돼요. 이 창에서 고친 것도 같이 계정으로 옮겨져요.
+              <b>{email.trim()}</b>로 메일을 보냈어요. 메일의 링크를 누르면 로그인돼요. 새 탭이
+              열리면 닫아도 돼요 — 이 창도 같이 로그인돼요.
             </p>
+          ) : sent ? (
+            <>
+              <p>
+                <b>{email.trim()}</b>로 메일을 보냈어요. 메일의 <b>숫자 코드</b>를 넣으면 이 창에서 바로
+                로그인돼요.
+              </p>
+              <input
+                className="code-field"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                value={token}
+                placeholder="123456"
+                maxLength={8}
+                autoFocus
+                aria-label="메일로 온 숫자 코드"
+                onChange={(e) => {
+                  setToken(e.target.value.replace(/\D/g, ''));
+                  setError('');
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && tokenOk && !busy) void verify();
+                }}
+              />
+              {error && <p className="code-error">{error}</p>}
+              <button
+                type="button"
+                className="login-btn main"
+                disabled={!tokenOk || busy}
+                onClick={() => void verify()}
+              >
+                {busy ? '확인 중…' : '로그인'}
+                <span>메일의 링크를 눌러도 돼요 — 이 창도 같이 로그인돼요</span>
+              </button>
+            </>
           ) : (
             <>
               <p>
@@ -54,6 +106,24 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
                   ? '지금 고친 상성은 이 창에만 있어요. 로그인하면 계정에 남고, 코드로 친구에게 건넬 수 있어요.'
                   : '로그인하면 고친 상성이 계정에 남고, 코드로 친구에게 건넬 수 있어요.'}
               </p>
+              <button
+                type="button"
+                className="login-btn kakao"
+                disabled={busy}
+                onClick={() => {
+                  setBusy(true);
+                  void loginWithKakao().then((err) => {
+                    // 성공하면 카카오 화면으로 넘어가서 여기로 안 돌아온다.
+                    if (err) {
+                      setError(err);
+                      setBusy(false);
+                    }
+                  });
+                }}
+              >
+                카카오로 로그인
+              </button>
+              <div className="login-or">또는 이메일로</div>
               <input
                 ref={field}
                 className="email-field"
@@ -76,7 +146,7 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
                 disabled={!valid || busy}
                 onClick={() => void send()}
               >
-                {busy ? '보내는 중…' : '로그인 링크 받기'}
+                {busy ? '보내는 중…' : '로그인 메일 받기'}
                 <span>비밀번호 없이 메일의 링크로 들어와요</span>
               </button>
             </>
@@ -119,6 +189,17 @@ export function AccountChip() {
       </button>
       {menu && (
         <div className="acct-menu" role="menu">
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setMenu(false);
+              const next = prompt('"○○의 카운터픽"에 들어갈 이름 (20자까지)', user.name);
+              if (next !== null) setName(next);
+            }}
+          >
+            이름 바꾸기
+          </button>
           <button
             type="button"
             role="menuitem"

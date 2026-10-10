@@ -236,6 +236,16 @@ export function resetHero(id: HeroId) {
   set({ sheet });
 }
 
+/**
+ * 내 이름을 바꾼다 — "○○의 카운터픽" 에 들어가는 이름. 1~20자.
+ * 처음엔 카카오 닉네임이나 이메일 앞부분으로 정해지고, 여기서 바꾸면 그게 남는다.
+ */
+export function setName(name: string) {
+  const n = name.trim().slice(0, 20);
+  if (!state.user || !n) return;
+  set({ user: { ...state.user, name: n } });
+}
+
 /** 초기화 — 나무위키를 따라간다. */
 export function resetAll() {
   set({ sheet: null });
@@ -256,14 +266,43 @@ export async function findCode(input: string) {
 
 // ── 로그인 ─────────────────────────────────────────────
 
-/** 이메일로 로그인 링크를 보낸다. 링크를 누르면 이 사이트로 돌아와 로그인된다. 실패하면 이유. */
+/**
+ * 이메일로 로그인 메일을 보낸다. 실패하면 이유.
+ *
+ * 메일에는 숫자 코드와 링크가 같이 온다. 숫자를 이 창에 넣으면 새 탭 없이 그대로
+ * 로그인된다. 링크를 누르면 새 탭이 열리는데, 원래 탭도 같이 로그인된다(수파베이스가
+ * 탭끼리 로그인을 나눈다). 링크는 지금 보던 화면으로 돌아오게 한다.
+ */
 export async function sendLoginLink(email: string) {
   if (!supabase) return '수파베이스가 연결되지 않았어요.';
   const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: { emailRedirectTo: location.origin + import.meta.env.BASE_URL + 'edit' },
+    options: { emailRedirectTo: location.href },
   });
   return error ? error.message : null;
+}
+
+/**
+ * 카카오로 로그인한다. 카카오 로그인 화면으로 갔다가 지금 보던 화면으로 돌아온다.
+ *
+ * 수파베이스는 scopes 를 무엇으로 주든 account_email · profile_image · profile_nickname 을
+ * 늘 같이 요청한다. 그래서 카카오 앱의 동의항목에 셋이 모두 설정돼 있어야 한다(없으면
+ * KOE205). 이메일은 비즈 앱이어야 설정할 수 있다. 이름은 닉네임으로 정하고 직접 바꿀 수 있다.
+ */
+export async function loginWithKakao() {
+  if (!supabase) return '수파베이스가 연결되지 않았어요.';
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'kakao',
+    options: { redirectTo: location.href },
+  });
+  return error ? error.message : null;
+}
+
+/** 메일로 온 숫자 코드로 로그인한다. 실패하면 이유. */
+export async function verifyLoginCode(email: string, token: string) {
+  if (!supabase) return '수파베이스가 연결되지 않았어요.';
+  const { error } = await supabase.auth.verifyOtp({ email, token, type: 'email' });
+  return error ? '코드가 맞지 않거나 시간이 지났어요. 메일의 최신 코드를 넣어 주세요.' : null;
 }
 
 export async function logout() {
@@ -271,12 +310,12 @@ export async function logout() {
 }
 
 /** 로그인되면 제 줄을 불러온다. 로그인 전에 이 창에서 한 것이 있으면 그쪽이 이긴다. */
-async function signedIn(id: string, email: string | undefined) {
+async function signedIn(id: string, fallbackName: string) {
   if (!supabase) return;
   const { data: row } = await supabase.from('sheets').select(COLS).eq('owner', id).maybeSingle<SheetRow>();
   const draft = read<{ sheet: Sheet | null }>(session, DRAFT);
   const fresh = !!draft && draft.sheet !== null;
-  const user: User = { id, name: row?.name ?? (email?.split('@')[0] || '플레이어') };
+  const user: User = { id, name: row?.name ?? fallbackName };
 
   state = {
     user,
@@ -465,7 +504,12 @@ export function useMySheet() {
         // 같은 사람이면 다시 불러오지 않는다 — 탭을 오갈 때도 SIGNED_IN 이 오는데,
         // 그때 DB 값으로 덮으면 아직 저장 안 된 방금 고친 칸이 날아간다.
         if (state.user?.id !== auth.user.id) {
-          void signedIn(auth.user.id, auth.user.email);
+          // 처음 이름 — 카카오 닉네임, 없으면 이메일 앞부분. 한 번 정하면 DB 의 이름을 쓴다.
+          const meta = auth.user.user_metadata ?? {};
+          const nick = (meta.nickname ?? meta.name ?? meta.full_name ?? meta.preferred_username) as
+            | string
+            | undefined;
+          void signedIn(auth.user.id, nick?.trim() || auth.user.email?.split('@')[0] || '플레이어');
         }
       } else if (event === 'SIGNED_OUT' || (event === 'INITIAL_SESSION' && state.user)) {
         signedOut();

@@ -24,8 +24,6 @@ export interface User {
   id: string;
   /** 화면에 뜨는 이름 — "○○의 카운터픽". */
   name: string;
-  /** Battle.net 으로 들어왔으면 배틀태그가 확인된 사용자다(아직 없음). */
-  verified: boolean;
 }
 
 /** 상성표 한 장. `mine>enemy` → −3 … +3. 칸이 없으면 "적힌 것 없음"이다. */
@@ -278,7 +276,7 @@ async function signedIn(id: string, email: string | undefined) {
   const { data: row } = await supabase.from('sheets').select(COLS).eq('owner', id).maybeSingle<SheetRow>();
   const draft = read<{ sheet: Sheet | null }>(session, DRAFT);
   const fresh = !!draft && draft.sheet !== null;
-  const user: User = { id, name: row?.name ?? (email?.split('@')[0] || '플레이어'), verified: false };
+  const user: User = { id, name: row?.name ?? (email?.split('@')[0] || '플레이어') };
 
   state = {
     user,

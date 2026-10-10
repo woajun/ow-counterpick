@@ -892,11 +892,6 @@ footer code {
 .bar a.reset { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .edit-link:hover, .acct:hover { border-color: var(--accent); color: var(--accent); }
 .acct.on { color: var(--txt); display: inline-flex; align-items: center; gap: 6px; }
-.verified {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 15px; height: 15px; border-radius: 50%;
-  background: #148eff; color: #fff; font-size: 10px; font-weight: 700;
-}
 .acct-wrap { position: relative; }
 .acct-menu {
   position: absolute; right: 0; top: calc(100% + 6px); z-index: 30;
@@ -925,8 +920,8 @@ footer code {
 }
 .login-btn span { font-size: 11px; font-weight: 400; opacity: .8; }
 .login-btn:hover { border-color: var(--txt); }
-.login-btn.bnet { background: #148eff; border-color: #148eff; color: #fff; }
-.login-btn.bnet:hover { background: #0f7ae0; }
+.login-btn.main { background: #148eff; border-color: #148eff; color: #fff; }
+.login-btn.main:hover { background: #0f7ae0; }
 .login-body .mock-note { font-size: 11.5px; color: var(--faint); margin: 4px 0 0; }
 .login-body .reset.small { align-self: center; }
 

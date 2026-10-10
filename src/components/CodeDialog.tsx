@@ -76,7 +76,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
               <>
                 <h3>내 상성 코드</h3>
                 <p>코드는 계정에 붙어요. 로그인하면 고친 상성을 코드 하나로 건넬 수 있어요.</p>
-                <button type="button" className="login-btn bnet" onClick={() => setLogin(true)}>
+                <button type="button" className="login-btn main" onClick={() => setLogin(true)}>
                   로그인
                 </button>
               </>
@@ -95,7 +95,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
                   aria-label="내 상성 코드"
                   onFocus={(e) => e.currentTarget.select()}
                 />
-                <button type="button" className="login-btn bnet" onClick={() => void copy('link')} disabled={!code}>
+                <button type="button" className="login-btn main" onClick={() => void copy('link')} disabled={!code}>
                   {copied === 'link' ? '복사했어요' : '내 카운터픽 주소 복사'}
                   <span>{link || '코드를 받는 중…'}</span>
                 </button>
@@ -130,7 +130,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
               {error && <p className="code-error">{error}</p>}
               <button
                 type="button"
-                className="login-btn bnet"
+                className="login-btn main"
                 disabled={input.length !== CODE_LEN}
                 onClick={() => void use()}
               >

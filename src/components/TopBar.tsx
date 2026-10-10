@@ -19,8 +19,8 @@ const TABS = [
 export function TopBar({ children }: { children?: ReactNode }) {
   const { user, source, peek } = useMySheet();
   // 제목은 지금 보는 상성이 누구의 것인지 — 주소로 연 사람, 나무위키, 아니면 나.
-  // 배틀태그는 # 앞만, 이메일은 @ 앞만 — 제목이 길어지지 않게.
-  const short = (name: string) => name.split(/[#@]/)[0];
+  // 이메일은 @ 앞만 — 제목이 길어지지 않게.
+  const short = (name: string) => name.split('@')[0];
   const who = peek
     ? short(peek.owner)
     : source.kind === 'namu'

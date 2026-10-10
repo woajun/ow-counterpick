@@ -3,9 +3,6 @@ import { logout, sendLoginLink, useMySheet } from '../lib/mySheet';
 
 /**
  * 로그인 창 — 이메일로 로그인 링크를 받는다(비밀번호 없음).
- *
- * Battle.net 은 블리자드 개발자 앱을 등록한 다음에 붙인다. 배틀태그가 확인된
- * 사용자라 공유할 때 더 믿을 만하게 보일 것이다.
  */
 export function LoginDialog({ onClose }: { onClose: () => void }) {
   const field = useRef<HTMLInputElement>(null);
@@ -75,16 +72,12 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
               {error && <p className="code-error">{error}</p>}
               <button
                 type="button"
-                className="login-btn bnet"
+                className="login-btn main"
                 disabled={!valid || busy}
                 onClick={() => void send()}
               >
                 {busy ? '보내는 중…' : '로그인 링크 받기'}
                 <span>비밀번호 없이 메일의 링크로 들어와요</span>
-              </button>
-              <button type="button" className="login-btn" disabled>
-                Battle.net으로 로그인
-                <span>준비 중이에요</span>
               </button>
             </>
           )}
@@ -122,7 +115,6 @@ export function AccountChip() {
         aria-expanded={menu}
         onClick={() => setMenu((m) => !m)}
       >
-        {user.verified && <span className="verified" title="배틀태그 인증">✓</span>}
         {user.name}
       </button>
       {menu && (

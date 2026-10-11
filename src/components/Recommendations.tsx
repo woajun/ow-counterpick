@@ -148,7 +148,7 @@ export function Recommendations({ mode, team, size, onLit, onInfo }: Props) {
         <span className="lbl">추천</span>
         <span className="peek">
           {peek.length === 0 ? (
-            <i>{combo ? '우리 팀을 고르면 여기에 나옵니다' : '적을 고르면 여기에 나옵니다'}</i>
+            <i>영웅을 골라주세요</i>
           ) : (
             peek.map((it) => (
               <span
@@ -204,9 +204,7 @@ export function Recommendations({ mode, team, size, onLit, onInfo }: Props) {
 
       {enemies.length === 0 ? (
         <div className="rec-empty">
-          {combo
-            ? '아래에서 우리 팀 영웅을 고르면 어울리는 픽이 여기 나옵니다.'
-            : '아래에서 적 영웅을 고르면 유리한 픽이 여기 나옵니다.'}
+          영웅을 골라주세요
         </div>
       ) : blocks.length === 0 && avoid.length === 0 ? (
         <div className="rec-empty">

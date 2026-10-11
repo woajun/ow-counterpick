@@ -1193,7 +1193,6 @@ main.detail { display: block; max-width: 1480px; }
 .dv-card {
   padding: 16px 18px; margin-bottom: 18px;
   background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
-  box-shadow: inset 0 3px 0 0 var(--accent);
 }
 .dv-title { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .dv-title b { font-family: var(--display); font-size: 22px; font-weight: 600; color: var(--txt); }
@@ -1249,10 +1248,18 @@ button.pick-item { background: transparent; cursor: pointer; font: inherit; }
   margin-left: 6px; padding: 0 6px; border-radius: 10px; vertical-align: 1px;
   border: 1px dashed var(--line2); color: var(--faint); font-size: 10.5px;
 }
+/* 설명은 점수 바로 오른쪽, 같은 줄에 — 남는 폭을 쓰고 줄이 끊기지 않는다. */
 .dv-note {
-  grid-column: 2 / -1; margin: -2px 0 4px;
-  font-size: 12px; line-height: 1.5; color: var(--faint);
+  margin: 0; padding-left: 6px; border-left: 2px solid var(--line2);
+  font-size: 12.5px; line-height: 1.5; color: var(--dim);
 }
+/* 한 줄로 접어 두고, 넘치면 눌러서 펼친다. */
+.dv-note { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dv-note.long { cursor: pointer; }
+.dv-note.long:hover { color: var(--txt); }
+.dv-note.open { white-space: normal; overflow: visible; }
+.dv-fold { margin-left: 8px; color: var(--accent); font-size: 11.5px; }
+.dv-row:has(.dv-note.open) { align-items: start; }
 .dv-legend {
   display: flex; gap: 10px; flex-wrap: wrap; padding: 8px 14px;
   font-size: 11.5px; color: var(--dim); border-bottom: 1px solid var(--line);
@@ -1333,3 +1340,5 @@ main[data-mode] .slot.filled::before { display: none; }
 .syn-list li.zero { opacity: .45; }
 .syn-who { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--txt); min-width: 0; white-space: nowrap; }
 .syn-who .pic { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; flex: none; }
+/* 자세히 화면의 영웅 머리 — 위쪽 역할 색 줄은 뺀다(소개 카드와 맞춘다). */
+main.detail .ed-head { box-shadow: none; }

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 import { cellTone, signed } from '../lib/matrix';
 import { MOCK_BLURB, MOCK_NOTES } from '../data/mockNotes';
@@ -54,7 +54,7 @@ export function DetailView() {
   const subject: Subject = my.peek
     ? { name: my.peek.owner, code: my.peek.code, sheet: my.peek.sheet, updatedAt: my.peek.updatedAt, isNamu: false }
     : my.source.kind === 'mine'
-      ? { name: my.user?.name ?? '나', code: my.code, sheet: my.sheet, isNamu: false }
+      ? { name: my.user?.name ?? '내 상성', code: my.code, sheet: my.sheet, isNamu: false }
       : { name: '나무위키', sheet: null, isNamu: true };
 
   return (
@@ -85,30 +85,24 @@ function Overview({ subject }: { subject: Subject }) {
         <b>{subject.name}</b>
         {subject.code && <span className="mono">{subject.code}</span>}
       </div>
-      <div className="dv-stats">
-        {subject.isNamu ? (
-          <span>나무위키 영웅 문서의 상성 절을 옮긴 기본 표예요.</span>
-        ) : (
-          <>
-            {subject.code && (
-              <span>
-                ♥ <b>{likes ?? '…'}</b>
-              </span>
-            )}
-            {subject.updatedAt && (
-              <span>
-                마지막 수정 <b>{ago(subject.updatedAt)}</b>
-              </span>
-            )}
-          </>
-        )}
-      </div>
+      {!subject.isNamu && (subject.code || subject.updatedAt) && (
+        <div className="dv-stats">
+          {subject.code && (
+            <span>
+              ♥ <b>{likes ?? '…'}</b>
+            </span>
+          )}
+          {subject.updatedAt && (
+            <span>
+              마지막 수정 <b>{ago(subject.updatedAt)}</b>
+            </span>
+          )}
+        </div>
+      )}
       {/* 주인이 쓰는 한마디 — 목업 */}
       <p className="dv-blurb">
-        {subject.isNamu
-          ? '나무위키 영웅 문서에 적힌 등급을 그대로 옮겼어요. 왜 그런지는 각 영웅 문서의 상성 절에서 볼 수 있어요.'
-          : MOCK_BLURB}
-        <span className="dv-mock">예시</span>
+        {subject.isNamu ? '나무위키 영웅 문서의 상성 절을 그대로 옮긴 기본 표예요.' : MOCK_BLURB}
+        {!subject.isNamu && <span className="dv-mock">예시</span>}
       </p>
     </section>
   );
@@ -195,12 +189,6 @@ function HeroLines({ subject }: { subject: Subject }) {
             </button>
           </div>
 
-          {combo && (
-            <div className="dv-legend">
-              +2 찰떡 궁합 · +1 좋은 편 · −1 안 어울림 · — 평가 없음
-              <span>나무위키 궁합 절을 읽고 매긴 값이에요. 아직 고칠 수 없어요.</span>
-            </div>
-          )}
 
           {ROLES.map((r) => {
             const list = rows.filter((e) => HEROES[e].r === r.k);
@@ -234,7 +222,7 @@ function HeroLines({ subject }: { subject: Subject }) {
                         <span />
                       )}
                       {/* 왜 이 점수인지 — 목업. 나중엔 표 주인이 칸마다 쓴다. */}
-                      {!combo && MOCK_NOTES[`${id}>${e}`] && <p className="dv-note">{MOCK_NOTES[`${id}>${e}`]}</p>}
+                      {!combo && MOCK_NOTES[`${id}>${e}`] && <Note key={id + e} text={MOCK_NOTES[`${id}>${e}`]} />}
                     </div>
                   );
                 })}
@@ -244,6 +232,39 @@ function HeroLines({ subject }: { subject: Subject }) {
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * 한 줄 설명 — 넘치면 한 줄로 접어 두고 눌러서 펼친다. 줄마다 설명 길이가 달라도
+ * 표가 들쭉날쭉해지지 않는다. 한 줄에 다 들어가면 펼칠 것도 없다.
+ */
+function Note({ text }: { text: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const [open, setOpen] = useState(false);
+  const [long, setLong] = useState(false);
+
+  // 접힌 상태에서 글이 칸보다 길면 펼치기 단추를 단다. 화면 폭이 바뀌면 다시 잰다.
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el || open) return;
+    const measure = () => setLong(el.scrollWidth > el.clientWidth + 1);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [open, text]);
+
+  return (
+    <p
+      ref={ref}
+      className={'dv-note' + (open ? ' open' : '') + (long || open ? ' long' : '')}
+      onClick={() => (long || open) && setOpen((v) => !v)}
+      title={long && !open ? '눌러서 펼치기' : undefined}
+    >
+      {text}
+      {open && <span className="dv-fold">접기</span>}
+    </p>
   );
 }
 

@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, NavLink } from 'react-router';
-import { likeCounts, likeSheet, likedToday, useMySheet } from '../lib/mySheet';
+import { likeCounts, likeSheet, likedToday, likedTodayServer, unlikeSheet, useMySheet } from '../lib/mySheet';
 import { AccountChip } from './Account';
 
 /**
@@ -64,20 +64,26 @@ export function TopBar({ children }: { children?: ReactNode }) {
 
 /**
  * 제목 옆 추천(♥) — 남의 표면 눌러서 추천한다(로그인 없이, 하루 한 번 · DB 가 가린다).
+ * 한 번 더 누르면 오늘 누른 추천을 거둔다.
  * 내 표면 받은 수만 보인다.
  */
 function TitleLike({ code, canLike }: { code: string; canLike: boolean }) {
   const [likes, setLikes] = useState<number | null>(null);
-  const [justLiked, setJustLiked] = useState<string | null>(null);
-  const liked = justLiked === code || likedToday(code);
+  /** 이 화면에서 바꾼 상태 — 없으면 브라우저에 남은 "오늘 눌렀나" 를 따른다. */
+  const [mine, setMine] = useState<{ code: string; liked: boolean } | null>(null);
+  const [busy, setBusy] = useState(false);
+  const liked = mine?.code === code ? mine.liked : likedToday(code);
   useEffect(() => {
     let alive = true;
     void likeCounts().then((m) => alive && setLikes(m.get(code) ?? 0));
+    // 브라우저 기록은 이 브라우저에서 누른 것만 안다 — DB 에 물어 맞춘다.
+    if (canLike)
+      void likedTodayServer(code).then((v) => alive && v !== null && setMine({ code, liked: v }));
     return () => {
       alive = false;
       setLikes(null);
     };
-  }, [code]);
+  }, [code, canLike]);
 
   if (!canLike)
     return (
@@ -90,13 +96,21 @@ function TitleLike({ code, canLike }: { code: string; canLike: boolean }) {
       type="button"
       className={'like-btn title-like' + (liked ? ' on' : '')}
       aria-pressed={liked}
-      title={liked ? '오늘은 이미 추천했어요' : '추천 — 하루 한 번'}
+      title={liked ? '추천 취소' : '추천 — 하루 한 번'}
+      disabled={busy}
       onClick={async () => {
-        if (liked) return;
-        setJustLiked(code);
-        const r = await likeSheet(code);
+        // 누르자마자 바꿔 보이고, 실패하면 되돌린다.
+        const next = !liked;
+        setBusy(true);
+        setMine({ code, liked: next });
+        setLikes((n) => (n === null ? n : n + (next ? 1 : -1)));
+        const r = next ? await likeSheet(code) : await unlikeSheet(code);
         if (r) setLikes(r.likes);
-        else setJustLiked(null);
+        else {
+          setMine({ code, liked: !next });
+          setLikes((n) => (n === null ? n : n + (next ? -1 : 1)));
+        }
+        setBusy(false);
       }}
     >
       ♥ {likes ?? '…'}

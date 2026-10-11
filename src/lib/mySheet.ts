@@ -295,11 +295,19 @@ export async function sendLoginLink(email: string) {
  * 늘 같이 요청한다. 그래서 카카오 앱의 동의항목에 셋이 모두 설정돼 있어야 한다(없으면
  * KOE205). 이메일은 비즈 앱이어야 설정할 수 있다. 이름은 닉네임으로 정하고 직접 바꿀 수 있다.
  */
-export async function loginWithKakao() {
+/** "내 상성표 만들기" 로 로그인했다는 표시 — 카카오에 다녀오는 동안 이 탭에 남긴다. 값은 보던 코드. */
+const START = 'ow-counterpick.start';
+
+/**
+ * 카카오로 로그인한다. `start` 를 주면 "내 상성표 만들기" — 로그인하면 수정 화면으로 가고,
+ * 아직 표가 없는 사람이면 보던 코드(start.code)의 표를 복사해 시작한다.
+ */
+export async function loginWithKakao(start?: { code: string | null }) {
   if (!supabase) return '수파베이스가 연결되지 않았어요.';
+  if (start) write(session, START, { code: start.code });
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'kakao',
-    options: { redirectTo: location.href },
+    options: { redirectTo: start ? `${location.origin}${import.meta.env.BASE_URL}edit` : location.href },
   });
   return error ? error.message : null;
 }
@@ -335,11 +343,23 @@ async function signedIn(id: string, fallbackName: string) {
   if (!supabase) return;
   const { data: row } = await supabase.from('sheets').select(COLS).eq('owner', id).maybeSingle<SheetRow>();
   const user: User = { id, name: row?.name ?? fallbackName };
+  let sheet = row?.sheet ? clean(row.sheet) : null;
+
+  // "내 상성표 만들기" 로 들어왔고 아직 내 표가 없으면 — 보던 사람 표를 복사해 시작한다.
+  // 이미 표가 있는 사람은 덮어쓰지 않는다.
+  const start = read<{ code: string | null }>(session, START);
+  if (start) {
+    write(session, START, null);
+    if (!sheet && start.code) {
+      const hit = await fetchCode(normalizeCode(start.code));
+      if (hit?.sheet) sheet = { ...hit.sheet };
+    }
+  }
 
   state = {
     user,
     code: row?.code,
-    sheet: row?.sheet ? clean(row.sheet) : null,
+    sheet,
   };
   persist(); // 줄이 없으면 이때 만들어지고 코드를 받는다
   emit();
@@ -416,6 +436,32 @@ export async function likeSheet(code: string): Promise<{ liked: boolean; likes: 
   book[code] = today();
   write(local, LIKED, book);
   return data as { liked: boolean; likes: number };
+}
+
+/**
+ * 오늘 이 표에 눌렀나 — DB 에 묻는다(계정이나 IP 기준). 다른 브라우저에서 누른 것도 안다.
+ * 물어볼 수 없으면 null. 답에 맞춰 이 브라우저의 기록도 고쳐 둔다.
+ */
+export async function likedTodayServer(code: string): Promise<boolean | null> {
+  if (!supabase) return null;
+  const { data, error } = await supabase.rpc('liked_today', { p_code: code });
+  if (error || typeof data !== 'boolean') return null;
+  const book = read<Record<string, string>>(local, LIKED) ?? {};
+  if (data) book[code] = today();
+  else delete book[code];
+  write(local, LIKED, book);
+  return data;
+}
+
+/** 오늘 누른 좋아요를 거둔다(한 번 더 누르면). 실패하면 null. */
+export async function unlikeSheet(code: string): Promise<{ unliked: boolean; likes: number } | null> {
+  if (!supabase) return null;
+  const { data, error } = await supabase.rpc('unlike_sheet', { p_code: code });
+  if (error || !data || (data as { error?: string }).error) return null;
+  const book = read<Record<string, string>>(local, LIKED) ?? {};
+  delete book[code];
+  write(local, LIKED, book);
+  return data as { unliked: boolean; likes: number };
 }
 
 /** 코드별 좋아요 수. */

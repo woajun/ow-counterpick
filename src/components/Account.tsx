@@ -12,7 +12,14 @@ import { deleteAccount, loginWithKakao, logout, sendLoginLink, setName, useMyShe
 const EMAIL_LOGIN = false;
 const OTP_IN_MAIL = false;
 
-export function LoginDialog({ onClose }: { onClose: () => void }) {
+export function LoginDialog({
+  onClose,
+  start,
+}: {
+  onClose: () => void;
+  /** "내 상성표 만들기" 로 열었을 때 — 보던 코드(없으면 null). */
+  start?: { code: string | null };
+}) {
   const field = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
@@ -60,7 +67,12 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
     >
       <div className="hero-sheet login" role="dialog" aria-modal="true" aria-label="로그인">
         <div className="login-body">
-          <h3>로그인</h3>
+          <div className="login-top">
+            <h3>로그인</h3>
+            <button type="button" className="hs-icon hs-close" aria-label="닫기" onClick={onClose}>
+              ✕
+            </button>
+          </div>
           {sent && !OTP_IN_MAIL ? (
             <p>
               <b>{email.trim()}</b>로 메일을 보냈어요. 메일의 링크를 누르면 로그인돼요. 새 탭이
@@ -111,7 +123,7 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
                 disabled={busy}
                 onClick={() => {
                   setBusy(true);
-                  void loginWithKakao().then((err) => {
+                  void loginWithKakao(start).then((err) => {
                     // 성공하면 카카오 화면으로 넘어가서 여기로 안 돌아온다.
                     if (err) {
                       setError(err);
@@ -155,9 +167,6 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
               {!EMAIL_LOGIN && error && <p className="code-error">{error}</p>}
             </>
           )}
-          <button type="button" className="reset small" onClick={onClose}>
-            {sent ? '닫기' : '나중에'}
-          </button>
         </div>
       </div>
     </div>
@@ -166,17 +175,18 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
 
 /** 상단 바 오른쪽 — 로그인 단추나 내 계정. */
 export function AccountChip() {
-  const { user } = useMySheet();
+  const { user, peek } = useMySheet();
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(false);
 
   if (!user) {
     return (
       <>
+        {/* 로그인보다 왜 로그인하는지가 먼저 읽히게. 남의 표를 보던 중이면 그 표로 시작한다. */}
         <button type="button" className="reset acct" onClick={() => setOpen(true)}>
-          로그인
+          내 상성표 만들기
         </button>
-        {open && <LoginDialog onClose={() => setOpen(false)} />}
+        {open && <LoginDialog start={{ code: peek?.code ?? null }} onClose={() => setOpen(false)} />}
       </>
     );
   }

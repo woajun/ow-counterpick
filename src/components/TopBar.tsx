@@ -18,7 +18,7 @@ const TABS = [
 
 /** children 은 계정 단추 앞에 놓인다 — 상성표(/table) 처럼 헤더에 도구가 꼭 필요한 화면만 쓴다. */
 export function TopBar({ children }: { children?: ReactNode }) {
-  const { user, code, source, peek } = useMySheet();
+  const { user, code, source, peek, peekPending } = useMySheet();
   // 제목은 지금 보는 상성이 누구의 것인지 — 주소로 연 사람, 나무위키, 아니면 나.
   // 이메일은 @ 앞만 — 제목이 길어지지 않게.
   const short = (name: string) => name.split('@')[0];
@@ -30,14 +30,21 @@ export function TopBar({ children }: { children?: ReactNode }) {
         ? short(user.name)
         : '나무위키';
   // 추천(♥) 받는 표 — 주소로 연 사람의 표, 아니면 내 카운터픽. 나무위키는 없다.
-  const likeCode = peek ? peek.code : user && source.kind === 'mine' ? code : undefined;
+  // 남의 표를 받아 오는 중이면 그 코드를 흐리게 — 잠깐 "나무위키" 로 보였다가 바뀌지 않게.
+  const likeCode = peekPending ? undefined : peek ? peek.code : user && source.kind === 'mine' ? code : undefined;
   return (
     <header className="bar">
       {/* 로고와 제목을 누르면 인게임 추천(첫 화면, 주소 `/`)으로 — 자세히나 남의 코드를 보던
           중이어도 게임에 바로 쓰는 화면으로 돌아온다. */}
       <Link className="brand" to="/" aria-label="인게임 추천으로">
         <span className="mark">OW</span>
-        <h1>{who}</h1>
+        {peekPending ? (
+          <h1 className="loading" title="불러오는 중">
+            {peekPending}
+          </h1>
+        ) : (
+          <h1>{who}</h1>
+        )}
       </Link>
       {likeCode && <TitleLike code={likeCode} canLike={!!peek} />}
 

@@ -74,6 +74,8 @@ export function CounterPage() {
   };
   const navigate = useNavigate();
   const [missing, setMissing] = useState(false);
+  // 로그인 · 로그아웃할 때도 다시 받아 온다 — 로그인하는 사이 요청이 멈춰 남의 표가 안 뜨는 일이 있었다.
+  const uid = sheet.user?.id;
   useEffect(() => {
     if (!code || isMine) return;
     let alive = true;
@@ -83,7 +85,7 @@ export function CounterPage() {
       setMissing(false);
       stopPeek();
     };
-  }, [code, isMine]);
+  }, [code, isMine, uid]);
 
   return (
     <>

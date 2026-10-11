@@ -383,13 +383,22 @@ export interface Peek {
   updatedAt: string;
 }
 let peek: Peek | null = null;
+/** 마지막으로 부탁한 표 — 늦게 온 예전 답이 지금 보는 표를 덮지 않게. */
+let peekTicket = 0;
+/** 받아 오는 중인 코드 — 그동안 제목이 나무위키로 보이지 않게. */
+let peekPending: string | null = null;
 
 /**
  * 이 코드의 표로 본다 — 주소 `?code=코드` 로 들어왔을 때. 내 상태는 안 건드려서
  * 로그인 없이도 그 사람 카운터픽이 바로 뜬다. 없는 코드면 false.
  */
 export async function peekCode(code: string) {
-  const hit = await fetchCode(normalizeCode(code));
+  const ticket = ++peekTicket;
+  peekPending = normalizeCode(code);
+  subs.forEach((f) => f());
+  const hit = await fetchCode(peekPending);
+  if (ticket !== peekTicket) return !!hit; // 그 사이 다른 표를 열었거나 닫았다
+  peekPending = null;
   peek = hit
     ? { code: hit.row.code, owner: hit.row.name, sheet: hit.sheet, matrix: toMatrix(hit.sheet), updatedAt: hit.row.updated_at }
     : null;
@@ -398,8 +407,10 @@ export async function peekCode(code: string) {
 }
 
 export function stopPeek() {
-  if (!peek) return;
+  peekTicket++;
+  if (!peek && !peekPending) return;
   peek = null;
+  peekPending = null;
   subs.forEach((f) => f());
 }
 
@@ -520,10 +531,15 @@ const subscribe = (f: () => void) => {
   return () => subs.delete(f);
 };
 
-let snap: { state: State; matrix: Matrix; peek: Peek | null } = { state, matrix, peek };
+let snap: { state: State; matrix: Matrix; peek: Peek | null; pending: string | null } = {
+  state,
+  matrix,
+  peek,
+  pending: peekPending,
+};
 const getSnap = () => {
-  if (snap.state !== state || snap.matrix !== matrix || snap.peek !== peek)
-    snap = { state, matrix, peek };
+  if (snap.state !== state || snap.matrix !== matrix || snap.peek !== peek || snap.pending !== peekPending)
+    snap = { state, matrix, peek, pending: peekPending };
   return snap;
 };
 
@@ -537,6 +553,8 @@ export function useMySheet() {
     matrix: s.matrix,
     /** 둘러보는 중이면 그 사람 표. */
     peek: s.peek,
+    /** 주소의 코드를 받아 오는 중이면 그 코드. */
+    peekPending: s.pending,
     /** 추천 화면이 쓸 표 — 둘러보는 중이면 그 사람 것, 아니면 내 것. */
     viewMatrix: s.peek?.matrix ?? s.matrix,
     /** 추천 화면이 쓸 "적힌 값 없음" 판정. */

@@ -1185,6 +1185,9 @@ span.title-like { padding-left: 0; }
 }
 a.brand { text-decoration: none; color: inherit; }
 a.brand:hover h1 { color: var(--accent); }
+/* 남의 표를 받아 오는 중 — 코드를 흐리게 깜빡인다 */
+.brand h1.loading { color: var(--faint); letter-spacing: .08em; animation: title-wait 1.2s ease-in-out infinite; }
+@keyframes title-wait { 50% { opacity: .45; } }
 
 /* 살펴보기 */
 /* 인게임 화면과 같은 폭 — 모드를 바꿔도 도구줄 · 내용의 왼쪽 끝이 그대로다. */

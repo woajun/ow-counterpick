@@ -2,10 +2,8 @@ import { useEffect } from 'react';
 import { HEROES, portrait, type HeroId } from '../data/heroes';
 import { cellTone, signed } from '../lib/matrix';
 import { synergyVerdict } from '../lib/score';
-import { SYNERGY } from '../data/synergy';
-
-/** 점수에 마우스를 올리면 뜨는 뜻 — 화면에는 숫자만 둔다. */
-const LABEL: Record<number, string> = { 2: '찰떡 궁합', 1: '좋은 편', 0: '평가 없음', [-1]: '안 어울림' };
+import { SYN_LABEL } from '../data/synergy';
+import { useMySheet } from '../lib/mySheet';
 
 /**
  * 팀 궁합 풀이 — 팀 칸 머리줄의 [팀 궁합] 을 누르면 뜬다.
@@ -30,10 +28,11 @@ export function SynergyDialog({
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose]);
 
+  const { viewSynergy } = useMySheet();
   const pairs: { a: HeroId; b: HeroId; v: number }[] = [];
   for (let i = 0; i < ids.length; i++)
     for (let j = i + 1; j < ids.length; j++)
-      pairs.push({ a: ids[i], b: ids[j], v: SYNERGY[ids[i]]?.[ids[j]] ?? 0 });
+      pairs.push({ a: ids[i], b: ids[j], v: viewSynergy[ids[i]]?.[ids[j]] ?? 0 });
   const total = pairs.reduce((s, p) => s + p.v, 0);
   const avg = pairs.length ? total / pairs.length : 0;
   // 점수 높은 짝부터 — 위에서 아래로 읽으면 점수가 어디서 왔는지 보인다.
@@ -67,7 +66,7 @@ export function SynergyDialog({
                 <img className="pic" src={portrait(p.b)} alt="" />
                 {HEROES[p.b].ko}
               </span>
-              <span className={'hs-badge ' + (p.v === 0 ? 'blank' : cellTone(p.v))} title={LABEL[p.v]}>
+              <span className={'hs-badge ' + (p.v === 0 ? 'blank' : cellTone(p.v))} title={p.v === 0 ? '평가 없음 · 보통' : SYN_LABEL[p.v]}>
                 {p.v === 0 ? '·' : signed(p.v)}
               </span>
             </li>

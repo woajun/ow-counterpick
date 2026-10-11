@@ -45,8 +45,10 @@ body {
 
 button, input { font: inherit; color: inherit; }
 
+/* 포커스 — 주황(강조색)은 너무 튀어서 흐린 흰색 테두리로. 키보드로 옮겨 다닐 때 어디 있는지만 보이면 된다. */
+:root { --focus: color-mix(in srgb, var(--txt) 45%, transparent); }
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
   border-radius: 3px;
 }
@@ -104,7 +106,7 @@ button, input { font: inherit; color: inherit; }
 }
 .search::placeholder { color: var(--faint); }
 .search:focus {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--line2));
+  border-color: var(--focus);
   outline: none;
 }
 
@@ -792,15 +794,6 @@ footer code {
 .hs-icon:hover { border-color: var(--accent); color: var(--accent); }
 .hs-close:hover { border-color: var(--bad); color: var(--bad); }
 
-/* 나무위키 로고는 그 자체가 동그란 마크라 테두리를 덧그릴 필요가 없다.
-   자체 색을 가진 그림이라 글자색으로도 못 물들여서, 평소엔 조금 죽여 두고
-   올렸을 때 제 색을 낸다. */
-.hs-wiki { border: 0; padding: 0; }
-.hs-wiki img {
-  width: 100%; height: 100%; display: block;
-  border-radius: 50%; opacity: .82;
-}
-.hs-wiki:hover img { opacity: 1; }
 
 .hs-body {
   overflow: auto; overscroll-behavior: contain;
@@ -1016,11 +1009,41 @@ button.link {
   border: 1px solid var(--line2); background: transparent; color: var(--dim);
 }
 .undo:hover { border-color: var(--accent); color: var(--accent); }
+/* 칸마다 설명 — 줄 오른쪽 끝 단추, 쓴 설명은 줄 아래에 이름 줄에 맞춰 */
+.note-btn {
+  justify-self: end; padding: 3px 9px; cursor: pointer; border-radius: 12px;
+  border: 1px solid var(--line2); background: transparent; color: var(--faint); font-size: 11.5px;
+}
+.note-btn:hover, .note-btn[aria-expanded='true'] { border-color: var(--accent); color: var(--accent); }
+.note-btn.has { color: var(--dim); border-style: solid; }
+.ed-note {
+  margin: 0 6px 4px 44px; cursor: pointer;
+  font-size: 12px; color: var(--dim); line-height: 1.5; white-space: pre-wrap;
+}
+.ed-note:hover { color: var(--txt); }
+.ed-note-edit { margin: 2px 6px 8px 44px; position: relative; }
+.ed-note-edit textarea {
+  width: 100%; box-sizing: border-box; resize: vertical; padding: 7px 9px 18px;
+  background: var(--bg); color: var(--txt); border: 1px solid var(--focus); border-radius: 7px;
+  font: inherit; font-size: 12.5px; line-height: 1.5;
+}
+.ed-note-edit .cnt { position: absolute; right: 9px; bottom: 7px; font-size: 10.5px; color: var(--faint); }
+/* 표 한마디 */
+.blurb-field { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 13px; color: var(--dim); }
+.blurb-field > span { flex: none; }
+.blurb-input {
+  flex: 1; min-width: 0; padding: 8px 11px;
+  background: var(--panel); color: var(--txt); border: 1px solid var(--line2); border-radius: 8px; font: inherit;
+}
+.blurb-input:focus { outline: none; border-color: var(--focus); }
+
 @media (max-width: 640px) {
-  .ed-row { grid-template-columns: 24px minmax(0, 1fr); row-gap: 4px; }
+  .ed-row { grid-template-columns: 24px minmax(0, 1fr) auto; row-gap: 4px; }
   .ed-row .steps { grid-column: 1 / -1; }
   .ed-row .step { flex: 1; width: auto; }
   .ed-row .was { grid-column: 1 / -1; }
+  .ed-note, .ed-note-edit { margin-left: 6px; }
+  .ed-row .note-btn { grid-row: 1; grid-column: 3; }
 }
 
 /* 상성 시트 — 내가 고친 칸 */
@@ -1043,7 +1066,7 @@ button.link {
   letter-spacing: .32em; text-transform: uppercase;
 }
 .code-field::placeholder { color: var(--faint); opacity: .5; }
-.code-field:focus { outline: none; border-color: color-mix(in srgb, var(--accent) 55%, var(--line2)); }
+.code-field:focus { outline: none; border-color: var(--focus); }
 .login-body .code-error { color: var(--bad); font-size: 12px; margin: 0; }
 .login-btn:disabled { opacity: .45; cursor: not-allowed; }
 .save-note.linked {
@@ -1140,7 +1163,7 @@ button.link {
   background: var(--panel); border: 1px solid var(--line2); border-radius: 8px;
   color: var(--txt); font-size: 14px;
 }
-.email-field:focus { outline: none; border-color: color-mix(in srgb, var(--accent) 55%, var(--line2)); }
+.email-field:focus { outline: none; border-color: var(--focus); }
 .like-btn {
   display: inline-flex; align-items: center; gap: 4px;
   padding: 5px 12px; cursor: pointer; border-radius: 20px;
@@ -1223,10 +1246,6 @@ button.pick-item { background: transparent; cursor: pointer; font: inherit; }
 }
 .page-tools + main, .page-tools ~ .peek-bar + main { padding-top: 12px; }
 .dv-blurb { margin: 10px 0 0; font-size: 13px; color: var(--dim); line-height: 1.6; }
-.dv-mock {
-  margin-left: 6px; padding: 0 6px; border-radius: 10px; vertical-align: 1px;
-  border: 1px dashed var(--line2); color: var(--faint); font-size: 10.5px;
-}
 /* 설명은 점수 바로 오른쪽, 같은 줄에 — 남는 폭을 쓰고 줄이 끊기지 않는다. */
 .dv-note {
   margin: 0; padding-left: 6px; border-left: 2px solid var(--line2);
@@ -1415,6 +1434,18 @@ main.detail .ed-head { box-shadow: none; }
 }
 .dv-likes b { font-family: var(--display); font-size: 16px; font-variant-numeric: tabular-nums; }
 .sm-list.safe .sc { color: var(--good); }
+/* 찰떡 조합 — 순위 · 5명 · 합 */
+.sm-teams { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+.sm-team { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: center; gap: 10px; }
+.sm-team .rk { font-family: var(--display); font-size: 13px; color: var(--faint); text-align: center; }
+.sm-team-ids { display: flex; flex-wrap: wrap; gap: 2px 4px; }
+.sm-mate {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px 3px 3px; cursor: pointer;
+  border: 0; border-radius: 16px; background: transparent; color: var(--txt); font-size: 13px;
+}
+.sm-mate:hover { background: var(--panel2); }
+.sm-mate .pic { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+.sm-team-sc { font-family: var(--display); font-size: 15px; font-variant-numeric: tabular-nums; color: var(--good); }
 /* 설명 아이콘 — 올리면 말풍선 */
 .info {
   position: relative; display: inline-flex; align-items: center; justify-content: center;
@@ -1424,8 +1455,9 @@ main.detail .ed-head { box-shadow: none; }
 }
 .info:hover, .info:focus { color: var(--txt); border-color: var(--dim); outline: none; }
 .info::after {
-  content: attr(data-tip); position: absolute; left: 50%; top: calc(100% + 8px); z-index: 20;
-  transform: translateX(-50%); width: max-content; max-width: 260px;
+  /* 아이콘 왼쪽 끝에 맞춰 오른쪽으로 편다 — 가운데 맞춤은 왼쪽 끝 제목 옆에서 칸 밖으로 잘렸다. */
+  content: attr(data-tip); position: absolute; left: -6px; top: calc(100% + 8px); z-index: 20;
+  width: max-content; max-width: min(300px, calc(100vw - 48px));
   padding: 7px 10px; border-radius: 8px;
   background: var(--panel2); border: 1px solid var(--line2); box-shadow: 0 8px 24px rgb(0 0 0 / .45);
   color: var(--txt); font-family: var(--body); font-size: 12px; font-weight: 400; line-height: 1.5;
@@ -1433,3 +1465,22 @@ main.detail .ed-head { box-shadow: none; }
   opacity: 0; visibility: hidden; transition: opacity .12s;
 }
 .info:hover::after, .info:focus::after { opacity: 1; visibility: visible; }
+
+/* 영웅 창 — 설명이 있는 상대 칸은 눌러서 펼친다. 이름 밑 점선이 "눌러 볼 수 있음" 표시. */
+.hs-now-item.has-note { cursor: pointer; }
+.hs-now-item.has-note .nm { text-decoration: underline dotted; text-underline-offset: 3px; text-decoration-color: var(--faint); }
+.hs-now-item.has-note:hover {
+  background: color-mix(in srgb, var(--txt) 7%, var(--bg2));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--txt) 30%, transparent);
+}
+.hs-now-item.on {
+  background: color-mix(in srgb, var(--txt) 10%, var(--bg2));
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--txt) 70%, transparent);
+}
+.hs-now-item.on .nm { color: var(--txt); font-weight: 600; text-decoration: none; }
+.hs-now-note {
+  display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 8px; align-items: start;
+  margin: 10px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--dim);
+}
+.hs-now-note .pic { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-top: 1px; }
+.hs-now-note b { color: var(--txt); font-weight: 600; margin-right: 4px; }

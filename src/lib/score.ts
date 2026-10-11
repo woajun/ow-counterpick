@@ -1,7 +1,7 @@
 import { HEROES, HERO_IDS, type HeroId, type Role } from '../data/heroes';
 import type { Level } from '../data/matchups';
 import { MATRIX, type Matrix } from './matrix';
-import { SYNERGY } from '../data/synergy';
+import type { SynTable } from '../data/synergy';
 import { canAdd, type TeamSize } from './roster';
 
 /** 한 칸이 얹을 수 있는 가장 센 점수. 막대를 채우는 기준이 된다. */
@@ -118,20 +118,20 @@ export const scaleFor = (enemyCount: number) =>
 /**
  * 우리 팀 조합에 대해 아직 넣을 수 있는 영웅을 점수로 매긴다 — 조합 모드.
  *
- * 카운터와 같은 단순 합이다. 팀원 하나하나와의 궁합 등급(+2 · +1 · 0 · −1)을 더한다.
+ * 카운터와 같은 단순 합이다. 팀원 하나하나와의 궁합 점수(−3 … +3, 나무위키는 +2 · +1 · −1)를 더한다.
  * 근거(reasons)의 `enemy` 칸에는 여기서는 팀원이 들어간다.
  *
  * <b>자리가 없는 역할은 아예 매기지 않는다</b> — 5v5 에서 탱커가 이미 있으면 탱커는
  * 고를 수 없으니 추천할 이유가 없다. 그런 영웅은 결과에서 빠진다(값이 없다).
  */
-export function scoreCombo(allies: HeroId[], size: TeamSize): Partial<Record<HeroId, Scored>> {
+export function scoreCombo(allies: HeroId[], size: TeamSize, syn: SynTable): Partial<Record<HeroId, Scored>> {
   const out: Partial<Record<HeroId, Scored>> = {};
   for (const id of HERO_IDS) {
     if (!canAdd(allies, size, id)) continue;
     const reasons: Reason[] = [];
     let value = 0;
     for (const mate of allies) {
-      const lv = SYNERGY[id]?.[mate];
+      const lv = syn[id]?.[mate];
       if (lv) {
         value += lv;
         reasons.push({ enemy: mate, level: lv as Level });
@@ -147,14 +147,14 @@ export function scoreCombo(allies: HeroId[], size: TeamSize): Partial<Record<Her
  * 팀 궁합 — 고른 영웅끼리 짝지은 궁합 등급의 합. 5명이면 10짝, 6명이면 15짝이다.
  *
  * 상성 모드에서는 적 팀이 얼마나 잘 짜였는지, 조합 모드에서는 우리 팀이 얼마나 잘
- * 맞는지 본다. 등급은 나무위키 궁합(+2 · +1 · −1, 평가 없으면 0)이다.
+ * 맞는지 본다. 점수는 보고 있는 표의 궁합이다(평가 없으면 0).
  */
-export function teamSynergy(ids: HeroId[]) {
+export function teamSynergy(ids: HeroId[], syn: SynTable) {
   const pairs: { a: HeroId; b: HeroId; level: number }[] = [];
   let total = 0;
   for (let i = 0; i < ids.length; i++) {
     for (let j = i + 1; j < ids.length; j++) {
-      const level = SYNERGY[ids[i]]?.[ids[j]] ?? 0;
+      const level = syn[ids[i]]?.[ids[j]] ?? 0;
       total += level;
       if (level !== 0) pairs.push({ a: ids[i], b: ids[j], level });
     }
@@ -167,3 +167,44 @@ export function teamSynergy(ids: HeroId[]) {
 /** 한 짝 평균으로 붙이는 한마디. */
 export const synergyVerdict = (avg: number) =>
   avg >= 0.9 ? '찰떡' : avg >= 0.5 ? '잘 어울림' : avg > 0.1 ? '무난' : avg > -0.2 ? '따로 놂' : '안 어울림';
+
+/**
+ * 궁합이 가장 좋은 5명(탱커 1 · 딜러 2 · 지원 2) — 짝마다 궁합 점수를 더한 합이 큰 순으로 `top` 개.
+ *
+ * 탱커마다 가장 좋은 조합 하나씩만 겨룬다 — 그냥 상위 3개를 뽑으면 한두 명만 바뀐 비슷한
+ * 조합이 줄줄이 나온다. 탱커가 달라야 고를 거리가 된다.
+ *
+ * 다 세어 본다. 탱커 × 딜러 두 명 × 지원 두 명이라 30만 가지 남짓이고, 한 번에 몇십 ms 다.
+ * 합이 같으면 먼저 찾은 것(영웅 목록 순)이 앞이라 순서가 흔들리지 않는다.
+ */
+export function bestTeams(syn: SynTable, top = 3) {
+  const of = (r: Role) => HERO_IDS.filter((h) => HEROES[h].r === r);
+  const tanks = of('tank');
+  const dmg = of('dmg');
+  const sup = of('sup');
+  const v = (a: HeroId, b: HeroId) => syn[a]?.[b] ?? 0;
+  const pairs = (list: HeroId[]) => {
+    const out: { a: HeroId; b: HeroId; v: number }[] = [];
+    for (let i = 0; i < list.length; i++)
+      for (let j = i + 1; j < list.length; j++) out.push({ a: list[i], b: list[j], v: v(list[i], list[j]) });
+    return out;
+  };
+  const dPairs = pairs(dmg);
+  const sPairs = pairs(sup);
+
+  const perTank: { ids: HeroId[]; total: number }[] = [];
+  for (const t of tanks) {
+    let best: { ids: HeroId[]; total: number } | null = null;
+    for (const d of dPairs) {
+      const td = v(t, d.a) + v(t, d.b) + d.v;
+      for (const s of sPairs) {
+        const total =
+          td + v(t, s.a) + v(t, s.b) + s.v + v(d.a, s.a) + v(d.a, s.b) + v(d.b, s.a) + v(d.b, s.b);
+        if (!best || total > best.total) best = { ids: [t, d.a, d.b, s.a, s.b], total };
+      }
+    }
+    if (best) perTank.push(best);
+  }
+  // 안정 정렬이라 합이 같으면 영웅 목록 순 그대로.
+  return perTank.sort((x, y) => y.total - x.total).slice(0, top);
+}

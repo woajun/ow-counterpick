@@ -3,6 +3,7 @@ import { HERO_IDS, isHeroId, type HeroId } from '../data/heroes';
 import { isNeutral } from '../data/neutral';
 import { MATRIX, type Matrix } from './matrix';
 import { MAP_IDS } from '../data/maps';
+import { SYNERGY, type SynTable } from '../data/synergy';
 import { supabase, type SheetRow } from './supabase';
 
 /**
@@ -36,7 +37,15 @@ interface State {
   sheet: Sheet | null;
   /** 내 코드. 로그인하면 DB 가 준다. */
   code?: string;
+  /** 표 한마디 — 자세히 보기 · 둘러보기에 뜬다. */
+  blurb?: string | null;
+  /** 칸마다 설명 — 키는 표와 같다(`내 픽>적 픽`, `syn:이름순`). */
+  notes?: Notes | null;
 }
+
+export type Notes = Record<string, string>;
+/** 한 칸 설명 · 표 한마디의 최대 길이. */
+export const NOTE_MAX = 200;
 
 /** 로그인한 사람의 마지막 상태 — 알트탭으로 열었을 때 DB 를 기다리지 않고 바로 그린다. */
 const CACHE = 'ow-counterpick.cache';
@@ -50,14 +59,38 @@ const key = (mine: HeroId, enemy: HeroId) => `${mine}>${enemy}`;
 export const mapKey = (map: string, hero: HeroId) => `map:${map}>${hero}`;
 const isMapKey = (k: string) => k.startsWith('map:');
 
+/**
+ * 궁합 칸의 키 — `syn:<영웅>><영웅>`. 궁합은 방향이 없어서 이름 순으로 한 칸만 둔다.
+ * 표에 궁합 칸이 하나도 없으면 나무위키 궁합을 따른다 — 상성만 고친 표도 궁합은 그대로 보인다.
+ */
+export const synKey = (a: HeroId, b: HeroId) => (a < b ? `syn:${a}>${b}` : `syn:${b}>${a}`);
+const isSynKey = (k: string) => k.startsWith('syn:');
+
 function clean(raw: unknown): Sheet | null {
   if (!raw || typeof raw !== 'object') return null;
   const out: Sheet = {};
   for (const [k, v] of Object.entries(raw)) {
     if (typeof v !== 'number' || v < -3 || v > 3) continue;
     const [a, b] = k.split('>');
-    const ok = isMapKey(k) ? MAP_IDS.has(a.slice(4)) && isHeroId(b) : isHeroId(a) && isHeroId(b);
+    const ok = isMapKey(k)
+      ? MAP_IDS.has(a.slice(4)) && isHeroId(b)
+      : isSynKey(k)
+        ? isHeroId(a.slice(4)) && isHeroId(b) && a.slice(4) !== b
+        : isHeroId(a) && isHeroId(b);
     if (ok) out[k] = Math.round(v);
+  }
+  return out;
+}
+
+/** DB · 캐시에서 온 설명 — 글자인 칸만, 키가 표의 칸 모양인 것만 남긴다. */
+function cleanNotes(raw: unknown): Notes | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const out: Notes = {};
+  for (const [k, v] of Object.entries(raw)) {
+    if (typeof v !== 'string' || !v.trim()) continue;
+    const [a, b] = k.split('>');
+    const ok = isSynKey(k) ? isHeroId(a.slice(4)) && isHeroId(b) : isHeroId(a) && isHeroId(b);
+    if (ok && a !== b) out[k] = v.trim().slice(0, NOTE_MAX);
   }
   return out;
 }
@@ -114,7 +147,7 @@ function toMatrix(sheet: Sheet | null): Matrix {
     for (const e of HERO_IDS) m[id][e] = 0;
   }
   for (const [k, v] of Object.entries(sheet)) {
-    if (isMapKey(k)) continue; // 맵 점수는 상성 행렬이 아니다
+    if (isMapKey(k) || isSynKey(k)) continue; // 맵 · 궁합 점수는 상성 행렬이 아니다
     const [a, b] = k.split('>') as [HeroId, HeroId];
     m[a][b] = v;
   }
@@ -125,6 +158,33 @@ function toMatrix(sheet: Sheet | null): Matrix {
 export const mapValueIn = (sheet: Sheet | null, map: string, hero: HeroId): number | null =>
   sheet && mapKey(map, hero) in sheet ? sheet[mapKey(map, hero)] : null;
 
+/** 이 표가 궁합을 따로 들고 있나. 없으면 나무위키 궁합. */
+const hasSyn = (sheet: Sheet | null) => sheet !== null && Object.keys(sheet).some(isSynKey);
+
+const synCache = new WeakMap<Sheet, SynTable>();
+/** 표 한 장의 궁합 표. 같은 표면 같은 객체를 돌려준다(화면이 다시 계산하지 않게). */
+export function synergyOf(sheet: Sheet | null): SynTable {
+  if (sheet === null) return SYNERGY;
+  const hit = synCache.get(sheet);
+  if (hit) return hit;
+  let out: SynTable = {};
+  let any = false;
+  for (const [k, v] of Object.entries(sheet)) {
+    if (!isSynKey(k)) continue;
+    any = true;
+    const [a, b] = k.slice(4).split('>') as [HeroId, HeroId];
+    (out[a] ??= {})[b] = v;
+    (out[b] ??= {})[a] = v;
+  }
+  if (!any) out = SYNERGY;
+  synCache.set(sheet, out);
+  return out;
+}
+
+/** 표 한 장에서 궁합 한 칸. 적힌 것 없으면 null. */
+export const synValueIn = (sheet: Sheet | null, a: HeroId, b: HeroId): number | null =>
+  synergyOf(sheet)[a]?.[b] ?? null;
+
 // ── 코드 ───────────────────────────────────────────────
 
 /** 대문자·숫자 6자. 헷갈리는 0 · O · 1 · I 는 DB 가 안 만든다. */
@@ -133,7 +193,7 @@ export const CODE_LEN = 6;
 /** 입력을 코드 모양으로 — 소문자 · 띄어쓰기 · 붙임표를 받아 준다. */
 export const normalizeCode = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, '');
 
-const COLS = 'id, owner, code, name, sheet, featured, blurb, updated_at';
+const COLS = 'id, owner, code, name, sheet, featured, blurb, notes, updated_at';
 
 /** 코드의 표를 읽는다. 없는 코드면 null. */
 async function fetchCode(code: string): Promise<{ row: SheetRow; sheet: Sheet | null } | null> {
@@ -176,6 +236,8 @@ async function saveRow() {
         owner: state.user.id,
         name: state.user.name,
         sheet: state.sheet,
+        blurb: state.blurb?.trim() || null,
+        notes: state.notes && Object.keys(state.notes).length ? state.notes : null,
       },
       { onConflict: 'owner' },
     )
@@ -193,8 +255,8 @@ async function saveRow() {
 }
 
 function set(next: Partial<State>) {
-  // 표를 바꾸는 것은 로그인한 사람만 — 표는 그 사람 코드에 붙는다.
-  if ('sheet' in next && !state.user) return;
+  // 표 · 설명을 바꾸는 것은 로그인한 사람만 — 표는 그 사람 코드에 붙는다.
+  if (('sheet' in next || 'notes' in next || 'blurb' in next) && !state.user) return;
   state = { ...state, ...next };
   persist();
   emit();
@@ -228,6 +290,59 @@ export function setMapScore(map: string, hero: HeroId, v: number | null) {
   else sheet[mapKey(map, hero)] = v === 0 ? 0 : v;
   set({ sheet });
 }
+
+/** 궁합을 고치기 전에 — 표에 궁합이 없으면 나무위키 궁합 전체를 든다(상성과 같은 방식). */
+function forkedSyn(): Sheet {
+  const sheet = forked();
+  if (!hasSyn(sheet))
+    for (const a of HERO_IDS)
+      for (const b of HERO_IDS) {
+        const v = a < b ? SYNERGY[a]?.[b] : undefined;
+        if (v !== undefined) sheet[synKey(a, b)] = v;
+      }
+  return sheet;
+}
+
+/** 궁합 한 짝을 정한다(방향 없음). null 이면 나무위키 값으로. */
+export function setSynergy(a: HeroId, b: HeroId, v: number | null) {
+  const sheet = forkedSyn();
+  const next = v ?? SYNERGY[a]?.[b] ?? null;
+  if (next === null) delete sheet[synKey(a, b)];
+  else sheet[synKey(a, b)] = next === 0 ? 0 : next;
+  set({ sheet });
+}
+
+/** 한 영웅이 낀 궁합을 모두 나무위키 값으로. */
+export function resetSynergyHero(id: HeroId) {
+  const sheet = forkedSyn();
+  for (const e of HERO_IDS) {
+    if (e === id) continue;
+    const v = SYNERGY[id]?.[e];
+    if (v === undefined) delete sheet[synKey(id, e)];
+    else sheet[synKey(id, e)] = v;
+  }
+  set({ sheet });
+}
+
+/**
+ * 한 칸 설명을 적는다. 빈 글이면 지운다. 키는 표와 같다 — 상성은 `key(내 픽, 적 픽)`, 궁합은 `synKey`.
+ * 설명은 점수와 따로라, 적어도 나무위키와의 연결이 끊기지 않는다.
+ */
+export function setNote(k: string, text: string) {
+  const notes = { ...(state.notes ?? {}) };
+  const t = text.trim().slice(0, NOTE_MAX);
+  if (t) notes[k] = t;
+  else delete notes[k];
+  set({ notes });
+}
+
+/** 표 한마디를 적는다. 빈 글이면 지운다. */
+export function setBlurb(text: string) {
+  set({ blurb: text.trim().slice(0, NOTE_MAX) || null });
+}
+
+/** 상성 칸 설명의 키 — `내 픽>적 픽`. */
+export const noteKey = key;
 
 /** 한 영웅이 낀 짝을 모두 나무위키 값으로. */
 export function resetHero(id: HeroId) {
@@ -360,6 +475,8 @@ async function signedIn(id: string, fallbackName: string) {
     user,
     code: row?.code,
     sheet,
+    blurb: row?.blurb ?? null,
+    notes: cleanNotes(row?.notes),
   };
   persist(); // 줄이 없으면 이때 만들어지고 코드를 받는다
   emit();
@@ -381,6 +498,8 @@ export interface Peek {
   sheet: Sheet | null;
   /** 마지막으로 고친 때 — 살펴보기에서 "얼마나 최근 표인지" 보여 준다. */
   updatedAt: string;
+  blurb: string | null;
+  notes: Notes | null;
 }
 let peek: Peek | null = null;
 /** 마지막으로 부탁한 표 — 늦게 온 예전 답이 지금 보는 표를 덮지 않게. */
@@ -400,7 +519,15 @@ export async function peekCode(code: string) {
   if (ticket !== peekTicket) return !!hit; // 그 사이 다른 표를 열었거나 닫았다
   peekPending = null;
   peek = hit
-    ? { code: hit.row.code, owner: hit.row.name, sheet: hit.sheet, matrix: toMatrix(hit.sheet), updatedAt: hit.row.updated_at }
+    ? {
+        code: hit.row.code,
+        owner: hit.row.name,
+        sheet: hit.sheet,
+        matrix: toMatrix(hit.sheet),
+        updatedAt: hit.row.updated_at,
+        blurb: hit.row.blurb,
+        notes: cleanNotes(hit.row.notes),
+      }
     : null;
   subs.forEach((f) => f());
   return !!hit;
@@ -561,8 +688,15 @@ export function useMySheet() {
     viewBlank: (a: HeroId, b: HeroId) => valueIn(s.peek ? s.peek.sheet : sheet, a, b) === null,
     /** 추천 화면이 쓸 맵 점수 — 둘러보는 중이면 그 사람 것. */
     viewMap: (map: string, hero: HeroId) => mapValueIn(s.peek ? s.peek.sheet : sheet, map, hero),
+    /** 추천 화면이 쓸 궁합 표 — 둘러보는 중이면 그 사람 것. 표가 같으면 같은 객체다. */
+    viewSynergy: synergyOf(s.peek ? s.peek.sheet : sheet),
+    /** 내 표의 궁합 한 칸 — 수정 화면용. */
+    mySyn: (a: HeroId, b: HeroId) => synValueIn(sheet, a, b),
     /** 내 표의 맵 점수 — 수정 화면용. */
     myMap: (map: string, hero: HeroId) => mapValueIn(sheet, map, hero),
+    /** 내 표 한마디 · 칸마다 설명. */
+    blurb: s.state.blurb ?? null,
+    notes: s.state.notes ?? null,
     /** 내 표 그대로(null 이면 나무위키). */
     sheet,
     /** 적힌 값이 없는 칸인가 — 중립(0)과 다르다. */
@@ -576,7 +710,7 @@ export function useMySheet() {
   // 로그인했던 사람은 지난 상태로 바로 그린다. 진짜 로그인 여부는 아래에서 확인한다.
   const cached = read<State>(local, CACHE);
   if (cached?.user) {
-    state = { ...cached, sheet: clean(cached.sheet) };
+    state = { ...cached, sheet: clean(cached.sheet), notes: cleanNotes(cached.notes) };
   }
   // 예전에 로그인 없이 고쳐 둔 임시 표가 남아 있으면 치운다 — 이제 쓰지 않는다.
   write(session, 'ow-counterpick.draft', null);

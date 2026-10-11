@@ -111,6 +111,12 @@ export function CounterPage() {
         {/* 자세히 — 게임 밖에서 이 카운터픽을 따져 보는 화면. 인게임 조건들과 성격이 달라서
             설정 묶음과 떼어 오른쪽 끝에 둔다. 아이콘만 두면 뜻이 안 읽혀서 글자로. */}
         <div className="spacer" />
+        {/* 내 코드를 보고 있을 때만 — 남의 표 · 나무위키는 내가 고칠 표가 아니다. */}
+        {isMine && (
+          <button type="button" className="reset small view-btn" onClick={() => navigate('/edit')}>
+            ✎ 수정
+          </button>
+        )}
         {view === 'game' ? (
           <button type="button" className="reset small view-btn" onClick={() => setView('detail')}>
             자세히 보기 →

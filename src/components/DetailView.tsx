@@ -1,10 +1,11 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 import { cellTone, signed } from '../lib/matrix';
-import { MOCK_BLURB, MOCK_NOTES } from '../data/mockNotes';
-import { SYNERGY } from '../data/synergy';
 import { MAPS, MODES } from '../data/maps';
-import { mapValueIn } from '../lib/mySheet';
+import { mapValueIn, noteKey, synKey, synValueIn, synergyOf, type Notes } from '../lib/mySheet';
+import { bestTeams, synergyVerdict } from '../lib/score';
+import { useViewNotes } from '../lib/namuNotes';
+import { Note } from './Note';
 import {
   likeCounts,
   useMySheet,
@@ -27,6 +28,9 @@ interface Subject {
   sheet: Sheet | null;
   updatedAt?: string;
   isNamu: boolean;
+  /** 표 한마디 · 칸마다 설명 — 주인이 수정 화면에서 쓴다. */
+  blurb?: string | null;
+  notes?: Notes | null;
 }
 
 const Badge = ({ v, title }: { v: number | null; title?: string }) => (
@@ -47,13 +51,23 @@ function ago(iso?: string) {
 
 export function DetailView() {
   const my = useMySheet();
+  // 칸마다 설명 — 나무위키 표면 나무위키 요약을 따로 불러온다.
+  const namuNotes = useViewNotes();
 
   // 무엇을 살펴보나 — 주소로 연 남의 표가 먼저, 아니면 내 카운터픽(로그인), 아니면 나무위키.
   const subject: Subject = my.peek
-    ? { name: my.peek.owner, code: my.peek.code, sheet: my.peek.sheet, updatedAt: my.peek.updatedAt, isNamu: false }
+    ? {
+        name: my.peek.owner,
+        code: my.peek.code,
+        sheet: my.peek.sheet,
+        updatedAt: my.peek.updatedAt,
+        isNamu: false,
+        blurb: my.peek.blurb,
+        notes: my.peek.notes,
+      }
     : my.user && my.source.kind === 'mine'
-      ? { name: my.user.name, code: my.code, sheet: my.sheet, isNamu: false }
-      : { name: '나무위키', sheet: null, isNamu: true };
+      ? { name: my.user.name, code: my.code, sheet: my.sheet, isNamu: false, blurb: my.blurb, notes: my.notes }
+      : { name: '나무위키', sheet: null, isNamu: true, notes: namuNotes };
 
   return (
     <main className="edit detail">
@@ -97,11 +111,12 @@ function Overview({ subject }: { subject: Subject }) {
           )}
         </div>
       )}
-      {/* 주인이 쓰는 한마디 — 목업 */}
-      <p className="dv-blurb">
-        {subject.isNamu ? '나무위키 영웅 문서의 상성 절을 그대로 옮긴 기본 표예요.' : MOCK_BLURB}
-        {!subject.isNamu && <span className="dv-mock">예시</span>}
-      </p>
+      {/* 주인이 쓰는 한마디 — 수정 화면에서 쓴다. 안 썼으면 줄을 두지 않는다. */}
+      {(subject.isNamu || subject.blurb) && (
+        <p className="dv-blurb">
+          {subject.isNamu ? '나무위키 영웅 문서의 상성 절을 그대로 옮긴 기본 표예요.' : subject.blurb}
+        </p>
+      )}
     </section>
   );
 }
@@ -121,13 +136,13 @@ function HeroLines({ subject }: { subject: Subject }) {
   const [byScore, setByScore] = useState(false);
   /**
    * 상성(적으로 만났을 때) · 조합(같은 팀일 때).
-   * 조합은 나무위키 궁합 절을 읽고 매긴 값이라 표마다 다르지 않고, 아직 고칠 수도 없다.
+   * 궁합은 그 표가 따로 고친 것이 없으면 나무위키 궁합이다.
    */
   const [tab, setTab] = useState<'counter' | 'combo' | 'map'>('counter');
   const onMapTab = tab === 'map';
   const combo = tab === 'combo';
-  /** 지금 탭의 한 칸 — 조합은 +2 · +1 · −1, 평가 없으면 null. */
-  const valueOf = (e: HeroId) => (combo ? (SYNERGY[id]?.[e] ?? null) : valueIn(subject.sheet, id, e));
+  /** 지금 탭의 한 칸 — 평가 없으면 null. */
+  const valueOf = (e: HeroId) => (combo ? synValueIn(subject.sheet, id, e) : valueIn(subject.sheet, id, e));
   const me = HEROES[id];
 
   const rows = HERO_IDS.filter((e) => e !== id);
@@ -247,14 +262,15 @@ function HeroLines({ subject }: { subject: Subject }) {
                 </div>
                 {list.map((e) => {
                   const v = valueOf(e);
+                  const note = subject.notes?.[combo ? synKey(id, e) : noteKey(id, e)];
                   return (
                     <div key={e} className="dv-row">
                       <img className="pic" src={portrait(e)} alt="" loading="lazy" decoding="async" />
                       <span className="nm">{HEROES[e].full}</span>
                       <Badge v={v} title={subject.isNamu ? '나무위키' : `${subject.name}의 값`} />
                       <span />
-                      {/* 왜 이 점수인지 — 목업. 나중엔 표 주인이 칸마다 쓴다. */}
-                      {!combo && MOCK_NOTES[`${id}>${e}`] && <Note key={id + e} text={MOCK_NOTES[`${id}>${e}`]} />}
+                      {/* 왜 이 점수인지 — 표 주인이 수정 화면에서 칸마다 쓴다. */}
+                      {note && <Note key={id + e + (combo ? 's' : '')}>{note}</Note>}
                     </div>
                   );
                 })}
@@ -291,6 +307,9 @@ function Summary({ sheet, onPick }: { sheet: Sheet | null; onPick: (h: HeroId) =
   const byName = (x: { h: HeroId }, y: { h: HeroId }) => HEROES[x.h].full.localeCompare(HEROES[y.h].full);
   const counters = [...countered].sort((x, y) => y.n - x.n || byName(x, y)).slice(0, 10);
   const safe = [...countered].sort((x, y) => x.n - y.n || byName(x, y)).slice(0, 10);
+  // 찰떡 조합 — 이 표의 궁합으로. 표가 같으면 궁합 표도 같은 객체라 다시 세지 않는다.
+  const syn = synergyOf(sheet);
+  const teams = useMemo(() => bestTeams(syn, 3), [syn]);
 
   const Hero = ({ h, score }: { h: HeroId; score: string }) => (
     <button type="button" className="sm-hero" onClick={() => onPick(h)} title={`${HEROES[h].full} 줄 보기`}>
@@ -325,39 +344,38 @@ function Summary({ sheet, onPick }: { sheet: Sheet | null; onPick: (h: HeroId) =
           ))}
         </div>
       </section>
+
+      <section className="sm-sec">
+        <h3>
+          찰떡 조합
+          <Info text="이 표의 궁합 점수를 짝마다 더한 합이 가장 큰 5명이에요 — 탱커 1 · 딜러 2 · 지원 2. 탱커마다 하나씩, 탱커가 겹치지 않게 골랐어요" />
+        </h3>
+        <div className="sm-teams">
+          {teams.map((t, i) => (
+            <div key={t.ids.join()} className="sm-team">
+              <span className="rk">{i + 1}</span>
+              <div className="sm-team-ids">
+                {t.ids.map((h) => (
+                  <button
+                    key={h}
+                    type="button"
+                    className="sm-mate"
+                    onClick={() => onPick(h)}
+                    title={`${HEROES[h].full} 줄 보기`}
+                  >
+                    <img className="pic" src={portrait(h)} alt="" loading="lazy" decoding="async" />
+                    <span>{HEROES[h].ko}</span>
+                  </button>
+                ))}
+              </div>
+              <span className="sm-team-sc" title={synergyVerdict(t.total / 10)}>
+                {signed(t.total)}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
 
-/**
- * 한 줄 설명 — 넘치면 한 줄로 접어 두고 눌러서 펼친다. 줄마다 설명 길이가 달라도
- * 표가 들쭉날쭉해지지 않는다. 한 줄에 다 들어가면 펼칠 것도 없다.
- */
-function Note({ text }: { text: string }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const [open, setOpen] = useState(false);
-  const [long, setLong] = useState(false);
-
-  // 접힌 상태에서 글이 칸보다 길면 펼치기 단추를 단다. 화면 폭이 바뀌면 다시 잰다.
-  useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el || open) return;
-    const measure = () => setLong(el.scrollWidth > el.clientWidth + 1);
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [open, text]);
-
-  return (
-    <p
-      ref={ref}
-      className={'dv-note' + (open ? ' open' : '') + (long || open ? ' long' : '')}
-      onClick={() => (long || open) && setOpen((v) => !v)}
-      title={long && !open ? '눌러서 펼치기' : undefined}
-    >
-      {text}
-      {open && <span className="dv-fold">접기</span>}
-    </p>
-  );
-}

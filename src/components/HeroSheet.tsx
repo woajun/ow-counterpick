@@ -1,14 +1,13 @@
-import { useEffect, useRef, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
-import { namuUrl } from '../data/namu';
 import { Link } from 'react-router';
 import { cellTone, signed } from '../lib/matrix';
-import { useMySheet } from '../lib/mySheet';
+import { noteKey, synKey, useMySheet } from '../lib/mySheet';
+import { useViewNotes } from '../lib/namuNotes';
 import { isInferred } from '../data/inferred';
-import { SYNERGY } from '../data/synergy';
+import { SYN_LABEL } from '../data/synergy';
 import type { Mode } from '../lib/useMode';
 import { mapById, mapImage } from '../data/maps';
-import wikiIcon from '../assets/wiki.svg';
 
 interface Props {
   /** 펼쳐 볼 내 픽. null 이면 안 뜬다. */
@@ -42,11 +41,11 @@ const LEVELS: { v: number; label: string; kind: Kind }[] = [
   { v: 0, label: '적힌 것 없음', kind: 'blank' },
 ];
 
-/** 조합 — 나무위키 궁합 절을 읽고 매긴 등급. 0 은 안 적어서 중립 묶음이 없다. */
+/** 궁합 — 나무위키는 +2 · +1 · −1 만 적고, 사람이 고친 표는 −3 … +3. 빈 묶음은 안 그린다. */
 const COMBO_LEVELS: { v: number; label: string; kind: Kind }[] = [
-  { v: 2, label: '찰떡 궁합', kind: 'scored' },
-  { v: 1, label: '좋은 편', kind: 'scored' },
-  { v: -1, label: '안 어울림', kind: 'scored' },
+  ...[3, 2, 1].map((v) => ({ v, label: SYN_LABEL[v], kind: 'scored' as Kind })),
+  { v: 0, label: SYN_LABEL[0], kind: 'neutral' },
+  ...[-1, -2, -3].map((v) => ({ v, label: SYN_LABEL[v], kind: 'scored' as Kind })),
   { v: 0, label: '평가 없음', kind: 'blank' },
 ];
 
@@ -59,13 +58,13 @@ const COMBO_LEVELS: { v: number; label: string; kind: Kind }[] = [
 export function HeroSheet({ id, enemies, mode = 'counter', map, onClose }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
   // 내가 고친 상성이 있으면 그 위에서 편다. 추천 점수와 같은 행렬이어야 한다.
-  const { viewMatrix: matrix, viewBlank: blank, viewMap } = useMySheet();
+  const { viewMatrix: matrix, viewBlank: blank, viewMap, viewSynergy } = useMySheet();
   const combo = mode === 'combo';
-  // 조합은 표마다 같은 나무위키 궁합이라 "내가 고친 값" · "뒤집어 메운 값" 표시가 없다.
+  // 궁합에는 "뒤집어 메운 값" 이 없다.
   const guessed = (a: HeroId, b: HeroId) => !combo && isInferred(a, b);
   /** 판단이 있는 칸 — 0 이어도 중립이라 정한 것이다. */
   const judged = (e: HeroId) =>
-    id ? (combo ? SYNERGY[id]?.[e] !== undefined : !blank(id, e)) : false;
+    id ? (combo ? viewSynergy[id]?.[e] !== undefined : !blank(id, e)) : false;
 
   useEffect(() => {
     if (!id) return;
@@ -87,7 +86,7 @@ export function HeroSheet({ id, enemies, mode = 'counter', map, onClose }: Props
 
   const me = HEROES[id];
   const row: Record<HeroId, number> = combo
-    ? (Object.fromEntries(HERO_IDS.map((e) => [e, SYNERGY[id]?.[e] ?? 0])) as Record<HeroId, number>)
+    ? (Object.fromEntries(HERO_IDS.map((e) => [e, viewSynergy[id]?.[e] ?? 0])) as Record<HeroId, number>)
     : matrix[id];
   // 한 묶음에 열일곱 명까지 들어간다. 역할로 한 번 더 갈라야 눈에 들어온다.
   const groups = (combo ? COMBO_LEVELS : LEVELS).map((lv) => {
@@ -121,30 +120,17 @@ export function HeroSheet({ id, enemies, mode = 'counter', map, onClose }: Props
           <img className="pic" src={portrait(id)} alt="" decoding="async" />
           <div className="hs-name">
             <b>{me.full}</b>
-            <span>{combo ? '같은 팀일 때 · 나무위키 궁합' : me.en}</span>
+            <span>{combo ? '같은 팀일 때' : me.en}</span>
           </div>
-          {/* 값이 이상하면 여기가 고칠 자리다. 이 도구는 옮겨 적은 사본이다. */}
-          <a
-            className="hs-icon hs-wiki"
-            href={namuUrl(id)}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`나무위키 ${me.full} 상성 절 열기`}
-            title="나무위키 상성 절 열기"
-          >
-            <img src={wikiIcon} alt="" />
-          </a>
-          {/* 이 영웅 줄을 고치러 간다. 고친 것은 나무위키 위에 덧씌워진다. 조합은 아직 못 고친다. */}
-          {!combo && (
+          {/* 이 영웅 줄을 고치러 간다 — 궁합이면 궁합 탭으로. */}
           <Link
             className="hs-icon hs-edit"
-            to={`/edit/${id}`}
-            aria-label={`${me.full} 상성 수정`}
-            title="상성 수정"
+            to={`/edit/${id}${combo ? '?tab=syn' : ''}`}
+            aria-label={`${me.full} ${combo ? '궁합' : '상성'} 수정`}
+            title={combo ? '궁합 수정' : '상성 수정'}
           >
             ✎
           </Link>
-          )}
           <button
             ref={closeRef}
             type="button"
@@ -158,6 +144,7 @@ export function HeroSheet({ id, enemies, mode = 'counter', map, onClose }: Props
 
         <div className="hs-body">
           <VersusNow
+            key={id + mode}
             id={id}
             enemies={enemies.filter((e) => e !== id)}
             row={row}
@@ -279,6 +266,18 @@ function VersusNow({
   /** 이번 판 맵과 이 영웅의 맵 점수(정하지 않았으면 null). 합에 더한다 — 추천 점수와 같게. */
   map: { id: string; ko: string; v: number | null } | null;
 }) {
+  const notes = useViewNotes();
+  // 탱커 · 딜러 · 지원 순 — 팀 칸과 같은 차례. 같은 역할 안에서는 고른 순서 그대로(안정 정렬).
+  const roleAt = (e: HeroId) => ROLES.findIndex((r) => r.k === HEROES[e].r);
+  enemies = [...enemies].sort((a, b) => roleAt(a) - roleAt(b));
+  /**
+   * 설명을 펼친 상대 — 칸을 누르면 그 상대 설명만 아래에 편다. 화면을 덜 차지하게.
+   * 처음엔 설명이 있는 첫 상대를 펼쳐 둔다 — 눌러서 볼 수 있다는 것이 바로 보이게.
+   * undefined 는 "아직 안 골랐음(첫 상대)", null 은 "다 접음".
+   */
+  const [picked, setOpen] = useState<HeroId | null | undefined>(undefined);
+  const noteOf = (e: HeroId) => notes?.[combo ? synKey(id, e) : noteKey(id, e)];
+  const open = picked === undefined ? (enemies.find((e) => noteOf(e)) ?? null) : picked;
   if (enemies.length === 0 && !map) return null;
   const mapV = map?.v ?? 0;
   const total = enemies.reduce((a, e) => a + row[e], 0) + mapV;
@@ -312,11 +311,32 @@ function VersusNow({
         {enemies.map((e) => {
           const v = row[e];
           const none = v === 0 && !judged(e);
+          const note = noteOf(e);
           return (
             <span
               key={e}
-              className={'hs-now-item' + (guessed(id, e) ? ' guessed' : '')}
-              title={HEROES[e].full + (guessed(id, e) ? ` · ${HEROES[e].full} 문서 쪽 기록을 뒤집어 매긴 값` : '')}
+              className={
+                'hs-now-item' + (guessed(id, e) ? ' guessed' : '') + (note ? ' has-note' : '') + (open === e ? ' on' : '')
+              }
+              title={
+                HEROES[e].full +
+                (guessed(id, e) ? ` · ${HEROES[e].full} 문서 쪽 기록을 뒤집어 매긴 값` : '') +
+                (note ? ' · 눌러서 설명 보기' : '')
+              }
+              role={note ? 'button' : undefined}
+              tabIndex={note ? 0 : undefined}
+              aria-expanded={note ? open === e : undefined}
+              onClick={note ? () => setOpen(open === e ? null : e) : undefined}
+              onKeyDown={
+                note
+                  ? (ev) => {
+                      if (ev.key === 'Enter' || ev.key === ' ') {
+                        ev.preventDefault();
+                        setOpen(open === e ? null : e);
+                      }
+                    }
+                  : undefined
+              }
             >
               <img className="pic" src={portrait(e)} alt="" decoding="async" />
               <span className="nm">{HEROES[e].ko}</span>
@@ -325,6 +345,15 @@ function VersusNow({
           );
         })}
       </div>
+      {/* 누른 상대의 칸 설명 — 왜 이 점수인지. */}
+      {open && enemies.includes(open) && noteOf(open) && (
+        <p className="hs-now-note">
+          <img className="pic" src={portrait(open)} alt="" decoding="async" />
+          <span>
+            <b>{HEROES[open].ko}</b> {noteOf(open)}
+          </span>
+        </p>
+      )}
     </section>
   );
 }

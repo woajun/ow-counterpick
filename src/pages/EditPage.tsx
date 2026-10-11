@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from 'react';
+import { Fragment, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { Link, Navigate, useParams, useSearchParams } from 'react-router';
 import { MapEditor } from '../components/MapEditor';
 import { MAPS } from '../data/maps';
@@ -7,7 +7,14 @@ import { cellTone, signed } from '../lib/matrix';
 import {
   resetAll,
   resetHero,
+  NOTE_MAX,
+  noteKey,
+  resetSynergyHero,
+  setBlurb,
+  setNote,
   setPair,
+  setSynergy,
+  synKey,
   sourceNow,
   useMySheet,
   type Source,
@@ -16,6 +23,7 @@ import { CodeDialog } from '../components/CodeDialog';
 import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
 import { LoginDialog } from '../components/Account';
+import { SYN_LABEL } from '../data/synergy';
 
 const STEPS = [3, 2, 1, 0, -1, -2, -3];
 const STEP_LABEL: Record<number, string> = {
@@ -36,9 +44,12 @@ const STEP_LABEL: Record<number, string> = {
  */
 export function EditPage() {
   const { hero } = useParams();
-  /** 상성 · 맵 — 주소(?tab=map&map=)에 둔다. */
+  /** 상성 · 궁합 · 맵 — 주소(?tab=syn · ?tab=map&map=)에 둔다. */
   const [params, setParams] = useSearchParams();
-  const tab = params.get('tab') === 'map' ? 'map' : 'counter';
+  const tabParam = params.get('tab');
+  const tab = tabParam === 'map' ? 'map' : tabParam === 'syn' ? 'syn' : 'counter';
+  /** 궁합 — 같은 팀일 때. 상성과 같은 줄 모양이고 방향이 없다(한쪽을 고치면 반대쪽도 같은 값). */
+  const syn = tab === 'syn';
   const editMap = params.get('map') ?? MAPS[0].id;
   const setQuery = (patch: Record<string, string | null>) =>
     setParams(
@@ -54,6 +65,8 @@ export function EditPage() {
     );
   const sheet = useMySheet();
   const [login, setLogin] = useState(false);
+  /** 설명을 쓰고 있는 칸의 키 — 한 번에 한 칸만 연다. */
+  const [noteOpen, setNoteOpen] = useState<string | null>(null);
   const [codeMode, setCodeMode] = useState<'share' | 'enter' | null>(null);
   /** 방금 고쳐서 떠나온 것 — 나무위키나 남의 코드. 안내를 띄우고 되돌릴 수 있게. */
   const [left, setLeft] = useState<Source | null>(null);
@@ -153,10 +166,24 @@ export function EditPage() {
         </div>
 
 
+        {/* 표 한마디 — 자세히 보기 맨 위 · 둘러보기 카드에 뜬다. 칸을 떠나면 저장된다. */}
+        <label className="blurb-field">
+          <span>한마디</span>
+          <TextField
+            key={sheet.blurb ?? ''}
+            value={sheet.blurb ?? ''}
+            placeholder="내 카운터픽을 한 줄로 소개해 주세요 — 자세히 보기와 둘러보기에 보여요"
+            onSave={setBlurb}
+          />
+        </label>
+
         {/* 상성(적으로 만났을 때) · 맵(이 맵에서). 같은 카운터픽 한 장에 들어간다. */}
-        <div className="seg small edit-tab" role="group" aria-label="상성 · 맵">
+        <div className="seg small edit-tab" role="group" aria-label="상성 · 궁합 · 맵">
           <button type="button" aria-pressed={tab === 'counter'} onClick={() => setQuery({ tab: null })}>
             상성
+          </button>
+          <button type="button" aria-pressed={tab === 'syn'} onClick={() => setQuery({ tab: 'syn' })}>
+            궁합
           </button>
           <button type="button" aria-pressed={tab === 'map'} onClick={() => setQuery({ tab: 'map' })}>
             맵
@@ -180,7 +207,7 @@ export function EditPage() {
                     return (
                       <Link
                         key={h}
-                        to={`/edit/${h}`}
+                        to={`/edit/${h}${syn ? '?tab=syn' : ''}`}
                         className={'pick-item' + (h === id ? ' on' : '')}
                         title={HEROES[h].full}
                         aria-current={h === id ? 'page' : undefined}
@@ -195,17 +222,17 @@ export function EditPage() {
             ))}
           </nav>
 
-          <section className="editor" aria-label={`${me.full} 상성 수정`}>
+          <section className="editor" aria-label={`${me.full} ${syn ? '궁합' : '상성'} 수정`}>
             <div className="ed-head" style={{ '--role': `var(--${me.r})` } as CSSProperties}>
               <img className="pic" src={portrait(id)} alt="" decoding="async" />
               <div className="hs-name">
                 <b>{me.full}</b>
-                <span>내 픽이 {me.ko}일 때</span>
+                <span>{syn ? `${me.ko} · 같은 팀일 때` : `내 픽이 ${me.ko}일 때`}</span>
               </div>
               <button
                 type="button"
                 className="reset small"
-                onClick={() => edit(() => resetHero(id))}
+                onClick={() => edit(() => (syn ? resetSynergyHero(id) : resetHero(id)))}
               >
                 이 영웅 되돌리기
               </button>
@@ -223,17 +250,25 @@ export function EditPage() {
                     {r.ko}
                   </div>
                   {list.map((e) => {
-                    const blank = sheet.blank(id, e);
-                    const v = sheet.matrix[id][e];
+                    const nk = syn ? synKey(id, e) : noteKey(id, e);
+                    const note = sheet.notes?.[nk];
+                    const open = noteOpen === nk;
+                    const sv = syn ? sheet.mySyn(id, e) : null;
+                    const blank = syn ? sv === null : sheet.blank(id, e);
+                    const v = syn ? (sv ?? 0) : sheet.matrix[id][e];
                     return (
+                      <Fragment key={e}>
                       <div
-                        key={e}
                         className={'ed-row' + (blank ? ' blank' : '')}
                         title={blank ? '아직 값이 없어요 — 골라 주세요' : undefined}
                       >
                         <img className="pic" src={portrait(e)} alt="" loading="lazy" decoding="async" />
                         <span className="nm">{HEROES[e].full}</span>
-                        <div className="steps" role="radiogroup" aria-label={`${me.full} vs ${HEROES[e].full}`}>
+                        <div
+                          className="steps"
+                          role="radiogroup"
+                          aria-label={`${me.full} ${syn ? '+' : 'vs'} ${HEROES[e].full}`}
+                        >
                           {STEPS.map((s) => {
                             const on = !blank && v === s;
                             return (
@@ -242,21 +277,47 @@ export function EditPage() {
                                 type="button"
                                 role="radio"
                                 aria-checked={on}
-                                title={STEP_LABEL[s]}
+                                title={syn ? SYN_LABEL[s] : STEP_LABEL[s]}
                                 className={
                                   'step ' +
                                   (cellTone(s) || 'zero') +
                                   (on ? ' on' : '')
                                 }
-                                onClick={() => edit(() => setPair(id, e, s))}
+                                onClick={() => edit(() => (syn ? setSynergy(id, e, s) : setPair(id, e, s)))}
                               >
                                 {s === 0 ? '0' : signed(s)}
                               </button>
                             );
                           })}
                         </div>
-                        <span />
+                        {/* 왜 이 점수인지 — 자세히 보기의 영웅 줄 아래에 뜬다. */}
+                        <button
+                          type="button"
+                          className={'note-btn' + (note ? ' has' : '')}
+                          aria-expanded={open}
+                          title={note ? '설명 고치기' : '왜 이 점수인지 설명 쓰기'}
+                          onClick={() => setNoteOpen(open ? null : nk)}
+                        >
+                          설명
+                        </button>
                       </div>
+                      {open ? (
+                        <TextField
+                          multiline
+                          autoFocus
+                          value={note ?? ''}
+                          placeholder={`왜 이 점수인지 한두 줄로 (${NOTE_MAX}자까지)`}
+                          onSave={(t) => setNote(nk, t)}
+                          onDone={() => setNoteOpen(null)}
+                        />
+                      ) : (
+                        note && (
+                          <p className="ed-note" onClick={() => setNoteOpen(nk)} title="눌러서 고치기">
+                            {note}
+                          </p>
+                        )
+                      )}
+                      </Fragment>
                     );
                   })}
                 </div>
@@ -285,5 +346,66 @@ export function EditPage() {
         </div>
       )}
     </>
+  );
+}
+
+/**
+ * 설명 · 한마디 입력 칸 — 쓰는 동안은 저장하지 않고, 칸을 떠날 때(또는 Enter) 한 번 저장한다.
+ * 글자마다 저장하면 표 전체가 다시 그려지고 DB 에도 계속 간다.
+ */
+function TextField({
+  value,
+  placeholder,
+  onSave,
+  onDone,
+  multiline = false,
+  autoFocus = false,
+}: {
+  value: string;
+  placeholder: string;
+  onSave: (text: string) => void;
+  /** 저장하고 닫을 때 — Enter · Esc. */
+  onDone?: () => void;
+  multiline?: boolean;
+  autoFocus?: boolean;
+}) {
+  const [draft, setDraft] = useState(value);
+  /** Esc 로 닫을 때 — 닫히며 떠나는 순간(blur)에 저장하지 않게. */
+  const discard = useRef(false);
+  const save = () => {
+    if (discard.current) return;
+    if (draft.trim() !== value.trim()) onSave(draft);
+  };
+  const common = {
+    value: draft,
+    placeholder,
+    maxLength: NOTE_MAX,
+    autoFocus,
+    onChange: (e: { target: { value: string } }) => setDraft(e.target.value),
+    onBlur: save,
+    onKeyDown: (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      // 줄바꿈은 Shift+Enter. Enter 는 저장하고 닫기, Esc 는 고친 것을 버리고 닫기.
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        save();
+        onDone?.();
+        if (!onDone) e.currentTarget.blur();
+      } else if (e.key === 'Escape') {
+        e.stopPropagation();
+        discard.current = true;
+        setDraft(value);
+        onDone?.();
+      }
+    },
+  };
+  return multiline ? (
+    <div className="ed-note-edit">
+      <textarea rows={2} {...common} />
+      <span className="cnt">
+        {draft.length} / {NOTE_MAX}
+      </span>
+    </div>
+  ) : (
+    <input type="text" className="blurb-input" {...common} />
   );
 }

@@ -1,5 +1,6 @@
 import { useState, type CSSProperties } from 'react';
 import { SynergyDialog } from './SynergyDialog';
+import { useMySheet } from '../lib/mySheet';
 import { MapDialog } from './MapPicker';
 import { mapById, mapImage } from '../data/maps';
 import { HEROES, ROLES, portrait, type HeroId } from '../data/heroes';
@@ -38,7 +39,8 @@ export function EnemySlots({
   const cur = mapById(map);
   const slots = arrange(enemies, size);
   // 둘 이상 골랐을 때만 — 한 명은 짝이 없다.
-  const syn = enemies.length >= 2 ? teamSynergy(enemies) : null;
+  const { viewSynergy } = useMySheet();
+  const syn = enemies.length >= 2 ? teamSynergy(enemies, viewSynergy) : null;
   const [synOpen, setSynOpen] = useState(false);
 
   return (

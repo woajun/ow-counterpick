@@ -35,3 +35,4 @@ dist-ssr
 # 나무위키에서 받아 둔 원본 — 다시 받으면 되니 커밋하지 않는다.
 # 정리한 결과인 data/namu/matchups.json 은 커밋한다.
 data/namu/pages/
+data/namu/matchup-text.json

@@ -21,5 +21,7 @@ export interface SheetRow {
   sheet: Record<string, number> | null;
   featured: boolean;
   blurb: string | null;
+  /** 칸마다 설명 — 키는 sheet 와 같다. */
+  notes: Record<string, string> | null;
   updated_at: string;
 }

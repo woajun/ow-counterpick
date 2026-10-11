@@ -7,6 +7,7 @@ import type { Mode } from '../lib/useMode';
 import type { TeamSize } from '../lib/roster';
 import { cellTone } from '../lib/matrix';
 import { useMySheet } from '../lib/mySheet';
+import { SYNERGY } from '../data/synergy';
 
 interface Props {
   /** 카운터 — 적 조합에 유리한 픽. 조합 — 우리 팀에 어울리는 픽. */
@@ -116,21 +117,22 @@ function Row({
 export function Recommendations({ mode, team, size, onLit, onInfo, map }: Props) {
   const [role, setRole] = useRoleFilter();
   const combo = mode === 'combo';
-  const { viewMatrix: matrix, viewMap } = useMySheet();
+  const { viewMatrix: matrix, viewMap, viewSynergy } = useMySheet();
   const onMap = mapById(map) ? map! : null;
   /* 조합은 자리가 남은 역할만 매긴다 — 5v5 에서 탱커가 차 있으면 탱커는 안 나온다. */
   const scores = useMemo(
     () =>
       withMap(
-        combo ? scoreCombo(team, size) : scoreAll(team, matrix),
+        combo ? scoreCombo(team, size, viewSynergy) : scoreAll(team, matrix),
         onMap ? (h: HeroId) => viewMap(onMap, h) : null,
       ),
     // viewMap 은 매번 새 함수라 넣지 않는다 — 표가 바뀌면 matrix 도 바뀐다.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [combo, team, size, matrix, onMap],
+    [combo, team, size, matrix, viewSynergy, onMap],
   );
-  // 조합 한 칸은 최대 2점이라 막대 기준도 그만큼. 맵을 고르면 한 칸(3점)이 더 붙는다.
-  const scale = (combo ? Math.max(2, team.length * 2) : scaleFor(team.length)) + (onMap ? 3 : 0);
+  // 궁합 한 칸은 나무위키면 최대 2점, 사람이 고친 표면 3점. 맵을 고르면 한 칸(3점)이 더 붙는다.
+  const synMax = viewSynergy === SYNERGY ? 2 : 3;
+  const scale = (combo ? Math.max(synMax, team.length * synMax) : scaleFor(team.length)) + (onMap ? 3 : 0);
   const enemies = team; // 아래 빈 화면 판정에 쓰던 이름 그대로
 
   // 한 역할만 볼 때는 자리가 남으니 더 깊이 보여 준다.

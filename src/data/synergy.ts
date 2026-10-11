@@ -10,6 +10,20 @@ import type { HeroId } from './heroes';
  */
 export type SynLevel = 2 | 1 | -1;
 
+/** 궁합 표 — 나무위키(SYNERGY) 든 사람이 고친 것이든 같은 모양. [a][b] 가 없으면 적힌 것 없음. */
+/** 궁합 점수의 뜻 — 사람이 고친 표는 −3 … +3 을 쓴다(나무위키는 +2 · +1 · −1 뿐). */
+export const SYN_LABEL: Record<number, string> = {
+  3: '최고 궁합',
+  2: '찰떡 궁합',
+  1: '좋은 편',
+  0: '보통',
+  [-1]: '안 어울림',
+  [-2]: '나쁜 궁합',
+  [-3]: '최악 궁합',
+};
+
+export type SynTable = Partial<Record<HeroId, Partial<Record<HeroId, number>>>>;
+
 export const SYNERGY: Partial<Record<HeroId, Partial<Record<HeroId, SynLevel>>>> = {
   dmon: { dva: 2, jetpackcat: 2, kiriko: 2, mauga: 2, reinhardt: 2, zarya: 2, ana: 1, baptiste: 1, domina: 1, juno: 1, lifeweaver: 1, lucio: 1, moira: 1, orisa: 1, roadhog: 1, mercy: -1, mizuki: -1, wreckingball: -1, zenyatta: -1 },
   dva: { dmon: 2, freja: 2, jetpackcat: 2, juno: 2, kiriko: 2, mauga: 2, mei: 2, pharah: 2, sombra: 2, winston: 2, ana: 1, anran: 1, ashe: 1, brigitte: 1, cassidy: 1, domina: 1, doomfist: 1, echo: 1, emre: 1, genji: 1, hanzo: 1, hazard: 1, junkerqueen: 1, junkrat: 1, lifeweaver: 1, lucio: 1, mercy: 1, mizuki: 1, moira: 1, orisa: 1, ramattra: 1, reaper: 1, reinhardt: 1, shion: 1, sojourn: 1, soldier76: 1, symmetra: 1, torbjorn: 1, tracer: 1, vendetta: 1, venture: 1, wreckingball: 1, zarya: 1, zenyatta: 1, roadhog: -1, sierra: -1, sigma: -1, wuyang: -1 },

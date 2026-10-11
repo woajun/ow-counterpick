@@ -1,7 +1,8 @@
 import { useMemo, useState, type CSSProperties } from 'react';
 import { HEROES, ROLES, portrait, type HeroId } from '../data/heroes';
 import { useRoleFilter } from '../lib/useRoleFilter';
-import { reasonsFor, scaleFor, scoreAll, scoreCombo, topByRole, worst, type Scored } from '../lib/score';
+import { reasonsFor, scaleFor, scoreAll, scoreCombo, topByRole, withMap, worst, type Scored } from '../lib/score';
+import { mapById } from '../data/maps';
 import type { Mode } from '../lib/useMode';
 import type { TeamSize } from '../lib/roster';
 import { cellTone } from '../lib/matrix';
@@ -16,6 +17,8 @@ interface Props {
   onLit: (ids: HeroId[]) => void;
   /** 그 영웅의 상성 전체를 펼친다. 모달은 화면 쪽에서 그린다. */
   onInfo: (id: HeroId) => void;
+  /** 고른 맵 — 있으면 표 주인이 정한 맵 점수를 추천에 더한다. */
+  map?: string | null;
 }
 
 function Row({
@@ -67,8 +70,18 @@ function Row({
 
       <div>
         <div className="name">{h.full}</div>
-        {chips.length > 0 && (
+        {(chips.length > 0 || item.map !== undefined) && (
           <div className="why">
+            {/* 맵 점수는 맨 앞에 따로 — 적 · 팀원 칩과 섞이면 어디서 온 점수인지 흐려진다. */}
+            {item.map !== undefined && (
+              <span className={'map-chip ' + cellTone(item.map)}>
+                맵
+                <b>
+                  {item.map > 0 ? '+' : item.map < 0 ? '−' : ''}
+                  {Math.abs(item.map)}
+                </b>
+              </span>
+            )}
             {chips.map((c) => (
               <span key={c.enemy} className={cellTone(c.level)}>
                 {HEROES[c.enemy].ko}
@@ -100,17 +113,24 @@ function Row({
   );
 }
 
-export function Recommendations({ mode, team, size, onLit, onInfo }: Props) {
+export function Recommendations({ mode, team, size, onLit, onInfo, map }: Props) {
   const [role, setRole] = useRoleFilter();
   const combo = mode === 'combo';
-  const { viewMatrix: matrix } = useMySheet();
+  const { viewMatrix: matrix, viewMap } = useMySheet();
+  const onMap = mapById(map) ? map! : null;
   /* 조합은 자리가 남은 역할만 매긴다 — 5v5 에서 탱커가 차 있으면 탱커는 안 나온다. */
   const scores = useMemo(
-    () => (combo ? scoreCombo(team, size) : scoreAll(team, matrix)),
-    [combo, team, size, matrix],
+    () =>
+      withMap(
+        combo ? scoreCombo(team, size) : scoreAll(team, matrix),
+        onMap ? (h: HeroId) => viewMap(onMap, h) : null,
+      ),
+    // viewMap 은 매번 새 함수라 넣지 않는다 — 표가 바뀌면 matrix 도 바뀐다.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [combo, team, size, matrix, onMap],
   );
-  // 조합 한 칸은 최대 2점이라 막대 기준도 그만큼.
-  const scale = combo ? Math.max(2, team.length * 2) : scaleFor(team.length);
+  // 조합 한 칸은 최대 2점이라 막대 기준도 그만큼. 맵을 고르면 한 칸(3점)이 더 붙는다.
+  const scale = (combo ? Math.max(2, team.length * 2) : scaleFor(team.length)) + (onMap ? 3 : 0);
   const enemies = team; // 아래 빈 화면 판정에 쓰던 이름 그대로
 
   // 한 역할만 볼 때는 자리가 남으니 더 깊이 보여 준다.
@@ -202,7 +222,7 @@ export function Recommendations({ mode, team, size, onLit, onInfo }: Props) {
         </div>
       </h2>
 
-      {enemies.length === 0 ? (
+      {enemies.length === 0 && !onMap ? (
         <div className="rec-empty">
           영웅을 골라주세요
         </div>

@@ -15,6 +15,8 @@ import { useView } from '../lib/useView';
 import { useNavigate, useSearchParams } from 'react-router';
 import { copyPeek, likeCounts, likeSheet, likedToday, peekCode, stopPeek, useMySheet } from '../lib/mySheet';
 
+const MAP_KEY = 'ow-counterpick.map';
+
 export function CounterPage() {
   /* 고른 영웅은 하나다 — 카운터면 적 팀으로, 조합이면 우리 팀으로 읽는다.
      따로 두었더니 토글할 때마다 고른 것이 바뀌어 보였다. 토글은 읽는 법만 바꾼다. */
@@ -36,6 +38,26 @@ export function CounterPage() {
      내줘서, 디스코드 · 카톡 링크 미리보기가 깨진다. 메인 주소에 붙이면 늘 200 이다. */
   const [params] = useSearchParams();
   const code = params.get('code');
+  /**
+   * 고른 맵 — 주소에는 안 남긴다. 판마다 바뀌는 내 상황이라 공유할 일이 없다.
+   * 이 탭에서만 기억해서(sessionStorage) 새로고침해도 이번 판 맵은 그대로다.
+   */
+  const [map, setMapState] = useState<string | null>(() => {
+    try {
+      return sessionStorage.getItem(MAP_KEY);
+    } catch {
+      return null;
+    }
+  });
+  const setMap = (id: string | null) => {
+    setMapState(id);
+    try {
+      if (id) sessionStorage.setItem(MAP_KEY, id);
+      else sessionStorage.removeItem(MAP_KEY);
+    } catch {
+      /* 저장이 막혀 있어도 이번 화면에서는 쓴다 */
+    }
+  };
   const navigate = useNavigate();
   const [missing, setMissing] = useState(false);
   useEffect(() => {
@@ -106,7 +128,7 @@ export function CounterPage() {
         )}
       </div>
 
-      {/* 주소로 들어온 남의 카운터픽 — 좋아요를 누르거나, 복사해 내 상성으로 시작할 수 있다. */}
+      {/* 주소로 들어온 남의 카운터픽 — 좋아요를 누르거나, 복사해 내 카운터픽으로 시작할 수 있다. */}
       {code && missing && (
         <div className="peek-bar">
           <span>
@@ -132,17 +154,19 @@ export function CounterPage() {
           >
             ♥ {likes ?? '…'}
           </button>
+          {/* 복사해서 내 카운터픽으로 — 내 표가 있는 사람(로그인)만. */}
+          {sheet.user && sheet.peek.code !== sheet.code && (
           <button
             type="button"
             className="reset small"
-            title="이 표를 복사해 내 상성으로 시작해요. 그 뒤로는 이 사람이 고쳐도 안 바뀌어요."
+            title="이 표를 복사해 내 카운터픽으로 시작해요. 그 뒤로는 이 사람이 고쳐도 안 바뀌어요."
             onClick={async () => {
               const owner = sheet.peek!.owner;
               if (
                 sheet.source.kind === 'mine' &&
                 !(await confirmDialog({
                   title: `${owner}의 표로 다시 시작할까요?`,
-                  message: '지금 내 상성은 지워져요. 지운 상성은 되돌릴 수 없어요.',
+                  message: '지금 내 카운터픽은 지워져요. 지운 것은 되돌릴 수 없어요.',
                   ok: '다시 시작',
                   danger: true,
                 }))
@@ -154,6 +178,7 @@ export function CounterPage() {
           >
             이 상성으로 내 것 만들기
           </button>
+          )}
           <button type="button" className="reset small" onClick={() => navigate('/')}>
             내 추천으로
           </button>
@@ -173,6 +198,8 @@ export function CounterPage() {
           onReset={team.reset}
           title={mode === 'combo' ? '우리 팀' : '적 팀'}
           synLabel={mode === 'combo' ? '우리팀 궁합' : '상대팀 궁합'}
+          map={map}
+          onMap={setMap}
         />
 
         <Recommendations
@@ -181,6 +208,7 @@ export function CounterPage() {
           size={team.size}
           onLit={setLit}
           onInfo={setInfo}
+          map={map}
         />
 
         <HeroPool
@@ -195,7 +223,7 @@ export function CounterPage() {
       )}
 
       {/* '지금 적 팀 상대' 는 카운터일 때만 — 조합이면 고른 영웅이 우리 편이다. */}
-      <HeroSheet id={info} enemies={team.enemies} mode={mode} onClose={() => setInfo(null)} />
+      <HeroSheet id={info} enemies={team.enemies} mode={mode} map={map} onClose={() => setInfo(null)} />
 
       {/* 좁은 화면에서 추천 시트가 화면 아래에 떠 있어서, 마지막 줄이
           그 밑에 깔리지 않게 자리를 비워 둔다. */}

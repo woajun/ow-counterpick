@@ -2,20 +2,21 @@ import { useSyncExternalStore } from 'react';
 import { HERO_IDS, isHeroId, type HeroId } from '../data/heroes';
 import { isNeutral } from '../data/neutral';
 import { MATRIX, type Matrix } from './matrix';
+import { MAP_IDS } from '../data/maps';
 import { supabase, type SheetRow } from './supabase';
 
 /**
- * 내 상성 — 둘 중 하나다.
+ * 카운터픽 — 로그인한 사람마다 한 장, 그 사람 코드에 붙어 있다.
  *
- *   나무위키 (기본)  나무위키 상성을 그대로 쓴다. 나무위키가 바뀌면 같이 바뀐다.
- *   내 상성          한 칸이라도 고친 순간 나무위키와의 연결이 끊기고, 그때의 표
- *                    전체를 통째로 내 것으로 들고 간다.
+ *   로그인 전          나무위키 상성을 쓴다. 고칠 수 없다.
+ *   로그인 · 안 고침   내 코드의 표가 나무위키를 따라간다(sheet 가 null).
+ *   로그인 · 고침      한 칸이라도 고친 순간 나무위키와의 연결이 끊기고, 그때의 표
+ *                      전체를 통째로 내 것으로 들고 간다.
  *
  * 남의 표는 주소(?code=코드)로 열어 본다(peek). 내 상태는 안 바뀌고, 북마크하면
  * 로그인 없이 언제든 그 사람의 최신 표로 열린다.
  *
- * 로그인하면 수파베이스 sheets 테이블의 제 줄에 저장한다(코드도 거기서 받는다).
- * 로그인 전에는 sessionStorage 라 창을 닫으면 사라진다.
+ * 표는 수파베이스 sheets 테이블의 제 줄에 저장한다(코드도 거기서 받는다).
  *
  * 한 칸을 고치면 반대 칸도 부호를 뒤집어 같이 고친다.
  */
@@ -37,20 +38,26 @@ interface State {
   code?: string;
 }
 
-const DRAFT = 'ow-counterpick.draft';
 /** 로그인한 사람의 마지막 상태 — 알트탭으로 열었을 때 DB 를 기다리지 않고 바로 그린다. */
 const CACHE = 'ow-counterpick.cache';
 
 const key = (mine: HeroId, enemy: HeroId) => `${mine}>${enemy}`;
 
+/**
+ * 맵 점수 칸의 키 — `map:<맵 id>><영웅>`. 상성 칸(`영웅>영웅`)과 같은 표에 들어간다.
+ * 한 사람의 카운터픽 한 장에 상성도 맵도 같이 있어서, 코드 · 주소로 함께 공유된다.
+ */
+export const mapKey = (map: string, hero: HeroId) => `map:${map}>${hero}`;
+const isMapKey = (k: string) => k.startsWith('map:');
+
 function clean(raw: unknown): Sheet | null {
   if (!raw || typeof raw !== 'object') return null;
   const out: Sheet = {};
   for (const [k, v] of Object.entries(raw)) {
+    if (typeof v !== 'number' || v < -3 || v > 3) continue;
     const [a, b] = k.split('>');
-    if (isHeroId(a) && isHeroId(b) && typeof v === 'number' && v >= -3 && v <= 3) {
-      out[k] = Math.round(v);
-    }
+    const ok = isMapKey(k) ? MAP_IDS.has(a.slice(4)) && isHeroId(b) : isHeroId(a) && isHeroId(b);
+    if (ok) out[k] = Math.round(v);
   }
   return out;
 }
@@ -121,11 +128,16 @@ function toMatrix(sheet: Sheet | null): Matrix {
     for (const e of HERO_IDS) m[id][e] = 0;
   }
   for (const [k, v] of Object.entries(sheet)) {
+    if (isMapKey(k)) continue; // 맵 점수는 상성 행렬이 아니다
     const [a, b] = k.split('>') as [HeroId, HeroId];
     m[a][b] = v;
   }
   return m;
 }
+
+/** 표 한 장에서 맵 점수. 정하지 않았으면 null(추천에 영향 없음). 나무위키 표엔 맵 점수가 없다. */
+export const mapValueIn = (sheet: Sheet | null, map: string, hero: HeroId): number | null =>
+  sheet && mapKey(map, hero) in sheet ? sheet[mapKey(map, hero)] : null;
 
 // ── 코드 ───────────────────────────────────────────────
 
@@ -163,15 +175,12 @@ function emit() {
 
 let saveTimer: ReturnType<typeof setTimeout> | undefined;
 
-/** 로그인했으면 DB 에(조금 모았다가), 아니면 이 창에만. */
+/** DB 에 저장한다(조금 모았다가). 로그인 전에는 고칠 수 없어서 저장할 것도 없다. */
 function persist() {
-  if (state.user) {
-    write(local, CACHE, { ...state });
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => void saveRow(), 400);
-  } else {
-    write(session, DRAFT, { sheet: state.sheet });
-  }
+  if (!state.user) return;
+  write(local, CACHE, { ...state });
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => void saveRow(), 400);
 }
 
 async function saveRow() {
@@ -200,6 +209,8 @@ async function saveRow() {
 }
 
 function set(next: Partial<State>) {
+  // 표를 바꾸는 것은 로그인한 사람만 — 표는 그 사람 코드에 붙는다.
+  if ('sheet' in next && !state.user) return;
   state = { ...state, ...next };
   persist();
   emit();
@@ -223,6 +234,14 @@ export function setPair(a: HeroId, b: HeroId, v: number | null) {
     put(sheet, a, b, v);
     put(sheet, b, a, -v);
   }
+  set({ sheet });
+}
+
+/** 맵 점수를 정한다. null 이면 지운다(정하지 않음). 이것도 고치는 것이라 나무위키와 연결이 끊긴다. */
+export function setMapScore(map: string, hero: HeroId, v: number | null) {
+  const sheet = forked();
+  if (v === null) delete sheet[mapKey(map, hero)];
+  else sheet[mapKey(map, hero)] = v === 0 ? 0 : v;
   set({ sheet });
 }
 
@@ -327,20 +346,17 @@ export async function deleteAccount() {
   return null;
 }
 
-/** 로그인되면 제 줄을 불러온다. 로그인 전에 이 창에서 한 것이 있으면 그쪽이 이긴다. */
+/** 로그인되면 제 줄을 불러온다. 줄이 없으면 나무위키를 따라가는 새 줄을 만든다(코드를 받는다). */
 async function signedIn(id: string, fallbackName: string) {
   if (!supabase) return;
   const { data: row } = await supabase.from('sheets').select(COLS).eq('owner', id).maybeSingle<SheetRow>();
-  const draft = read<{ sheet: Sheet | null }>(session, DRAFT);
-  const fresh = !!draft && draft.sheet !== null;
   const user: User = { id, name: row?.name ?? fallbackName };
 
   state = {
     user,
     code: row?.code,
-    sheet: fresh ? clean(draft!.sheet) : row?.sheet ? clean(row.sheet) : null,
+    sheet: row?.sheet ? clean(row.sheet) : null,
   };
-  write(session, DRAFT, null);
   persist(); // 줄이 없으면 이때 만들어지고 코드를 받는다
   emit();
 }
@@ -348,7 +364,6 @@ async function signedIn(id: string, fallbackName: string) {
 function signedOut() {
   clearTimeout(saveTimer);
   write(local, CACHE, null);
-  write(session, DRAFT, null);
   state = { user: null, sheet: null };
   emit();
 }
@@ -496,6 +511,10 @@ export function useMySheet() {
     viewMatrix: s.peek?.matrix ?? s.matrix,
     /** 추천 화면이 쓸 "적힌 값 없음" 판정. */
     viewBlank: (a: HeroId, b: HeroId) => valueIn(s.peek ? s.peek.sheet : sheet, a, b) === null,
+    /** 추천 화면이 쓸 맵 점수 — 둘러보는 중이면 그 사람 것. */
+    viewMap: (map: string, hero: HeroId) => mapValueIn(s.peek ? s.peek.sheet : sheet, map, hero),
+    /** 내 표의 맵 점수 — 수정 화면용. */
+    myMap: (map: string, hero: HeroId) => mapValueIn(sheet, map, hero),
     /** 나무위키와 다른 짝 수. */
     diff: s.diff,
     /** 내 표 그대로(null 이면 나무위키) — 살펴보기의 비교에 쓴다. */
@@ -514,10 +533,9 @@ export function useMySheet() {
   const cached = read<State>(local, CACHE);
   if (cached?.user) {
     state = { ...cached, sheet: clean(cached.sheet) };
-  } else {
-    const draft = read<{ sheet: Sheet | null }>(session, DRAFT);
-    state = { user: null, sheet: clean(draft?.sheet) };
   }
+  // 예전에 로그인 없이 고쳐 둔 임시 표가 남아 있으면 치운다 — 이제 쓰지 않는다.
+  write(session, 'ow-counterpick.draft', null);
   emit();
 
 

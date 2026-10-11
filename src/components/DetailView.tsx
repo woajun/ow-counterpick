@@ -1,14 +1,13 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 import { cellTone, signed } from '../lib/matrix';
 import { MOCK_BLURB, MOCK_NOTES } from '../data/mockNotes';
 import { SYNERGY } from '../data/synergy';
+import { MAPS, MODES } from '../data/maps';
+import { mapValueIn } from '../lib/mySheet';
 import {
-  CODE_LEN,
-  findCode,
   likeCounts,
   namuValue,
-  normalizeCode,
   useMySheet,
   valueIn,
   type Sheet,
@@ -18,7 +17,7 @@ import {
  * 살펴보기 — 이 카운터픽이 믿을 만한지 게임 밖에서 천천히 본다.
  *
  * 인게임 화면과 같은 표(주소로 연 남의 표, 아니면 내 표 · 나무위키)를 쓴다.
- * 여기 있는 것: 소개 · 영웅별로 보기(나무위키와 나란히) · 다른 표와 비교.
+ * 여기 있는 것: 소개 · 영웅별로 보기(나무위키와 나란히).
  * 댓글 · 작성자 근거 · 합의도는 다음 단계에서 붙는다.
  */
 
@@ -50,18 +49,17 @@ function ago(iso?: string) {
 export function DetailView() {
   const my = useMySheet();
 
-  // 무엇을 살펴보나 — 주소로 연 남의 표가 먼저, 아니면 내 기준(내 상성 · 나무위키).
+  // 무엇을 살펴보나 — 주소로 연 남의 표가 먼저, 아니면 내 카운터픽(로그인), 아니면 나무위키.
   const subject: Subject = my.peek
     ? { name: my.peek.owner, code: my.peek.code, sheet: my.peek.sheet, updatedAt: my.peek.updatedAt, isNamu: false }
-    : my.source.kind === 'mine'
-      ? { name: my.user?.name ?? '내 상성', code: my.code, sheet: my.sheet, isNamu: false }
+    : my.user && my.source.kind === 'mine'
+      ? { name: my.user.name, code: my.code, sheet: my.sheet, isNamu: false }
       : { name: '나무위키', sheet: null, isNamu: true };
 
   return (
     <main className="edit detail">
       <Overview subject={subject} />
       <HeroLines subject={subject} />
-      <Compare subject={subject} />
     </main>
   );
 }
@@ -119,7 +117,8 @@ function HeroLines({ subject }: { subject: Subject }) {
    * 상성(적으로 만났을 때) · 조합(같은 팀일 때).
    * 조합은 나무위키 궁합 절을 읽고 매긴 값이라 표마다 다르지 않고, 아직 고칠 수도 없다.
    */
-  const [tab, setTab] = useState<'counter' | 'combo'>('counter');
+  const [tab, setTab] = useState<'counter' | 'combo' | 'map'>('counter');
+  const onMapTab = tab === 'map';
   const combo = tab === 'combo';
   /** 지금 탭의 한 칸 — 조합은 +2 · +1 · −1, 평가 없으면 null. */
   const valueOf = (e: HeroId) => (combo ? (SYNERGY[id]?.[e] ?? null) : valueIn(subject.sheet, id, e));
@@ -168,14 +167,19 @@ function HeroLines({ subject }: { subject: Subject }) {
             <img className="pic" src={portrait(id)} alt="" decoding="async" />
             <div className="hs-name">
               <b>{me.full}</b>
-              <span>{combo ? `${me.ko}와 같은 팀일 때` : `내 픽이 ${me.ko}일 때`}</span>
+              <span>
+                {onMapTab ? `맵마다 ${me.ko} 점수` : combo ? `${me.ko}와 같은 팀일 때` : `내 픽이 ${me.ko}일 때`}
+              </span>
             </div>
-            <div className="seg small" role="group" aria-label="상성 · 궁합">
-              <button type="button" aria-pressed={!combo} onClick={() => setTab('counter')}>
+            <div className="seg small" role="group" aria-label="상성 · 궁합 · 맵">
+              <button type="button" aria-pressed={tab === 'counter'} onClick={() => setTab('counter')}>
                 상성
               </button>
               <button type="button" aria-pressed={combo} onClick={() => setTab('combo')}>
                 궁합
+              </button>
+              <button type="button" aria-pressed={onMapTab} onClick={() => setTab('map')}>
+                맵
               </button>
             </div>
             <button
@@ -190,7 +194,36 @@ function HeroLines({ subject }: { subject: Subject }) {
           </div>
 
 
-          {ROLES.map((r) => {
+          {/* 맵 — 이 영웅이 맵마다 몇 점인지(표 주인이 정한 것). 정하지 않은 맵은 — . */}
+          {onMapTab &&
+            (MAPS.every((m) => mapValueIn(subject.sheet, m.id, id) === null) ? (
+              <div className="rec-empty">
+                {subject.isNamu ? '나무위키에는 맵 점수가 없어요.' : `${me.ko}의 맵 점수를 아직 정하지 않았어요.`}
+              </div>
+            ) : (
+              MODES.map((mode) => {
+                const list = MAPS.filter((m) => m.mode === mode.k);
+                if (byScore) {
+                  const sc = (id2: string) => mapValueIn(subject.sheet, id2, id) ?? -Infinity;
+                  list.sort((a, b) => sc(b.id) - sc(a.id));
+                }
+                return (
+                  <div key={mode.k} className="ed-group">
+                    <div className="pick-head">{mode.ko}</div>
+                    {list.map((m) => (
+                      <div key={m.id} className="dv-row">
+                        <span />
+                        <span className="nm">{m.ko}</span>
+                        <Badge v={mapValueIn(subject.sheet, m.id, id)} />
+                        <span />
+                      </div>
+                    ))}
+                  </div>
+                );
+              })
+            ))}
+
+          {!onMapTab && ROLES.map((r) => {
             const list = rows.filter((e) => HEROES[e].r === r.k);
             if (list.length === 0) return null;
             // 점수순: 유리한 것부터, 적힌 것 없음은 맨 뒤. 같은 점수는 원래 차례 그대로.
@@ -265,135 +298,5 @@ function Note({ text }: { text: string }) {
       {text}
       {open && <span className="dv-fold">접기</span>}
     </p>
-  );
-}
-
-// ── 다른 표와 비교 ─────────────────────────────────────
-
-interface Other {
-  name: string;
-  sheet: Sheet | null;
-}
-
-function Compare({ subject }: { subject: Subject }) {
-  const my = useMySheet();
-  const [other, setOther] = useState<Other | null>(null);
-  const [code, setCode] = useState('');
-  const [error, setError] = useState('');
-  const [more, setMore] = useState(false);
-
-  // 비교 상대 — 기본은 나무위키. 남의 표를 보는 중이고 내 상성이 있으면 내 것과도 견줄 수 있다.
-  const target: Other = other ?? (subject.isNamu ? { name: '내 상성', sheet: my.sheet } : { name: '나무위키', sheet: null });
-  // 나무위키를 보면서 내 상성도 없으면 견줄 상대가 아직 없다 — 코드를 넣어야 한다.
-  const nothing = subject.isNamu && my.source.kind !== 'mine' && !other;
-  const canMine = !subject.isNamu && my.source.kind === 'mine' && my.code !== subject.code;
-
-  const pairs = useMemo(() => {
-    const out: { a: HeroId; b: HeroId; x: number | null; y: number | null }[] = [];
-    for (let i = 0; i < HERO_IDS.length; i++) {
-      for (let j = 0; j < HERO_IDS.length; j++) {
-        if (i === j) continue;
-        const a = HERO_IDS[i];
-        const b = HERO_IDS[j];
-        const x = valueIn(subject.sheet, a, b);
-        const y = valueIn(target.sheet, a, b);
-        if (x !== y) out.push({ a, b, x, y });
-      }
-    }
-    return out;
-  }, [subject.sheet, target.sheet]);
-
-  const load = async () => {
-    const hit = await findCode(code);
-    if (!hit) {
-      setError('없는 코드예요.');
-      return;
-    }
-    setOther({ name: hit.owner, sheet: hit.sheet });
-    setError('');
-  };
-
-  const shown = more ? pairs : pairs.slice(0, 60);
-
-  return (
-    <section className="dv-section">
-      <h2 className="head">
-        다른 표와 비교
-        {!nothing && (
-          <span className="n">
-            {subject.name} · {target.name} — 다른 칸 {pairs.length}
-          </span>
-        )}
-      </h2>
-
-      <div className="dv-pick">
-        <div className="seg small" role="group" aria-label="비교 상대">
-          {!subject.isNamu && (
-            <button type="button" aria-pressed={target.name === '나무위키' && !other} onClick={() => setOther(null)}>
-              나무위키
-            </button>
-          )}
-          {canMine && (
-            <button
-              type="button"
-              aria-pressed={other?.name === '내 상성'}
-              onClick={() => setOther({ name: '내 상성', sheet: my.sheet })}
-            >
-              내 상성
-            </button>
-          )}
-        </div>
-        <input
-          className="dv-code"
-          value={code}
-          placeholder="코드로 비교"
-          maxLength={CODE_LEN + 2}
-          spellCheck={false}
-          onChange={(e) => {
-            setCode(normalizeCode(e.target.value));
-            setError('');
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && code.length === CODE_LEN) void load();
-          }}
-        />
-        <button type="button" className="reset small" disabled={code.length !== CODE_LEN} onClick={() => void load()}>
-          비교
-        </button>
-        {error && <span className="code-error">{error}</span>}
-      </div>
-
-      {nothing ? (
-        <div className="rec-empty">코드를 넣으면 나무위키와 그 사람 표를 견줘 볼 수 있어요.</div>
-      ) : pairs.length === 0 ? (
-        <div className="rec-empty">두 표가 같아요.</div>
-      ) : (
-        <div className="dv-diffs">
-          <div className="dv-diff head">
-            <span>내 픽 vs 적 픽</span>
-            <span>{subject.name}</span>
-            <span>{target.name}</span>
-          </div>
-          {shown.map(({ a, b, x, y }) => (
-            <div key={a + '>' + b} className="dv-diff">
-              <span className="dv-pair">
-                <img className="pic" src={portrait(a)} alt="" loading="lazy" />
-                {HEROES[a].ko}
-                <i>vs</i>
-                <img className="pic" src={portrait(b)} alt="" loading="lazy" />
-                {HEROES[b].ko}
-              </span>
-              <Badge v={x} />
-              <Badge v={y} />
-            </div>
-          ))}
-          {!more && pairs.length > shown.length && (
-            <button type="button" className="reset small dv-more" onClick={() => setMore(true)}>
-              {pairs.length - shown.length}칸 더 보기
-            </button>
-          )}
-        </div>
-      )}
-    </section>
   );
 }

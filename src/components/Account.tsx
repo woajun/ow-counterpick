@@ -14,7 +14,6 @@ const OTP_IN_MAIL = false;
 
 export function LoginDialog({ onClose }: { onClose: () => void }) {
   const field = useRef<HTMLInputElement>(null);
-  const { source } = useMySheet();
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -61,7 +60,7 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
     >
       <div className="hero-sheet login" role="dialog" aria-modal="true" aria-label="로그인">
         <div className="login-body">
-          <h3>내 상성 저장하기</h3>
+          <h3>로그인</h3>
           {sent && !OTP_IN_MAIL ? (
             <p>
               <b>{email.trim()}</b>로 메일을 보냈어요. 메일의 링크를 누르면 로그인돼요. 새 탭이
@@ -104,9 +103,7 @@ export function LoginDialog({ onClose }: { onClose: () => void }) {
           ) : (
             <>
               <p>
-                {source.kind !== 'namu'
-                  ? '지금 고친 상성은 이 창에만 있어요. 로그인하면 계정에 남고, 코드로 친구에게 건넬 수 있어요.'
-                  : '로그인하면 고친 상성이 계정에 남고, 코드로 친구에게 건넬 수 있어요.'}
+                로그인하면 내 카운터픽을 고치고, 내 코드로 친구에게 건넬 수 있어요.
               </p>
               <button
                 type="button"
@@ -233,7 +230,7 @@ export function AccountChip() {
                 title: '회원 탈퇴할까요?',
                 message: (
                   <>
-                    계정과 내 상성표가 지워지고 <b>되돌릴 수 없어요.</b> 내 코드로 공유한 주소도 더
+                    계정과 내 카운터픽이 지워지고 <b>되돌릴 수 없어요.</b> 내 코드로 공유한 주소도 더
                     이상 열리지 않아요.
                   </>
                 ),

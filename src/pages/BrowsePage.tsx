@@ -38,7 +38,7 @@ export function BrowsePage() {
 
       <main className="edit browse">
         <div className="bw-now">
-          내 추천 기준 · <b>{sheet.source.kind === 'mine' ? '내 상성' : '나무위키'}</b>
+          내 추천 기준 · <b>{sheet.user ? sheet.user.name : '나무위키'}</b>
           <Link to="/" className="link">
             추천 보러 가기 →
           </Link>
@@ -68,7 +68,7 @@ export function BrowsePage() {
                   onClick={async () => {
                     const ok = await confirmDialog({
                       title: '나무위키로 돌아갈까요?',
-                      message: '내 상성을 지우고 나무위키를 따라가요. 지운 상성은 되돌릴 수 없어요.',
+                      message: '내 카운터픽을 지우고 나무위키를 따라가요. 지운 것은 되돌릴 수 없어요.',
                       ok: '돌아가기',
                       danger: true,
                     });

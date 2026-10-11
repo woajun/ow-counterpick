@@ -74,7 +74,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
           {mode === 'share' ? (
             !user ? (
               <>
-                <h3>내 상성 코드</h3>
+                <h3>내 코드</h3>
                 <p>코드는 계정에 붙어요. 로그인하면 고친 상성을 코드 하나로 건넬 수 있어요.</p>
                 <button type="button" className="login-btn main" onClick={() => setLogin(true)}>
                   로그인
@@ -82,9 +82,9 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
               </>
             ) : (
               <>
-                <h3>내 상성 코드</h3>
+                <h3>내 코드</h3>
                 <p>
-                  주소를 열면 누구나 로그인 없이 내 상성(나무위키와 다른 짝 <b>{diff}</b>)으로 추천을
+                  주소를 열면 누구나 로그인 없이 내 카운터픽(나무위키와 다른 짝 <b>{diff}</b>)으로 추천을
                   받아요. 내가 더 고치면 다음에 열 때 바로 반영돼요.
                 </p>
                 <input
@@ -92,7 +92,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
                   className="code-field"
                   readOnly
                   value={code ?? ''}
-                  aria-label="내 상성 코드"
+                  aria-label="내 코드"
                   onFocus={(e) => e.currentTarget.select()}
                 />
                 <button type="button" className="login-btn main" onClick={() => void copy('link')} disabled={!code}>
@@ -108,7 +108,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
             <>
               <h3>상성 코드 입력</h3>
               <p>
-                친구 코드를 넣으면 그 사람 카운터픽을 열어요. 내 상성은 그대로예요.
+                친구 코드를 넣으면 그 사람 카운터픽을 열어요. 내 카운터픽은 그대로예요.
               </p>
               <input
                 ref={field}

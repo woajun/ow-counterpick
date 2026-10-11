@@ -7,6 +7,7 @@ import { useMySheet } from '../lib/mySheet';
 import { isInferred } from '../data/inferred';
 import { SYNERGY } from '../data/synergy';
 import type { Mode } from '../lib/useMode';
+import { mapById, mapImage } from '../data/maps';
 import wikiIcon from '../assets/wiki.svg';
 
 interface Props {
@@ -16,6 +17,8 @@ interface Props {
   enemies: HeroId[];
   /** 상성(적으로 만났을 때) · 조합(같은 팀일 때). 시트 전체가 이 기준으로 펼쳐진다. */
   mode?: Mode;
+  /** 이번 판 맵 — 있으면 맨 위 "지금" 칸에 이 영웅의 맵 점수를 같이 보여 주고 합에 더한다. */
+  map?: string | null;
   onClose: () => void;
 }
 
@@ -53,10 +56,10 @@ const COMBO_LEVELS: { v: number; label: string; kind: Kind }[] = [
  * 추천 줄은 "지금 고른 적 조합"에 대한 점수만 보여 준다. 그 영웅을 실제로
  * 꺼낼지 정하려면 아직 안 나온 적한테도 통하는지가 궁금해진다.
  */
-export function HeroSheet({ id, enemies, mode = 'counter', onClose }: Props) {
+export function HeroSheet({ id, enemies, mode = 'counter', map, onClose }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
   // 내가 고친 상성이 있으면 그 위에서 편다. 추천 점수와 같은 행렬이어야 한다.
-  const { viewMatrix: matrix, differs, viewBlank: blank, peek } = useMySheet();
+  const { viewMatrix: matrix, differs, viewBlank: blank, peek, viewMap } = useMySheet();
   // 둘러보는 중에는 내가 고친 표시를 하지 않는다 — 보고 있는 표가 내 것이 아니다.
   const combo = mode === 'combo';
   // 조합은 표마다 같은 나무위키 궁합이라 "내가 고친 값" · "뒤집어 메운 값" 표시가 없다.
@@ -156,16 +159,15 @@ export function HeroSheet({ id, enemies, mode = 'counter', onClose }: Props) {
         </div>
 
         <div className="hs-body">
-          {enemies.length > 0 && (
-            <VersusNow
-              id={id}
-              enemies={enemies.filter((e) => e !== id)}
-              row={row}
-              judged={judged}
-              guessed={guessed}
-              combo={combo}
-            />
-          )}
+          <VersusNow
+            id={id}
+            enemies={enemies.filter((e) => e !== id)}
+            row={row}
+            judged={judged}
+            guessed={guessed}
+            combo={combo}
+            map={mapById(map) ? { id: map!, ko: mapById(map)!.ko, v: viewMap(map!, id) } : null}
+          />
 
           {/* 역할 머리는 여기 한 번만. 등급 묶음마다 달면 일곱 번 반복된다.
               스크롤해도 붙어 있어서 아래로 내려가도 어느 칸인지 안 잃는다. */}
@@ -272,6 +274,7 @@ function VersusNow({
   judged,
   guessed,
   combo,
+  map,
 }: {
   id: HeroId;
   enemies: HeroId[];
@@ -279,10 +282,13 @@ function VersusNow({
   judged: (e: HeroId) => boolean;
   guessed: (a: HeroId, b: HeroId) => boolean;
   combo: boolean;
+  /** 이번 판 맵과 이 영웅의 맵 점수(정하지 않았으면 null). 합에 더한다 — 추천 점수와 같게. */
+  map: { id: string; ko: string; v: number | null } | null;
 }) {
-  if (enemies.length === 0) return null;
-  const total = enemies.reduce((a, e) => a + row[e], 0);
-  const avg = total / enemies.length;
+  if (enemies.length === 0 && !map) return null;
+  const mapV = map?.v ?? 0;
+  const total = enemies.reduce((a, e) => a + row[e], 0) + mapV;
+  const avg = total / Math.max(1, enemies.length + (map?.v != null ? 1 : 0));
   const tone = cellTone(Math.max(-3, Math.min(3, Math.round(avg))));
   const up = enemies.filter((e) => row[e] > 0).length;
   const down = enemies.filter((e) => row[e] < 0).length;
@@ -300,6 +306,15 @@ function VersusNow({
         </span>
       </div>
       <div className="hs-now-list">
+        {map && (
+          <span className="hs-now-item" title={`${map.ko} 맵 점수`}>
+            <img className="pic map" src={mapImage(map.id)} alt="" decoding="async" />
+            <span className="nm">{map.ko}</span>
+            <span className={'hs-badge ' + (map.v === null ? 'blank' : cellTone(map.v) || 'zero')}>
+              {map.v === null ? '—' : signed(map.v)}
+            </span>
+          </span>
+        )}
         {enemies.map((e) => {
           const v = row[e];
           const none = v === 0 && !judged(e);

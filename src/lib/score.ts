@@ -18,6 +18,25 @@ export interface Scored {
   id: HeroId;
   value: number;
   reasons: Reason[];
+  /** 고른 맵에서 이 영웅의 점수(표 주인이 정한 것). 정하지 않았으면 없다. value 에 들어 있다. */
+  map?: number;
+}
+
+/**
+ * 맵 점수를 얹는다 — 표 주인이 정한 "이 맵에서 이 영웅 몇 점"(−3 … +3)을 그대로 더한다.
+ * 맵 하나가 적 한 명만큼 무게를 갖는다. 정하지 않은 영웅은 그대로다.
+ */
+export function withMap(
+  scores: Partial<Record<HeroId, Scored>>,
+  mapScore: ((hero: HeroId) => number | null) | null,
+): Partial<Record<HeroId, Scored>> {
+  if (!mapScore) return scores;
+  const out: Partial<Record<HeroId, Scored>> = {};
+  for (const [id, s] of Object.entries(scores) as [HeroId, Scored][]) {
+    const m = mapScore(id);
+    out[id] = m === null ? s : { ...s, value: s.value + m, map: m };
+  }
+  return out;
 }
 
 /**

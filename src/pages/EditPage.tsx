@@ -1,5 +1,7 @@
 import { useEffect, useState, type CSSProperties } from 'react';
-import { Link, Navigate, useParams } from 'react-router';
+import { Link, Navigate, useParams, useSearchParams } from 'react-router';
+import { MapEditor } from '../components/MapEditor';
+import { MAPS } from '../data/maps';
 import { HEROES, HERO_IDS, ROLES, isHeroId, portrait, type HeroId } from '../data/heroes';
 import { cellTone, signed } from '../lib/matrix';
 import {
@@ -34,6 +36,22 @@ const STEP_LABEL: Record<number, string> = {
  */
 export function EditPage() {
   const { hero } = useParams();
+  /** 상성 · 맵 — 주소(?tab=map&map=)에 둔다. */
+  const [params, setParams] = useSearchParams();
+  const tab = params.get('tab') === 'map' ? 'map' : 'counter';
+  const editMap = params.get('map') ?? MAPS[0].id;
+  const setQuery = (patch: Record<string, string | null>) =>
+    setParams(
+      (p) => {
+        const n = new URLSearchParams(p);
+        for (const [k, v] of Object.entries(patch)) {
+          if (v === null) n.delete(k);
+          else n.set(k, v);
+        }
+        return n;
+      },
+      { replace: true },
+    );
   const sheet = useMySheet();
   const [onlyMine, setOnlyMine] = useState(false);
   const [login, setLogin] = useState(false);
@@ -47,7 +65,7 @@ export function EditPage() {
     return () => clearTimeout(t);
   }, [left]);
 
-  /** 칸을 고친다. 나무위키를 따라가다가 내 상성으로 넘어가는 순간이면 알린다. */
+  /** 칸을 고친다. 나무위키를 따라가다가 내 카운터픽으로 넘어가는 순간이면 알린다. */
   const edit = (fn: () => void) => {
     const before = sourceNow();
     fn();
@@ -72,30 +90,40 @@ export function EditPage() {
   );
   const mineHere = editedOf(id);
 
+  // 고치는 것은 로그인한 사람만 — 표는 그 사람 코드에 붙는다.
+  if (!sheet.user) {
+    return (
+      <>
+        <TopBar />
+        <main className="edit">
+          <div className="login-gate">
+            <p>로그인하면 내 카운터픽을 고칠 수 있어요.</p>
+            <button type="button" className="login-btn kakao" onClick={() => setLogin(true)}>
+              카카오로 로그인
+            </button>
+          </div>
+        </main>
+        {login && <LoginDialog onClose={() => setLogin(false)} />}
+      </>
+    );
+  }
+
   return (
     <>
       <TopBar />
 
       <main className="edit">
-        {/* 저장 상태. 로그인 전에는 창을 닫으면 사라진다는 것을 먼저 알린다. */}
+        {/* 내 카운터픽(내 코드의 표)의 상태. */}
         <div className={'save-note' + (src === 'mine' ? ' saved' : '')}>
           <span>
             {src === 'namu' ? (
               <>
                 <b>나무위키</b>를 따라가는 중 · 나무위키가 바뀌면 같이 바뀌어요. 한 칸이라도 고치면
-                연결이 끊기고 내 상성이 돼요.
-              </>
-            ) : sheet.user ? (
-              <>
-                <b>내 상성</b> · 나무위키와 다른 짝 {sheet.diff} · 계정에 저장됨
+                연결이 끊기고 내 카운터픽이 돼요.
               </>
             ) : (
               <>
-                <b>내 상성</b>은 이 창에만 임시로 있어요. 다음에도 쓰려면{' '}
-                <button type="button" className="link" onClick={() => setLogin(true)}>
-                  로그인
-                </button>
-                하세요.
+                <b>{sheet.user?.name}</b>의 카운터픽 · 나무위키와 다른 짝 {sheet.diff} · 저장됨
               </>
             )}
           </span>
@@ -114,7 +142,7 @@ export function EditPage() {
                     onClick={async () => {
                       const ok = await confirmDialog({
                         title: '초기화할까요?',
-                        message: '내 상성을 지우고 나무위키를 따라가요. 지운 상성은 되돌릴 수 없어요.',
+                        message: '내 카운터픽을 지우고 나무위키를 따라가요. 지운 것은 되돌릴 수 없어요.',
                         ok: '초기화',
                         danger: true,
                       });
@@ -130,6 +158,19 @@ export function EditPage() {
         </div>
 
 
+        {/* 상성(적으로 만났을 때) · 맵(이 맵에서). 같은 카운터픽 한 장에 들어간다. */}
+        <div className="seg small edit-tab" role="group" aria-label="상성 · 맵">
+          <button type="button" aria-pressed={tab === 'counter'} onClick={() => setQuery({ tab: null })}>
+            상성
+          </button>
+          <button type="button" aria-pressed={tab === 'map'} onClick={() => setQuery({ tab: 'map' })}>
+            맵
+          </button>
+        </div>
+
+        {tab === 'map' ? (
+          <MapEditor map={editMap} onMap={(m) => setQuery({ map: m })} edit={edit} />
+        ) : (
         <div className="edit-grid">
           {/* 영웅 고르기 — 역할별로. 고친 짝이 있는 영웅에는 숫자가 붙는다. */}
           <nav className="pick" aria-label="수정할 영웅">
@@ -256,6 +297,7 @@ export function EditPage() {
             })}
           </section>
         </div>
+        )}
       </main>
 
       {login && <LoginDialog onClose={() => setLogin(false)} />}
@@ -265,7 +307,7 @@ export function EditPage() {
       {left && (
         <div className="toast" role="status">
           <span>
-            <b>나무위키</b> 연결이 끊기고 내 상성이 됐어요. 이제 나무위키가 바뀌어도 안 바뀌어요.
+            <b>나무위키</b> 연결이 끊기고 내 카운터픽이 됐어요. 이제 나무위키가 바뀌어도 안 바뀌어요.
           </span>
           <button type="button" className="link" onClick={undo}>
             되돌리기

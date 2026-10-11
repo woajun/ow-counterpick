@@ -28,7 +28,7 @@ export function TopBar({ children }: { children?: ReactNode }) {
       ? '나무위키'
       : user
         ? short(user.name)
-        : '내 상성';
+        : '나무위키';
   return (
     <header className="bar">
       {/* 로고와 제목을 누르면 인게임 추천(첫 화면, 주소 `/`)으로 — 자세히나 남의 코드를 보던

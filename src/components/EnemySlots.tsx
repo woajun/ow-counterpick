@@ -1,5 +1,7 @@
 import { useState, type CSSProperties } from 'react';
 import { SynergyDialog } from './SynergyDialog';
+import { MapDialog } from './MapPicker';
+import { mapById, mapImage } from '../data/maps';
 import { HEROES, ROLES, portrait, type HeroId } from '../data/heroes';
 import { LIMITS, arrange, countRole, type TeamSize } from '../lib/roster';
 import { synergyVerdict, teamSynergy } from '../lib/score';
@@ -16,6 +18,9 @@ interface Props {
   title?: string;
   /** 팀 궁합 이름 — 상성이면 '상대팀 궁합', 궁합 모드면 '우리팀 궁합'. */
   synLabel?: string;
+  /** 이번 판 맵 — 영웅 칸 앞에 한 칸. 없으면 맵 칸을 안 그린다. */
+  map?: string | null;
+  onMap?: (id: string | null) => void;
 }
 
 export function EnemySlots({
@@ -26,7 +31,11 @@ export function EnemySlots({
   onReset,
   title = '적 팀',
   synLabel = '상대팀 궁합',
+  map,
+  onMap,
 }: Props) {
+  const [mapOpen, setMapOpen] = useState(false);
+  const cur = mapById(map);
   const slots = arrange(enemies, size);
   // 둘 이상 골랐을 때만 — 한 명은 짝이 없다.
   const syn = enemies.length >= 2 ? teamSynergy(enemies) : null;
@@ -65,7 +74,7 @@ export function EnemySlots({
 
       {/* 칸 수를 격자에 그대로 넘긴다. flex 로 나누면 안쪽 글자 폭 때문에
           좁은 화면에서 마지막 칸이 밀려 나간다. */}
-      <div className="slots" style={{ '--n': size } as CSSProperties}>
+      <div className={'slots' + (onMap ? ' with-map' : '')} style={{ '--n': size } as CSSProperties}>
         {/* 비우는 대상과 같은 높이로, 맨 앞에. 머리줄에 작게 달려 있을 때는
             있는 줄도 몰랐다. */}
         <button
@@ -79,6 +88,28 @@ export function EnemySlots({
           </span>
           <span className="lbl">초기화</span>
         </button>
+
+        {/* 맵 — 적처럼 "이번 판의 상황" 이라 영웅 칸 앞에 둔다. 초기화는 적만 비운다 —
+            한 판 안에서 적은 자주 바뀌어도 맵은 그대로다. 비어 있을 땐 아무 맵이나 하나를
+            회색으로 깔아 "여기에 맵이 들어간다" 를 글 없이 보여 준다. */}
+        {onMap && (
+          <div className={'slot map-slot' + (cur ? ' on' : '')}>
+            <button
+              type="button"
+              className="map-slot-btn"
+              style={{ backgroundImage: `url(${mapImage(cur ? cur.id : 'kings-row')})` }}
+              aria-label={cur ? `맵 ${cur.ko} — 바꾸기` : '맵 고르기'}
+              onClick={() => setMapOpen(true)}
+            >
+              <span className="map-slot-name">{cur ? cur.ko : '맵'}</span>
+            </button>
+            {cur && (
+              <button type="button" className="map-slot-x" aria-label="맵 빼기" onClick={() => onMap(null)}>
+                ✕
+              </button>
+            )}
+          </div>
+        )}
 
         {slots.map((slot, i) => {
           if (!slot.id) {
@@ -121,6 +152,16 @@ export function EnemySlots({
           );
         })}
       </div>
+      {mapOpen && onMap && (
+        <MapDialog
+          value={map ?? null}
+          onPick={(id) => {
+            onMap(id);
+            setMapOpen(false);
+          }}
+          onClose={() => setMapOpen(false)}
+        />
+      )}
     </section>
   );
 }

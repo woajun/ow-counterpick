@@ -106,20 +106,6 @@ function namuSheet(): Sheet {
 export const valueIn = (sheet: Sheet | null, a: HeroId, b: HeroId) =>
   sheet === null ? namuValue(a, b) : key(a, b) in sheet ? sheet[key(a, b)] : null;
 
-/** 나무위키와 다른 짝 수. 앞뒤 두 칸이 한 짝이다. */
-export function diffCount(sheet: Sheet | null) {
-  if (sheet === null) return 0;
-  let n = 0;
-  for (let i = 0; i < HERO_IDS.length; i++) {
-    for (let j = i + 1; j < HERO_IDS.length; j++) {
-      const a = HERO_IDS[i];
-      const b = HERO_IDS[j];
-      if (valueIn(sheet, a, b) !== namuValue(a, b) || valueIn(sheet, b, a) !== namuValue(b, a)) n++;
-    }
-  }
-  return n;
-}
-
 function toMatrix(sheet: Sheet | null): Matrix {
   if (sheet === null) return MATRIX;
   const m = {} as Matrix;
@@ -160,14 +146,12 @@ async function fetchCode(code: string): Promise<{ row: SheetRow; sheet: Sheet | 
 
 let state: State = { user: null, sheet: null };
 let matrix = MATRIX;
-let diff = 0;
 let computedFor: Sheet | null = null;
 const subs = new Set<() => void>();
 
 function emit() {
   if (computedFor !== state.sheet) {
     matrix = toMatrix(state.sheet);
-    diff = diffCount(state.sheet);
     computedFor = state.sheet;
   }
   subs.forEach((f) => f());
@@ -490,10 +474,10 @@ const subscribe = (f: () => void) => {
   return () => subs.delete(f);
 };
 
-let snap: { state: State; matrix: Matrix; diff: number; peek: Peek | null } = { state, matrix, diff, peek };
+let snap: { state: State; matrix: Matrix; peek: Peek | null } = { state, matrix, peek };
 const getSnap = () => {
   if (snap.state !== state || snap.matrix !== matrix || snap.peek !== peek)
-    snap = { state, matrix, diff, peek };
+    snap = { state, matrix, peek };
   return snap;
 };
 
@@ -515,12 +499,8 @@ export function useMySheet() {
     viewMap: (map: string, hero: HeroId) => mapValueIn(s.peek ? s.peek.sheet : sheet, map, hero),
     /** 내 표의 맵 점수 — 수정 화면용. */
     myMap: (map: string, hero: HeroId) => mapValueIn(sheet, map, hero),
-    /** 나무위키와 다른 짝 수. */
-    diff: s.diff,
-    /** 내 표 그대로(null 이면 나무위키) — 살펴보기의 비교에 쓴다. */
+    /** 내 표 그대로(null 이면 나무위키). */
     sheet,
-    /** 나무위키와 다른 칸인가. */
-    differs: (a: HeroId, b: HeroId) => valueIn(sheet, a, b) !== namuValue(a, b),
     /** 적힌 값이 없는 칸인가 — 중립(0)과 다르다. */
     blank: (a: HeroId, b: HeroId) => valueIn(sheet, a, b) === null,
   };

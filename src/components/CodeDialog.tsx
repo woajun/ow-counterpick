@@ -9,7 +9,7 @@ import { LoginDialog } from './Account';
  * 로그인 창과 같은 껍데기를 쓴다.
  */
 export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose: () => void }) {
-  const { user, diff, code: myCode } = useMySheet();
+  const { user, code: myCode } = useMySheet();
   const navigate = useNavigate();
   const [copied, setCopied] = useState<'code' | 'link' | null>(null);
   const [input, setInput] = useState('');
@@ -84,7 +84,7 @@ export function CodeDialog({ mode, onClose }: { mode: 'share' | 'enter'; onClose
               <>
                 <h3>내 코드</h3>
                 <p>
-                  주소를 열면 누구나 로그인 없이 내 카운터픽(나무위키와 다른 짝 <b>{diff}</b>)으로 추천을
+                  주소를 열면 누구나 로그인 없이 내 카운터픽으로 추천을
                   받아요. 내가 더 고치면 다음에 열 때 바로 반영돼요.
                 </p>
                 <input

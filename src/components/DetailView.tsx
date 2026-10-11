@@ -7,7 +7,6 @@ import { MAPS, MODES } from '../data/maps';
 import { mapValueIn } from '../lib/mySheet';
 import {
   likeCounts,
-  namuValue,
   useMySheet,
   valueIn,
   type Sheet,
@@ -82,14 +81,15 @@ function Overview({ subject }: { subject: Subject }) {
       <div className="dv-title">
         <b>{subject.name}</b>
         {subject.code && <span className="mono">{subject.code}</span>}
+        {/* 받은 추천(좋아요) 수 — 제목 줄 오른쪽 끝에 크게. 코드가 있는 표만. */}
+        {subject.code && (
+          <span className="dv-likes" title="받은 추천 수">
+            ♥ <b>{likes ?? '…'}</b>
+          </span>
+        )}
       </div>
-      {!subject.isNamu && (subject.code || subject.updatedAt) && (
+      {!subject.isNamu && subject.updatedAt && (
         <div className="dv-stats">
-          {subject.code && (
-            <span>
-              ♥ <b>{likes ?? '…'}</b>
-            </span>
-          )}
           {subject.updatedAt && (
             <span>
               마지막 수정 <b>{ago(subject.updatedAt)}</b>
@@ -109,8 +109,14 @@ function Overview({ subject }: { subject: Subject }) {
 // ── 영웅별로 보기 ───────────────────────────────────────
 
 function HeroLines({ subject }: { subject: Subject }) {
-  // 목업 설명이 겐지 줄에만 있어서 겐지부터 보여 준다. 설명이 실제로 붙으면 첫 영웅으로 되돌린다.
+  // 목업 설명이 겐지 줄에만 있어서 영웅을 고르면 겐지부터. 처음엔 영웅 없이 전체 요약을 보여 준다.
   const [id, setId] = useState<HeroId>('genji');
+  /** 영웅을 아직 안 골랐다 — 오른쪽에 이 표 전체 요약. */
+  const [summary, setSummary] = useState(true);
+  const pick = (h: HeroId) => {
+    setId(h);
+    setSummary(false);
+  };
   /** 역할 안에서 점수 높은 순으로 — 끄면 게임 영웅 선택 화면 차례. */
   const [byScore, setByScore] = useState(false);
   /**
@@ -124,8 +130,6 @@ function HeroLines({ subject }: { subject: Subject }) {
   const valueOf = (e: HeroId) => (combo ? (SYNERGY[id]?.[e] ?? null) : valueIn(subject.sheet, id, e));
   const me = HEROES[id];
 
-  const differs = (a: HeroId, b: HeroId) => valueIn(subject.sheet, a, b) !== namuValue(a, b);
-  const diffOf = (h: HeroId) => HERO_IDS.filter((e) => e !== h && differs(h, e)).length;
   const rows = HERO_IDS.filter((e) => e !== id);
 
   return (
@@ -141,19 +145,17 @@ function HeroLines({ subject }: { subject: Subject }) {
               </div>
               <div className="pick-list">
                 {HERO_IDS.filter((h) => HEROES[h].r === r.k).map((h) => {
-                  const n = subject.isNamu ? 0 : diffOf(h);
                   return (
                     <button
                       key={h}
                       type="button"
-                      className={'pick-item' + (h === id ? ' on' : '')}
+                      className={'pick-item' + (!summary && h === id ? ' on' : '')}
                       title={HEROES[h].full}
-                      aria-pressed={h === id}
-                      onClick={() => setId(h)}
+                      aria-pressed={!summary && h === id}
+                      onClick={() => pick(h)}
                     >
                       <img className="pic" src={portrait(h)} alt="" loading="lazy" decoding="async" />
                       <span className="nm">{HEROES[h].ko}</span>
-                      {n > 0 && <span className="cnt">{n}</span>}
                     </button>
                   );
                 })}
@@ -162,8 +164,14 @@ function HeroLines({ subject }: { subject: Subject }) {
           ))}
         </nav>
 
+        {summary ? (
+          <Summary sheet={subject.sheet} onPick={pick} />
+        ) : (
         <div className="editor">
           <div className="ed-head" style={{ '--role': `var(--${me.r})` } as CSSProperties}>
+            <button type="button" className="reset small" onClick={() => setSummary(true)} title="표 전체 요약으로">
+              ← 요약
+            </button>
             <img className="pic" src={portrait(id)} alt="" decoding="async" />
             <div className="hs-name">
               <b>{me.full}</b>
@@ -239,21 +247,12 @@ function HeroLines({ subject }: { subject: Subject }) {
                 </div>
                 {list.map((e) => {
                   const v = valueOf(e);
-                  const n = namuValue(id, e);
-                  // 조합은 표마다 같아서 나무위키와 견줄 것이 없다.
-                  const d = !combo && !subject.isNamu && v !== n;
                   return (
-                    <div key={e} className={'dv-row' + (d ? ' diff' : '')}>
+                    <div key={e} className="dv-row">
                       <img className="pic" src={portrait(e)} alt="" loading="lazy" decoding="async" />
                       <span className="nm">{HEROES[e].full}</span>
                       <Badge v={v} title={subject.isNamu ? '나무위키' : `${subject.name}의 값`} />
-                      {d ? (
-                        <span className="dv-was">
-                          나무위키 <Badge v={n} />
-                        </span>
-                      ) : (
-                        <span />
-                      )}
+                      <span />
                       {/* 왜 이 점수인지 — 목업. 나중엔 표 주인이 칸마다 쓴다. */}
                       {!combo && MOCK_NOTES[`${id}>${e}`] && <Note key={id + e} text={MOCK_NOTES[`${id}>${e}`]} />}
                     </div>
@@ -263,8 +262,70 @@ function HeroLines({ subject }: { subject: Subject }) {
             );
           })}
         </div>
+        )}
       </div>
     </section>
+  );
+}
+
+// ── 전체 요약 — 영웅을 고르기 전 ─────────────────────────
+
+/** 설명 아이콘 — 마우스를 올리면(또는 눌러 초점을 주면) 말풍선으로 설명이 뜬다. */
+const Info = ({ text }: { text: string }) => (
+  <span className="info" tabIndex={0} aria-label={text} data-tip={text}>
+    i
+  </span>
+);
+
+
+/**
+ * 이 표 전체를 한눈에 — 영웅을 고르기 전에 오른쪽에 뜬다.
+ *
+ * 카운터가 많은 영웅 · 적은 영웅 — +2 이상으로 이기는 상대가 많은 영웅. 꺼내기 조심스러운 픽.
+ * 영웅을 누르면 그 영웅 줄로 넘어간다.
+ */
+function Summary({ sheet, onPick }: { sheet: Sheet | null; onPick: (h: HeroId) => void }) {
+  const v = (a: HeroId, b: HeroId) => valueIn(sheet, a, b) ?? 0;
+  const countered = HERO_IDS.map((h) => ({ h, n: HERO_IDS.filter((x) => x !== h && v(x, h) >= 2).length }));
+  // 많은 순 · 적은 순. 같으면 이름순으로 고정해 순서가 안 흔들리게.
+  const byName = (x: { h: HeroId }, y: { h: HeroId }) => HEROES[x.h].full.localeCompare(HEROES[y.h].full);
+  const counters = [...countered].sort((x, y) => y.n - x.n || byName(x, y)).slice(0, 10);
+  const safe = [...countered].sort((x, y) => x.n - y.n || byName(x, y)).slice(0, 10);
+
+  const Hero = ({ h, score }: { h: HeroId; score: string }) => (
+    <button type="button" className="sm-hero" onClick={() => onPick(h)} title={`${HEROES[h].full} 줄 보기`}>
+      <img className="pic" src={portrait(h)} alt="" loading="lazy" decoding="async" />
+      <span className="nm">{HEROES[h].ko}</span>
+      <span className="sc">{score}</span>
+    </button>
+  );
+
+  return (
+    <div className="editor summary">
+      <section className="sm-sec">
+        <h3>
+          카운터가 많은 영웅
+          <Info text="+2 이상으로 이기는 상대 수 — 많을수록 꺼내기 조심스러워요" />
+        </h3>
+        <div className="sm-list">
+          {counters.map(({ h, n }) => (
+            <Hero key={h} h={h} score={`${n}명`} />
+          ))}
+        </div>
+      </section>
+
+      <section className="sm-sec">
+        <h3>
+          카운터가 적은 영웅
+          <Info text="+2 이상으로 이기는 상대 수 — 적을수록 어디서든 꺼내기 편해요" />
+        </h3>
+        <div className="sm-list safe">
+          {safe.map(({ h, n }) => (
+            <Hero key={h} h={h} score={`${n}명`} />
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
 

@@ -970,12 +970,6 @@ button.link {
 .pick-item .nm { font-size: 10px; white-space: nowrap; overflow: hidden; max-width: 100%; }
 .pick-item:hover { color: var(--txt); background: var(--panel2); }
 .pick-item.on { border-color: var(--role); color: var(--txt); background: var(--panel2); }
-.pick-item .cnt {
-  position: absolute; top: 0; right: 2px;
-  min-width: 15px; height: 15px; padding: 0 3px; border-radius: 8px;
-  background: var(--accent); color: #111; font-size: 9.5px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-}
 
 .editor { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
 .ed-head {
@@ -1207,12 +1201,8 @@ button.pick-item { background: transparent; cursor: pointer; font: inherit; }
   align-items: center; gap: 10px; padding: 4px 6px; border-radius: 7px;
 }
 .dv-row:hover { background: var(--panel2); }
-.dv-row.diff { background: color-mix(in srgb, var(--accent) 7%, transparent); }
-.dv-row.diff .nm { color: var(--accent); }
 .dv-row .pic { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
 .dv-row .nm { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dv-was { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--faint); }
-.dv-was .hs-badge { opacity: .6; }
 .reset.small.on { border-color: var(--accent); color: var(--accent); }
 
 /* 화면 도구줄 — 헤더 아래, 이 화면에서만 뜻이 있는 설정(보기 방식 · 인원) */
@@ -1391,3 +1381,47 @@ main.detail .ed-head { box-shadow: none; }
   display: flex; flex-direction: column; gap: 14px;
 }
 .login-gate p { margin: 0; color: var(--dim); font-size: 14px; }
+
+/* 자세히 — 전체 요약 */
+.editor.summary { padding: 6px 0; }
+.sm-sec { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.sm-sec:last-child { border-bottom: 0; }
+.sm-sec h3 { margin: 0; font-size: 14px; font-weight: 600; color: var(--txt); display: flex; align-items: center; gap: 8px; }
+.sm-n { font-size: 11.5px; font-weight: 500; color: var(--faint); }
+.sm-sub { margin: 4px 0 10px; font-size: 11.5px; color: var(--faint); }
+.sm-hero {
+  display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: center; gap: 8px;
+  padding: 4px 6px; border-radius: 6px; cursor: pointer; text-align: left;
+  background: transparent; border: 0; color: var(--txt); font-size: 13px;
+}
+.sm-hero:hover { background: var(--panel2); }
+.sm-hero .pic { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+.sm-hero .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sm-hero .sc { font-family: var(--display); font-variant-numeric: tabular-nums; color: var(--dim); }
+.sm-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 2px 12px; }
+.sm-list .sc { color: var(--bad); }
+.dv-likes {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 12px; border-radius: 20px;
+  border: 1px solid color-mix(in srgb, #ff5a7a 45%, transparent); color: #ff5a7a; font-size: 14px;
+}
+.dv-likes b { font-family: var(--display); font-size: 16px; font-variant-numeric: tabular-nums; }
+.sm-list.safe .sc { color: var(--good); }
+/* 설명 아이콘 — 올리면 말풍선 */
+.info {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; border-radius: 50%; cursor: help;
+  border: 1px solid var(--line2); color: var(--faint);
+  font-family: var(--display); font-size: 10.5px; font-weight: 600; font-style: normal;
+}
+.info:hover, .info:focus { color: var(--txt); border-color: var(--dim); outline: none; }
+.info::after {
+  content: attr(data-tip); position: absolute; left: 50%; top: calc(100% + 8px); z-index: 20;
+  transform: translateX(-50%); width: max-content; max-width: 260px;
+  padding: 7px 10px; border-radius: 8px;
+  background: var(--panel2); border: 1px solid var(--line2); box-shadow: 0 8px 24px rgb(0 0 0 / .45);
+  color: var(--txt); font-family: var(--body); font-size: 12px; font-weight: 400; line-height: 1.5;
+  white-space: normal; text-align: left; pointer-events: none;
+  opacity: 0; visibility: hidden; transition: opacity .12s;
+}
+.info:hover::after, .info:focus::after { opacity: 1; visibility: visible; }

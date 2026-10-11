@@ -53,7 +53,6 @@ export function EditPage() {
       { replace: true },
     );
   const sheet = useMySheet();
-  const [onlyMine, setOnlyMine] = useState(false);
   const [login, setLogin] = useState(false);
   const [codeMode, setCodeMode] = useState<'share' | 'enter' | null>(null);
   /** 방금 고쳐서 떠나온 것 — 나무위키나 남의 코드. 안내를 띄우고 되돌릴 수 있게. */
@@ -81,14 +80,10 @@ export function EditPage() {
   const me = HEROES[id];
   const src = sheet.source.kind;
 
-  /** 영웅마다 나무위키와 다른 짝 수 — 고르는 줄에 숫자로 찍는다. */
-  const editedOf = (h: HeroId) =>
-    HERO_IDS.filter((e) => e !== h && sheet.differs(h, e)).length;
 
   const rows = HERO_IDS.filter(
-    (e) => e !== id && (!onlyMine || sheet.differs(id, e)),
+    (e) => e !== id,
   );
-  const mineHere = editedOf(id);
 
   // 고치는 것은 로그인한 사람만 — 표는 그 사람 코드에 붙는다.
   if (!sheet.user) {
@@ -123,7 +118,7 @@ export function EditPage() {
               </>
             ) : (
               <>
-                <b>{sheet.user?.name}</b>의 카운터픽 · 나무위키와 다른 짝 {sheet.diff} · 저장됨
+                <b>{sheet.user?.name}</b>의 카운터픽 · 저장됨
               </>
             )}
           </span>
@@ -182,7 +177,6 @@ export function EditPage() {
                 </div>
                 <div className="pick-list">
                   {HERO_IDS.filter((h) => HEROES[h].r === r.k).map((h) => {
-                    const n = editedOf(h);
                     return (
                       <Link
                         key={h}
@@ -193,7 +187,6 @@ export function EditPage() {
                       >
                         <img className="pic" src={portrait(h)} alt="" loading="lazy" decoding="async" />
                         <span className="nm">{HEROES[h].ko}</span>
-                        {n > 0 && <span className="cnt">{n}</span>}
                       </Link>
                     );
                   })}
@@ -207,20 +200,11 @@ export function EditPage() {
               <img className="pic" src={portrait(id)} alt="" decoding="async" />
               <div className="hs-name">
                 <b>{me.full}</b>
-                <span>내 픽이 {me.ko}일 때 · 고친 짝 {mineHere}</span>
-              </div>
-              <div className="seg small" role="group" aria-label="보기">
-                <button type="button" aria-pressed={!onlyMine} onClick={() => setOnlyMine(false)}>
-                  전체
-                </button>
-                <button type="button" aria-pressed={onlyMine} onClick={() => setOnlyMine(true)}>
-                  고친 것만
-                </button>
+                <span>내 픽이 {me.ko}일 때</span>
               </div>
               <button
                 type="button"
                 className="reset small"
-                disabled={mineHere === 0}
                 onClick={() => edit(() => resetHero(id))}
               >
                 이 영웅 되돌리기
@@ -228,7 +212,6 @@ export function EditPage() {
             </div>
 
 
-            {rows.length === 0 && <div className="rec-empty">이 영웅은 아직 고친 짝이 없어요.</div>}
 
             {ROLES.map((r) => {
               const list = rows.filter((e) => HEROES[e].r === r.k);
@@ -242,12 +225,10 @@ export function EditPage() {
                   {list.map((e) => {
                     const blank = sheet.blank(id, e);
                     const v = sheet.matrix[id][e];
-                    // 나무위키와 다른 칸.
-                    const edited = sheet.differs(id, e);
                     return (
                       <div
                         key={e}
-                        className={'ed-row' + (edited ? ' edited' : blank ? ' blank' : '')}
+                        className={'ed-row' + (blank ? ' blank' : '')}
                         title={blank ? '아직 값이 없어요 — 골라 주세요' : undefined}
                       >
                         <img className="pic" src={portrait(e)} alt="" loading="lazy" decoding="async" />
@@ -274,21 +255,7 @@ export function EditPage() {
                             );
                           })}
                         </div>
-                        <span className="was">
-                          {edited ? (
-                            <>
-                              <button
-                                type="button"
-                                className="undo"
-                                title="나무위키 값으로 되돌리기"
-                                aria-label="나무위키 값으로 되돌리기"
-                                onClick={() => edit(() => setPair(id, e, null))}
-                              >
-                                ↺
-                              </button>
-                            </>
-                          ) : null}
-                        </span>
+                        <span />
                       </div>
                     );
                   })}

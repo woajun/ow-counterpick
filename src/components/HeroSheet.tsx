@@ -59,11 +59,9 @@ const COMBO_LEVELS: { v: number; label: string; kind: Kind }[] = [
 export function HeroSheet({ id, enemies, mode = 'counter', map, onClose }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
   // 내가 고친 상성이 있으면 그 위에서 편다. 추천 점수와 같은 행렬이어야 한다.
-  const { viewMatrix: matrix, differs, viewBlank: blank, peek, viewMap } = useMySheet();
-  // 둘러보는 중에는 내가 고친 표시를 하지 않는다 — 보고 있는 표가 내 것이 아니다.
+  const { viewMatrix: matrix, viewBlank: blank, viewMap } = useMySheet();
   const combo = mode === 'combo';
   // 조합은 표마다 같은 나무위키 궁합이라 "내가 고친 값" · "뒤집어 메운 값" 표시가 없다.
-  const isEdited = (a: HeroId, b: HeroId) => !combo && !peek && differs(a, b);
   const guessed = (a: HeroId, b: HeroId) => !combo && isInferred(a, b);
   /** 판단이 있는 칸 — 0 이어도 중립이라 정한 것이다. */
   const judged = (e: HeroId) =>
@@ -214,17 +212,13 @@ export function HeroSheet({ id, enemies, mode = 'counter', map, onClose }: Props
                             key={e}
                             className={
                               'hs-item' +
-                              (isEdited(id, e)
-                                ? ' mine'
-                                : guessed(id, e)
+                              (guessed(id, e)
                                   ? ' guessed'
                                   : '')
                             }
                             title={
                               h.full +
-                              (isEdited(id, e)
-                                ? ' · 내가 고친 값'
-                                : guessed(id, e)
+                              (guessed(id, e)
                                   ? ` · ${h.full} 문서 쪽 기록을 뒤집어 매긴 값`
                                   : '')
                             }

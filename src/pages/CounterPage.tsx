@@ -3,7 +3,6 @@ import type { HeroId } from '../data/heroes';
 import { useTeam } from '../lib/useTeam';
 import { useMode } from '../lib/useMode';
 import { canAdd, swapIn } from '../lib/roster';
-import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
 import { SizeToggle } from '../components/SizeToggle';
 import { EnemySlots } from '../components/EnemySlots';
@@ -13,7 +12,7 @@ import { HeroSheet } from '../components/HeroSheet';
 import { DetailView } from '../components/DetailView';
 import { useView } from '../lib/useView';
 import { useNavigate, useSearchParams } from 'react-router';
-import { copyPeek, likeCounts, likeSheet, likedToday, peekCode, stopPeek, useMySheet } from '../lib/mySheet';
+import { normalizeCode, peekCode, stopPeek, useMySheet } from '../lib/mySheet';
 
 const MAP_KEY = 'ow-counterpick.map';
 
@@ -36,8 +35,23 @@ export function CounterPage() {
      로그인 없이 알트탭 한 번에 그 사람 상성으로 뜬다. 내 상태는 안 바뀐다.
      `/c/코드` 처럼 경로로 두지 않은 이유: GitHub Pages 는 없는 경로를 404 상태로
      내줘서, 디스코드 · 카톡 링크 미리보기가 깨진다. 메인 주소에 붙이면 늘 200 이다. */
-  const [params] = useSearchParams();
+  const [params, setParams] = useSearchParams();
   const code = params.get('code');
+  /** 주소의 코드가 내 코드면 남의 표처럼 받아 오지 않고 내 표를 그대로 쓴다 — 방금 고친 것이 바로 보인다. */
+  const isMine = !!code && !!sheet.user && normalizeCode(code) === sheet.code;
+  const myCode = sheet.user ? sheet.code : undefined;
+  /* 로그인한 채로 코드 없이 들어오면 내 코드 주소로 바꾼다 — 그 주소를 북마크하면 된다. */
+  useEffect(() => {
+    if (code || !myCode) return;
+    setParams(
+      (p) => {
+        const next = new URLSearchParams(p);
+        next.set('code', myCode);
+        return next;
+      },
+      { replace: true },
+    );
+  }, [code, myCode, setParams]);
   /**
    * 고른 맵 — 주소에는 안 남긴다. 판마다 바뀌는 내 상황이라 공유할 일이 없다.
    * 이 탭에서만 기억해서(sessionStorage) 새로고침해도 이번 판 맵은 그대로다.
@@ -61,7 +75,7 @@ export function CounterPage() {
   const navigate = useNavigate();
   const [missing, setMissing] = useState(false);
   useEffect(() => {
-    if (!code) return;
+    if (!code || isMine) return;
     let alive = true;
     void peekCode(code).then((ok) => alive && setMissing(!ok));
     return () => {
@@ -69,29 +83,7 @@ export function CounterPage() {
       setMissing(false);
       stopPeek();
     };
-  }, [code]);
-
-  /* 좋아요 — 로그인 없이 누른다. 하루 한 번(계정이나 IP 로 DB 가 가린다). */
-  const [likes, setLikes] = useState<number | null>(null);
-  const [justLiked, setJustLiked] = useState<string | null>(null);
-  const peekCodeNow = sheet.peek?.code;
-  const liked = !!peekCodeNow && (justLiked === peekCodeNow || likedToday(peekCodeNow));
-  useEffect(() => {
-    if (!peekCodeNow) return;
-    let alive = true;
-    void likeCounts().then((m) => alive && setLikes(m.get(peekCodeNow) ?? 0));
-    return () => {
-      alive = false;
-      setLikes(null);
-    };
-  }, [peekCodeNow]);
-  const like = async () => {
-    if (!peekCodeNow || liked) return;
-    setJustLiked(peekCodeNow);
-    const r = await likeSheet(peekCodeNow);
-    if (r) setLikes(r.likes);
-    else setJustLiked(null);
-  };
+  }, [code, isMine]);
 
   return (
     <>
@@ -128,7 +120,7 @@ export function CounterPage() {
         )}
       </div>
 
-      {/* 주소로 들어온 남의 카운터픽 — 좋아요를 누르거나, 복사해 내 카운터픽으로 시작할 수 있다. */}
+      {/* 주소의 코드가 없는 코드일 때만 알린다. */}
       {code && missing && (
         <div className="peek-bar">
           <span>
@@ -139,52 +131,6 @@ export function CounterPage() {
           </button>
         </div>
       )}
-      {sheet.peek && (
-        <div className="peek-bar">
-          <span>
-            <b>{sheet.peek.owner}</b>의 카운터픽이에요. 이 주소를 북마크하면 로그인 없이 바로
-            열려요.
-          </span>
-          <button
-            type="button"
-            className={'like-btn' + (liked ? ' on' : '')}
-            aria-pressed={liked}
-            title={liked ? '오늘은 이미 눌렀어요' : '좋아요 — 하루 한 번'}
-            onClick={() => void like()}
-          >
-            ♥ {likes ?? '…'}
-          </button>
-          {/* 복사해서 내 카운터픽으로 — 내 표가 있는 사람(로그인)만. */}
-          {sheet.user && sheet.peek.code !== sheet.code && (
-          <button
-            type="button"
-            className="reset small"
-            title="이 표를 복사해 내 카운터픽으로 시작해요. 그 뒤로는 이 사람이 고쳐도 안 바뀌어요."
-            onClick={async () => {
-              const owner = sheet.peek!.owner;
-              if (
-                sheet.source.kind === 'mine' &&
-                !(await confirmDialog({
-                  title: `${owner}의 표로 다시 시작할까요?`,
-                  message: '지금 내 카운터픽은 지워져요. 지운 것은 되돌릴 수 없어요.',
-                  ok: '다시 시작',
-                  danger: true,
-                }))
-              )
-                return;
-              copyPeek();
-              navigate('/edit');
-            }}
-          >
-            이 상성으로 내 것 만들기
-          </button>
-          )}
-          <button type="button" className="reset small" onClick={() => navigate('/')}>
-            내 추천으로
-          </button>
-        </div>
-      )}
-
       {view === 'detail' ? (
         <DetailView />
       ) : (

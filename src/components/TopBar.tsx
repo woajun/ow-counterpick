@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link, NavLink } from 'react-router';
-import { useMySheet } from '../lib/mySheet';
+import { likeCounts, likeSheet, likedToday, useMySheet } from '../lib/mySheet';
 import { AccountChip } from './Account';
 
 /**
@@ -18,7 +18,7 @@ const TABS = [
 
 /** children 은 계정 단추 앞에 놓인다 — 상성표(/table) 처럼 헤더에 도구가 꼭 필요한 화면만 쓴다. */
 export function TopBar({ children }: { children?: ReactNode }) {
-  const { user, source, peek } = useMySheet();
+  const { user, code, source, peek } = useMySheet();
   // 제목은 지금 보는 상성이 누구의 것인지 — 주소로 연 사람, 나무위키, 아니면 나.
   // 이메일은 @ 앞만 — 제목이 길어지지 않게.
   const short = (name: string) => name.split('@')[0];
@@ -29,6 +29,8 @@ export function TopBar({ children }: { children?: ReactNode }) {
       : user
         ? short(user.name)
         : '나무위키';
+  // 추천(♥) 받는 표 — 주소로 연 사람의 표, 아니면 내 카운터픽. 나무위키는 없다.
+  const likeCode = peek ? peek.code : user && source.kind === 'mine' ? code : undefined;
   return (
     <header className="bar">
       {/* 로고와 제목을 누르면 인게임 추천(첫 화면, 주소 `/`)으로 — 자세히나 남의 코드를 보던
@@ -37,6 +39,7 @@ export function TopBar({ children }: { children?: ReactNode }) {
         <span className="mark">OW</span>
         <h1>{who}</h1>
       </Link>
+      {likeCode && <TitleLike code={likeCode} canLike={!!peek} />}
 
       <nav className="tabs">
         {TABS.map((t) => (
@@ -56,5 +59,47 @@ export function TopBar({ children }: { children?: ReactNode }) {
       {children}
       <AccountChip />
     </header>
+  );
+}
+
+/**
+ * 제목 옆 추천(♥) — 남의 표면 눌러서 추천한다(로그인 없이, 하루 한 번 · DB 가 가린다).
+ * 내 표면 받은 수만 보인다.
+ */
+function TitleLike({ code, canLike }: { code: string; canLike: boolean }) {
+  const [likes, setLikes] = useState<number | null>(null);
+  const [justLiked, setJustLiked] = useState<string | null>(null);
+  const liked = justLiked === code || likedToday(code);
+  useEffect(() => {
+    let alive = true;
+    void likeCounts().then((m) => alive && setLikes(m.get(code) ?? 0));
+    return () => {
+      alive = false;
+      setLikes(null);
+    };
+  }, [code]);
+
+  if (!canLike)
+    return (
+      <span className="title-like" title="받은 추천 수">
+        ♥ {likes ?? '…'}
+      </span>
+    );
+  return (
+    <button
+      type="button"
+      className={'like-btn title-like' + (liked ? ' on' : '')}
+      aria-pressed={liked}
+      title={liked ? '오늘은 이미 추천했어요' : '추천 — 하루 한 번'}
+      onClick={async () => {
+        if (liked) return;
+        setJustLiked(code);
+        const r = await likeSheet(code);
+        if (r) setLikes(r.likes);
+        else setJustLiked(null);
+      }}
+    >
+      ♥ {likes ?? '…'}
+    </button>
   );
 }

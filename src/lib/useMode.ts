@@ -6,10 +6,10 @@ export type Mode = 'counter' | 'combo';
 const KEY = 'ow-counterpick.mode';
 
 /**
- * 조합 모드를 화면에 내놓을지. 아직 실전성이 떨어져 숨겨 둔다(10/4) — 궁합 등급이
- * 문서 글을 읽어 매긴 것이라 거칠다. 코드와 자료(synergy.ts)는 그대로 두고 단추만 감춘다.
+ * 조합 모드를 화면에 내놓을지. 10/4 에 궁합 등급이 거칠다며 숨겼다가, 10/11 에 다시 켰다 —
+ * 인게임 · 살펴보기 모두 [상성 | 조합] 으로 고른다.
  */
-export const COMBO_ENABLED = false;
+export const COMBO_ENABLED = true;
 
 /** 기억해 둔다 — 알트탭으로 넘어올 때마다 다시 고르게 하지 않으려고. */
 export function useMode() {

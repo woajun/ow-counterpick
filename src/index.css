@@ -1186,3 +1186,150 @@ button.link {
 }
 a.brand { text-decoration: none; color: inherit; }
 a.brand:hover h1 { color: var(--accent); }
+
+/* 살펴보기 */
+/* 인게임 화면과 같은 폭 — 모드를 바꿔도 도구줄 · 내용의 왼쪽 끝이 그대로다. */
+main.detail { display: block; max-width: 1480px; }
+.dv-card {
+  padding: 16px 18px; margin-bottom: 18px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: inset 0 3px 0 0 var(--accent);
+}
+.dv-title { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.dv-title b { font-family: var(--display); font-size: 22px; font-weight: 600; color: var(--txt); }
+.dv-title .mono { color: var(--faint); font-size: 13px; }
+.dv-stats { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; font-size: 13px; color: var(--dim); }
+.dv-stats b { color: var(--txt); font-variant-numeric: tabular-nums; }
+.dv-section { margin-bottom: 26px; }
+button.pick-item { background: transparent; cursor: pointer; font: inherit; }
+.dv-row {
+  /* 이름 칸을 고정해 점수가 이름 바로 옆에 붙는다. 남는 폭은 맨 뒤로 보낸다. */
+  display: grid; grid-template-columns: 28px 120px auto auto 1fr;
+  align-items: center; gap: 10px; padding: 4px 6px; border-radius: 7px;
+}
+.dv-row:hover { background: var(--panel2); }
+.dv-row.diff { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.dv-row.diff .nm { color: var(--accent); }
+.dv-row .pic { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+.dv-row .nm { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dv-was { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--faint); }
+.dv-was .hs-badge { opacity: .6; }
+.dv-pick { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.dv-code {
+  width: 130px; padding: 5px 10px; text-transform: uppercase; letter-spacing: .12em;
+  background: var(--panel); border: 1px solid var(--line2); border-radius: 7px;
+  color: var(--txt); font-family: var(--display);
+}
+.dv-code:focus { outline: none; border-color: color-mix(in srgb, var(--accent) 55%, var(--line2)); }
+.dv-diffs { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 0; }
+.dv-diff {
+  display: grid; grid-template-columns: minmax(0, 1fr) 90px 90px; align-items: center; gap: 8px;
+  padding: 6px 14px; border-bottom: 1px solid var(--line); font-size: 13px;
+}
+.dv-diff:last-of-type { border-bottom: 0; }
+.dv-diff.head { font-size: 11.5px; color: var(--faint); }
+.dv-diff > .hs-badge, .dv-diff.head > span + span { justify-self: center; }
+.dv-pair { display: inline-flex; align-items: center; gap: 5px; min-width: 0; }
+.dv-pair .pic { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
+.dv-pair i { font-style: normal; color: var(--faint); font-size: 11px; }
+.dv-more { margin: 8px 14px; }
+.reset.small.on { border-color: var(--accent); color: var(--accent); }
+
+/* 화면 도구줄 — 헤더 아래, 이 화면에서만 뜻이 있는 설정(보기 방식 · 인원) */
+.page-tools {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  max-width: 1480px; margin: 0 auto; padding: 12px 18px 0;
+}
+.page-tools .seg button {
+  padding: 4px 11px; font-family: var(--body); font-size: 12.5px; font-weight: 500; letter-spacing: .01em;
+}
+.page-tools + main, .page-tools ~ .peek-bar + main { padding-top: 12px; }
+.dv-blurb { margin: 10px 0 0; font-size: 13px; color: var(--dim); line-height: 1.6; }
+.dv-mock {
+  margin-left: 6px; padding: 0 6px; border-radius: 10px; vertical-align: 1px;
+  border: 1px dashed var(--line2); color: var(--faint); font-size: 10.5px;
+}
+.dv-note {
+  grid-column: 2 / -1; margin: -2px 0 4px;
+  font-size: 12px; line-height: 1.5; color: var(--faint);
+}
+.dv-legend {
+  display: flex; gap: 10px; flex-wrap: wrap; padding: 8px 14px;
+  font-size: 11.5px; color: var(--dim); border-bottom: 1px solid var(--line);
+}
+.dv-legend span { color: var(--faint); }
+
+/* 상성 · 조합 — 고른 영웅이 적인지 우리 편인지 색으로도 갈라 둔다.
+   오버워치 경기 결과 화면의 팀 색을 따른다 — 우리 팀 파랑, 적 팀 분홍. 게임에서 익은 색이라
+   설명 없이 읽힌다. 어두운 바탕에서 잘 보이게 게임 색보다 조금 밝게 잡았다. */
+[data-mode='counter'] { --mode: #e5579b; }
+[data-mode='combo'] { --mode: #5cb0ea; }
+.mode-seg button[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--mode) 22%, transparent);
+  color: color-mix(in srgb, var(--mode) 85%, var(--txt));
+}
+.mode-seg[data-mode='counter'] button:first-child[aria-pressed='true'],
+.mode-seg[data-mode='combo'] button:last-child[aria-pressed='true'] { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mode) 55%, transparent); }
+main[data-mode] .mode-pill {
+  display: inline-flex; align-items: center; padding: 1px 9px; border-radius: 20px;
+  background: color-mix(in srgb, var(--mode) 16%, transparent);
+  color: color-mix(in srgb, var(--mode) 90%, var(--txt));
+  letter-spacing: .08em;
+}
+main[data-mode] .slot.empty { border-color: color-mix(in srgb, var(--mode) 35%, var(--line2)); }
+/* 고른 영웅 타일도 모드 색 — 상성이면 적(분홍), 조합이면 우리 편(파랑). */
+main[data-mode] .tile[aria-pressed='true'] {
+  border-color: var(--mode);
+  box-shadow: 0 0 0 1px var(--mode), 0 0 18px color-mix(in srgb, var(--mode) 28%, transparent);
+}
+main[data-mode] .tile[aria-pressed='true'] .ko { color: color-mix(in srgb, var(--mode) 90%, var(--txt)); }
+main[data-mode] .tile[aria-pressed='true'] { background: color-mix(in srgb, var(--mode) 16%, var(--panel)); }
+/* 팀 칸에 들어간 영웅 — 상성이면 적 팀 분홍, 조합이면 우리 팀 파랑 바탕. 위쪽 역할 색 줄은 뺀다 —
+   팀 색과 겹쳐 눈이 갈 곳이 둘이 된다. 역할은 아래 영웅 고르기와 빈 자리 글자로 보인다. */
+main[data-mode] .slot.filled {
+  background: color-mix(in srgb, var(--mode) 14%, var(--panel));
+  border-color: color-mix(in srgb, var(--mode) 45%, var(--line2));
+}
+main[data-mode] .slot.filled::before { display: none; }
+/* 역할 자리가 찬 영웅 — 흐리게 보이지만 누르면 같은 역할 영웅과 바뀐다. */
+.tile.swap { opacity: .45; }
+.tile.swap:hover { opacity: 1; }
+.page-tools .spacer { flex: 1; }
+.view-btn:hover { border-color: var(--accent); color: var(--accent); }
+/* 팀 궁합 — 팀 칸 머리줄 오른쪽 */
+.enemy .head .syn {
+  margin-left: auto; padding: 1px 9px; border-radius: 20px;
+  font-family: var(--body); font-size: 11.5px; font-weight: 500; letter-spacing: .02em; text-transform: none;
+  border: 1px solid var(--line2); color: var(--dim); cursor: help;
+}
+.enemy .head .syn b { font-variant-numeric: tabular-nums; color: var(--txt); }
+.enemy .head .syn.up { border-color: color-mix(in srgb, var(--good) 45%, transparent); }
+.enemy .head .syn.up b { color: var(--good); }
+.enemy .head .syn.down { border-color: color-mix(in srgb, var(--bad) 45%, transparent); }
+.enemy .head .syn.down b { color: var(--bad); }
+.enemy .head .syn { cursor: pointer; background: transparent; }
+.enemy .head .syn:hover { border-color: var(--txt); color: var(--txt); }
+/* 팀 궁합 풀이 창 — 설명 없이 짝과 점수만 */
+.hero-sheet.syn-dlg { width: min(360px, 100%); }
+.syn-top {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 16px 14px 20px; border-bottom: 1px solid var(--line);
+}
+.syn-title { font-family: var(--display); font-size: 16px; font-weight: 600; color: var(--txt); }
+.syn-total {
+  font-family: var(--display); font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums;
+  color: var(--dim); line-height: 1;
+}
+.syn-total.up { color: var(--good); }
+.syn-total.down { color: var(--bad); }
+.syn-verdict { font-size: 12.5px; color: var(--dim); }
+.syn-top .hs-close { margin-left: auto; }
+.syn-list { list-style: none; margin: 0; padding: 8px 12px 12px; max-height: 60vh; overflow-y: auto; }
+.syn-list li {
+  display: grid; grid-template-columns: 1fr 1fr auto; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 8px;
+}
+.syn-list li:hover { background: var(--panel2); }
+.syn-list li.zero { opacity: .45; }
+.syn-who { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--txt); min-width: 0; white-space: nowrap; }
+.syn-who .pic { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; flex: none; }

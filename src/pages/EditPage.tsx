@@ -13,7 +13,7 @@ import {
 import { CodeDialog } from '../components/CodeDialog';
 import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
-import { AccountChip, LoginDialog } from '../components/Account';
+import { LoginDialog } from '../components/Account';
 
 const STEPS = [3, 2, 1, 0, -1, -2, -3];
 const STEP_LABEL: Record<number, string> = {
@@ -74,12 +74,7 @@ export function EditPage() {
 
   return (
     <>
-      <TopBar>
-        <Link className="reset" to="/">
-          ← 추천으로
-        </Link>
-        <AccountChip />
-      </TopBar>
+      <TopBar />
 
       <main className="edit">
         {/* 저장 상태. 로그인 전에는 창을 닫으면 사라진다는 것을 먼저 알린다. */}

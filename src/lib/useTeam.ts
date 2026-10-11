@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { isHeroId, type HeroId } from '../data/heroes';
-import { canAdd, trim, type TeamSize } from './roster';
+import { canAdd, swapIn, trim, type TeamSize } from './roster';
 
 export type { TeamSize };
 
@@ -63,9 +63,8 @@ export function useTeam(key: string = KEY) {
         edit((p) =>
           p.enemies.includes(id)
             ? p.enemies.filter((x) => x !== id)
-            : canAdd(p.enemies, p.size, id)
-              ? [...p.enemies, id]
-              : p.enemies,
+            : // 자리가 찼으면 같은 역할의 마지막 영웅과 바꾼다. 바꿀 상대가 없으면 그대로.
+              (swapIn(p.enemies, p.size, id) ?? p.enemies),
         ),
 
       removeLast: () => edit((p) => p.enemies.slice(0, -1)),

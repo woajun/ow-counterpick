@@ -1,6 +1,9 @@
-import type { CSSProperties } from 'react';
+import { useState, type CSSProperties } from 'react';
+import { SynergyDialog } from './SynergyDialog';
 import { HEROES, ROLES, portrait, type HeroId } from '../data/heroes';
 import { LIMITS, arrange, countRole, type TeamSize } from '../lib/roster';
+import { synergyVerdict, teamSynergy } from '../lib/score';
+import { signed } from '../lib/matrix';
 
 interface Props {
   enemies: HeroId[];
@@ -11,6 +14,8 @@ interface Props {
   onReset: () => void;
   /** 머리 글자. 조합 모드에서는 '우리 팀'. */
   title?: string;
+  /** 팀 궁합 이름 — 상성이면 '상대팀 궁합', 궁합 모드면 '우리팀 궁합'. */
+  synLabel?: string;
 }
 
 export function EnemySlots({
@@ -20,13 +25,17 @@ export function EnemySlots({
   onRemove,
   onReset,
   title = '적 팀',
+  synLabel = '상대팀 궁합',
 }: Props) {
   const slots = arrange(enemies, size);
+  // 둘 이상 골랐을 때만 — 한 명은 짝이 없다.
+  const syn = enemies.length >= 2 ? teamSynergy(enemies) : null;
+  const [synOpen, setSynOpen] = useState(false);
 
   return (
     <section className="enemy">
       <h2 className="head">
-        {title}
+        <span className="mode-pill">{title}</span>
         <span className="n">
           {enemies.length} / {size}
         </span>
@@ -40,7 +49,19 @@ export function EnemySlots({
             탱커 {countRole(enemies, 'tank')} / {LIMITS[6].tank}
           </span>
         )}
+        {/* 팀 궁합 — 고른 영웅끼리의 궁합 합. 누르면 짝마다 어떻게 더했는지 창으로 보여 준다. */}
+        {syn && (
+          <button
+            type="button"
+            className={'syn ' + (syn.total > 0 ? 'up' : syn.total < 0 ? 'down' : '')}
+            title="눌러서 점수가 어떻게 나왔는지 보기"
+            onClick={() => setSynOpen(true)}
+          >
+            {synLabel} <b>{signed(syn.total)}</b> · {synergyVerdict(syn.avg)}
+          </button>
+        )}
       </h2>
+      {synOpen && enemies.length >= 2 && <SynergyDialog ids={enemies} label={synLabel} onClose={() => setSynOpen(false)} />}
 
       {/* 칸 수를 격자에 그대로 넘긴다. flex 로 나누면 안쪽 글자 폭 때문에
           좁은 화면에서 마지막 칸이 밀려 나간다. */}

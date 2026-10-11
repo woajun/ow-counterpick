@@ -1,8 +1,8 @@
 import { useMemo, useState, type CSSProperties } from 'react';
 import { HEROES, ROLES, portrait, type HeroId } from '../data/heroes';
 import { useRoleFilter } from '../lib/useRoleFilter';
-import { scaleFor, scoreAll, scoreCombo, topByRole, worst, type Scored } from '../lib/score';
-import { COMBO_ENABLED, type Mode } from '../lib/useMode';
+import { reasonsFor, scaleFor, scoreAll, scoreCombo, topByRole, worst, type Scored } from '../lib/score';
+import type { Mode } from '../lib/useMode';
 import type { TeamSize } from '../lib/roster';
 import { cellTone } from '../lib/matrix';
 import { useMySheet } from '../lib/mySheet';
@@ -10,7 +10,6 @@ import { useMySheet } from '../lib/mySheet';
 interface Props {
   /** 카운터 — 적 조합에 유리한 픽. 조합 — 우리 팀에 어울리는 픽. */
   mode: Mode;
-  onMode: (m: Mode) => void;
   /** 지금 모드의 팀 — 카운터면 적 팀, 조합이면 우리 팀. */
   team: HeroId[];
   size: TeamSize;
@@ -35,8 +34,8 @@ function Row({
   const h = HEROES[item.id];
   const negative = item.value < 0;
 
-  // 적 하나가 얹는 점수는 하나뿐이라 그대로 쓴다. 센 근거부터 정렬돼 있다.
-  const chips = item.reasons;
+  // +를 센 것부터, 다음 −를 센 것부터. 마이너스 픽은 −가 먼저(reasonsFor).
+  const chips = reasonsFor(item);
 
   return (
     <div
@@ -101,7 +100,7 @@ function Row({
   );
 }
 
-export function Recommendations({ mode, onMode, team, size, onLit, onInfo }: Props) {
+export function Recommendations({ mode, team, size, onLit, onInfo }: Props) {
   const [role, setRole] = useRoleFilter();
   const combo = mode === 'combo';
   const { viewMatrix: matrix } = useMySheet();
@@ -179,18 +178,8 @@ export function Recommendations({ mode, onMode, team, size, onLit, onInfo }: Pro
 
       <div className="rec-body">
       <h2 className="head">
-        추천 픽
+        <span className="mode-pill">{combo ? '궁합 추천' : '상성 추천'}</span>
         {/* 카운터 — 적 조합 상대로. 조합 — 우리 팀에 맞춰. 바꾸면 위의 팀 칸도 따라 바뀐다. */}
-        {COMBO_ENABLED && (
-        <div className="seg small" role="group" aria-label="추천 기준">
-          <button type="button" aria-pressed={!combo} onClick={() => onMode('counter')}>
-            카운터
-          </button>
-          <button type="button" aria-pressed={combo} onClick={() => onMode('combo')}>
-            조합
-          </button>
-        </div>
-        )}
         <div className="spacer" />
         <div className="seg small" role="group" aria-label="역할 고르기">
           <button
@@ -221,7 +210,7 @@ export function Recommendations({ mode, onMode, team, size, onLit, onInfo }: Pro
         </div>
       ) : blocks.length === 0 && avoid.length === 0 ? (
         <div className="rec-empty">
-          {combo ? '이 팀과 궁합이 좋다고 적힌 ' : '이 조합에서 유리하다고 적힌 '}
+          {combo ? '이 팀과 궁합이 좋다고 적힌 ' : '이 적 팀 상대로 유리하다고 적힌 '}
           {role ? `${ROLES.find((r) => r.k === role)?.ko} ` : ''}
           픽이 없습니다.
         </div>

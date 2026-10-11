@@ -5,13 +5,17 @@ import { Link } from 'react-router';
 import { cellTone, signed } from '../lib/matrix';
 import { useMySheet } from '../lib/mySheet';
 import { isInferred } from '../data/inferred';
+import { SYNERGY } from '../data/synergy';
+import type { Mode } from '../lib/useMode';
 import wikiIcon from '../assets/wiki.svg';
 
 interface Props {
   /** 펼쳐 볼 내 픽. null 이면 안 뜬다. */
   id: HeroId | null;
-  /** 지금 고른 적 팀. 있으면 맨 위에 "이 조합 상대로 어떤지" 를 먼저 보여 준다. */
+  /** 지금 고른 팀 — 상성이면 적 팀, 조합이면 우리 팀. 있으면 맨 위에 그 팀과의 점수를 먼저 보여 준다. */
   enemies: HeroId[];
+  /** 상성(적으로 만났을 때) · 조합(같은 팀일 때). 시트 전체가 이 기준으로 펼쳐진다. */
+  mode?: Mode;
   onClose: () => void;
 }
 
@@ -35,20 +39,32 @@ const LEVELS: { v: number; label: string; kind: Kind }[] = [
   { v: 0, label: '적힌 것 없음', kind: 'blank' },
 ];
 
+/** 조합 — 나무위키 궁합 절을 읽고 매긴 등급. 0 은 안 적어서 중립 묶음이 없다. */
+const COMBO_LEVELS: { v: number; label: string; kind: Kind }[] = [
+  { v: 2, label: '찰떡 궁합', kind: 'scored' },
+  { v: 1, label: '좋은 편', kind: 'scored' },
+  { v: -1, label: '안 어울림', kind: 'scored' },
+  { v: 0, label: '평가 없음', kind: 'blank' },
+];
+
 /**
  * 내 픽 하나가 적 전체를 상대로 어떤지 한 장에 편다.
  *
  * 추천 줄은 "지금 고른 적 조합"에 대한 점수만 보여 준다. 그 영웅을 실제로
  * 꺼낼지 정하려면 아직 안 나온 적한테도 통하는지가 궁금해진다.
  */
-export function HeroSheet({ id, enemies, onClose }: Props) {
+export function HeroSheet({ id, enemies, mode = 'counter', onClose }: Props) {
   const closeRef = useRef<HTMLButtonElement>(null);
   // 내가 고친 상성이 있으면 그 위에서 편다. 추천 점수와 같은 행렬이어야 한다.
   const { viewMatrix: matrix, differs, viewBlank: blank, peek } = useMySheet();
   // 둘러보는 중에는 내가 고친 표시를 하지 않는다 — 보고 있는 표가 내 것이 아니다.
-  const isEdited = (a: HeroId, b: HeroId) => !peek && differs(a, b);
+  const combo = mode === 'combo';
+  // 조합은 표마다 같은 나무위키 궁합이라 "내가 고친 값" · "뒤집어 메운 값" 표시가 없다.
+  const isEdited = (a: HeroId, b: HeroId) => !combo && !peek && differs(a, b);
+  const guessed = (a: HeroId, b: HeroId) => !combo && isInferred(a, b);
   /** 판단이 있는 칸 — 0 이어도 중립이라 정한 것이다. */
-  const judged = (e: HeroId) => (id ? !blank(id, e) : false);
+  const judged = (e: HeroId) =>
+    id ? (combo ? SYNERGY[id]?.[e] !== undefined : !blank(id, e)) : false;
 
   useEffect(() => {
     if (!id) return;
@@ -69,9 +85,11 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
   if (!id) return null;
 
   const me = HEROES[id];
-  const row = matrix[id];
+  const row: Record<HeroId, number> = combo
+    ? (Object.fromEntries(HERO_IDS.map((e) => [e, SYNERGY[id]?.[e] ?? 0])) as Record<HeroId, number>)
+    : matrix[id];
   // 한 묶음에 열일곱 명까지 들어간다. 역할로 한 번 더 갈라야 눈에 들어온다.
-  const groups = LEVELS.map((lv) => {
+  const groups = (combo ? COMBO_LEVELS : LEVELS).map((lv) => {
     // 자기 자신은 뺀다. 0 묶음에 제가 끼어 있으면 이상하다.
     const ids = HERO_IDS.filter((e) => {
       if (e === id || row[e] !== lv.v) return false;
@@ -97,12 +115,12 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="hero-sheet" role="dialog" aria-modal="true" aria-label={`${me.full} 상성`}>
+      <div className="hero-sheet" role="dialog" aria-modal="true" aria-label={`${me.full} ${combo ? '궁합' : '상성'}`}>
         <div className="hs-head" style={{ '--role': `var(--${me.r})` } as CSSProperties}>
           <img className="pic" src={portrait(id)} alt="" decoding="async" />
           <div className="hs-name">
             <b>{me.full}</b>
-            <span>{me.en}</span>
+            <span>{combo ? '같은 팀일 때 · 나무위키 궁합' : me.en}</span>
           </div>
           {/* 값이 이상하면 여기가 고칠 자리다. 이 도구는 옮겨 적은 사본이다. */}
           <a
@@ -115,7 +133,8 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
           >
             <img src={wikiIcon} alt="" />
           </a>
-          {/* 이 영웅 줄을 고치러 간다. 고친 것은 나무위키 위에 덧씌워진다. */}
+          {/* 이 영웅 줄을 고치러 간다. 고친 것은 나무위키 위에 덧씌워진다. 조합은 아직 못 고친다. */}
+          {!combo && (
           <Link
             className="hs-icon hs-edit"
             to={`/edit/${id}`}
@@ -124,6 +143,7 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
           >
             ✎
           </Link>
+          )}
           <button
             ref={closeRef}
             type="button"
@@ -137,7 +157,14 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
 
         <div className="hs-body">
           {enemies.length > 0 && (
-            <VersusNow id={id} enemies={enemies} row={row} judged={judged} />
+            <VersusNow
+              id={id}
+              enemies={enemies.filter((e) => e !== id)}
+              row={row}
+              judged={judged}
+              guessed={guessed}
+              combo={combo}
+            />
           )}
 
           {/* 역할 머리는 여기 한 번만. 등급 묶음마다 달면 일곱 번 반복된다.
@@ -187,7 +214,7 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
                               'hs-item' +
                               (isEdited(id, e)
                                 ? ' mine'
-                                : isInferred(id, e)
+                                : guessed(id, e)
                                   ? ' guessed'
                                   : '')
                             }
@@ -195,7 +222,7 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
                               h.full +
                               (isEdited(id, e)
                                 ? ' · 내가 고친 값'
-                                : isInferred(id, e)
+                                : guessed(id, e)
                                   ? ` · ${h.full} 문서 쪽 기록을 뒤집어 매긴 값`
                                   : '')
                             }
@@ -227,6 +254,9 @@ export function HeroSheet({ id, enemies, onClose }: Props) {
 /** 평균 한 칸 점수로 붙이는 한마디. 합만 보면 적이 많을수록 커져서 감이 안 온다. */
 const verdict = (avg: number) =>
   avg >= 1.5 ? '유리' : avg >= 0.5 ? '약간 유리' : avg > -0.5 ? '비슷' : avg > -1.5 ? '약간 불리' : '불리';
+/** 조합은 +2 ~ −1 이라 눈금이 다르다. */
+const comboVerdict = (avg: number) =>
+  avg >= 1.5 ? '찰떡' : avg >= 0.5 ? '잘 어울림' : avg > -0.5 ? '무난' : '안 어울림';
 
 /**
  * 지금 고른 적 팀 상대로 — 시트 맨 위.
@@ -240,12 +270,17 @@ function VersusNow({
   enemies,
   row,
   judged,
+  guessed,
+  combo,
 }: {
   id: HeroId;
   enemies: HeroId[];
   row: Record<HeroId, number>;
   judged: (e: HeroId) => boolean;
+  guessed: (a: HeroId, b: HeroId) => boolean;
+  combo: boolean;
 }) {
+  if (enemies.length === 0) return null;
   const total = enemies.reduce((a, e) => a + row[e], 0);
   const avg = total / enemies.length;
   const tone = cellTone(Math.max(-3, Math.min(3, Math.round(avg))));
@@ -254,14 +289,14 @@ function VersusNow({
   const blank = enemies.filter((e) => row[e] === 0 && !judged(e)).length;
 
   return (
-    <section className="hs-now" aria-label="지금 적 팀 상대 상성">
+    <section className="hs-now" aria-label={combo ? '지금 우리 팀과 궁합' : '지금 적 팀 상대 상성'}>
       <div className="hs-now-head">
-        <span className="hs-now-title">지금 적 팀 상대</span>
+        <span className="hs-now-title">{combo ? '지금 우리 팀과' : '지금 적 팀 상대'}</span>
         <span className={'hs-badge hs-now-total ' + (tone || 'zero')}>{signed(total)}</span>
-        <span className="hs-now-verdict">{verdict(avg)}</span>
+        <span className="hs-now-verdict">{combo ? comboVerdict(avg) : verdict(avg)}</span>
         <span className="hs-now-count">
-          유리 {up} · 불리 {down}
-          {blank > 0 && ` · 기록 없음 ${blank}`}
+          {combo ? `잘 맞음 ${up} · 안 어울림 ${down}` : `유리 ${up} · 불리 ${down}`}
+          {blank > 0 && (combo ? ` · 평가 없음 ${blank}` : ` · 기록 없음 ${blank}`)}
         </span>
       </div>
       <div className="hs-now-list">
@@ -271,8 +306,8 @@ function VersusNow({
           return (
             <span
               key={e}
-              className={'hs-now-item' + (isInferred(id, e) ? ' guessed' : '')}
-              title={HEROES[e].full + (isInferred(id, e) ? ` · ${HEROES[e].full} 문서 쪽 기록을 뒤집어 매긴 값` : '')}
+              className={'hs-now-item' + (guessed(id, e) ? ' guessed' : '')}
+              title={HEROES[e].full + (guessed(id, e) ? ` · ${HEROES[e].full} 문서 쪽 기록을 뒤집어 매긴 값` : '')}
             >
               <img className="pic" src={portrait(e)} alt="" decoding="async" />
               <span className="nm">{HEROES[e].ko}</span>

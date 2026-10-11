@@ -3,8 +3,10 @@ import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
 
 interface Props {
   picked: HeroId[];
-  /** 지금 더 못 넣는 영웅. 팀이 다 찼거나 그 역할 자리가 다 찼을 때. */
+  /** 그냥은 못 넣는 영웅 — 역할 자리가 찼다. 누르면 같은 역할의 마지막 영웅과 바뀐다. */
   blocked: (id: HeroId) => boolean;
+  /** 아예 못 넣는 영웅 — 바꿀 상대도 없다. 이것만 누를 수 없게 한다. */
+  locked?: (id: HeroId) => boolean;
   onToggle: (id: HeroId) => void;
   /** 그 영웅의 상성 전체를 펼친다. */
   onInfo: (id: HeroId) => void;
@@ -12,7 +14,7 @@ interface Props {
   title?: string;
 }
 
-export function HeroPool({ picked, blocked, onToggle, onInfo, title = '적 영웅 고르기' }: Props) {
+export function HeroPool({ picked, blocked, locked, onToggle, onInfo, title = '적 영웅 고르기' }: Props) {
   return (
     <section className="pool">
       <h2 className="head">{title}</h2>
@@ -51,10 +53,11 @@ export function HeroPool({ picked, blocked, onToggle, onInfo, title = '적 영�
                       </button>
                     <button
                       type="button"
-                      className="tile"
+                      className={'tile' + (!on && blocked(id) ? ' swap' : '')}
                       style={{ '--role': `var(--${role.k})` } as CSSProperties}
                       aria-pressed={on}
-                      disabled={!on && blocked(id)}
+                      disabled={!on && !!locked?.(id)}
+                      title={!on && blocked(id) ? `누르면 같은 역할 영웅과 바꿔요` : undefined}
                       onClick={() => onToggle(id)}
                     >
                       <img

@@ -95,7 +95,8 @@ function namuSheet(): Sheet {
   return out;
 }
 
-const valueIn = (sheet: Sheet | null, a: HeroId, b: HeroId) =>
+/** 표 한 장에서 한 칸. null 표는 나무위키다. 칸이 없으면 null(적힌 것 없음). */
+export const valueIn = (sheet: Sheet | null, a: HeroId, b: HeroId) =>
   sheet === null ? namuValue(a, b) : key(a, b) in sheet ? sheet[key(a, b)] : null;
 
 /** 나무위키와 다른 짝 수. 앞뒤 두 칸이 한 짝이다. */
@@ -261,7 +262,9 @@ export function publishCode(): string | null {
 /** 코드로 표를 찾는다. 없는 코드면 null. */
 export async function findCode(input: string) {
   const hit = await fetchCode(normalizeCode(input));
-  return hit ? { sheet: hit.sheet, owner: hit.row.name, code: hit.row.code } : null;
+  return hit
+    ? { sheet: hit.sheet, owner: hit.row.name, code: hit.row.code, updatedAt: hit.row.updated_at }
+    : null;
 }
 
 // ── 로그인 ─────────────────────────────────────────────
@@ -357,6 +360,8 @@ export interface Peek {
   owner: string;
   matrix: Matrix;
   sheet: Sheet | null;
+  /** 마지막으로 고친 때 — 살펴보기에서 "얼마나 최근 표인지" 보여 준다. */
+  updatedAt: string;
 }
 let peek: Peek | null = null;
 
@@ -366,7 +371,9 @@ let peek: Peek | null = null;
  */
 export async function peekCode(code: string) {
   const hit = await fetchCode(normalizeCode(code));
-  peek = hit ? { code: hit.row.code, owner: hit.row.name, sheet: hit.sheet, matrix: toMatrix(hit.sheet) } : null;
+  peek = hit
+    ? { code: hit.row.code, owner: hit.row.name, sheet: hit.sheet, matrix: toMatrix(hit.sheet), updatedAt: hit.row.updated_at }
+    : null;
   subs.forEach((f) => f());
   return !!hit;
 }
@@ -491,6 +498,8 @@ export function useMySheet() {
     viewBlank: (a: HeroId, b: HeroId) => valueIn(s.peek ? s.peek.sheet : sheet, a, b) === null,
     /** 나무위키와 다른 짝 수. */
     diff: s.diff,
+    /** 내 표 그대로(null 이면 나무위키) — 살펴보기의 비교에 쓴다. */
+    sheet,
     /** 나무위키와 다른 칸인가. */
     differs: (a: HeroId, b: HeroId) => valueIn(sheet, a, b) !== namuValue(a, b),
     /** 적힌 값이 없는 칸인가 — 중립(0)과 다르다. */

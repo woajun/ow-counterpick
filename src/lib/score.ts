@@ -44,14 +44,21 @@ export function scoreAll(enemies: HeroId[], matrix: Matrix = MATRIX): Record<Her
     }
   }
 
-  // 센 근거부터. 칩을 몇 개만 보고 넘어가도 제일 중요한 것이 눈에 들어온다.
-  for (const s of Object.values(out)) {
-    s.reasons.sort(
-      (a, b) => Math.abs(b.level) - Math.abs(a.level) || b.level - a.level,
-    );
-  }
+  for (const s of Object.values(out)) s.reasons.sort(byReason);
   return out;
 }
+
+/**
+ * 근거 칩 차례 — 점수 순으로 한 줄. 추천 픽은 높은 것부터(+3 … −3), 피해야 할 픽은
+ * 낮은 것부터(−3 … +3)(reasonsFor).
+ *
+ * 세기(절댓값)로 줄 세우면 +3 옆에 −3 이 끼어 초록 · 빨강이 섞여 읽힌다. 점수 순이면
+ * 초록에서 빨강으로(또는 그 반대로) 한 방향으로 흐른다.
+ */
+export const byReason = (a: Reason, b: Reason) => b.level - a.level;
+
+/** 줄에 늘어놓을 칩 — 점수가 마이너스인 픽은 왜 나쁜지가 먼저라 낮은 것부터. */
+export const reasonsFor = (s: Scored) => (s.value < 0 ? [...s.reasons].reverse() : s.reasons);
 
 /** 역할별 상위 픽. 점수가 같으면 이름순으로 고정해서 순서가 안 흔들리게. */
 export function topByRole(
@@ -111,8 +118,33 @@ export function scoreCombo(allies: HeroId[], size: TeamSize): Partial<Record<Her
         reasons.push({ enemy: mate, level: lv as Level });
       }
     }
-    reasons.sort((a, b) => Math.abs(b.level) - Math.abs(a.level) || b.level - a.level);
+    reasons.sort(byReason);
     out[id] = { id, value, reasons };
   }
   return out;
 }
+
+/**
+ * 팀 궁합 — 고른 영웅끼리 짝지은 궁합 등급의 합. 5명이면 10짝, 6명이면 15짝이다.
+ *
+ * 상성 모드에서는 적 팀이 얼마나 잘 짜였는지, 조합 모드에서는 우리 팀이 얼마나 잘
+ * 맞는지 본다. 등급은 나무위키 궁합(+2 · +1 · −1, 평가 없으면 0)이다.
+ */
+export function teamSynergy(ids: HeroId[]) {
+  const pairs: { a: HeroId; b: HeroId; level: number }[] = [];
+  let total = 0;
+  for (let i = 0; i < ids.length; i++) {
+    for (let j = i + 1; j < ids.length; j++) {
+      const level = SYNERGY[ids[i]]?.[ids[j]] ?? 0;
+      total += level;
+      if (level !== 0) pairs.push({ a: ids[i], b: ids[j], level });
+    }
+  }
+  const count = (ids.length * (ids.length - 1)) / 2;
+  pairs.sort((x, y) => y.level - x.level);
+  return { total, count, pairs, avg: count ? total / count : 0 };
+}
+
+/** 한 짝 평균으로 붙이는 한마디. */
+export const synergyVerdict = (avg: number) =>
+  avg >= 0.9 ? '찰떡' : avg >= 0.5 ? '잘 어울림' : avg > 0.1 ? '무난' : avg > -0.2 ? '따로 놂' : '안 어울림';

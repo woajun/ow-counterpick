@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { HeroId } from '../data/heroes';
 import { useTeam } from '../lib/useTeam';
 import { useMode } from '../lib/useMode';
-import { canAdd } from '../lib/roster';
+import { canAdd, swapIn } from '../lib/roster';
 import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
 import { SizeToggle } from '../components/SizeToggle';
@@ -10,14 +10,17 @@ import { EnemySlots } from '../components/EnemySlots';
 import { HeroPool } from '../components/HeroPool';
 import { Recommendations } from '../components/Recommendations';
 import { HeroSheet } from '../components/HeroSheet';
-import { AccountChip } from '../components/Account';
-import { Link, useNavigate, useSearchParams } from 'react-router';
+import { DetailView } from '../components/DetailView';
+import { useView } from '../lib/useView';
+import { useNavigate, useSearchParams } from 'react-router';
 import { copyPeek, likeCounts, likeSheet, likedToday, peekCode, stopPeek, useMySheet } from '../lib/mySheet';
 
 export function CounterPage() {
   /* 고른 영웅은 하나다 — 카운터면 적 팀으로, 조합이면 우리 팀으로 읽는다.
      따로 두었더니 토글할 때마다 고른 것이 바뀌어 보였다. 토글은 읽는 법만 바꾼다. */
   const team = useTeam();
+  /** 인게임(빠르게) · 살펴보기(자세히) — 같은 표를 두 벌로 본다. */
+  const [view, setView] = useView();
   const sheet = useMySheet();
   const [mode, setMode] = useMode();
   const [lit, setLit] = useState<HeroId[]>([]);
@@ -25,6 +28,7 @@ export function CounterPage() {
   const [info, setInfo] = useState<HeroId | null>(null);
 
   const blocked = (id: HeroId) => !canAdd(team.enemies, team.size, id);
+  const locked = (id: HeroId) => swapIn(team.enemies, team.size, id) === null;
 
   /* `?code=코드` 로 들어오면 그 사람 카운터픽으로 본다. 주소가 기준이라 북마크해 두면
      로그인 없이 알트탭 한 번에 그 사람 상성으로 뜬다. 내 상태는 안 바뀐다.
@@ -69,19 +73,38 @@ export function CounterPage() {
 
   return (
     <>
-      <TopBar>
-        <SizeToggle size={team.size} onSize={team.setSize} />
-        {/* 내 상성이 얹혀 있으면 추천도 그걸로 나온다는 것을 보여 둔다. */}
-        {!sheet.peek && sheet.source.kind === 'mine' && (
-          <span className="tag" title="추천 점수가 내 상성으로 계산돼요">
-            내 상성{sheet.user ? '' : ' · 임시'}
-          </span>
+      <TopBar />
+
+      {/* 이 화면에서만 뜻이 있는 설정 — 헤더가 아니라 화면 맨 위 도구줄에 둔다. */}
+      {/* 두 모드에서 폭이 같아야 토글이 제자리에 있다. */}
+      <div className="page-tools">
+        {view === 'game' && (
+          <>
+            {/* 상성 — 적 조합을 보고 고른다. 조합 — 우리 팀에 맞춰 고른다. 위의 팀 칸도 같이 바뀐다. */}
+            <div className="seg small mode-seg" data-mode={mode} role="group" aria-label="상성 · 궁합">
+              <button type="button" aria-pressed={mode === 'counter'} onClick={() => setMode('counter')}>
+                상성
+              </button>
+              <button type="button" aria-pressed={mode === 'combo'} onClick={() => setMode('combo')}>
+                궁합
+              </button>
+            </div>
+            <SizeToggle size={team.size} onSize={team.setSize} />
+          </>
         )}
-        <Link className="reset edit-link" to="/edit">
-          상성 수정
-        </Link>
-        <AccountChip />
-      </TopBar>
+        {/* 자세히 — 게임 밖에서 이 카운터픽을 따져 보는 화면. 인게임 조건들과 성격이 달라서
+            설정 묶음과 떼어 오른쪽 끝에 둔다. 아이콘만 두면 뜻이 안 읽혀서 글자로. */}
+        <div className="spacer" />
+        {view === 'game' ? (
+          <button type="button" className="reset small view-btn" onClick={() => setView('detail')}>
+            자세히 보기 →
+          </button>
+        ) : (
+          <button type="button" className="reset small view-btn" onClick={() => setView('game')}>
+            ← 인게임으로
+          </button>
+        )}
+      </div>
 
       {/* 주소로 들어온 남의 카운터픽 — 좋아요를 누르거나, 복사해 내 상성으로 시작할 수 있다. */}
       {code && missing && (
@@ -137,7 +160,11 @@ export function CounterPage() {
         </div>
       )}
 
-      <main>
+      {view === 'detail' ? (
+        <DetailView />
+      ) : (
+      // 상성 · 조합에 따라 색이 바뀐다 — 고른 영웅이 적인지 우리 편인지 한눈에.
+      <main data-mode={mode}>
         <EnemySlots
           enemies={team.enemies}
           size={team.size}
@@ -145,11 +172,11 @@ export function CounterPage() {
           onRemove={team.remove}
           onReset={team.reset}
           title={mode === 'combo' ? '우리 팀' : '적 팀'}
+          synLabel={mode === 'combo' ? '우리팀 궁합' : '상대팀 궁합'}
         />
 
         <Recommendations
           mode={mode}
-          onMode={setMode}
           team={team.enemies}
           size={team.size}
           onLit={setLit}
@@ -159,14 +186,16 @@ export function CounterPage() {
         <HeroPool
           picked={team.enemies}
           blocked={blocked}
+          locked={locked}
           onToggle={team.toggle}
           onInfo={setInfo}
           title={mode === 'combo' ? '우리 팀 영웅 고르기' : '적 영웅 고르기'}
         />
       </main>
+      )}
 
       {/* '지금 적 팀 상대' 는 카운터일 때만 — 조합이면 고른 영웅이 우리 편이다. */}
-      <HeroSheet id={info} enemies={mode === 'counter' ? team.enemies : []} onClose={() => setInfo(null)} />
+      <HeroSheet id={info} enemies={team.enemies} mode={mode} onClose={() => setInfo(null)} />
 
       {/* 좁은 화면에서 추천 시트가 화면 아래에 떠 있어서, 마지막 줄이
           그 밑에 깔리지 않게 자리를 비워 둔다. */}

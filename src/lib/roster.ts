@@ -32,6 +32,23 @@ export function canAdd(ids: HeroId[], size: TeamSize, id: HeroId): boolean {
 }
 
 /**
+ * 자리가 차서 못 넣는 영웅을 누르면, 같은 역할에서 가장 나중에 고른 영웅과 바꾼다.
+ *
+ * 5v5 에서 탱커를 잘못 골랐을 때 빼고 다시 고르는 두 번 대신 한 번에 바뀐다 —
+ * 게임 중에 몇 초 안에 쓰는 도구라 누르는 횟수가 중요하다. 같은 역할이 없어서
+ * 바꿀 상대가 없으면(6v6 에서 다른 역할로 꽉 찬 경우) null.
+ */
+export function swapIn(ids: HeroId[], size: TeamSize, id: HeroId): HeroId[] | null {
+  if (ids.includes(id)) return null;
+  if (canAdd(ids, size, id)) return [...ids, id];
+  const r = HEROES[id].r;
+  for (let i = ids.length - 1; i >= 0; i--) {
+    if (HEROES[ids[i]].r === r) return [...ids.slice(0, i), ...ids.slice(i + 1), id];
+  }
+  return null;
+}
+
+/**
  * 규칙에 안 맞는 것을 잘라 낸다.
  *
  * 6v6 에서 5v5 로 줄일 때, 그리고 이 규칙이 생기기 전에 저장해 둔 조합을

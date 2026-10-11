@@ -5,7 +5,6 @@ import { NAMU_FETCHED } from '../data/namu';
 import wikiIcon from '../assets/wiki.svg';
 import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
-import { AccountChip } from '../components/Account';
 
 /** 41.2만 · 4.7만 · 9,800 */
 const count = (n: number) =>
@@ -35,9 +34,7 @@ export function BrowsePage() {
 
   return (
     <>
-      <TopBar>
-        <AccountChip />
-      </TopBar>
+      <TopBar />
 
       <main className="edit browse">
         <div className="bw-now">

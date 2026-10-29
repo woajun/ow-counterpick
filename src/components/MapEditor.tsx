@@ -1,16 +1,13 @@
-import { type CSSProperties } from 'react';
-import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
+import { HERO_IDS } from '../data/heroes';
 import { MAPS, MODES, MAP_LABEL, mapById, mapImage } from '../data/maps';
-import { cellTone, signed } from '../lib/matrix';
 import { setMapScore, useMySheet } from '../lib/mySheet';
-
-const STEPS = [3, 2, 1, 0, -1, -2, -3];
+import { TierBoard } from './TierEditor';
 
 /**
- * 맵 점수 고치기 — 맵 하나를 고르면 영웅 전부가 줄로 나온다. 영웅마다 −3 … +3.
+ * 맵 점수 고치기 — 맵 하나를 고르면 영웅 얼굴을 −3 … +3 줄에 끌어다 놓는다.
  *
- * 나무위키에는 맵 점수가 없어서 처음엔 다 비어 있다(추천에 영향 없음). 정한 것만 더해진다.
- * 상성 수정과 같은 줄 모양을 쓴다 — 새로 익힐 것이 없게.
+ * 나무위키에는 맵 점수가 없어서 처음엔 다 "정하지 않음" 이다(추천에 영향 없음). 정한 것만 더해진다.
+ * 상성 · 궁합 수정과 같은 티어 판을 쓴다 — 새로 익힐 것이 없게.
  */
 export function MapEditor({
   map,
@@ -29,14 +26,13 @@ export function MapEditor({
 
   return (
     <div className="edit-grid">
-      {/* 맵 고르기 — 모드별로. 점수를 정한 영웅 수가 숫자로 붙는다. */}
+      {/* 맵 고르기 — 모드별로, 사진과 이름. */}
       <nav className="pick map-pick" aria-label="맵">
         {MODES.map((mode) => (
           <div key={mode.k} className="pick-role">
             <div className="pick-head">{mode.ko}</div>
             <div className="map-pick-list">
               {MAPS.filter((m) => m.mode === mode.k).map((m) => {
-                const c = setOf(m.id);
                 return (
                   <button
                     key={m.id}
@@ -45,8 +41,15 @@ export function MapEditor({
                     aria-pressed={m.id === cur.id}
                     onClick={() => onMap(m.id)}
                   >
-                    <span>{m.ko}</span>
-                    {c > 0 && <span className="cnt">{c}</span>}
+                    <img
+                      className="map-pick-thumb"
+                      src={mapImage(m.id)}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => (e.currentTarget.style.visibility = 'hidden')}
+                    />
+                    <span className="nm">{m.ko}</span>
                   </button>
                 );
               })}
@@ -62,65 +65,17 @@ export function MapEditor({
             <b>{cur.ko}</b>
             <span>이 맵에서 영웅마다 · 정한 영웅 {n}</span>
           </div>
-          <button
-            type="button"
-            className="reset small"
-            disabled={n === 0}
-            onClick={() =>
-              edit(() => {
-                for (const h of HERO_IDS) if (sheet.myMap(cur.id, h) !== null) setMapScore(cur.id, h, null);
-              })
-            }
-          >
-            이 맵 비우기
-          </button>
         </div>
 
-        {ROLES.map((r) => (
-          <div key={r.k} className="ed-group" style={{ '--role': `var(--${r.k})` } as CSSProperties}>
-            <div className="pick-head">
-              <span className="dot" />
-              {r.ko}
-            </div>
-            {HERO_IDS.filter((h) => HEROES[h].r === r.k).map((h: HeroId) => {
-              const v = sheet.myMap(cur.id, h);
-              return (
-                <div key={h} className={'ed-row' + (v !== null ? ' edited' : '')}>
-                  <img className="pic" src={portrait(h)} alt="" loading="lazy" decoding="async" />
-                  <span className="nm">{HEROES[h].full}</span>
-                  <div className="steps" role="radiogroup" aria-label={`${cur.ko}에서 ${HEROES[h].full}`}>
-                    {STEPS.map((s) => (
-                      <button
-                        key={s}
-                        type="button"
-                        role="radio"
-                        aria-checked={v === s}
-                        title={MAP_LABEL[s]}
-                        className={'step ' + (cellTone(s) || 'zero') + (v === s ? ' on' : '')}
-                        onClick={() => edit(() => setMapScore(cur.id, h, s))}
-                      >
-                        {s === 0 ? '0' : signed(s)}
-                      </button>
-                    ))}
-                  </div>
-                  <span className="was">
-                    {v !== null && (
-                      <button
-                        type="button"
-                        className="undo"
-                        title="지우기 — 이 맵에서 점수 없음"
-                        aria-label="지우기"
-                        onClick={() => edit(() => setMapScore(cur.id, h, null))}
-                      >
-                        ↺
-                      </button>
-                    )}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        ))}
+        {/* 영웅 얼굴을 끌어다 이 맵에서의 점수 줄에 놓는다 — 상성 · 궁합과 같은 티어 판. 나무위키엔 맵 점수가 없다. */}
+        <TierBoard
+          resetKey={cur.id}
+          items={HERO_IDS}
+          valueOf={(h) => sheet.myMap(cur.id, h)}
+          place={(h, v) => edit(() => setMapScore(cur.id, h, v))}
+          label={MAP_LABEL}
+          noneLabel="정하지 않음"
+        />
       </section>
     </div>
   );

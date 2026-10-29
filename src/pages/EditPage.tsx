@@ -1,20 +1,15 @@
-import { Fragment, useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { Link, Navigate, useParams, useSearchParams } from 'react-router';
 import { MapEditor } from '../components/MapEditor';
 import { MAPS } from '../data/maps';
 import { HEROES, HERO_IDS, ROLES, isHeroId, portrait, type HeroId } from '../data/heroes';
-import { cellTone, signed } from '../lib/matrix';
 import {
   resetAll,
-  resetHero,
   CELL_NOTE_MAX,
   NOTE_MAX,
   noteKey,
-  resetSynergyHero,
   setBlurb,
   setNote,
-  setPair,
-  setSynergy,
   synKey,
   sourceNow,
   useMySheet,
@@ -25,18 +20,6 @@ import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
 import { LoginDialog } from '../components/Account';
 import { TierEditor } from '../components/TierEditor';
-import { SYN_LABEL } from '../data/synergy';
-
-const STEPS = [3, 2, 1, 0, -1, -2, -3];
-const STEP_LABEL: Record<number, string> = {
-  3: '매우 유리',
-  2: '유리',
-  1: '약간 유리',
-  0: '중립',
-  [-1]: '약간 불리',
-  [-2]: '불리',
-  [-3]: '매우 불리',
-};
 
 /**
  * 상성 수정 — 영웅 하나를 고르면 나머지 전부와의 상성이 줄로 나온다.
@@ -67,10 +50,6 @@ export function EditPage() {
     );
   const sheet = useMySheet();
   const [login, setLogin] = useState(false);
-  /** 티어(끌어다 놓기) · 목록(줄마다 단추 · 설명). 처음엔 티어. */
-  const [layout, setLayout] = useState<'tier' | 'list'>('tier');
-  /** 설명을 쓰고 있는 칸의 키 — 한 번에 한 칸만 연다. */
-  const [noteOpen, setNoteOpen] = useState<string | null>(null);
   const [codeMode, setCodeMode] = useState<'share' | 'enter' | null>(null);
   /** 방금 고쳐서 떠나온 것 — 나무위키나 남의 코드. 안내를 띄우고 되돌릴 수 있게. */
   const [left, setLeft] = useState<Source | null>(null);
@@ -97,10 +76,6 @@ export function EditPage() {
   const me = HEROES[id];
   const src = sheet.source.kind;
 
-
-  const rows = HERO_IDS.filter(
-    (e) => e !== id,
-  );
 
   // 고치는 것은 로그인한 사람만 — 표는 그 사람 코드에 붙는다.
   if (!sheet.user) {
@@ -233,114 +208,35 @@ export function EditPage() {
                 <b>{me.full}</b>
                 <span>{syn ? `${me.ko} · 같은 팀일 때` : `내 픽이 ${me.ko}일 때`}</span>
               </div>
-              <div className="seg small" role="group" aria-label="티어 · 목록">
-                <button type="button" aria-pressed={layout === 'tier'} onClick={() => setLayout('tier')}>
-                  티어
-                </button>
-                <button type="button" aria-pressed={layout === 'list'} onClick={() => setLayout('list')}>
-                  목록
-                </button>
-              </div>
-              {layout === 'list' && (
-                <button
-                  type="button"
-                  className="reset small"
-                  onClick={() => edit(() => (syn ? resetSynergyHero(id) : resetHero(id)))}
-                >
-                  이 영웅 되돌리기
-                </button>
-              )}
             </div>
 
-            {/* 티어 — 얼굴을 끌어다 −3 … +3 줄에 놓는다. 설명은 목록에서 쓴다. */}
-            {layout === 'tier' && <TierEditor id={id} syn={syn} edit={edit} />}
-
-
-
-            {layout === 'list' && ROLES.map((r) => {
-              const list = rows.filter((e) => HEROES[e].r === r.k);
-              if (list.length === 0) return null;
-              return (
-                <div key={r.k} className="ed-group" style={{ '--role': `var(--${r.k})` } as CSSProperties}>
-                  <div className="pick-head">
-                    <span className="dot" />
-                    {r.ko}
+            {/* 티어 — 얼굴을 끌어다 −3 … +3 줄에 놓는다. 얼굴을 짧게 누르면 그 줄 아래에 칸 설명을 쓴다. */}
+            <TierEditor
+              id={id}
+              syn={syn}
+              edit={edit}
+              note={(e) => {
+                const nk = syn ? synKey(id, e) : noteKey(id, e);
+                return (
+                  <div className="tier-note">
+                    <b>{HEROES[e].ko}</b>
+                    <TextField
+                      key={nk}
+                      multiline
+                      autoFocus
+                      value={sheet.notes?.[nk] ?? ''}
+                      placeholder={
+                        syn
+                          ? `${me.ko} · ${HEROES[e].ko} 같은 팀일 때 어떻게 맞추는지 적어주세요`
+                          : `내가 ${me.ko}일 때, ${HEROES[e].ko} 상대법을 적어주세요`
+                      }
+                      max={CELL_NOTE_MAX}
+                      onSave={(t) => setNote(nk, t)}
+                    />
                   </div>
-                  {list.map((e) => {
-                    const nk = syn ? synKey(id, e) : noteKey(id, e);
-                    const note = sheet.notes?.[nk];
-                    const open = noteOpen === nk;
-                    const sv = syn ? sheet.mySyn(id, e) : null;
-                    const blank = syn ? sv === null : sheet.blank(id, e);
-                    const v = syn ? (sv ?? 0) : sheet.matrix[id][e];
-                    return (
-                      <Fragment key={e}>
-                      <div
-                        className={'ed-row' + (blank ? ' blank' : '')}
-                        title={blank ? '아직 값이 없어요 — 골라 주세요' : undefined}
-                      >
-                        <img className="pic" src={portrait(e)} alt="" loading="lazy" decoding="async" />
-                        <span className="nm">{HEROES[e].full}</span>
-                        <div
-                          className="steps"
-                          role="radiogroup"
-                          aria-label={`${me.full} ${syn ? '+' : 'vs'} ${HEROES[e].full}`}
-                        >
-                          {STEPS.map((s) => {
-                            const on = !blank && v === s;
-                            return (
-                              <button
-                                key={s}
-                                type="button"
-                                role="radio"
-                                aria-checked={on}
-                                title={syn ? SYN_LABEL[s] : STEP_LABEL[s]}
-                                className={
-                                  'step ' +
-                                  (cellTone(s) || 'zero') +
-                                  (on ? ' on' : '')
-                                }
-                                onClick={() => edit(() => (syn ? setSynergy(id, e, s) : setPair(id, e, s)))}
-                              >
-                                {s === 0 ? '0' : signed(s)}
-                              </button>
-                            );
-                          })}
-                        </div>
-                        {/* 왜 이 점수인지 — 자세히 보기의 영웅 줄 아래에 뜬다. */}
-                        <button
-                          type="button"
-                          className={'note-btn' + (note ? ' has' : '')}
-                          aria-expanded={open}
-                          title={note ? '설명 고치기' : '왜 이 점수인지 설명 쓰기'}
-                          onClick={() => setNoteOpen(open ? null : nk)}
-                        >
-                          설명
-                        </button>
-                      </div>
-                      {open ? (
-                        <TextField
-                          multiline
-                          autoFocus
-                          value={note ?? ''}
-                          placeholder={`왜 이 점수인지, 어떻게 상대하는지 (${CELL_NOTE_MAX}자까지 · Shift+Enter 로 줄바꿈)`}
-                          max={CELL_NOTE_MAX}
-                          onSave={(t) => setNote(nk, t)}
-                          onDone={() => setNoteOpen(null)}
-                        />
-                      ) : (
-                        note && (
-                          <p className="ed-note" onClick={() => setNoteOpen(nk)} title="눌러서 고치기">
-                            {note}
-                          </p>
-                        )
-                      )}
-                      </Fragment>
-                    );
-                  })}
-                </div>
-              );
-            })}
+                );
+              }}
+            />
           </section>
         </div>
         )}
@@ -397,6 +293,18 @@ function TextField({
     if (discard.current) return;
     if (draft.trim() !== value.trim()) onSave(draft);
   };
+  // 칸이 바깥 누르기로 닫혀 사라질 때도 쓴 것을 저장한다 — 사라지는 칸에서는 blur 가 안 올 수 있다.
+  const latest = useRef({ draft, value, onSave });
+  useEffect(() => {
+    latest.current = { draft, value, onSave };
+  });
+  useEffect(
+    () => () => {
+      const { draft: d, value: v, onSave: save } = latest.current;
+      if (!discard.current && d.trim() !== v.trim()) save(d);
+    },
+    [],
+  );
   const common = {
     value: draft,
     placeholder,
@@ -405,8 +313,9 @@ function TextField({
     onChange: (e: { target: { value: string } }) => setDraft(e.target.value),
     onBlur: save,
     onKeyDown: (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      // 줄바꿈은 Shift+Enter. Enter 는 저장하고 닫기, Esc 는 고친 것을 버리고 닫기.
-      if (e.key === 'Enter' && !e.shiftKey) {
+      // 한 줄 칸(한마디)은 Enter 로 저장. 여러 줄 칸(칸 설명)은 Enter 가 그냥 줄바꿈이고, 바깥을 누르면 저장된다.
+      // Esc 는 고친 것을 버리고 닫기.
+      if (e.key === 'Enter' && !multiline) {
         e.preventDefault();
         save();
         onDone?.();

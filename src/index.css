@@ -1300,11 +1300,6 @@ main.detail .ed-head { box-shadow: none; }
 }
 .map-pick-item:hover { background: var(--panel2); color: var(--txt); }
 .map-pick-item.on { border-color: var(--accent); background: var(--panel2); color: var(--txt); }
-.map-pick-item .cnt {
-  min-width: 18px; height: 16px; padding: 0 4px; border-radius: 8px;
-  background: var(--accent); color: #111; font-size: 10px; font-weight: 700;
-  display: inline-flex; align-items: center; justify-content: center;
-}
 .map-head .map-thumb { width: 74px; height: 42px; border-radius: 6px; object-fit: cover; background: var(--panel2); }
 .map-head { box-shadow: none; }
 
@@ -1491,3 +1486,22 @@ button.dv-chip:hover { background: color-mix(in srgb, var(--txt) 8%, var(--bg2))
   border: 2px solid var(--txt);
 }
 @media (max-width: 640px) { .tier-row { grid-template-columns: 64px minmax(0, 1fr); } .tier-face { width: 42px; height: 42px; } }
+/* 티어 — 누른 얼굴과 그 줄 아래 설명 쓰기 */
+.tier-face.on { border: 2px solid var(--txt); }
+.tier-row-note { grid-column: 1 / -1; padding: 8px 10px 10px; border-top: 1px dashed var(--line2); }
+.tier-note { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; }
+.tier-note > b { font-size: 13px; padding-top: 7px; }
+.tier-note .ed-note-edit { margin: 0; }
+/* 맵 목록 — 왼쪽에 맵 사진, 오른쪽에 이름 */
+.map-pick-item { display: flex; align-items: center; gap: 8px; }
+.map-pick-thumb { width: 48px; height: 27px; flex: none; border-radius: 4px; object-fit: cover; background: var(--panel2); }
+.map-pick-item .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; }
+/* 티어 — 반대쪽 줄도 바뀌었다는 알림. 나무위키에서 떨어져 나오는 알림(아래)과 겹치지 않게 조금 위에. */
+.tier-toast { bottom: 84px; font-size: 13px; color: var(--dim); animation: tier-toast-in .18s ease-out; }
+.tier-toast .pic { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; flex: none; }
+.tier-toast-v { padding: 1px 8px; border-radius: 12px; font-weight: 600; }
+.tier-toast-v.p3, .tier-toast-v.p2, .tier-toast-v.p1, .tier-toast-v.n1, .tier-toast-v.n2, .tier-toast-v.n3 {
+  background: color-mix(in srgb, var(--on) var(--tint), transparent);
+  color: color-mix(in srgb, var(--on) var(--ink), var(--txt));
+}
+@keyframes tier-toast-in { from { opacity: 0; transform: translate(-50%, 6px); } }

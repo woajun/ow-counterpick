@@ -759,6 +759,8 @@ footer code {
   box-shadow: 0 24px 60px rgb(0 0 0 / .6);
   overflow: hidden;
 }
+/* 영웅 창 — 점수 줄마다 얼굴이 많이 들어가게 넓고 높게. 다른 창(궁합 · 맵 · 로그인)은 그대로. */
+.hero-sheet.hs-main { width: min(920px, 100%); max-height: min(92vh, 1000px); }
 @media (max-width: 1020px) {
   .hero-sheet {
     border-radius: 16px 16px 0 0; border-bottom: 0;
@@ -801,29 +803,6 @@ footer code {
   padding: 14px 16px 18px;
 }
 
-/* 지금 고른 적 팀 상대 — 시트 맨 위. 합 · 한마디 · 적 하나하나. */
-.hs-now {
-  margin-bottom: 16px; padding: 12px; border-radius: 10px;
-  background: var(--panel2); border: 1px solid var(--line);
-}
-.hs-now-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
-.hs-now-title { font-size: 12.5px; color: var(--dim); }
-.hs-now-total { font-size: 15px; padding: 2px 10px; }
-.hs-now-verdict { font-family: var(--display); font-size: 15px; font-weight: 600; color: var(--txt); }
-.hs-now-count { margin-left: auto; font-size: 11.5px; color: var(--faint); }
-.hs-now-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
-.hs-now-item {
-  display: flex; align-items: center; gap: 8px; min-width: 0;
-  padding: 4px 8px 4px 4px; border-radius: 999px; background: var(--bg2);
-}
-.hs-now-item .pic { width: 26px; height: 26px; flex: none; border-radius: 50%; object-fit: cover; }
-.hs-now-item .nm { flex: 1; min-width: 0; font-size: 12.5px; color: var(--txt); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.hs-now-item.guessed .nm { font-style: italic; }
-
-.hs-group + .hs-group { margin-top: 16px; }
-.hs-group-head {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
-}
 .hs-badge {
   font-family: var(--display); font-size: 12px;
   font-variant-numeric: tabular-nums;
@@ -838,46 +817,6 @@ footer code {
   background: transparent; color: var(--faint);
   border: 1px dashed var(--line2);
 }
-.hs-label { font-size: 12.5px; color: var(--dim); }
-
-/* 역할을 세로 3열로 세운다. 한 묶음에 열일곱 명까지 들어가는데 가로로
-   늘어놓으면 어느 역할인지 되짚어야 한다. 빈 역할도 칸을 남겨서 줄을 맞춘다. */
-.hs-cols {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
-  align-items: start;
-}
-.hs-col { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-/* 역할 머리는 본문 맨 위에 한 번만. 스크롤해도 붙어 있는다. */
-.hs-colhead {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
-  margin: 0 0 10px; padding-bottom: 8px;
-  border-bottom: 1px solid var(--line);
-}
-.hs-colhead > div {
-  display: flex; align-items: center; gap: 5px; min-width: 0;
-  font-family: var(--display); font-size: 11px; font-weight: 600;
-  letter-spacing: .12em; text-transform: uppercase; color: var(--role);
-}
-.hs-colhead .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--role); flex: none; }
-.hs-none { color: var(--faint); font-size: 12px; padding: 2px 4px; }
-
-.hs-item {
-  display: flex; align-items: center; gap: 5px; position: relative; min-width: 0;
-  padding: 3px 6px 3px 3px; border-radius: 20px;
-  background: var(--panel); border: 1px solid var(--line);
-}
-/* 반대쪽 문서를 뒤집어 매긴 값. 근거가 한쪽뿐이라 테두리로만 조용히 구별한다. */
-.hs-item.guessed { border-style: dashed; border-color: var(--line2); }
-
-.hs-item .pic {
-  width: 22px; height: 22px; flex: none;
-  border-radius: 50%; object-fit: cover; background: var(--panel2);
-}
-.hs-item .nm {
-  font-family: var(--display); font-size: 12.5px; color: var(--txt);
-  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-
 /* 추천 줄이 눌리는 것이라는 표시 */
 .row { cursor: pointer; }
 
@@ -1046,9 +985,6 @@ button.link {
   .ed-row .note-btn { grid-row: 1; grid-column: 3; }
 }
 
-/* 상성 시트 — 내가 고친 칸 */
-.hs-item.mine { border-color: var(--accent); }
-.hs-item.mine .nm { color: var(--accent); }
 .hs-edit { font-size: 15px; text-decoration: none; }
 
 .bar a.reset:hover { border-color: var(--txt); color: var(--txt); }
@@ -1400,7 +1336,6 @@ main.detail .ed-head { box-shadow: none; }
   border: 0; cursor: pointer; background: rgb(0 0 0 / .55); color: var(--txt); font-size: 11px;
 }
 .map-slot-x:hover { background: var(--bad); }
-.hs-now-item .pic.map { border-radius: 4px; width: 36px; }
 /* 로그인 전 내 카운터픽 화면 */
 .login-gate {
   max-width: 360px; margin: 60px auto; padding: 24px; text-align: center;
@@ -1466,21 +1401,93 @@ main.detail .ed-head { box-shadow: none; }
 }
 .info:hover::after, .info:focus::after { opacity: 1; visibility: visible; }
 
-/* 영웅 창 — 설명이 있는 상대 칸은 눌러서 펼친다. 이름 밑 점선이 "눌러 볼 수 있음" 표시. */
-.hs-now-item.has-note { cursor: pointer; }
-.hs-now-item.has-note .nm { text-decoration: underline dotted; text-underline-offset: 3px; text-decoration-color: var(--faint); }
-.hs-now-item.has-note:hover {
-  background: color-mix(in srgb, var(--txt) 7%, var(--bg2));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--txt) 30%, transparent);
+/* 영웅 창 머리 — 자세히 보기로 가는 글자 단추. 동그란 아이콘들 앞에 둔다. */
+.hs-detail { flex: none; white-space: nowrap; }
+
+/* 자세히 보기 — 점수별로 묶어 보기 */
+.dv-levels { display: flex; flex-direction: column; }
+.dv-level { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 12px; align-items: start; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.dv-level:last-child { border-bottom: 0; }
+.dv-level-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--dim); padding-top: 3px; }
+.dv-level-list { display: flex; flex-wrap: wrap; gap: 4px 6px; }
+.dv-chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 3px;
+  border: 0; border-radius: 16px; background: var(--bg2); color: var(--txt); font-size: 13px;
 }
-.hs-now-item.on {
-  background: color-mix(in srgb, var(--txt) 10%, var(--bg2));
-  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--txt) 70%, transparent);
+button.dv-chip { cursor: pointer; }
+button.dv-chip:hover { background: color-mix(in srgb, var(--txt) 8%, var(--bg2)); }
+.dv-chip .pic { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; }
+.dv-chip .pic.map { border-radius: 4px; width: 32px; }
+@media (max-width: 640px) { .dv-level { grid-template-columns: minmax(0, 1fr); gap: 6px; } }
+/* 점수별 — 영웅은 얼굴만 크게. 올리면 살짝 떠오른다. */
+.dv-face {
+  width: 52px; height: 52px; padding: 0; cursor: pointer; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--line2); background: var(--bg2);
+  transition: transform .12s, border-color .12s;
 }
-.hs-now-item.on .nm { color: var(--txt); font-weight: 600; text-decoration: none; }
-.hs-now-note {
-  display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 8px; align-items: start;
-  margin: 10px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--dim);
+.dv-face img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dv-face:hover { transform: translateY(-2px) scale(1.06); border-color: color-mix(in srgb, var(--txt) 55%, transparent); }
+.dv-level-list:has(.dv-face) { gap: 6px; }
+.dv-level:has(.dv-face) .dv-level-head { padding-top: 14px; }
+.dv-face.on { border-color: var(--txt); box-shadow: 0 0 0 2px color-mix(in srgb, var(--txt) 70%, transparent); }
+/* 누른 얼굴의 설명 — 점수 줄 오른쪽 칸 아래, 얼굴들과 같은 왼쪽 끝에 */
+.dv-face-note { grid-column: 2; margin: 2px 0 0; font-size: 13px; line-height: 1.55; color: var(--dim); white-space: pre-wrap; }
+.dv-face-note b { color: var(--txt); font-weight: 600; margin-right: 6px; }
+.dv-face-note .none { color: var(--faint); }
+@media (max-width: 640px) { .dv-face-note { grid-column: 1; } }
+/* 지금 고른 영웅(적 팀 · 우리 팀) — 팀 색 테두리. 상성은 분홍, 궁합은 파랑(인게임 팀 칸과 같은 색). */
+.dv-face.picked { border: 2px solid #e5579b; }
+.hs-main.combo .dv-face.picked { border-color: #5cb0ea; }
+.dv-face.picked.on { box-shadow: 0 0 0 2px color-mix(in srgb, var(--txt) 70%, transparent); }
+
+/* 긴 설명 — 몇 줄까지만, 넘치면 "더 보기" */
+.clamp-body { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+.clamp-body.open { display: block; overflow: visible; }
+.clamp-more {
+  margin-top: 2px; padding: 0; border: 0; background: none; cursor: pointer;
+  color: var(--txt); font-size: 12px; text-decoration: underline; text-underline-offset: 3px;
 }
-.hs-now-note .pic { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; margin-top: 1px; }
-.hs-now-note b { color: var(--txt); font-weight: 600; margin-right: 4px; }
+/* 수정 화면 칸 설명 — 쓴 글은 3줄까지만 보이고, 입력 칸은 글에 맞춰 늘어난다(지원하는 브라우저에서). */
+.ed-note { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.ed-note-edit textarea { field-sizing: content; min-height: 4.6em; max-height: 50vh; }
+
+/* 티어로 매기기 — 줄마다 왼쪽 점수 칸, 오른쪽에 얼굴을 끌어다 놓는다 */
+.tier { padding: 6px 12px 14px; user-select: none; -webkit-user-select: none; }
+.tier-tools { display: flex; align-items: center; gap: 6px; padding: 6px 0 10px; }
+.tier-hint { margin-right: auto; font-size: 12px; color: var(--faint); }
+.tier-row {
+  display: grid; grid-template-columns: 92px minmax(0, 1fr); min-height: 60px;
+  /* overflow 를 숨기지 않는다 — 숨기면 다른 줄로 날아가는 얼굴이 줄 경계에서 잘린다. */
+  border: 1px solid var(--line); border-radius: 10px; margin-bottom: 6px;
+  background: var(--bg2); transition: border-color .12s, background .12s;
+}
+.tier-row.over { border-color: color-mix(in srgb, var(--txt) 60%, transparent); background: color-mix(in srgb, var(--txt) 6%, var(--bg2)); }
+.tier-label {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  font-size: 11px; color: var(--txt); text-align: center; padding: 4px;
+  border-radius: 9px 0 0 9px;
+}
+.tier-label b { font-family: var(--display); font-size: 20px; font-variant-numeric: tabular-nums; }
+.tier-label.p3, .tier-label.p2, .tier-label.p1, .tier-label.n1, .tier-label.n2, .tier-label.n3 {
+  background: color-mix(in srgb, var(--on) calc(var(--tint) * 1.6), var(--bg2));
+  color: color-mix(in srgb, var(--on) var(--ink), var(--txt));
+}
+.tier-label.zero { background: var(--panel2); color: var(--dim); }
+.tier-label.none { background: transparent; color: var(--faint); border-right: 1px dashed var(--line2); }
+.tier-drop { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 4px; padding: 5px; }
+.tier-face {
+  position: relative;
+  width: 50px; height: 50px; padding: 0; border: 1px solid var(--line2); border-radius: 10px; overflow: hidden;
+  background: var(--panel); cursor: grab; touch-action: none;
+}
+.tier-face img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+.tier-face:hover { border-color: color-mix(in srgb, var(--txt) 55%, transparent); }
+.tier-face.lifted { opacity: .25; }
+.tier-face:disabled { cursor: default; }
+.tier.dragging, .tier.dragging .tier-face { cursor: grabbing; }
+.tier-ghost {
+  position: fixed; z-index: 100; width: 56px; height: 56px; border-radius: 12px; object-fit: cover;
+  pointer-events: none; box-shadow: 0 10px 28px rgb(0 0 0 / .55); transform: rotate(-4deg) scale(1.08);
+  border: 2px solid var(--txt);
+}
+@media (max-width: 640px) { .tier-row { grid-template-columns: 64px minmax(0, 1fr); } .tier-face { width: 42px; height: 42px; } }

@@ -7,6 +7,7 @@ import { cellTone, signed } from '../lib/matrix';
 import {
   resetAll,
   resetHero,
+  CELL_NOTE_MAX,
   NOTE_MAX,
   noteKey,
   resetSynergyHero,
@@ -23,6 +24,7 @@ import { CodeDialog } from '../components/CodeDialog';
 import { confirmDialog } from '../lib/dialog';
 import { TopBar } from '../components/TopBar';
 import { LoginDialog } from '../components/Account';
+import { TierEditor } from '../components/TierEditor';
 import { SYN_LABEL } from '../data/synergy';
 
 const STEPS = [3, 2, 1, 0, -1, -2, -3];
@@ -65,6 +67,8 @@ export function EditPage() {
     );
   const sheet = useMySheet();
   const [login, setLogin] = useState(false);
+  /** 티어(끌어다 놓기) · 목록(줄마다 단추 · 설명). 처음엔 티어. */
+  const [layout, setLayout] = useState<'tier' | 'list'>('tier');
   /** 설명을 쓰고 있는 칸의 키 — 한 번에 한 칸만 연다. */
   const [noteOpen, setNoteOpen] = useState<string | null>(null);
   const [codeMode, setCodeMode] = useState<'share' | 'enter' | null>(null);
@@ -229,18 +233,31 @@ export function EditPage() {
                 <b>{me.full}</b>
                 <span>{syn ? `${me.ko} · 같은 팀일 때` : `내 픽이 ${me.ko}일 때`}</span>
               </div>
-              <button
-                type="button"
-                className="reset small"
-                onClick={() => edit(() => (syn ? resetSynergyHero(id) : resetHero(id)))}
-              >
-                이 영웅 되돌리기
-              </button>
+              <div className="seg small" role="group" aria-label="티어 · 목록">
+                <button type="button" aria-pressed={layout === 'tier'} onClick={() => setLayout('tier')}>
+                  티어
+                </button>
+                <button type="button" aria-pressed={layout === 'list'} onClick={() => setLayout('list')}>
+                  목록
+                </button>
+              </div>
+              {layout === 'list' && (
+                <button
+                  type="button"
+                  className="reset small"
+                  onClick={() => edit(() => (syn ? resetSynergyHero(id) : resetHero(id)))}
+                >
+                  이 영웅 되돌리기
+                </button>
+              )}
             </div>
 
+            {/* 티어 — 얼굴을 끌어다 −3 … +3 줄에 놓는다. 설명은 목록에서 쓴다. */}
+            {layout === 'tier' && <TierEditor id={id} syn={syn} edit={edit} />}
 
 
-            {ROLES.map((r) => {
+
+            {layout === 'list' && ROLES.map((r) => {
               const list = rows.filter((e) => HEROES[e].r === r.k);
               if (list.length === 0) return null;
               return (
@@ -306,7 +323,8 @@ export function EditPage() {
                           multiline
                           autoFocus
                           value={note ?? ''}
-                          placeholder={`왜 이 점수인지 한두 줄로 (${NOTE_MAX}자까지)`}
+                          placeholder={`왜 이 점수인지, 어떻게 상대하는지 (${CELL_NOTE_MAX}자까지 · Shift+Enter 로 줄바꿈)`}
+                          max={CELL_NOTE_MAX}
                           onSave={(t) => setNote(nk, t)}
                           onDone={() => setNoteOpen(null)}
                         />
@@ -360,6 +378,7 @@ function TextField({
   onDone,
   multiline = false,
   autoFocus = false,
+  max = NOTE_MAX,
 }: {
   value: string;
   placeholder: string;
@@ -368,6 +387,8 @@ function TextField({
   onDone?: () => void;
   multiline?: boolean;
   autoFocus?: boolean;
+  /** 최대 글자 수 — 표 한마디 200, 칸 설명 1,000. */
+  max?: number;
 }) {
   const [draft, setDraft] = useState(value);
   /** Esc 로 닫을 때 — 닫히며 떠나는 순간(blur)에 저장하지 않게. */
@@ -379,7 +400,7 @@ function TextField({
   const common = {
     value: draft,
     placeholder,
-    maxLength: NOTE_MAX,
+    maxLength: max,
     autoFocus,
     onChange: (e: { target: { value: string } }) => setDraft(e.target.value),
     onBlur: save,
@@ -400,9 +421,9 @@ function TextField({
   };
   return multiline ? (
     <div className="ed-note-edit">
-      <textarea rows={2} {...common} />
+      <textarea rows={3} {...common} />
       <span className="cnt">
-        {draft.length} / {NOTE_MAX}
+        {draft.length} / {max}
       </span>
     </div>
   ) : (

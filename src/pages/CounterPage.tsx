@@ -177,7 +177,7 @@ export function CounterPage() {
       )}
 
       {/* '지금 적 팀 상대' 는 카운터일 때만 — 조합이면 고른 영웅이 우리 편이다. */}
-      <HeroSheet id={info} enemies={team.enemies} mode={mode} map={map} onClose={() => setInfo(null)} />
+      <HeroSheet id={info} enemies={team.enemies} mode={mode} onClose={() => setInfo(null)} />
 
       {/* 좁은 화면에서 추천 시트가 화면 아래에 떠 있어서, 마지막 줄이
           그 밑에 깔리지 않게 자리를 비워 둔다. */}

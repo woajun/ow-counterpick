@@ -71,3 +71,14 @@ export const cellTone = (v: number) =>
 
 /** 표에서는 하이픈 대신 진짜 빼기 기호를 쓴다 — 숫자 폭이 안 흔들린다. */
 export const signed = (v: number) => (v > 0 ? `+${v}` : String(v).replace('-', '−'));
+
+/** 상성 점수의 뜻 — 수정 화면과 같은 말. */
+export const COUNTER_LABEL: Record<number, string> = {
+  3: '매우 유리',
+  2: '유리',
+  1: '약간 유리',
+  0: '중립',
+  [-1]: '약간 불리',
+  [-2]: '불리',
+  [-3]: '매우 불리',
+};

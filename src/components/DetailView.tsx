@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useState, type CSSProperties } from 'react';
-import { HEROES, HERO_IDS, ROLES, portrait, type HeroId } from '../data/heroes';
+import { HEROES, HERO_IDS, ROLES, isHeroId, portrait, type HeroId } from '../data/heroes';
+import { useSearchParams } from 'react-router';
 import { cellTone, signed } from '../lib/matrix';
-import { MAPS, MODES } from '../data/maps';
+import { MAPS, MAP_LABEL, MODES, mapImage } from '../data/maps';
+import { SYN_LABEL } from '../data/synergy';
 import { mapValueIn, noteKey, synKey, synValueIn, synergyOf, type Notes } from '../lib/mySheet';
 import { bestTeams, synergyVerdict } from '../lib/score';
 import { useViewNotes } from '../lib/namuNotes';
 import { Note } from './Note';
+import { Levels } from './Levels';
+import { COUNTER_LABEL } from '../lib/matrix';
 import {
   likeCounts,
   useMySheet,
@@ -124,21 +128,26 @@ function Overview({ subject }: { subject: Subject }) {
 // ── 영웅별로 보기 ───────────────────────────────────────
 
 function HeroLines({ subject }: { subject: Subject }) {
-  // 목업 설명이 겐지 줄에만 있어서 영웅을 고르면 겐지부터. 처음엔 영웅 없이 전체 요약을 보여 준다.
-  const [id, setId] = useState<HeroId>('genji');
+  // 영웅 창의 "자세히 보기"로 오면 주소에 영웅(?hero=)과 탭(?tab=combo)이 있다 — 그 영웅부터 연다.
+  // 없으면 영웅 없이 전체 요약을 보여 준다.
+  const [params] = useSearchParams();
+  const fromUrl = params.get('hero');
+  const [id, setId] = useState<HeroId>(fromUrl && isHeroId(fromUrl) ? fromUrl : 'genji');
   /** 영웅을 아직 안 골랐다 — 오른쪽에 이 표 전체 요약. */
-  const [summary, setSummary] = useState(true);
+  const [summary, setSummary] = useState(!(fromUrl && isHeroId(fromUrl)));
   const pick = (h: HeroId) => {
     setId(h);
     setSummary(false);
   };
   /** 역할 안에서 점수 높은 순으로 — 끄면 게임 영웅 선택 화면 차례. */
   const [byScore, setByScore] = useState(false);
+  /** 역할별(줄마다 설명까지) · 점수별(+3 에는 누구, +2 에는 누구 — 설명 없이 한눈에). */
+  const [layout, setLayout] = useState<'role' | 'level'>('role');
   /**
    * 상성(적으로 만났을 때) · 조합(같은 팀일 때).
    * 궁합은 그 표가 따로 고친 것이 없으면 나무위키 궁합이다.
    */
-  const [tab, setTab] = useState<'counter' | 'combo' | 'map'>('counter');
+  const [tab, setTab] = useState<'counter' | 'combo' | 'map'>(params.get('tab') === 'combo' ? 'combo' : 'counter');
   const onMapTab = tab === 'map';
   const combo = tab === 'combo';
   /** 지금 탭의 한 칸 — 평가 없으면 null. */
@@ -205,20 +214,43 @@ function HeroLines({ subject }: { subject: Subject }) {
                 맵
               </button>
             </div>
-            <button
-              type="button"
-              className={'reset small' + (byScore ? ' on' : '')}
-              aria-pressed={byScore}
-              title="탱커 · 딜러 · 지원 안에서 점수 높은 순으로"
-              onClick={() => setByScore((v) => !v)}
-            >
-              점수순 {byScore ? '켬' : '끔'}
-            </button>
+            <div className="seg small" role="group" aria-label="역할별 · 점수별">
+              <button type="button" aria-pressed={layout === 'role'} onClick={() => setLayout('role')}>
+                역할별
+              </button>
+              <button type="button" aria-pressed={layout === 'level'} onClick={() => setLayout('level')}>
+                점수별
+              </button>
+            </div>
+            {layout === 'role' && (
+              <button
+                type="button"
+                className={'reset small' + (byScore ? ' on' : '')}
+                aria-pressed={byScore}
+                title="탱커 · 딜러 · 지원 안에서 점수 높은 순으로"
+                onClick={() => setByScore((v) => !v)}
+              >
+                점수순 {byScore ? '켬' : '끔'}
+              </button>
+            )}
           </div>
+
+          {/* 점수별 — 점수마다 한 줄에 누구누구. 설명은 숨기고 한눈에. 영웅을 누르면 그 영웅 줄로. */}
+          {layout === 'level' && (
+            <Levels
+              items={
+                onMapTab
+                  ? MAPS.map((m) => ({ k: m.id, ko: m.ko, pic: mapImage(m.id), v: mapValueIn(subject.sheet, m.id, id) }))
+                  : rows.map((e) => ({ k: e, ko: HEROES[e].ko, pic: portrait(e), v: valueOf(e), hero: e }))
+              }
+              label={onMapTab ? MAP_LABEL : combo ? SYN_LABEL : COUNTER_LABEL}
+              noteOf={(e) => subject.notes?.[combo ? synKey(id, e) : noteKey(id, e)]}
+            />
+          )}
 
 
           {/* 맵 — 이 영웅이 맵마다 몇 점인지(표 주인이 정한 것). 정하지 않은 맵은 — . */}
-          {onMapTab &&
+          {layout === 'role' && onMapTab &&
             (MAPS.every((m) => mapValueIn(subject.sheet, m.id, id) === null) ? (
               <div className="rec-empty">
                 {subject.isNamu ? '나무위키에는 맵 점수가 없어요.' : `${me.ko}의 맵 점수를 아직 정하지 않았어요.`}
@@ -246,7 +278,7 @@ function HeroLines({ subject }: { subject: Subject }) {
               })
             ))}
 
-          {!onMapTab && ROLES.map((r) => {
+          {layout === 'role' && !onMapTab && ROLES.map((r) => {
             const list = rows.filter((e) => HEROES[e].r === r.k);
             if (list.length === 0) return null;
             // 점수순: 유리한 것부터, 적힌 것 없음은 맨 뒤. 같은 점수는 원래 차례 그대로.

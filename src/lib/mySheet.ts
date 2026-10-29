@@ -44,8 +44,10 @@ interface State {
 }
 
 export type Notes = Record<string, string>;
-/** 한 칸 설명 · 표 한마디의 최대 길이. */
+/** 표 한마디의 최대 길이 — 카드에 들어가는 한 줄 소개. */
 export const NOTE_MAX = 200;
+/** 칸마다 설명의 최대 길이 — 상대법을 자세히 쓸 수 있게. DB 는 표 한 장의 설명 전체를 2MB 로 막는다. */
+export const CELL_NOTE_MAX = 1000;
 
 /** 로그인한 사람의 마지막 상태 — 알트탭으로 열었을 때 DB 를 기다리지 않고 바로 그린다. */
 const CACHE = 'ow-counterpick.cache';
@@ -90,7 +92,7 @@ function cleanNotes(raw: unknown): Notes | null {
     if (typeof v !== 'string' || !v.trim()) continue;
     const [a, b] = k.split('>');
     const ok = isSynKey(k) ? isHeroId(a.slice(4)) && isHeroId(b) : isHeroId(a) && isHeroId(b);
-    if (ok && a !== b) out[k] = v.trim().slice(0, NOTE_MAX);
+    if (ok && a !== b) out[k] = v.trim().slice(0, CELL_NOTE_MAX);
   }
   return out;
 }
@@ -312,6 +314,21 @@ export function setSynergy(a: HeroId, b: HeroId, v: number | null) {
   set({ sheet });
 }
 
+/** 상성 한 짝을 비운다(적힌 것 없음) — 반대 칸도 같이. 티어 편집에서 "미정" 칸으로 뺄 때. */
+export function clearPair(a: HeroId, b: HeroId) {
+  const sheet = forked();
+  put(sheet, a, b, null);
+  put(sheet, b, a, null);
+  set({ sheet });
+}
+
+/** 궁합 한 짝을 비운다(평가 없음). 티어 편집에서 "미정" 칸으로 뺄 때. */
+export function clearSynergy(a: HeroId, b: HeroId) {
+  const sheet = forkedSyn();
+  delete sheet[synKey(a, b)];
+  set({ sheet });
+}
+
 /** 한 영웅이 낀 궁합을 모두 나무위키 값으로. */
 export function resetSynergyHero(id: HeroId) {
   const sheet = forkedSyn();
@@ -330,7 +347,7 @@ export function resetSynergyHero(id: HeroId) {
  */
 export function setNote(k: string, text: string) {
   const notes = { ...(state.notes ?? {}) };
-  const t = text.trim().slice(0, NOTE_MAX);
+  const t = text.trim().slice(0, CELL_NOTE_MAX);
   if (t) notes[k] = t;
   else delete notes[k];
   set({ notes });

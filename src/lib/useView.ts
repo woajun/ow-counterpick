@@ -24,6 +24,10 @@ export function useView() {
         const n = new URLSearchParams(p);
         if (next === 'detail') n.set('view', 'detail');
         else n.delete('view');
+        // 영웅 창에서 바로 열 때 붙는 영웅 · 탭(?hero= · ?tab=)은 여기서 바꿀 때마다 지운다 — 남아 있으면
+        // 다음에 자세히 보기를 열 때 엉뚱한 영웅이 열린다.
+        n.delete('hero');
+        n.delete('tab');
         return n;
       });
     },
